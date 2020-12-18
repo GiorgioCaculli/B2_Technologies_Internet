@@ -1,0 +1,359 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Synchroniser des contenus multimédia avec SMIL</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="smil, concept, introduction">
+      <meta name="description" content="SMIL est un format permettant la synchronisation de données multimédia.">
+      <link rel="next" href="svg.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Synchroniser des contenus multimédia avec SMIL</h1>
+         <p><span class="version">version 1.31</span>, dernière mise à jour le 23 mai 2006.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#p1" title="Généralités">Généralités</a><ol>
+                     <li><a href="#p1s1" title="Introduction">Introduction</a></li>
+                     <li><a href="#p1s2" title="Moyens logiciels">Moyens logiciels</a></li>
+                     <li><a href="#p1s3" title="Structure d'un document SMIL">Structure d'un document SMIL</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#p2" title="Construction progressive d'un fichier SMIL">Construction progressive d'un fichier SMIL</a><ol>
+                     <li><a href="#p2s1" title="Structure">Structure</a></li>
+                     <li><a href="#p2s2" title="Positionnement">Positionnement</a><ol>
+                           <li><a href="#p2s2p1" title="Introduction">Introduction</a></li>
+                           <li><a href="#p2s2p2" title="Élément de base">Élément de base</a></li>
+                           <li><a href="#p2s2p3" title="Définition des régions">Définition des régions</a></li>
+                           <li><a href="#p2s2p4" title="z-index">z-index</a></li>
+                           <li><a href="#fit" title="Ajustement de la taille de l'objet">Ajustement de la taille de l'objet</a></li>
+                           <li><a href="#p2s2p5" title="Types d'objets multimédia">Types d'objets multimédia</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#synchro" title="Synchronisation">Synchronisation</a><ol>
+                           <li><a href="#syp1" title="Gestion des paramètres temporels d'affichage">Gestion des paramètres temporels d'affichage</a></li>
+                           <li><a href="#syp2" title="Séquence">Séquence</a></li>
+                           <li><a href="#syp3" title="Affichage en parallèle">Affichage en parallèle</a></li>
+                        </ol>
+                     </li>
+                     <li>Exercice&nbsp;: <a href="#exosmil">Un premier fichier SMIL</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#cl" title="Conclusion">Conclusion</a><ol>
+                     <li><a href="#cls1" title="D'autres effets possibles...">D'autres effets possibles...</a></li>
+                     <li><a href="#cls2" title="Pour en savoir plus...">Pour en savoir plus...</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="p1" href="#p1" id="p1"></a>I. Généralités
+         </h3>
+         <h4><a name="p1s1" id="p1s1" href="#p1s1"></a>1. Introduction
+         </h4>
+         <p>Il existe divers moyens d'apporter du contenu dynamique, alliant son, texte et animations sur un site web, <code class="logiciel">Flash</code> par exemple. De son côté, dans le cadre d'études sur la généralisation du format <code class="langage">XML</code>, le <a href="http://www.w3.org/AudioVideo">W3C</a> a mis sur pied des groupes de travail chargés de définir un format de données, fondé sur <code class="langage">XML</code>, permettant de créer des animations multimédia sur Internet. Ces groupes de travail ont donc défini <code class="langage">SMIL</code> (<span lang="en" class="autrelangue">Synchronized Multimedia Integration Language</span>). Ce langage permet de synchroniser divers éléments multimédia, tels que de la vidéo, du son et du texte. Ceci permet de
+            créer des présentations multimédia interactives très complexes.
+         </p>
+         <p>Le <code class="langage">SMIL</code> est une application <code class="langage">XML</code> et se sert donc de tout ce qu'offre ce dernier. Dans cette application, le <code class="langage">XML</code> indique le comportement dans le temps des divers objets multimédia, et leur interactivité <span lang="latin" class="autrelangue">via</span> des liens hypertextes ou autres.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p1s2" id="p1s2" href="#p1s2"></a>2. Moyens logiciels
+         </h4>
+         <p>Il est probable que vous ayiez déjà utilisé ce format de données sans le savoir&nbsp;; en effet, il commence à se répandre. Il
+            existe des applets <code class="langage">Java</code> permettant de visualiser une présentation dans un navigateur, telles que le Soja Player de HELIO et HPAS (<span lang="en" class="autrelangue">Hypermedia Presentation and Authoring System</span>) chez Digital.
+         </p>
+         <p>On retrouve de même la possibilité de lire ces nouveaux standards à l'aide du <code class="logiciel">Windows Media Player</code> à partir de la version 7.0, <code class="logiciel">Apple Quick Time</code> à partir de la version 5.0 ou encore <code class="logiciel">Real Player</code> à partir de la version 8.0.
+         </p>
+         <p>La société Oratrix propose une famille de produits multimédia (dont le nom est GriNS Authoring Software) permettant de créer
+            des présentations multimédia en flux tendu pouvant être lues grâce au <code class="logiciel">Real Player G2</code>. Cette famille de logiciels permet de la même manière de créer des présentations en format <code class="langage">SMIL</code> "pur" contenant aussi bien du <code class="langage">HTML</code> interactif que des animations très complexes.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s2" title="Retour à la TdM (Moyens logiciels)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p1s3" id="p1s3" href="#p1s3"></a>3. Structure d'un document SMIL
+         </h4>
+         <p>Un document <code class="langage">SMIL</code> est structuré en trois parties&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>définition des régions qui recevront les différents objets multimédias (position, style)&nbsp;;</p>
+            </li>
+            <li>
+               <p>définition de l'ordre et de l'échelle temporelle à appliquer aux objets. Cette étape permet en plus de définir les mouvements,
+                  les transitions, <span lang="latin" class="autrelangue">etc.</span>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>définition du débit en fonction du type de connexion.</p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p1s3" title="Retour à la TdM (Structure d'un document SMIL)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="p2" href="#p2" id="p2"></a>II. Construction progressive d'un fichier SMIL
+         </h3>
+         <h4><a name="p2s1" id="p2s1" href="#p2s1"></a>1. Structure
+         </h4>
+         <p>La structure d'un document <code class="langage">SMIL</code> ressemble beaucoup à celle d'un document <code class="typefichier">HTML</code>. L'élément racine est <code class="code">&lt;smil&gt;</code>, et il comporte un élément <code class="code">&lt;head&gt;</code> et un élément <code class="code">&lt;body&gt;</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;smil&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;head&gt;</span>(...)<span class="tag">&lt;/head&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;body&gt;</span>(...)<span class="tag">&lt;/body&gt;</span><br>
+            		<span class="tag">&lt;/smil&gt;</span><br></p>
+         <p>On peut ajouter dans l'élément <code class="code">&lt;head&gt;</code> des balises <code class="code">&lt;meta&gt;</code>, comme par exemple <code class="code">&lt;meta name="copyright" content="(...)" /&gt;</code>.
+         </p>
+         <p>Il est également possible d'incorporer dans le prologue du fichier, avant l'élément racine, la déclaration de version XML,
+            ainsi qu'une déclaration de dépendance envers la <code class="typefichier">DTD</code> du W3C&nbsp;:
+         </p>
+         <p class="xml"><span class="exempledtdexterne">&lt;!DOCTYPE smil PUBLIC<span class="valeurattribut"> "-//W3C//DTD SMIL 1.0//EN"</span><span class="valeurattribut"> "http://www.w3.org/TR/REC-smil/SMIL10.dtd"</span>&gt;<br></span></p>
+         <p>La dernière version de la spécification du W3C est la <a href="http://www.w3.org/TR/2005/REC-SMIL2-20051213/">2.1</a>. Par rapport à la 2.0,qui n'apportait que de petites modifications sur certains éléments, elle ajoute le concept de modularité
+            et l'ajout de nouvelles fonctionnalités plus particulièrement destinées aux mobiles.
+         </p>
+         <p>Ce cours d'initiation se limite à la version&nbsp;1.0.</p>
+         <p class="retourtdm"><a href="#tdm_p2s1" title="Retour à la TdM (Structure)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s2" id="p2s2" href="#p2s2"></a>2. Positionnement
+         </h4>
+         <h5><a href="#p2s2p1" name="p2s2p1" id="p2s2p1"></a>a. Introduction
+         </h5>
+         <p>Dans le <span lang="en" class="autrelangue">header</span>, doit également être défini l'élément <code class="code">&lt;layout&gt;</code>, dont la fonction est de spécifier la zone dans laquelle les animations doivent être affichées, ainsi que les diverses régions
+            où elles doivent prendre place.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2p1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s2p2" name="p2s2p2" id="p2s2p2"></a>b. Élément de base
+         </h5>
+         <p>La fenêtre destinée à accueillir l'ensemble des animations est définie par l'élément vide <code class="code">&lt;root-layout/&gt;</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;root-layout<span class="nomattribut"> width</span>="<span class="valeurattribut">300</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">200</span>"<span class="nomattribut"> background-color</span>="<span class="valeurattribut">blue</span>"<span class="nomattribut"> title</span>="<span class="valeurattribut">Animations</span>"&nbsp;/&gt;</span><br></p>
+         <p>Cet élément permet de définir par ses attributs <code class="code">width</code> et <code class="code">height</code> la taille de la fenêtre de base, mais également sa couleur de fond, son titre, <span lang="latin" class="autrelangue">etc</span>. A l'intérieur de cette fenêtre, tout comme à l'intérieur d'une fenêtre de navigateur, le positionnement d'un objet se fait
+            par rapport au coin supérieur gauche.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2p2" title="Retour à la TdM (Élément de base)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s2p3" name="p2s2p3" id="p2s2p3"></a>c. Définition des régions
+         </h5>
+         <p>Chaque objet multimédia devra être associé, dans ce cadre général, à uné région qu'il faut donc définir. Cela se fait par
+            l'intermédiaire de l'élément vide <code class="code">&lt;region/&gt;</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;region<span class="nomattribut"> id</span>="<span class="valeurattribut">region1</span>"<span class="nomattribut"> left</span>="<span class="valeurattribut">75</span>"<span class="nomattribut"> top</span>="<span class="valeurattribut">50</span>"<span class="nomattribut"> width</span>="<span class="valeurattribut">32</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">32</span>"&nbsp;/&gt;</span><br></p>
+         <p>Pour placer ensuite l'image "test.gif", de taille 32x32, dans cette région, il suffit alors de l'insérer dans le <code class="code">body</code>, en spécifiant son affectation à la région. Cela donne au final&nbsp;:
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="exempledtdexterne">&lt;!DOCTYPE smil PUBLIC<span class="valeurattribut"> "-//W3C//DTD SMIL 1.0//EN"</span><span class="valeurattribut"> "http://www.w3.org/TR/REC-smil/SMIL10.dtd"</span>&gt;<br></span><span class="tag">&lt;smil&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;head&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;meta<span class="nomattribut"> name</span>="<span class="valeurattribut">copyright</span>"<span class="nomattribut"> content</span>="<span class="valeurattribut">Jean Dupont</span>"&nbsp;/&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;root-layout<span class="nomattribut"> width</span>="<span class="valeurattribut">300</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">200</span>"<span class="nomattribut"> background-color</span>="<span class="valeurattribut">blue</span>"<span class="nomattribut"> title</span>="<span class="valeurattribut">Animations</span>"&nbsp;/&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;region<span class="nomattribut"> id</span>="<span class="valeurattribut">region1</span>"<span class="nomattribut"> left</span>="<span class="valeurattribut">75</span>"<span class="nomattribut"> top</span>="<span class="valeurattribut">50</span>"<span class="nomattribut"> width</span>="<span class="valeurattribut">32</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">32</span>"&nbsp;/&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/head&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;body&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;img<span class="nomattribut"> src</span>="<span class="valeurattribut">test.gif</span>"<span class="nomattribut"> alt</span>="<span class="valeurattribut">image de test</span>"<span class="nomattribut"> region</span>="<span class="valeurattribut">region1</span>"&nbsp;/&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/body&gt;</span><br>
+            		<span class="tag">&lt;/smil&gt;</span><br></p>
+         <p>Il est possible également de définir le positionnement de la région, non en absolu par rapport à la fenêtre principale comme
+            dans l'exemple précédent, mais en relatif, en utilisant les attributs <code class="code">left="40%"</code> et <code class="code">height="30%"</code>, par exemple, qui positionnent le coin supérieur gauche de la région à 40% de la taille totale de la fenêtre principale par
+            rapport à son bord gauche, et à 30% par rapport à son bord supérieur. 
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2p3" title="Retour à la TdM (Définition des régions)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s2p4" name="p2s2p4" id="p2s2p4"></a>d. z-index
+         </h5>
+         <p>De même qu'en <code class="langage">DHTML</code>, il est possible de positionner une région en avant- ou arrière-plan d'une autre, <span lang="latin" class="autrelangue">via</span> l'attribut <code class="code">z-index</code>. Plus la valeur de cet attribut est élevée, plus la région est à l'avant-plan. Par exemple
+         </p>
+         <p class="xml"><span class="tag">&lt;region<span class="nomattribut"> id</span>="<span class="valeurattribut">region1</span>"<span class="nomattribut"> left</span>="<span class="valeurattribut">75</span>"<span class="nomattribut"> top</span>="<span class="valeurattribut">50</span>"<span class="nomattribut"> width</span>="<span class="valeurattribut">32</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">32</span>"<span class="nomattribut"> z-index</span>="<span class="valeurattribut">1</span>"&nbsp;/&gt;</span><br><span class="tag">&lt;region<span class="nomattribut"> id</span>="<span class="valeurattribut">region2</span>"<span class="nomattribut"> left</span>="<span class="valeurattribut">100</span>"<span class="nomattribut"> top</span>="<span class="valeurattribut">175</span>"<span class="nomattribut"> width</span>="<span class="valeurattribut">80</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">80</span>"<span class="nomattribut"> z-index</span>="<span class="valeurattribut">2</span>"&nbsp;/&gt;</span><br></p>
+         <p>Ces deux régions se superposent, mais la région <code class="code">region2</code> est à l'avant-plan&nbsp;: un objet placé dans cette région apparaîtra <em>devant</em> tout objet de la première.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2p4" title="Retour à la TdM (z-index)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#fit" name="fit" id="fit"></a>e. Ajustement de la taille de l'objet
+         </h5>
+         <p>L'attribut <code class="code">fit</code> de l'élément <code class="code">region</code> permet de définir la manière dont un objet doit la remplir&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">fit="fill"</code> demande à l'objet de remplir toute la fenêtre&nbsp;; cela peut entraîner des déformations d'une image, par exemple&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">fit="meet"</code> demande à l'objet de s'agrandir éventuellement jusqu'à ce que sa plus grande dimension entre en contact avec les bords de
+                  la région&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">fit="slice"</code> est le complémentaire de la valeur précédente, puisque cette fois-ci c'est sa plus petite dimension qui est étirée pour entrer
+                  en contact avec les bors de la région&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">fit="scroll"</code> permet à un objet plus grand que la fenêtre d'y être affiché avec des barres de défilement.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_fit" title="Retour à la TdM (Ajustement de la taille de l'objet)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s2p5" name="p2s2p5" id="p2s2p5"></a>f. Types d'objets multimédia
+         </h5>
+         <p>On a vu un exemple d'utilisation d'une image avec l'élément <code class="code">img</code>. Il est également possible d'utiliser d'autres types d'objets multimédia&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>les formats d'images acceptés sont <code class="typefichier">gif</code> et <code class="typefichier">jpeg</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>des fichiers audio&nbsp;: <code class="typefichier">wav</code>, <code class="typefichier">MP3</code>, mais aussi des formats plus particuliers comme le format de données audio de Sun. C'est la balise <code class="code">audio</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>des fichiers de texte&nbsp;: texte brut avec la balise <code class="code">text</code>, ou bien texte en <span lang="en" class="autrelangue">streaming</span> avec la balise <code class="code">textstream</code> pour les lecteurs Real&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>des fichiers vidéo (<code class="typefichier">Real movie</code>, <code class="typefichier">avi</code>, <code class="typefichier">mpeg</code>, <code class="typefichier">mov</code>) avec la balise <code class="code">video</code>.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p2s2" title="Retour à la TdM (Positionnement)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="synchro" id="synchro" href="#synchro"></a>3. Synchronisation
+         </h4>
+         <h5><a href="#syp1" name="syp1" id="syp1"></a>a. Gestion des paramètres temporels d'affichage
+         </h5>
+         <p>On utilise pour cela les attributs <code class="code">begin</code> et <code class="code">dur</code> (pour <span lang="en" class="autrelangue">duration</span>)&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;img<span class="nomattribut"> src</span>="<span class="valeurattribut">test.gif</span>"<span class="nomattribut"> alt</span>="<span class="valeurattribut">image de test</span>"<span class="nomattribut"> region</span>="<span class="valeurattribut">region1</span>"<span class="nomattribut"> begin</span>="<span class="valeurattribut">1s</span>"<span class="nomattribut"> dur</span>="<span class="valeurattribut">3s</span>"&nbsp;/&gt;</span><br></p>
+         <p>Dans cet exemple, l'affichage de l'image débute une seconde après la définition de la région <code class="code">region1</code>, puis l'image disparaît après trois secondes.
+         </p>
+         <p class="retourtdm"><a href="#tdm_syp1" title="Retour à la TdM (Gestion des paramètres temporels d'affichage)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#syp2" name="syp2" id="syp2"></a>b. Séquence
+         </h5>
+         <p>Il est possible de créer une séquence d'événements, en se servant de la balise <code class="code">seq</code> et des attributs <code class="code">begin</code> et <code class="code">dur</code>. Ainsi...
+         </p>
+         <p class="xml"><span class="tag">&lt;seq&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;img<span class="nomattribut"> src</span>="<span class="valeurattribut">test.gif</span>"<span class="nomattribut"> alt</span>="<span class="valeurattribut">image de test</span>"<span class="nomattribut"> region</span>="<span class="valeurattribut">region1</span>"<span class="nomattribut"> dur</span>="<span class="valeurattribut">3s</span>"&nbsp;/&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;img<span class="nomattribut"> src</span>="<span class="valeurattribut">test2.gif</span>"<span class="nomattribut"> alt</span>="<span class="valeurattribut">image de test</span>"<span class="nomattribut"> region</span>="<span class="valeurattribut">region1</span>"<span class="nomattribut"> dur</span>="<span class="valeurattribut">3s</span>"<span class="nomattribut"> begin</span>="<span class="valeurattribut">1s</span>"<span class="nomattribut"> dur</span>="<span class="valeurattribut">7s</span>"&nbsp;/&gt;</span><br>
+            		<span class="tag">&lt;/seq&gt;</span><br></p>
+         <p>... va afficher dans la région1 tout d'abord test.gif pendant trois secondes, puis la faire disparaître. Une seconde plus
+            tard, <code class="code">test2.gif</code> est affichée, et ce pendant sept secondes. Les séquences vidéo et audio ont un "<span lang="en" class="autrelangue">timer</span>" interne&nbsp;; la gestion de leur affichage se fait grâce à d'autres attributs (<code class="code">clip-begin</code>, <code class="code">clip-end</code>...), qui permettent de positionner la lecture en différents endroits de la piste. En l'absence de ces attributs, les films
+            et extraits musicaux sont joués dans leur intégralité.
+         </p>
+         <p class="retourtdm"><a href="#tdm_syp2" title="Retour à la TdM (Séquence)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#syp3" name="syp3" id="syp3"></a>c. Affichage en parallèle
+         </h5>
+         <p>Il est également possible de faire jouer des objets en parallèle, avec l'élément <code class="code">par</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_synchro" title="Retour à la TdM (Synchronisation)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4>Exercice&nbsp;<a name="exosmil" href="#exosmil" id="exosmil"></a>1. Un premier fichier SMIL
+         </h4>
+         <p>Télécharger la correction et l'ouvrir localement, avec tous les fichiers multimédias donnés dans l'énoncé.</p>
+         <h5><a href="exercices/exo14.html" title="Énoncé de l'exercice 'Un premier fichier SMIL'">Énoncé</a></h5>
+         <h5><a href="exercices/exo14.smil" title="Correction 'Un premier fichier SMIL'">
+               				Correction</a></h5>
+         <h3><a name="cl" href="#cl" id="cl"></a>III. Conclusion
+         </h3>
+         <h4><a name="cls1" id="cls1" href="#cls1"></a>1. D'autres effets possibles...
+         </h4>
+         <p>La spécification 2.0 du W3C a ajouté également d'autres fonctionnalités, comme des effets de transition&nbsp;; mais dès le début,
+            <code class="langage">SMIL</code> a permis de mettre en place l'affichage de liens http, de l'interactivité <span lang="latin" class="autrelangue">via</span> des réactions à la souris... Bref, il est possible de mettre sur pied des présentations multimédia interactives, avec l'avantage
+            que le fichier source est un simple fichier ASCII. Bien sûr, des <a href="http://www.w3.org/AudioVideo/#Authoring">environnements intégrés de développement</a> existent également, pour les réfractaires au <code class="code">Bloc Notes</code>...
+         </p>
+         <p class="retourtdm"><a href="#tdm_cls1" title="Retour à la TdM (D'autres effets possibles...)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="cls2" id="cls2" href="#cls2"></a>2. Pour en savoir plus...
+         </h4>
+         <p>De nombreux didacticiels existent sur Internet. Je vous recommande, si ce format vous intéresse, d'y passer quelque temps.
+            Des exemples y sont donnés.
+         </p>
+         <ul>
+            <li>
+               <p>Le site du <a href="http://www.w3.org/AudioVideo">W3C</a>, bien entendu...
+               </p>
+            </li>
+            <li>
+               <p>Real Networks offre bien sûr un très bon site de présentation générale&nbsp;:<a href="http://service.real.com/help/library/guides/production/htmfiles/smil.htm">http://service.real.com/help/library/guides/production/htmfiles/smil.htm</a>. D'autres ressources figurent également sur ce site
+               </p>
+            </li>
+            <li>
+               <p>L'Université de Boston présente un très bon tutoriel à <a href="http://www.bu.edu/webcentral/learning/smil1/">http://www.bu.edu/webcentral/learning/smil1/</a>.
+               </p>
+            </li>
+            <li>
+               <p>Des didacticiels réalisés en <code class="langage">SMIL</code> et faisant appel à l'applet SOJA sont disponibles sur <a href="http://www.empirenet.com/~joseram/">http://www.empirenet.com/~joseram/</a></p>
+            </li>
+            <li>
+               <p>Un autre bon didacticiel a été réalisé par la société HELIO à <a href="http://www.helio.org/products/smil/tutorial/">http://www.helio.org/products/smil/tutorial/</a></p>
+            </li>
+            <li>
+               <p>Just Smil est une mine de renseignements sur <a href="http://smw.internet.com/smil/smilhome.html">http://smw.internet.com/smil/smilhome.html</a></p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_cls2" title="Retour à la TdM (Pour en savoir plus...)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours suivant&nbsp;: <a href="svg.html">Un format de dessin vectoriel en XML: SVG</a></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="smil.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 23 mai 2006, version 1.31. Ajout de la référence à SMIL 2.1.</li>
+            <li>Le 13 juillet 2005, version 1.30. Réécriture des exemples.</li>
+            <li>Le 28 juin 2004, version 1.21. Ajout d'une remarque sur la correction d'un exercice.</li>
+            <li>Le 20 avril 2004, version 1.20. Ajout d'un exercice.</li>
+            <li>Le 31 juillet 2003, version 1.10. Corrections typographiques et quelques mises à jour sur le fond.</li>
+            <li>Le 30 mai 2002, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

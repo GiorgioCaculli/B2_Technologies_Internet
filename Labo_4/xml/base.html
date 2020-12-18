@@ -1,0 +1,616 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Concepts de base</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="xml, base, concept, introduction">
+      <meta name="description" content="Ce chapitre présente un bref historique et les concepts de base de XML.">
+      <link rel="next" href="xmlcooktop.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Concepts de base</h1>
+         <p><span class="version">version 2.22</span>, dernière mise à jour le 13 janvier 2009.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#p1" title="Historique&nbsp;: de SGML à XML">Historique&nbsp;: de SGML à XML</a><ol>
+                     <li><a href="#p1s3" title="SGML et HTML">SGML et HTML</a><ol>
+                           <li><a href="#p1s3p1" title="Le SGML">Le SGML</a></li>
+                           <li><a href="#p1s3p2" title="Le HTML">Le HTML</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#p1s4" title="XML">XML</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#p2" title="Mise en &#339;uvre">Mise en &#339;uvre</a><ol>
+                     <li><a href="#p2s1" title="Procédure">Procédure</a></li>
+                     <li><a href="#p2s2" title="Exemple : une bibliographie">Exemple : une bibliographie</a></li>
+                     <li>Exercice&nbsp;: <a href="#ex1">Structuration d'informations 1</a></li>
+                     <li>Exercice&nbsp;: <a href="#exostruct">Structuration d'informations 2</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#p3" title="Structure d'un document XML">Structure d'un document XML</a><ol>
+                     <li><a href="#p3s1" title="Généralités">Généralités</a></li>
+                     <li><a href="#p3s2" title="Le prologue">Le prologue</a><ol>
+                           <li><a href="#p3s2p1" title="Déclaration XML">Déclaration XML</a></li>
+                           <li><a href="#p3s2p2" title="Instructions de traitement">Instructions de traitement</a></li>
+                           <li><a href="#p3s2p3" title="Déclaration de type de document (DTD)">Déclaration de type de document (DTD)</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#p3s3" title="Les commentaires">Les commentaires</a></li>
+                     <li><a href="#p3s4" title="L'arbre d'éléments">L'arbre d'éléments</a><ol>
+                           <li><a href="#p3s4p1" title="Introduction">Introduction</a></li>
+                           <li><a href="#p3s4p2" title="Élément racine">Élément racine</a></li>
+                           <li><a href="#p3s4p3" title="Les éléments">Les éléments</a></li>
+                           <li><a href="#p3s4p4" title="Les attributs">Les attributs</a></li>
+                           <li><a href="#p3s4p5" title="Les entités">Les entités</a></li>
+                           <li><a href="#p3s4p6" title="Les sections CDATA">Les sections CDATA</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#p3s5" title="Règles de composition">Règles de composition</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>IV. <a href="#p4" title="Support par les navigateurs">Support par les navigateurs</a><ol>
+                     <li><a href="#navigmozie" title="Famille Mozilla et Internet Explorer">Famille Mozilla et Internet Explorer</a></li>
+                     <li><a href="#p4s1" title="Netscape">Netscape</a></li>
+                     <li><a href="#navigopera" title="Opera">Opera</a></li>
+                     <li><a href="#p4s3" title="Conclusion">Conclusion</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="p1" href="#p1" id="p1"></a>I. Historique&nbsp;: de SGML à XML
+         </h3>
+         <p><code class="langage">XML</code> dérive d'un langage développé dans les années 80, le <a href="#p1s3p1"><code class="langage">SGML</code></a>. Ce langage était complexe à apprendre et utiliser quotidiennement. Une version allégée, le <a href="#p1s3p2"><code class="langage">HTML</code></a> a donc été développée&nbsp;; mais ce dernier, malgré de nombreuses adaptations, ne pouvait pas être étendu à l'infini, au fur
+            et à mesure de l'augmentation des besoins des développeurs. C'est alors que fut créé le <code class="langage">XML</code>.
+         </p>
+         <h4><a name="p1s3" id="p1s3" href="#p1s3"></a>1. SGML et HTML
+         </h4>
+         <h5><a href="#p1s3p1" name="p1s3p1" id="p1s3p1"></a>a. Le SGML
+         </h5>
+         <p>Le <code class="langage">SGML</code> (Standard Generalized Markup Language, langage de balisage standard généralisé), premier essai de normalisation concernant
+            les documents électroniques, a été adopté comme standard en 1986.
+         </p>
+         <p>Le <code class="langage">SGML</code> est constitué de plusieurs composants. Ceux-ci changent pour chaque application <code class="langage">SGML</code>&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><em>Définition du type de document</em> (<code class="typefichier">DTD</code>)&nbsp;: ce composant sert à préciser la structure du document&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><em>Instance du document</em>&nbsp;: il s'agit des données à stocker elle-mêmes, présentées sous une forme structurée selon les éléments <code class="langage">SGML</code> qui ont été définis dans la <code class="typefichier">DTD</code>. Même si une instance de document peut partager une <code class="typefichier">DTD</code> avec d'autres documents, elle ne peut se conformer qu'à une seule <code class="typefichier">DTD</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><em>Synthèse du document</em>&nbsp;: ce composant sert à préciser les principaux aspects de l'application <code class="langage">SGML</code>. C'est à ce niveau que sont déterminées les options et qu'est précisé le jeu de caractères qui sera utilisé ainsi que les
+                  autres fonctions similaires.
+               </p>
+            </li>
+         </ul>
+         <p>Ce langage servant à préciser la structure d'un document <em>quelconque</em>, il est compréhensible que sa généralité le rende difficile d'apprentissage, et complexe d'emploi. En particulier, il était
+            inadapté à l'écriture de documents pour Internet. Il a donc été nécessaire d'en dériver le langage <code class="langage">HTML</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s3p1" title="Retour à la TdM (Le SGML)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p1s3p2" name="p1s3p2" id="p1s3p2"></a>b. Le HTML
+         </h5>
+         <p>Comme il a été dit précédemment, c'est aujourd'hui le standard du développement web. Il a été étendu par le <code class="langage">XHTML</code>, un langage qui lui est extrêmement similaire, mais permettant la production de documents aux normes <code class="langage">XML</code>.
+         </p>
+         <p>Ce langage est facile à apprendre et à utiliser&nbsp;; il a d'ailleurs donné lieu au développement de nombreux outils de publication
+            sur Internet&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>logiciels WYSIWYG -"<span lang="en" class="autrelangue">What You See Is What You Get</span>"- tels que <a href="http://net2.com/nvu/"><code class="logiciel">Nvu</code></a>, <a href="http://office.microsoft.com/fr-fr/frontpage/FX100743231036.aspx"><code class="logiciel">FrontPage</code></a> ou <a href="http://www.adobe.com/fr/products/dreamweaver/"><code class="logiciel">Dreamweaver</code></a>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>outils de publication de contenu comme <a href="http://www.spip.net/">SPIP</a>, <a href="http://ez.no/ez_publish">eZPublish</a>, <a href="http://www.joomla.fr/"><code class="logiciel">Joomla</code></a>, <a href="http://phpnuke.org/">PHPNuke</a>...
+               </p>
+            </li>
+         </ul>
+         <p>... sans oublier qu'il est possible d'utiliser de simples éditeurs de texte comme <code class="logiciel">(X)Emacs</code> sous Linux ou bien le <code class="logiciel">Bloc-Notes</code> sous Windows.
+         </p>
+         <p>Le <code class="langage">HTML</code> étant une application <code class="langage">SGML</code>, il est donc lié lui aussi à une <code class="typefichier">DTD</code>. Il en existe parfois plusieurs par version d'<code class="langage">HTML</code>. Celles de la version 4.01 se trouvent référencées sur le site web du <a href="http://www.w3.org">W3C</a>&nbsp;: <em>DTD HTML 4.01 Strict, Transitional, Frameset</em>...
+         </p>
+         <p>Un inconvénient du <code class="langage">HTML</code> est son champ d'action limité&nbsp;: il n'est ainsi pas possible de définir <em>autre chose</em> qu'une page Web, ce qui est compréhensible puisque ce langage a été spécifiquement conçu pour cela.On ne peut par exemple
+            pas ajouter de nouveaux éléments (on pourrait imaginer insérer des équations mathématiques, mais ce n'est pas possible en
+            <code class="langage">HTML</code> stricto sensu).
+         </p>
+         <p>Au bout de quelques années, la demande se faisant de plus en plus forte pour la définition d'un nouveau format, et le langage
+            <code class="langage">HTML</code> rencontrant ses limites, le W3C a commencé à organiser des <a href="http://www.w3.org/XML/#wgs">groupes de travail sur <code class="langage">XML</code></a>, un autre descendant du <code class="langage">SGML</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s3" title="Retour à la TdM (SGML et HTML)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p1s4" id="p1s4" href="#p1s4"></a>2. XML
+         </h4>
+         <p>Le <code class="langage">XML</code> est un dérivé du <code class="langage">SGML</code>. Il tente de se servir des principes de simplicité du <code class="langage">HTML</code> et de la souplesse <code class="langage">SGML</code>.
+         </p>
+         <p>Simplification de <code class="langage">SGML</code>, puisqu'il ne reste que 35 pages de spécification contre 155 pages en ce qui concerne le <code class="langage">SGML</code>, le format <code class="langage">XML</code> est rapidement apparu adapté à beaucoup plus d'usages que ses concepteurs le pensaient initialement. Il conserve certains
+            aspects de <code class="langage">SGML</code>.
+         </p>
+         <p>Le plus important point commun avec le <code class="langage">SGML</code> est le fait que tout document <code class="typefichier">XML</code> <em>peut</em> être basé sur une <code class="typefichier">DTD</code> ou un <code class="typefichier">Schéma</code>. Cette association n'est cependant pas obligatoire, et un fichier <code class="typefichier">XML</code> peut très bien se suffire à lui-même.
+         </p>
+         <p>Une autre caractéristique importante est que dans un document <code class="typefichier">XML</code>, la mise en forme des données est totalement séparée des données elles-mêmes. Cela permet de séparer complètement l'information
+            (le contenu) de son apparence (le contenant), et donc de fournir plusieurs types de sortie pour un même fichier de données,
+            en fonction de l'utilisateur ou de l'application demandeuse (autre document <code class="typefichier">XML</code>, tableau, graphique, image, animation multimédia, fichier <code class="typefichier">HTML</code>, fichier <code class="typefichier">PDF</code>...).
+         </p>
+         <p>De plus, la possibilité de créer les éléments que l'on désire permet de rendre le fichier lui-même lisible -et modifiable-
+            par un être humain&nbsp;: on peut donner aux informations contenues dans un tel fichier les étiquettes que l'on veut, et les ordonner
+            selon son désir.
+         </p>
+         <p>Un document <code class="typefichier">XML</code> peut ainsi prévoir plusieurs cibles, comme par exemple l'écran d'un téléphone portable, celui d'un ordinateur de bureau,
+            une base de données, une application logicielle, <span lang="latin" class="autrelangue">etc</span>.
+         </p>
+         <p>Il est également possible d'effectuer des sélections par tri, des générations automatiques de tables des matières et bien
+            d'autres fonctions encore, grâce au <a href="stylexsl.html">langage de feuilles de style</a> <code class="langage">XSLT</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s4" title="Retour à la TdM (XML)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="p2" href="#p2" id="p2"></a>II. Mise en &#339;uvre
+         </h3>
+         <h4><a name="p2s1" id="p2s1" href="#p2s1"></a>1. Procédure
+         </h4>
+         <p><code class="langage">XML</code> permet de nettement séparer forme et fond. Par exemple, cela signifie que pour produire un document <code class="typefichier">HTML</code> à partir de données en utilisant le format <code class="typefichier">XML</code>, il est nécessaire d'écrire <em>au moins</em> deux fichiers, le premier contenant les données à mettre en forme, le second les informations nécessaires à cette mise en
+            forme. En pratique, et dans un souci de normalisation et de généralisation, il peut s'avérer nécessaire d'ajouter un troisième
+            fichier à l'ensemble&nbsp;:
+         </p>
+         <ol>
+            <li>
+               <p><em>Optionnel</em>&nbsp;: un fichier peut être nécessaire pour définir <span lang="latin" class="autrelangue">a priori</span> les balises auxquelles le document <code class="typefichier">XML</code> pourra avoir recours. Ce fichier peut être soit une <span lang="en" class="autrelangue">Document Type Definition</span> soit un Schema (voir plus loin dans le cours)&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Le document contenant les données elles-mêmes, c'est-à-dire le document <code class="typefichier">XML</code> à proprement parler (une instance du document, au sens <code class="langage">SGML</code>)&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Le document contenant les informations de mise en forme, permettant de produire un fichier dans le format de sortie voulu&nbsp;:
+                  une feuille XSLT (eXtensive Stylesheet Language Transformations).
+               </p>
+            </li>
+         </ol>
+         <p>Dans le cas d'un format de sortie <code class="langage">HTML</code>, il peut être également nécessaire d'ajouter une feuille de style <code class="typefichier">CSS</code>.
+         </p>
+         <p>En résumé, si l'on veut produire un fichier <code class="typefichier">HTML</code> à partir de données mises sous format <code class="langage">XML</code>, il faut&nbsp;:
+         </p>
+         <ol>
+            <li>
+               <p>Créer éventuellement un fichier définissant les balises utilisables&nbsp;;</p>
+            </li>
+            <li>
+               <p>Créer le fichier de données <code class="typefichier">XML</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Créer la feuille de style <code class="typefichier">XSL</code> permettant la production du fichier <code class="typefichier">HTML</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Créer éventuellement une feuille de style <code class="typefichier">CSS</code>.
+               </p>
+            </li>
+         </ol>
+         <p>Nous verrons au long de ce cours successivement les étapes 2, 1 et 3.</p>
+         <p class="retourtdm"><a href="#tdm_p2s1" title="Retour à la TdM (Procédure)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s2" id="p2s2" href="#p2s2"></a>2. Exemple : une bibliographie
+         </h4>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="commentaire">&lt;!--&nbsp;La ligne ci-dessus est le prologue&nbsp;--&gt;</span><br><span class="commentaire">&lt;!--&nbsp;Élément racine&nbsp;--&gt;</span><br><span class="tag">&lt;biblio&gt;</span><br>
+            				&nbsp;&nbsp;<span class="commentaire">&lt;!--&nbsp;Premier enfant&nbsp;--&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;livre&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="commentaire">&lt;!--&nbsp;Élément enfant titre&nbsp;--&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;titre&gt;</span>Les Misérables<span class="tag">&lt;/titre&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;auteur&gt;</span>Victor Hugo<span class="tag">&lt;/auteur&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;nb_tomes&gt;</span>3<span class="tag">&lt;/nb_tomes&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;/livre&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;livre&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;titre&gt;</span>L'Assomoir<span class="tag">&lt;/titre&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;auteur&gt;</span>Émile Zola<span class="tag">&lt;/auteur&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;/livre&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;livre<span class="nomattribut"> lang</span>="<span class="valeurattribut">en</span>"&gt;</span><br>
+            					
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;titre&gt;</span>David Copperfield<span class="tag">&lt;/titre&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;auteur&gt;</span>Charles Dickens<span class="tag">&lt;/auteur&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;nb_tomes&gt;</span>3<span class="tag">&lt;/nb_tomes&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;/livre&gt;</span><br>
+            			<span class="tag">&lt;/biblio&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p2s2" title="Retour à la TdM (Exemple : une bibliographie)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4>Exercice&nbsp;<a name="ex1" href="#ex1" id="ex1"></a>1. Structuration d'informations 1
+         </h4>
+         <h5><a href="exercices/exo1.html" title="Énoncé de l'exercice 'Structuration d'informations 1'">Énoncé</a></h5>
+         <h5><a href="exercices/exo1_cor.xml" title="Correction 'Structuration d'informations 1'">
+               				Correction</a></h5>
+         <h4>Exercice&nbsp;<a name="exostruct" href="#exostruct" id="exostruct"></a>2. Structuration d'informations 2
+         </h4>
+         <h5><a href="exercices/exo15.html" title="Énoncé de l'exercice 'Structuration d'informations 2'">Énoncé</a></h5>
+         <h5><a href="exercices/exo15cor.xml" title="Correction 'Structuration d'informations 2'">
+               				Correction</a></h5>
+         <h3><a name="p3" href="#p3" id="p3"></a>III. Structure d'un document XML
+         </h3>
+         <h4><a name="p3s1" id="p3s1" href="#p3s1"></a>1. Généralités
+         </h4>
+         <p>Les personnes ayant élaboré <code class="langage">XML</code> avaient en tête la simplicité de déclaration et la validation de la structure. De plus, elles souhaitaient tenir compte des
+            expériences du passé en intégrant la grande souplesse syntaxique du <code class="langage">SGML</code> et la simplicité d'écriture du <code class="langage">HTML</code>.
+         </p>
+         <p>Comme cela est illustré par l'<a href="#p2s2">exemple</a> précédent, un fichier <code class="typefichier">XML</code> est composé d'un <em>prologue</em>, d'un <em>élément racine</em> et d'un <em>arbre</em>. Cet arbre est constitué d'éléments imbriqués les uns dans les autres (ayant une relation parent-enfant) et d'éléments adjacents.
+         </p>
+         <ul>
+            <li>
+               <p>Les premières lignes forment le prologue, constitué dans l'exemple précédent de la déclaration <code class="langage">XML</code>, puis éventuellement d'une déclaration de type de document (une <code class="typefichier">DTD</code>)&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>L'élément <code class="code">biblio</code> est notre élément racine (en anglais&nbsp;: <span lang="en" class="autrelangue">document element</span>)&nbsp;; il est constitué de trois éléments <code class="code">livre</code>. Dans chacun d'entre eux nous retrouvons la même composition, c'est-à-dire&nbsp;: un élément <code class="code">titre</code>, un élement <code class="code">auteur</code> et éventuellement un élément <code class="code">nb_tomes</code>. L'élément <code class="code">livre</code>, de plus, peut avoir un attribut <code class="code">lang</code>&nbsp;;
+               </p>
+            </li>
+         </ul>
+         <p>Même s'il est simple de comprendre ce code, on s'aperçoit mieux d'une éventuelle erreur lorsqu'on visualise ce même fichier
+            dans <a href="#p4">un navigateur</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s1" title="Retour à la TdM (Généralités)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s2" id="p3s2" href="#p3s2"></a>2. Le prologue
+         </h4>
+         <h5><a href="#p3s2p1" name="p3s2p1" id="p3s2p1"></a>a. Déclaration XML
+         </h5>
+         <p>Cette déclaration fait partie des «&nbsp;instructions de traitement&nbsp;». Exemple de déclaration <code class="langage">XML</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"&nbsp;standalone="yes"?&gt;</span><br></p>
+         <p>On distingue trois informations fournies dans cette déclaration&nbsp;:</p>
+         <ol>
+            <li>
+               <p><code class="code">version</code>&nbsp;: version du <code class="langage">XML</code> utilisée dans le document, 1.0 en ce qui nous concerne (la dernière version du langage, 1.1, date de février 2004 mais ne
+                  change rien quant à ses bases)&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">encoding</code>&nbsp;: le jeu de codage de caractères utilisé. Le jeu de caractères habituel pour le français est le <em>ISO-8859-1</em>. Il a tendance à être remplacé par l'ISO-8859-15 en attendant la généralisation de l'Unicode. Par défaut, l'attribut <code class="code">encoding</code> a la valeur <code class="code">UTF-8</code>. Cela permet à l'ordinateur de «&nbsp;savoir&nbsp;» quel caractère il doit afficher en réponse aux combinaisons de 1 et de 0 que contient
+                  le fichier sur le disque dur&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">standalone</code>&nbsp;: dépendance du document par rapport à une <a href="dtd.html">déclaration de type de document</a>. Si <code class="code">standalone</code> a la valeur <code class="code">yes</code>, le processeur de l'application n'attend aucune déclaration de type de document extérieure au document. Sinon, le processeur
+                  attend une référence de déclaration de type de document. La valeur par défaut est <code class="code">no</code>.
+               </p>
+            </li>
+         </ol>
+         <p>Cette déclaration est facultative, mais il est préférable de l'utiliser. Dans ce cas les attributs <code class="code">version</code>, <code class="code">encoding</code> et <code class="code">standalone</code> doivent être placés <em>dans cet ordre</em>. Si elle est utilisée, elle doit être placée en toute <em>première ligne</em> du document <code class="typefichier">XML</code>. Par exemple, il ne faut placer ni commentaire, ni même une simple ligne vide avant elle.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s2p1" title="Retour à la TdM (Déclaration XML)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p3s2p2" name="p3s2p2" id="p3s2p2"></a>b. Instructions de traitement
+         </h5>
+         <p>Une instruction de traitement est une instruction interprétée par l'application servant à traiter le document <code class="typefichier">XML</code>. Elle ne fait pas totalement partie du document. Les instructions de traitement qui servent le plus souvent sont la déclaration
+            <code class="langage">XML</code> ainsi que la déclaration de feuille de style. Exemple d'instruction de traitement&nbsp;:
+         </p>
+         <p class="xml"><span class="instructiontraitement">&lt;?xml-stylesheet type="<span class="valeurattribut">text/xsl</span>"  href="<span class="valeurattribut">biblio.xsl</span>"?&gt;<br></span></p>
+         <p>Dans cet exemple, l'application est <code class="logiciel">xml-stylesheet</code>, le processeur de feuille de style du <code class="langage">XML</code>. Deux feuilles de style différentes peuvent être utilisées, les <code class="typefichier">XSL</code> (propres au <code class="langage">XML</code>) ainsi que les <code class="typefichier">CSS</code> (feuilles de style apparues avec le <code class="langage">HTML</code>). L'attribut <code class="code">type</code> indique de quel type de fichier il s'agit (<code class="code">text/css</code> pour les feuilles de style <code class="typefichier">CSS</code>, par exemple) et l'attribut <code class="code">href</code> indique l'URL du fichier. Cette instruction de traitement est notamment utilisée par les navigateurs Internet pour la mise
+            en forme du document.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s2p2" title="Retour à la TdM (Instructions de traitement)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p3s2p3" name="p3s2p3" id="p3s2p3"></a>c. Déclaration de type de document (DTD)
+         </h5>
+         <p>Cette déclaration, lorsqu'elle est présente, permet de définir la structure du document. Elle peut être de deux types, externe
+            ou interne. Exemple de déclaration de type de document&nbsp;:
+         </p>
+         <p class="xml"><span class="exempledtdexterne">&lt;!DOCTYPE biblio SYSTEM<span class="valeurattribut"> "biblio.dtd"</span>&gt;<br></span></p>
+         <p>Ce type de déclaration est celui d'une déclaration de type de document externe (voir le <a href="dtd.html">chapitre sur les DTD</a>). Elle définit l'ensemble des éléments utilisables dans le document, y compris l'élément-racine (ici <code class="code">biblio</code>) ainsi que l'emplacement où se trouve le fichier <code class="typefichier">biblio.dtd</code> dans lequel se trouve définie la structure du document.
+         </p>
+         <p>Bien que facultative, il est souvent très intéressant de posséder une <code class="typefichier">DTD</code>, en particulier externe, simplement pour vérifier la validité du document <code class="typefichier">XML</code>. Il est ainsi recommandé d'en utiliser une dans le cas du développement parallèle de plusieurs fichiers <code class="typefichier">XML</code> destinés à subir un traitement particulier (développement par plusieurs personnes par exemple).
+         </p>
+         <p>L'autre type de document permettant de définir la structure d'un fichier, le <a href="schema.html">schéma XML</a>, s'utilise autrement, comme nous le verrons plus tard.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s2" title="Retour à la TdM (Le prologue)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s3" id="p3s3" href="#p3s3"></a>3. Les commentaires
+         </h4>
+         <p>En <code class="langage">XML</code>, les commentaires se déclarent de la même façon qu'en <code class="langage">HTML</code>, car ils reprennent la syntaxe du <code class="langage">SGML</code>. Ils commencent donc par <code class="code">&lt;!--</code> et se terminent par <code class="code">--&gt;</code>. Ils peuvent être placés à n'importe quel endroit tant qu'ils se trouvent à l'<em>extérieur</em> d'une autre balise.
+         </p>
+         <p>Exemples de commentaires valides&nbsp;:</p>
+         <p class="xml"><span class="commentaire">&lt;!--&nbsp;ceci est correct&nbsp;--&gt;</span><br><span class="tag">&lt;elt&gt;</span>
+            			<span class="commentaire">&lt;!--&nbsp;ceci est correct aussi&nbsp;--&gt;</span><br>
+            			Un peu de texte
+            		<span class="tag">&lt;/elt&gt;</span><br></p>
+         <p><em>Remarque</em>&nbsp;: En raison de la compatibilité <code class="langage">XML</code>/<code class="langage">SGML</code>, la chaîne de caractères <code class="code">--</code> est interdite dans un commentaire.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s3" title="Retour à la TdM (Les commentaires)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s4" id="p3s4" href="#p3s4"></a>4. L'arbre d'éléments
+         </h4>
+         <h5><a href="#p3s4p1" name="p3s4p1" id="p3s4p1"></a>a. Introduction
+         </h5>
+         <p>Un document <code class="typefichier">XML</code> peut se représenter sous la forme d'une arborescence d'<em>éléments</em>. Cette arborescence comporte une racine (unique), des branches et des feuilles. Reprenons l'exemple précédent.
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="tag">&lt;biblio&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;livre&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="commentaire">&lt;!--&nbsp;Élément enfant titre&nbsp;--&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;titre&gt;</span>Les Misérables<span class="tag">&lt;/titre&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;auteur&gt;</span>Victor Hugo<span class="tag">&lt;/auteur&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;nb_tomes&gt;</span>3<span class="tag">&lt;/nb_tomes&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/livre&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;livre&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;titre&gt;</span>L'Assommoir<span class="tag">&lt;/titre&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;auteur&gt;</span>Émile Zola<span class="tag">&lt;/auteur&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;couverture<span class="nomattribut"> couleur</span>="<span class="valeurattribut">rouge</span>"&nbsp;/&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/livre&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;livre<span class="nomattribut"> lang</span>="<span class="valeurattribut">en</span>"&gt;</span><br>
+            				
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;titre&gt;</span>David Copperfield<span class="tag">&lt;/titre&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;auteur&gt;</span>Charles Dickens<span class="tag">&lt;/auteur&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;nb_tomes&gt;</span>3<span class="tag">&lt;/nb_tomes&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/livre&gt;</span><br>
+            		<span class="tag">&lt;/biblio&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p3s4p1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p3s4p2" name="p3s4p2" id="p3s4p2"></a>b. Élément racine
+         </h5>
+         <p>L'élément-racine (en anglais&nbsp;: <span lang="en" class="autrelangue">document element</span>) est, comme son nom l'indique, la base du document <code class="typefichier">XML</code>. Il est unique et englobe <em>tous</em> les autres éléments. Il s'ouvre juste après le prologue, et se ferme à la toute fin du document. Dans l'exemple ci-dessus, l'élément racine est <code class="code">biblio</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s4p2" title="Retour à la TdM (Élément racine)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p3s4p3" name="p3s4p3" id="p3s4p3"></a>c. Les éléments
+         </h5>
+         <p>Les éléments forment la structure même du document&nbsp;: ce sont les branches et les feuilles de l'arborescence. Ils peuvent contenir
+            du texte, ou bien d'autres éléments, qui sont alors appelés «&nbsp;éléments enfants&nbsp;», l'élément contenant étant quant à lui appelé
+            logiquement «&nbsp;élément parent&nbsp;».
+         </p>
+         <p>Exemple d'élément contenant du texte&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;titre&gt;</span>Les Misérables<span class="tag">&lt;/titre&gt;</span><br></p>
+         <p>
+            		Exemple d'élément contenant d'autres éléments&nbsp;:
+            	
+         </p>
+         <p class="xml"><span class="tag">&lt;livre&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;titre&gt;</span>L'Assommoir<span class="tag">&lt;/titre&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;auteur&gt;</span>Émile Zola<span class="tag">&lt;/auteur&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;couverture<span class="nomattribut"> couleur</span>="<span class="valeurattribut">rouge</span>"&nbsp;/&gt;</span><br>
+            		<span class="tag">&lt;/livre&gt;</span><br></p>
+         <p>D'autres éléments sont vides&nbsp;: ils ne contiennent pas d'élément-enfant. Exemple d'élément vide&nbsp;:</p>
+         <p class="xml">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;couverture<span class="nomattribut"> couleur</span>="<span class="valeurattribut">rouge</span>"&nbsp;/&gt;</span><br></p>
+         <p>Il faut prendre garde à ne pas confondre la <em>balise</em> <code class="code">&lt;elt&gt;</code> avec l'<em>élément</em> <code class="code">elt</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s4p3" title="Retour à la TdM (Les éléments)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p3s4p4" name="p3s4p4" id="p3s4p4"></a>d. Les attributs
+         </h5>
+         <p>
+            		Tous les éléments peuvent contenir un ou plusieurs attributs. Chaque élément ne peut contenir qu'une fois le même attribut.
+            Un attribut est composé d'un nom et d'une valeur. Il ne peut être présent que dans la balise <em>ouvrante</em> de l'élément (par exemple, on n'a pas le droit d'écrire <code class="code">&lt;/livre lang="en"&gt;</code>).
+            	
+         </p>
+         <p>
+            		Exemple d'utilisation d'un élément avec attribut&nbsp;:
+            	
+         </p>
+         <p class="xml"><span class="tag">&lt;instrument<span class="nomattribut"> type</span>="<span class="valeurattribut">vent</span>"&gt;</span>trompette<span class="tag">&lt;/instrument&gt;</span><br></p>
+         <p>
+            		Exemple d'utilisation d'un élément vide avec attributs&nbsp;:
+            	
+         </p>
+         <p class="xml"><span class="tag">&lt;img<span class="nomattribut"> src</span>="<span class="valeurattribut">ours.png</span>"<span class="nomattribut"> alt</span>="<span class="valeurattribut">Gros ours</span>"<span class="nomattribut"> width</span>="<span class="valeurattribut">56</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">100</span>"&nbsp;/&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p3s4p4" title="Retour à la TdM (Les attributs)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p3s4p5" name="p3s4p5" id="p3s4p5"></a>e. Les entités
+         </h5>
+         <p>
+            		Il existe des entités définissables et définies. Elles peuvent être analysables ou non, internes ou externes. La déclaration
+            des entités s'effectue au sein de la <code class="typefichier">DTD</code>. Elles peuvent être utilisées aussi bien dans la <code class="typefichier">DTD</code> que dans le document <code class="typefichier">XML</code>. Nous reviendrons plus en détails sur <a href="dtd.html#p4">les entités</a> et leur utilisation ultérieurement.
+            	
+         </p>
+         <p>Certains caractères ayant un sens précis en <code class="langage">XML</code>, il est nécessaire de leur trouver un remplaçant lorsque l'on a besoin de les insérer dans un document. On a recours dans
+            ce cas à des entités prédéfinies. Ces entités sont&nbsp;:
+         </p>
+         <table class="tableau" summary="Liste des entités prédéfinies" border="1">
+            <tr>
+               <th id="carac">
+                  <p>Caractère</p>
+               </th>
+               <th id="entite">
+                  <p>Entité</p>
+               </th>
+            </tr>
+            <tr>
+               <td headers="carac">
+                  <p>&amp;</p>
+               </td>
+               <td headers="entite">
+                  <p>&amp;amp;</p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="carac">
+                  <p>&lt;</p>
+               </td>
+               <td headers="entite">
+                  <p>&amp;lt;</p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="carac">
+                  <p>&gt;</p>
+               </td>
+               <td headers="entite">
+                  <p>&amp;gt;</p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="carac">
+                  <p>"</p>
+               </td>
+               <td headers="entite">
+                  <p>&amp;quot;</p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="carac">
+                  <p>'</p>
+               </td>
+               <td headers="entite">
+                  <p>&amp;aquot;</p>
+               </td>
+            </tr>
+         </table>
+         <p class="legende">Table&nbsp;1. Liste des entités prédéfinies</p>
+         <p>Il n'existe pas d'entité prédéfinie pour les lettres accentuées ou pour les alphabets latins. Il faut utiliser à la place
+            les entités numériques du type <code class="code">&amp;#n;</code> (où <code class="code">n</code> est une valeur décimale). La valeur numérique correspond au code ISO 10646&nbsp;; par exemple le caractère <em>é</em> est codé par l'entité numérique <code class="code">&amp;#233;</code>. Il est néanmoins possible d'importer des entités en provenance d'une autre <code class="typefichier">DTD</code>, par exemple <a href="http://www.w3.org/TR/REC-html40/HTMLsymbol.ent">celle du <code class="langage">HTML</code></a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s4p5" title="Retour à la TdM (Les entités)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p3s4p6" name="p3s4p6" id="p3s4p6"></a>f. Les sections CDATA
+         </h5>
+         <p>Une section <code class="code">CDATA</code> est une section pouvant contenir toutes sortes de chaîne de caractères. Une section <code class="code">CDATA</code> permet de définir un bloc de caractères ne devant pas être analysés par le processeur <code class="langage">XML</code>. Cela permet entre autres de garder dans un bloc de texte un exemple de code à afficher tel quel.
+         </p>
+         <p>Exemple d'utilisation de <code class="code">CDATA</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="exemplecdata">&lt;![CDATA[<span class="valeurattribut">Une balise commence par un &lt; et se termine par un &gt;.</span>]]&gt;</span></p>
+         <p class="retourtdm"><a href="#tdm_p3s4" title="Retour à la TdM (L'arbre d'éléments)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s5" id="p3s5" href="#p3s5"></a>5. Règles de composition
+         </h4>
+         <p>Un certain nombre de règles de base doivent être respectées&nbsp;:</p>
+         <ol>
+            <li>
+               <p>Un nom d'élément ne peut commencer par un chiffre. Si le nom n'est composé que d'un seul caractère, ce doit être une lettre
+                  comprise entre «&nbsp;a&nbsp;» et «&nbsp;z&nbsp;» pour les minuscules, «&nbsp;A&nbsp;» et «&nbsp;Z&nbsp;» pour les majuscules. S'il est composé d'au moins deux caractères,
+                  le premier peut être «&nbsp;_&nbsp;» ou «&nbsp;:&nbsp;». Le nom peut ensuite être composé de lettres, chiffres, tirets, tirets bas et deux points.
+                  La syntaxe <code class="langage">XML</code> est sensible à la casse (le format distingue majuscules et minuscules).
+               </p>
+            </li>
+            <li>
+               <p>Toutes les balises portant un contenu non vide doivent être fermées. La balise de début, la balise de terminaison et le contenu
+                  entre deux sont globalement appelés <em>élément</em>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Les balises n'ayant pas de contenu doivent se terminer par /&gt; (voir la balise <code class="code">&lt;img .../&gt;</code> ci-dessus)&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Les valeurs d'attributs doivent être <em>entre guillemets</em>&nbsp;;
+               </p>
+            </li>
+         </ol>
+         <p>Un document respectant ces critères est dit <em>bien formé</em> (<span lang="en" class="autrelangue">well formed</span>).
+         </p>
+         <p>Il est aussi possible de définir des règles plus strictes indiquant quelles sont les séquences et imbrications de balises
+            ou les attributs autorisés. Cela se fait à l'aide d'une <code class="typefichier">DTD</code> ou d'un <code class="typefichier">Schéma</code>. Il est alors possible d'effectuer une <em>validation</em> des documents faisant référence à une <code class="typefichier">DTD</code> pour s'assurer qu'ils respectent bien les règles qui y sont mentionnées. Un document bien formé dont la syntaxe est conforme
+            aux règles stipulées dans une <a href="dtd.html"><code class="typefichier">DTD</code></a> ou un <a href="schema.html">Schema XML</a> est dit <em>valide</em>. Nous reviendrons sur cette notion ultérieurement. 
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s5" title="Retour à la TdM (Règles de composition)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="p4" href="#p4" id="p4"></a>IV. Support par les navigateurs
+         </h3>
+         <h4><a name="navigmozie" id="navigmozie" href="#navigmozie"></a>1. Famille Mozilla et Internet Explorer
+         </h4>
+         <p>Ces navigateurs (à partir de la version 5 pour <code class="logiciel">Internet Explorer</code>) permettent l'affichage des documents <code class="typefichier">XML</code> sous la forme d'une arborescence dans le cas général&nbsp;; si une feuille de style est spécifiée, le navigateur l'interprète
+            (à partir de la version 6 pour <code class="logiciel">Internet Explorer</code>).
+         </p>
+         <p class="retourtdm"><a href="#tdm_navigmozie" title="Retour à la TdM (Famille Mozilla et Internet Explorer)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p4s1" id="p4s1" href="#p4s1"></a>2. Netscape
+         </h4>
+         <p>Le tour de la question est vite fait en ce qui concerne les navigateurs de la famille Netscape, puisque seules les versions
+            égales ou supérieures à 6 affichent les fichiers <code class="typefichier">XML</code> à condition toutefois qu'une feuille de style <code class="typefichier">XSL</code> soit déclarée dans le prologue. Néanmoins son implémentation est encore partielle.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p4s1" title="Retour à la TdM (Netscape)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="navigopera" id="navigopera" href="#navigopera"></a>3. Opera
+         </h4>
+         <p><code class="logiciel">Opera</code> supporte <code class="langage">XML</code> depuis la version&nbsp;8, et le langage <code class="langage">XSL</code> depuis la version&nbsp;9.
+         </p>
+         <p class="retourtdm"><a href="#tdm_navigopera" title="Retour à la TdM (Opera)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p4s3" id="p4s3" href="#p4s3"></a>4. Conclusion
+         </h4>
+         <p>En définitive, deux solutions se présentent&nbsp;:</p>
+         <ol>
+            <li>
+               <p>Soit on veut visualiser le source <code class="typefichier">XML</code>. Dans ce cas, mieux vaut ne pas fournir de feuille de style dans le prologue et utiliser <code class="logiciel">Internet Explorer</code> ou un navigateur de la famille <code class="logiciel">Mozilla</code>.&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Soit on veut tester la feuille de style. Dans ce cas, on peut ajouter l'appel à la feuille de style dans le fichier <code class="typefichier">XML</code>, et constater le résultat sous n'importe quel navigateur récent.
+               </p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_p4s3" title="Retour à la TdM (Conclusion)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours suivant&nbsp;: <a href="xmlcooktop.html">Prise en main d'XML CookTop</a></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="base.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 13 janvier 2009, version 2.22. Corrections syntaxiques.</li>
+            <li>Le 25 janvier 2008, version 2.21. Correction d'une erreur (copier/coller!) sur les normes pour les documents bien formés.</li>
+            <li>Le 15 janvier 2008, version 2.20. Syntaxe. Ajout d'un complément sur les éléments vides et du support par Opera.</li>
+            <li>Le 27 octobre 2005, version 2.12. Quelques corrections de syntaxe et suppression d'un paragraphe introductif.</li>
+            <li>Le 17 octobre 2005, version 2.11. Correction typographique.</li>
+            <li>Le 8 juillet 2005, version 2.10. Mise à jour pour Netscape et réécriture des exemples.</li>
+            <li>Le 15 février 2005, version 2.03. Corrections typographiques.</li>
+            <li>Le 7 février 2005, version 2.02. Corrections typographiques.</li>
+            <li>Le 4 février 2005, version 2.01. Corrections typographiques.</li>
+            <li>Le 6 décembre 2004, version 2.00. Réécriture.</li>
+            <li>Le 22 mai 2004, version 1.21. Corrections typographiques.</li>
+            <li>Le 2 février 2004, version 1.20. Ajouts de Mozilla et d'Opera.</li>
+            <li>Le 29 juillet 2003, version 1.10. Corrections typographiques. Quelques mises à jour sur le fond.</li>
+            <li>Le 31 mai 2002, version 1.01. Corrections typographiques.</li>
+            <li>Le 16 mai 2002, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" >
+
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+
+    <text x="5" y="20" style="font-size:10">SVG Demo: propriétés de stroke.</text>
+
+<g stroke-width="15px" stroke="black">
+    <rect x="10"  y="50" width="400" height="100" style="fill:yellow" stroke-linejoin="miter"  />
+    <rect x="10"  y="175" width="400" height="100" style="fill:magenta" stroke-linejoin="bevel"  />
+    <rect x="10"  y="300" width="400" height="100" style="fill:cyan" stroke-linejoin="round"  />
+</g>
+
+</svg> 

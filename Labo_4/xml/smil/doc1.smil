@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE smil PUBLIC "-//W3C//DTD SMIL 1.0//EN" "http://www.w3.org/TR/REC-smil/SMIL10.dtd">
+
+<smil>
+ <head>
+  <meta name="copyright" content="Gilles Chagnon" />
+  <layout>
+  	<root-layout  width="400" height="300" background-color="white"/>
+  	<region id="region1" left="10" top="30" width="32" height="32" z-index="0"/>
+  	<region id="region2" left="150" top="30" width="64" height="64" fit="fill" z-index="2"/>
+  	<region id="region3" left="150" top="100" width="100" height="100" fit="fill"/>
+  	<region id="titre" left="0" top="10" width="400" height="30" fit="fill" background-color="aqua" z-index="1"/>
+  </layout>
+ </head>
+ <body>
+  <!-- tags de media et synchronisation -->
+  	<par>
+  		<audio src="prologue.mp3" region="region2" dur="6s"/>
+  		<seq>
+  			<par>
+  				<img src="bal1.gif" alt="balle1" region="region1" dur="4s"/>
+	  			<img src="bal2.gif" alt="balle2" region="region2" begin="1s"/>
+	  		</par>
+	  	<audio src="ding.wav" region="region1" />
+	  	<par>
+  			<text src="essai.txt" type="text/plain" region="region3" dur="3.06s" />
+  			<audio src="mavoix.wav" region="region3" />
+  		</par>
+  		<audio src="prologue.mp3" region="region1" clip-begin="7.06s" dur="6.7s"/>
+  		</seq>
+  	</par>
+ </body>
+</smil>
+ 

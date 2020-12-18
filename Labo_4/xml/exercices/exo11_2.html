@@ -1,0 +1,111 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   
+      <title>Collection de nuages</title><script type="text/javascript">
+				var XMLsource = new Object;
+				var XSLsource = new Object;
+				XMLsource = document.XMLDocument;
+				XSLsource = document.XSLDocument;
+				
+                                            function changecouleur()
+					{
+						balisefont=XSLsource.documentElement.selectNodes("//font");
+						couleur=balisefont[0].getAttribute('color');
+						
+						/*if (couleur=='red')
+							{(XSLsource.selectNodes("//font"))[0].setAttribute('color', 'blue');}
+						if (couleur=='blue')
+							{(XSLsource.selectNodes("//font"))[0].setAttribute('color', 'red');}*/
+						
+						document.body.innerHTML = XMLsource.transformNode(XSLsource);
+					}
+					
+				function affichealtitude(nom, altmax, altmin)
+					{
+						alert("L'altitude maximale de ce nuage est " +altmax+"m, minimale "+altmin+"m.");
+						
+						zonealtitude=XSLsource.documentElement.selectNodes("//p[id=nom]");
+						alert(zonealtitude);
+					}
+			</script></head>
+   <body>
+      <h1>Les nuages</h1>
+      <h2 onCiick="affichealtitude(altocumulus,6000, 2000)">altocumulus
+         			
+      </h2>
+      <p>Ce type de nuage poss&egrave;de les <font color="red">esp&egrave;ces</font> suivantes&nbsp;:
+      </p>
+      <ul>
+         <li>lenticularis</li>
+         <li>stratiformis</li>
+         <li>castellanus</li>
+         <li>flocus</li>
+      </ul>
+      <p id="altitudealtocumulus">bla</p>
+      <h2 onCiick="affichealtitude(cirrus,12000, 6000)">cirrus
+         			
+      </h2>
+      <p>Ce type de nuage poss&egrave;de les <font color="red">esp&egrave;ces</font> suivantes&nbsp;:
+      </p>
+      <ul>
+         <li>flocus</li>
+         <li>castellanus</li>
+         <li>spissatus</li>
+         <li>uncinus</li>
+         <li>fibratus</li>
+      </ul>
+      <p id="altitudecirrus">bla</p>
+      <h2 onCiick="affichealtitude(cirrocumulus,7000, 5000)">cirrocumulus
+         			
+      </h2>
+      <p>Ce type de nuage poss&egrave;de les <font color="red">esp&egrave;ces</font> suivantes&nbsp;:
+      </p>
+      <ul>
+         <li>lenticularis</li>
+         <li>stratiformis</li>
+         <li>flocus</li>
+         <li>castellanus</li>
+      </ul>
+      <p id="altitudecirrocumulus">bla</p>
+      <h2 onCiick="affichealtitude(cumulus,8000, 200)">cumulus
+         			
+      </h2>
+      <p>Ce type de nuage poss&egrave;de les <font color="red">esp&egrave;ces</font> suivantes&nbsp;:
+      </p>
+      <ul>
+         <li>fractus</li>
+         <li>humilis</li>
+         <li>mediocris</li>
+         <li>congestus</li>
+      </ul>
+      <p id="altitudecumulus">bla</p>
+      <h2 onCiick="affichealtitude(strato-cumulus,2000, 0)">strato-cumulus
+         			
+      </h2>
+      <p>Ce type de nuage poss&egrave;de les <font color="red">esp&egrave;ces</font> suivantes&nbsp;:
+      </p>
+      <ul>
+         <li>stratiformis</li>
+         <li>lenticularis</li>
+         <li>castellanus</li>
+      </ul>
+      <p id="altitudestrato-cumulus">bla</p>
+      <h2 onCiick="affichealtitude(cumulonimbus,18000, 300)">cumulonimbus
+         			
+      </h2>
+      <p>Ce type de nuage poss&egrave;de les <font color="red">esp&egrave;ces</font> suivantes&nbsp;:
+      </p>
+      <ul>
+         <li>calvus</li>
+         <li>capillatus</li>
+         <li>mammatus</li>
+      </ul>
+      <p id="altitudecumulonimbus">bla</p>
+      
+          <p><a href="../domxslt.html#exomanipxsl">Retour au cours</a></p>
+   </body>
+</html>

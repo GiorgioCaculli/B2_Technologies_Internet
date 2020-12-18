@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" >
+
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+
+    <text x="5" y="20" style="font-size:10">SVG Demo: propriété linecap de stroke.</text>
+
+<g stroke-width="15px" stroke="black">
+	<line x1="50" x2="350" y1="100" y2="100" stroke-linecap="butt"></line>
+	<line x1="50" x2="350" y1="150" y2="150" stroke-linecap="round"></line>
+	<line x1="50" x2="350" y1="200" y2="200" stroke-linecap="square"></line>
+</g>
+
+</svg> 

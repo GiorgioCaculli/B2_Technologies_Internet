@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ev="http://www.w3.org/2001/xml-events" 
+      xmlns:xf="http://www.w3.org/2002/xforms">
+  <head>
+    
+    <style type="text/css">
+      h1 {font-size: 12pt }
+      xf|input.itemClass { width:100px }
+      xf|input.custNumClass { width:100px }
+      xf|input.dateClass { width:80px }
+    </style>
+    <title>Enter Order(s)</title>
+
+    <xf:model id="model1">
+
+      <xf:instance>
+        <orders xmlns="">
+          <order itemNum="">
+            <quantity/>
+            <custNum/>
+            <orderDate/>
+          </order>
+        </orders>
+      </xf:instance>
+
+      <xf:submission id="s01" method="put"
+                     action="file:///temp/ex2order.xml" /> 
+    </xf:model>
+  </head>
+
+  <body>
+
+    <h1>Enter Order(s)</h1>
+
+    <p>Enter data for orders below.</p>
+
+    <xf:repeat id="i1" nodeset="/orders/order">
+
+      <xf:input class="itemClass" ref="@itemNum">
+        <xf:label>Item Number</xf:label>
+      </xf:input>
+
+      <xf:input ref="quantity">
+        <xf:label>Quantity</xf:label>
+      </xf:input>
+
+      <xf:input ref="custNum" class="custNumClass">
+        <xf:label>Customer Number</xf:label>
+      </xf:input>
+
+      <xf:input ref="orderDate" class="dateClass">
+        <xf:label>Order Date</xf:label>
+      </xf:input>
+      <br />
+    </xf:repeat>
+
+    <xf:trigger id="addOrderButton">
+      <xf:label>Add Order</xf:label>
+      <xf:insert nodeset="order" at="last()"
+                 position="after"
+                 ev:event="xforms-activate"/>
+    </xf:trigger>
+
+    <xf:submit submission="s01">
+      <xf:label>Save</xf:label>
+      <xf:hint>Click here to save new order.</xf:hint>
+    </xf:submit>
+
+    <p>Click "Save" to store entered orders.</p>
+
+  </body>
+</html>

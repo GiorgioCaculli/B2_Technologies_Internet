@@ -1,0 +1,338 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Mise en forme à l'aide de feuilles de style XSL : initiation à XSLT</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="XSL, XSLT, base, concept, introduction">
+      <meta name="description" content="XSL est un langage de feuilles de style permettant la mise en forme d'un fichier XML.">
+      <link rel="next" href="recapxsl.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Mise en forme à l'aide de feuilles de style XSL : initiation à XSLT</h1>
+         <p><span class="version">version 1.74</span>, dernière mise à jour le 20 janvier 2009.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#p1" title="Présentation">Présentation</a><ol>
+                     <li><a href="#p1s1" title="Introduction">Introduction</a></li>
+                     <li><a href="#p1s2" title="Structure d'un document XSL">Structure d'un document XSL</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#p2" title="Exemples de mises en forme">Exemples de mises en forme</a><ol>
+                     <li><a href="#p2s2" title="Exemple simple">Exemple simple</a><ol>
+                           <li><a href="#p2s2p1" title="Introduction">Introduction</a></li>
+                           <li><a href="#p2s2p2" title="Exemple">Exemple</a></li>
+                           <li><a href="#p2s2p3" title="Application à un exemple">Application à un exemple</a></li>
+                        </ol>
+                     </li>
+                     <li>Exercice&nbsp;: <a href="#exo1_2">Mise en forme simple à l'aide de XSL</a></li>
+                     <li><a href="#p2s3" title="Exemple avec boucle">Exemple avec boucle</a><ol>
+                           <li><a href="#p2s3p1" title="Introduction">Introduction</a></li>
+                           <li><a href="#p2s3p2" title="Exemple">Exemple</a></li>
+                        </ol>
+                     </li>
+                     <li>Exercice&nbsp;: <a href="#exo_compl">Mise en forme avec réarrangement</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="p1" href="#p1" id="p1"></a>I. Présentation
+         </h3>
+         <h4><a name="p1s1" id="p1s1" href="#p1s1"></a>1. Introduction
+         </h4>
+         <p><code class="langage">XSL</code> signifie <em>eXtensive Stylesheet Langage</em>, ou langage extensible de feuille de style. Cette abréviation recouvre en fait trois langages&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="langage">XPath</code> désigne un moyen d'accéder à un n&#339;ud quelconque de l'arborescence d'un document <code class="typefichier">XML</code> à partir d'un autre n&#339;ud quelconque.
+               </p>
+            </li>
+            <li>
+               <p><code class="langage">XSLT</code> signifie <em>eXtensible Stylesheet Langage Transformation</em>.
+               </p>
+            </li>
+            <li>
+               <p><code class="langage">XSL-FO</code> signifie <em>eXtensible Stylesheet Langage - Formating Objects</em>, et désigne un langage permettant le contrôle de la mise en page finale de la transformation. Ce langage est particulièrement
+                  destiné à la production de contenus au format <abbr title="Portable Document Format">PDF</abbr>.
+               </p>
+            </li>
+         </ul>
+         <p>Ce cours se limitera à aborder les deux premiers langages.</p>
+         <p>Comme son nom l'indique, le <code class="langage">XSLT</code> ne sert pas uniquement de langage de feuille de style. Il est aussi un très puissant manipulateur d'éléments. Il permet de
+            transformer un document <code class="typefichier">XML</code> source en un autre, permettant ainsi, à l'extrême, d'en bouleverser la structure.
+         </p>
+         <p>Le fonctionnement du <code class="langage">XSL</code> est fondé sur les manipulations de modèles (<span lang="en" class="autrelangue">templates</span>). Les éléments du document <code class="typefichier">XML</code> d'origine sont remplacés (ou plus ou moins légèrement modifiés) par ces modèles. Un modèle contient ainsi le texte (éléments,
+            attributs, texte...) de remplacement d'un élément donné.
+         </p>
+         <p>Tout élément pouvant être remplacé dans le fichier de sortie par tout type de contenu texte, <code class="langage">XSL</code> est un outil privilégié de production de fichiers <code class="typefichier">HTML</code> à partir de sources <code class="typefichier">XML</code>. <code class="langage">PHP</code> fait ainsi appel à des bibliothèques de procédures de type <code class="langage">XSL</code> comme <a href="http://xmlsoft.org/XSLT/">libxslt</a> quand il doit gérer l'interfaçage avec des bases de données <code class="langage">XML</code>.
+         </p>
+         <p>Un fichier <code class="typefichier">XSL</code> étant un fichier <code class="typefichier">XML</code>, il doit respecter les <a href="base.html#p3s5">normes de syntaxe</a> de ce format.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p1s2" id="p1s2" href="#p1s2"></a>2. Structure d'un document XSL
+         </h4>
+         <p>La structure de base d'un document <code class="typefichier">XSL</code> commence par un <em>prologue</em>, puis un élément <code class="code">xsl:stylesheet</code> pouvant contenir quelques attributs, notamment une déclaration d'espace de noms ainsi que le numéro de version. L'exemple
+            suivant présente l'appel à cet élément tel que nous le pratiquerons dans ce cours&nbsp;:
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> version</span>="<span class="valeurattribut">1.0</span>"<span class="nomattribut"> xmlns:xsl</span>="<span class="valeurattribut">http://www.w3.org/1999/XSL/Transform</span>"&gt;</span>
+            			
+            			
+            			(...)
+            		<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p>L'élément <code class="code">xsl:stylesheet</code> est l'élément racine du document <code class="typefichier">XSL</code>. C'est lui qui contient tous les modèles (les <span lang="en" class="autrelangue">templates</span>), y compris celui qui est associé à la racine du document <code class="typefichier">XML</code>, modèle que l'on note <code class="code">&lt;xsl:template match="/"&gt;</code>. L'attribut <code class="code">match="/"</code> indique que ce modèle s'applique à la racine du document <code class="typefichier">XML</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s2" title="Retour à la TdM (Structure d'un document XSL)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="p2" href="#p2" id="p2"></a>II. Exemples de mises en forme
+         </h3>
+         <h4><a name="p2s2" id="p2s2" href="#p2s2"></a>1. Exemple simple
+         </h4>
+         <h5><a href="#p2s2p1" name="p2s2p1" id="p2s2p1"></a>a. Introduction
+         </h5>
+         <p>Il est possible de traiter de manière simple un fichier <code class="typefichier">XML</code> contenant une information relativement linéaire. Ainsi, l'exemple déjà présenté d'une composition de bouteille d'eau, dans
+            le cas d'une seule bouteille, se prête facilement à une simple mise en forme <code class="langage">HTML</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2p1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s2p2" name="p2s2p2" id="p2s2p2"></a>b. Exemple
+         </h5>
+         <p>Exemple d'un document <code class="typefichier">XML</code> lié à une feuille de style <code class="typefichier">XSL</code> simple à l'aide d'une <a href="base.html#p3s2p2">instruction de traitement</a>&nbsp;:
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="instructiontraitement">&lt;?xml-stylesheet type="<span class="valeurattribut">text/xsl</span>"  href="<span class="valeurattribut">bouteille1.xsl</span>"?&gt;<br></span><span class="tag">&lt;bouteille&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;marque&gt;</span>Cristaline<span class="tag">&lt;/marque&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;composition&gt;</span>calcium 71mg/l, magnésium 5,5mg/l, chlorure 20mg/l, nitrate 1mg/l, traces de fer.<span class="tag">&lt;/composition&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;source&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ville&gt;</span>St-Cyr la Source<span class="tag">&lt;/ville&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;departement&gt;</span>Loiret<span class="tag">&lt;/departement&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/source&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;code_barre&gt;</span>3274080005003<span class="tag">&lt;/code_barre&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;contenance&gt;</span>150cl<span class="tag">&lt;/contenance&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;ph&gt;</span>7,45<span class="tag">&lt;/ph&gt;</span><br>
+            		<span class="tag">&lt;/bouteille&gt;</span><br></p>
+         <p>Et voici la feuille de style <code class="typefichier">XSL</code> associée&nbsp;:
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> version</span>="<span class="valeurattribut">1.0</span>"<span class="nomattribut"> xmlns:xsl</span>="<span class="valeurattribut">http://www.w3.org/1999/XSL/Transform</span>"&gt;</span><br>
+            			
+            			
+            		<span class="tag">&lt;xsl:template<span class="nomattribut"> match</span>="<span class="valeurattribut">/</span>"&gt;</span><br>
+            			
+            			&nbsp;&nbsp;<span class="tag">&lt;html&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;head&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Exemple de sortie HTML<span class="tag">&lt;/title&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;meta<span class="nomattribut"> http-equiv</span>="<span class="valeurattribut">Content-Type</span>"<span class="nomattribut"> content</span>="<span class="valeurattribut">text/html; charset=ISO-8859-1</span>"&nbsp;/&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/head&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;body&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Bouteille de marque&nbsp;<span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/marque</span>"&nbsp;/&gt;</span><span class="tag">&lt;/h1&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Composition:<span class="tag">&lt;/h2&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/composition</span>"&nbsp;/&gt;</span><span class="tag">&lt;/p&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Lieu d'origine:<span class="tag">&lt;/h2&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Ville de&nbsp;<span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/source/ville</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span>, dans le département&nbsp;<span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/source/departement</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span><span class="tag">&lt;/p&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Autres informations<span class="tag">&lt;/h2&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>Contenance: <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/contenance</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>pH: <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/ph</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/body&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/html&gt;</span><br>
+            		<span class="tag">&lt;/xsl:template&gt;</span><br>
+            		<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p2s2p2" title="Retour à la TdM (Exemple)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s2p3" name="p2s2p3" id="p2s2p3"></a>c. Application à un exemple
+         </h5>
+         <p>Appliquer cette dernière feuille de style au fichier <code class="typefichier">XML</code> produit un <a href="exemples/bouteille1.html">fichier <code class="typefichier">HTML</code></a> avec la mise en page désirée.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2" title="Retour à la TdM (Exemple simple)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4>Exercice&nbsp;<a name="exo1_2" href="#exo1_2" id="exo1_2"></a>1. Mise en forme simple à l'aide de XSL
+         </h4>
+         <h5><a href="exercices/exo7.html" title="Énoncé de l'exercice 'Mise en forme simple à l'aide de XSL'">Énoncé</a></h5>
+         <h5><a href="exercices/exo7.xsl" title="Correction 'Mise en forme simple à l'aide de XSL'">
+               				Correction</a></h5>
+         <h4><a name="p2s3" id="p2s3" href="#p2s3"></a>2. Exemple avec boucle
+         </h4>
+         <h5><a href="#p2s3p1" name="p2s3p1" id="p2s3p1"></a>a. Introduction
+         </h5>
+         <p>Il arrive que la structure du document <code class="typefichier">XML</code> ne soit pas linéaire, mais fondée sur, par exemple, des boucles, ou bien comporte un nombre indéterminé de fois un même élément&nbsp;;
+            c'est d'ailleurs le plus souvent le cas.
+         </p>
+         <p>On peut ainsi reprendre l'exemple de la bouteille d'eau, qui se présente sous la forme du fichier <code class="typefichier">XML</code> suivant&nbsp;:
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="instructiontraitement">&lt;?xml-stylesheet type="<span class="valeurattribut">text/xsl</span>"  href="<span class="valeurattribut">bouteille1.xsl</span>"?&gt;<br></span><span class="tag">&lt;bouteille&gt;</span><br>
+            			&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;marque&gt;</span>Cristaline<span class="tag">&lt;/marque&gt;</span><br>
+            			&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;composition&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ion_positif&gt;</span>calcium 71mg/l<span class="tag">&lt;/ion_positif&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ion_negatif&gt;</span>nitrate 1mg/l<span class="tag">&lt;/ion_negatif&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ion_positif&gt;</span>magnésium 5,5mg/l<span class="tag">&lt;/ion_positif&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ion_negatif&gt;</span>chlorure 20mg/l<span class="tag">&lt;/ion_negatif&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;autres_materiaux&gt;</span>fer<span class="tag">&lt;/autres_materiaux&gt;</span><br>
+            			&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/composition&gt;</span><br>
+            			&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;source&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ville&gt;</span>St-Cyr la Source<span class="tag">&lt;/ville&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;departement&gt;</span>Loiret<span class="tag">&lt;/departement&gt;</span><br>
+            			&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/source&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;code_barre&gt;</span>3274080005003<span class="tag">&lt;/code_barre&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;contenance&gt;</span>150cl<span class="tag">&lt;/contenance&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;ph&gt;</span>7,45<span class="tag">&lt;/ph&gt;</span><br>
+            		<span class="tag">&lt;/bouteille&gt;</span><br></p>
+         <p>Cette fois-ci, il faut tenir compte d'un nombre <span lang="latin" class="autrelangue">a priori</span> indéterminé d'éléments <code class="code">ion_positif</code>, par exemple. Il suffit pour cela d'introduire dans la feuille de style un élément <code class="code">xsl:for-each</code> avec un attribut <code class="code">select</code> permettant d'indiquer les n&#339;uds sur lesquels s'effectue la boucle&nbsp;:
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> version</span>="<span class="valeurattribut">1.0</span>"<span class="nomattribut"> xmlns:xsl</span>="<span class="valeurattribut">http://www.w3.org/1999/XSL/Transform</span>"&gt;</span><br>
+            			
+            			
+            			<span class="tag">&lt;xsl:template<span class="nomattribut"> match</span>="<span class="valeurattribut">/</span>"&gt;</span><br>
+            				
+            				&nbsp;&nbsp;<span class="tag">&lt;html&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;head&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Exemple de sortie HTML<span class="tag">&lt;/title&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;meta<span class="nomattribut"> http-equiv</span>="<span class="valeurattribut">Content-Type</span>"<span class="nomattribut"> content</span>="<span class="valeurattribut">text/html; charset=ISO-8859-1</span>"&nbsp;/&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/head&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;body&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Bouteille de marque <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/marque</span>"&nbsp;/&gt;</span><span class="tag">&lt;/h1&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Composition:<span class="tag">&lt;/h2&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Ions positifs<span class="tag">&lt;/h3&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/composition/ion_positif</span>"&gt;</span><br>
+            								
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Ions négatifs<span class="tag">&lt;/h3&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/composition/ion_negatif</span>"&gt;</span><br>
+            								
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Autres matériaux<span class="tag">&lt;/h3&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">//autres_materiaux</span>"&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            						<span class="tag">&lt;h2&gt;</span>Lieu d'origine<span class="tag">&lt;/h2&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Ville de <span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/source/ville</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span>, dans le département <span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/source/departement</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span><span class="tag">&lt;/p&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Autres informations<span class="tag">&lt;/h2&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>Contenance: <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/contenance</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>pH: <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/ph</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/body&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;/html&gt;</span><br>
+            			<span class="tag">&lt;/xsl:template&gt;</span><br>
+            		<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p>
+            		Noter&nbsp;:
+            	
+         </p>
+         <ol>
+            <li>
+               <p>la présence du caractère <code class="code">/</code> à la fin de l'élément «&nbsp;Retour-Ligne&nbsp;» <code class="code">br</code>. Dans le fichier <code class="typefichier">HTML</code> produit, il n'apparaît plus. Le <code class="code">/</code> est obligatoire car en tant que fichier <code class="langage">XML</code>, la feuille de style XSLT doit être bien formée.
+               </p>
+            </li>
+            <li>
+               <p>le réarrangement des entrées&nbsp;: les ions positifs sont de toutes manières affichés <em>avant</em> les ions négatifs.
+               </p>
+            </li>
+            <li>
+               <p>la sélection des "autres matériaux" avec <code class="code">select="//autres_materiaux"</code>. Cela est une des manières de faire référence à un élément dans l'arbre des éléments. Nous verrons la liste de ces sélecteurs
+                  plus tard.
+               </p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_p2s3p1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s3p2" name="p2s3p2" id="p2s3p2"></a>b. Exemple
+         </h5>
+         <p>On trouvera un deuxième exemple dans une <a href="#exo_compl">variante</a> de l'exercice précédent...
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s3" title="Retour à la TdM (Exemple avec boucle)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4>Exercice&nbsp;<a name="exo_compl" href="#exo_compl" id="exo_compl"></a>2. Mise en forme avec réarrangement
+         </h4>
+         <h5><a href="exercices/exo8.html" title="Énoncé de l'exercice 'Mise en forme avec réarrangement'">Énoncé</a></h5>
+         <h5><a href="exercices/exo8.xsl" title="Correction 'Mise en forme avec réarrangement'">
+               				Correction</a></h5>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours suivant&nbsp;: <a href="recapxsl.html">Mise en forme à l'aide de feuilles de style XSL : instructions XSLT</a></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="stylexsl.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 20 janvier 2009, version 1.74. Corrections syntaxiques.</li>
+            <li>Le 22 janvier 2008, version 1.73. Corrections de fautes de frappe et de syntaxe.</li>
+            <li>Le 3 novembre 2006, version 1.72. Correction de fautes de frappe.</li>
+            <li>Le 4 janvier 2006, version 1.71. Corrections typographiques.</li>
+            <li>Le 27 novembre 2005, version 1.70. Réécriture de l'introduction.</li>
+            <li>Le 11 juillet 2005, version 1.60. Réécriture des exemples.</li>
+            <li>Le 15 février 2005, version 1.52. Corrections typographiques.</li>
+            <li>Le 16 juin 2004, version 1.51. Ajout des corrections des exercices.</li>
+            <li>Le 4 février 2004, version 1.50. Corrections typographiques et quelques mises à jour sur le fond.</li>
+            <li>Le 31 octobre 2003, version 1.40. Corrections typographiques et quelques mises à jour sur le fond.</li>
+            <li>Le 31 juillet 2003, version 1.30. Corrections typographiques. Quelques mises à jour sur le fond.</li>
+            <li>Le 28 juin 2003, version 1.20. Quelques paragraphes en plus.</li>
+            <li>Le 31 mai 2003, version 1.11. Corrections typographiques.</li>
+            <li>Le 28 octobre 2002, version 1.10. Quelques ajouts de titres.</li>
+            <li>Le 31 mai 2002, version 1.01. Corrections typographiques.</li>
+            <li>Le 21 mai 2002, version 1.00. Création du cours.</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" >
+
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+
+    <text x="5" y="20" style="font-size:10">SVG Demo: fill opacity.</text>
+
+    <rect x="10"  y="100" width="400" height="100" style="fill:yellow"  />
+    <rect x="10"  y="225" width="400" height="100" style="fill:green"  />
+
+    <g style="fill:cyan">
+      <rect x="25"  y="50"  width="50"  height="320" fill-opacity="0.2"  />
+      <rect x="100" y="50"  width="50"  height="320" fill-opacity="0.4"  />
+      <rect x="175" y="50"  width="50"  height="320" fill-opacity="0.6"  />
+      <rect x="250" y="50"  width="50"  height="320" fill-opacity="0.8"/>
+      <rect x="325" y="50"  width="50"  height="320"/>
+    </g>
+
+    <text x="40"  y="385">0.2</text>
+    <text x="115" y="385">0.4</text>
+    <text x="190" y="385">0.6</text>
+    <text x="265" y="385">0.8</text>
+    <text x="340" y="385">1.0</text>
+
+</svg> 

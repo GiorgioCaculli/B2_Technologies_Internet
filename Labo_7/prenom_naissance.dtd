@@ -1,0 +1,10 @@
+<!ELEMENT Stat_prenom (data*)>
+<!ELEMENT data (naissance*)>
+<!ATTLIST data annee CDATA #REQUIRED>
+<!ELEMENT naissance (prenom, (rang, occurence)*)>
+<!ATTLIST naissance genre CDATA #REQUIRED>
+<!ELEMENT prenom (#PCDATA)>
+<!ELEMENT rang (#PCDATA)>
+<!ATTLIST rang region CDATA #REQUIRED>
+<!ELEMENT occurence (#PCDATA)>
+<!ATTLIST occurence region CDATA #REQUIRED>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="exo12_5_1.xsl" ?>
+
+<annee>
+	<mois nom="janvier" numero="1">6</mois>
+	<mois nom="février" numero="2">3</mois>
+	<mois nom="mars" numero="3">35</mois>
+	<mois nom="avril" numero="4">26</mois>
+	<mois nom="mai" numero="5">48</mois>
+	<mois nom="juin" numero="6">55</mois>
+	<mois nom="juillet" numero="7">58</mois>
+	<mois nom="août" numero="8">91</mois>
+	<mois nom="septembre" numero="9">88</mois>
+	<mois nom="octobre" numero="10">67</mois>
+	<mois nom="novembre" numero="11">80</mois>
+	<mois nom="décembre" numero="12">90</mois>
+</annee>

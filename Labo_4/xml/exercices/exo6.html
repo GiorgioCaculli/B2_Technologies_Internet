@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+	<title>Exercice 6</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<h1>Exercice 6</h1>
+
+<p>On visualisera les documents <code>XML</code> avec Internet Explorer ou Mozilla.</p>
+
+<ol>
+	<li>Rédiger un document <code>XML</code> de quelques mots, comportant une <code>DTD</code> externe déclarant deux éléments&nbsp;:
+		<ol>
+			<li><code>elt.racine</code> peut contenir autant de fois que l'on veut du texte ou <code>elt.enfant</code>&nbsp;;</li>
+			<li><code>elt.enfant</code> peut contenir du texte.</li>
+		</ol>
+	</li>
+	<li>Déclarer dans la DTD une entité paramétrique <code>entite1</code> permettant d'insérer dans la <code>DTD</code> la chaîne de caractères "#PCDATA|elt.enfant". Utiliser cette entité dans la déclaration de l'élément <code>elt.racine</code>.</li>
+	<li>Compléter la déclaration de type de document du fichier XML, dans le document XML lui-même en&nbsp;:
+		<ul>
+			<li>déclarant une entité <code>entite2</code> permettant d'insérer "<code>&lt;elt.enfant&gt;entité&lt;/elt.enfant&gt;</code>" et l'appeler dans un corps de texte d'<code>elt.racine</code>.</li>
+			<li>déclarant l'entité de caractère <code>Eacute</code> comme étant le caractère <code>&amp;#201;</code> (qui correspond à &Eacute;). L'appeler dans un corps de texte.</li> 
+		</ul>
+	</li>
+</ol>
+
+<p><a href="../dtd.html#p4exo1">Retour au cours</a></p>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cours SYSTEM "../ressources/cours30.dtd">
+
+<cours nomfichier="cours" typecoursenligne="xml" typecourssiteweb="xml">
+	<titre>Cours de XML</titre>
+	<auteur>
+		<identite>Gilles Chagnon</identite>
+		<email>Gilles.Chagnon@upmc.fr</email>
+		<adresse>
+			<organisme>Formation Permanente - Université Paris VI</organisme>
+			<localisation>Couloir 24-25 - 3ème étage - salle 309</localisation>
+			<rue>4, Place Jussieu</rue>
+			<ville>75252 Paris Cedex 05</ville>
+		</adresse>
+		<telephone tel="01-44-27-60-11"/>
+	</auteur>
+	<motsclefs>XML, XSL, DTD, Schema XML, SVG, SMIL, XPath, XForms, services Web</motsclefs>
+	<resume>Cours d'initiation à XML, orienté multimédia: bases du XML, DTD, Schémas, XSL(T). Exemples d'application avec SVG et SMIL. Formulaires XForms et services Web.</resume>
+	<description>Ce cours a été initialement présenté à des étudiants de <lien href="http://www.licence.elec.upmc.fr/S_tec/">licence multimédia</lien> de l'Université Pierre et Marie Curie. Il présente, classés par thèmes, les bases du format XML, des notions sur sa manipulation, enfin quelques exemples de formats dédiés au multimédia.</description>
+	<prerequis>Maîtrise de HTML 4.01 et des feuilles de style CSS.</prerequis>
+	<bibliographie>
+		<mesLivres titre="XML" editeur="Pearson Education" date="septembre 2007" lienAmazon="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" lienEyrolles="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php"><commentaire>Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims)</commentaire></mesLivres>
+	</bibliographie>
+	<plan>
+		<thème titre="Pour bien débuter">
+			<intro>Ces pages abordent les bases de cette famille de langages, ainsi qu'un bref tutoriel sur deux éditeurs.</intro>
+			<chapitre href="base"/>
+			<chapitre href="xmlcooktop"/>
+			<chapitre href="oxygenxml"/>
+			<ARetenir></ARetenir>
+		</thème>
+		<thème titre="Définir le format d'un document&#160;: DTD et Schémas">
+			<intro>Un fichier <acronyme titre="eXtended Markup Language">XML</acronyme> doit non seulement respecter des règles d'écriture vues précédemment&#160;; il peut aussi, si on le désire, suivre des règles strictes d'enchâssements des éléments. Il existe deux grands langages de description pour ce faire.</intro>
+			<chapitre href="dtd"/>
+			<chapitre href="schema"/>
+			<ARetenir></ARetenir>
+		</thème>
+		<thème titre="Mettre en forme et transformer&#160;: CSS et XSL">
+			<intro>Un fichier <acronyme titre="eXtended Markup Language">XML</acronyme> peut être à loisir mis en forme et adapté à des formats de visualisation variés, comme par exemple une page Web ou un document <acronyme titre="Portable Document Format">PDF</acronyme>. Voici les techniques qui le permettent.</intro>
+			<chapitre href="stylexsl"/>
+			<chapitre href="recapxsl"/>
+			<chapitre href="fonctionsxpath"/>
+			<chapitre href="domxslt"/>
+			<ARetenir></ARetenir>
+		</thème>
+		<thème titre="Du XML pour le multimédia&#160;: SMIL et SVG">
+			<intro>Certains formats <acronyme titre="eXtended Markup Language">XML</acronyme> particuliers ont été créés afin de permettre la description de contenu multimédia&#160;: images vectorielles avec <acronyme titre="Scalable Vector Graphics">SVG</acronyme> et synchronisation de son et vidéo avec <acronyme titre="Synchronized Multimedia Integration Language">SMIL</acronyme>.</intro>
+			<chapitre href="smil"/>
+			<chapitre href="svg"/>
+			<chapitre href="svgdynamique"/>
+			<ARetenir></ARetenir>
+		</thème>
+		<thème titre="Divers autres formats XML">
+			<intro>Une multitude de formats a été développée pour certaines tâches précises. Ces pages en décrivent quelques-uns dans cette galaxie.</intro>
+			<chapitre href="xforms"/>
+			<chapitre href="servicesweb"/>
+			<ARetenir></ARetenir>
+		</thème>
+	</plan>
+</cours>

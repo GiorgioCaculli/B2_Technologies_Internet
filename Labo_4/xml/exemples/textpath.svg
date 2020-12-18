@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd">
+<svg width="500" height="300cm" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path id="MonChemin"
+          d="M 50 100 
+             C 100 50 150   0 200 50
+             C 250 100 300 150 350 100
+             C 400 200 450 50 450 50" fill="none" stroke="none"/>
+
+  <text style="font-family:Verdana; font-size:20; fill:blue">
+    <textPath xlink:href="#MonChemin">
+      On monte, puis on descend, et hop une petite bosse!
+    </textPath>
+  </text>
+</svg>

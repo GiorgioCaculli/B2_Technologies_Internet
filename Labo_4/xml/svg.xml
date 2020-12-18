@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+	<cours nomfichier="svg">Initiation à XML</cours>
+	<entete>
+		<titre>Un format de dessin vectoriel en XML: SVG</titre>
+		<auteur>G. Chagnon</auteur>
+		<resume>Le SVG est un format graphique vectoriel permettant la production de figures et de diagrammes.</resume>
+		<motsclefs>SVG, Scalable, Vector, Graphics, XML</motsclefs>
+	</entete>
+	<corpus>
+		<partie titre="Introduction" ancre="intro">
+			<section titre="Origine et but" ancre="origine">
+				<paragraphe titre="Histoire" ancre="histosvg">
+					<texte><acronyme titre="Scalable Vector Graphics">SVG</acronyme> signifie <autrelangue type="en">Scalable Vector Graphics</autrelangue>. Ce langage permet d'écrire des graphiques vectoriels 2D en <code type="langage">XML</code>. Il a été inventé en 1998 par un groupe de travail (comprenant Microsoft, Autodesk, Adobe, IBM, Sun, Netscape, Xerox, Apple, Corel, HP, ILOG...) pour répondre à un besoin de graphiques légers, dynamiques et interactifs.</texte>
+					<texte>Une première ébauche du langage est sortie en octobre 1998 et en juin 2000 apparaît la première version du <logiciel>Viewer Adobe</logiciel> (<autrelangue>plugin</autrelangue> permettant de visualiser le <code type="langage">SVG</code>). Le <code type="langage">SVG</code> s'est très vite placé comme un concurrent de <logiciel>Flash</logiciel> et à ce titre, Adobe a intégré ce langage dans la plupart de ses éditeurs (dont les principaux sont <logiciel>Illustrator</logiciel> et <logiciel>Golive</logiciel>).</texte>
+				</paragraphe>
+				<paragraphe titre="«&#160;Niche&#160;» de SVG" ancre="niche">
+					<texte>Cependant, comme Flash est désormais un produit bien installé, notamment en publicité et sur les sites «&#160;branchés&#160;», <code type="langage">SVG</code> semble plus adapté aux contextes suivants&#160;:</texte>
+					<liste>
+						<item><texte>visualisation de contenus (économiques, processus, cartes, etc.) au format <code type="langage">XML</code>, associée à JavaScript+DOM, ou bien à des transformations <code type="langage">XSLT</code>...&#160;;</texte></item>
+						<item><texte>interface utilisateur pour certains types d'applications Internet (comme par exemple <logiciel lang="en">Firefox</logiciel>)&#160;;</texte></item>
+						<item><texte>interfaces pour des outils de consultation particuliers (par exemple avec une faible bande passante)</texte></item>
+						<item><texte>dessins statiques, animés ou même interactifs dans le monde de l'éducation.</texte></item>
+					</liste>
+				</paragraphe>
+			</section>
+			<section titre="Pourquoi SVG&#160;?" ancre="pourquoi">
+				<paragraphe>
+					<texte>Les raisons pouvant pousser à l'adoption d'un format comme <code type="langage">SVG</code> sont nombreuses&#160;:</texte>
+					<liste>
+						<item>
+							<texte>Liées aux avantages du graphisme vectoriel&#160;:</texte>
+							<liste>
+								<item><texte>Adaptation de l'affichage à des media variés et à des tailles différentes&#160;;</texte></item>
+								<item><texte>Possibilité d'appliquer des styles&#160;;</texte></item>
+								<item><texte>Possibilité d'indexer le texte qui fait partie du graphisme&#160;;</texte></item>
+								<item><texte>Taille de l'image après compression&#160;;</texte></item>
+								<item><texte>Facilités d'édition&#160;: les éléments sont des objets, des hiérarchies, etc.</texte></item>
+							</liste>
+						</item>
+						<item>
+							<texte>Liées aux avantages particuliers du format <code type="langage">SVG</code>&#160;:</texte>
+							<liste>
+								<item>
+									<texte>Insertion dans le monde XML/XHTML&#160;:</texte>
+									<liste>
+										<item><texte>Génération de <code type='typefichier'>SVG</code> avec <code type="langage">XSLT</code> à partir de données <code type='typefichier'>XML</code>&#160;;</texte></item>
+										<item><texte>Intégration totale dans <code type="langage">XHTML</code>, viewers <code type='langage'>SMIL</code>, etc.</texte></item>
+										<item><texte>Utilisation de <code type="langage">CSS</code>&#160;;</texte></item>
+										<item><texte>Scriptable avec <code type="langage">JavaScript</code> <autrelangue>via</autrelangue> le <acronyme titre="Document Object Model" lang="en">DOM</acronyme>.</texte></item>
+										<item><texte>Possibilité de mélanger des grammaires <code type="langage">XML</code> entre elles&#160;: un document <code type='typefichier'>HTML</code> peut contenir des gaphiques <code type="langage">SVG</code>, des expressions mathématiques en <code type="langage">MathML</code>, des présentations en <code type='langage'>SMIL</code>...</texte></item>
+									</liste>
+								</item>
+								<item><texte>Modèle de couleurs sophistiqué, filtres graphiques (comme dans <logiciel>PhotoShop</logiciel>)&#160;;</texte></item>
+								<item><texte>Possibilité d'indexage par les moteurs de recherche (c'est un fichier texte&#160;!)&#160;;</texte></item>
+								<item><texte>Possibilité de partager du code (format texte non propriétaire)&#160;;</texte></item>
+							</liste>
+						</item>
+					</liste>
+				</paragraphe>
+			</section>
+			<section titre="Outils" ancre="outils">
+				<paragraphe titre="Introduction" ancre="outilsintro">
+					<texte>Une <reference href="http://www.svgi.org/">liste complète des implémentations de <code type="langage">SVG</code></reference> est disponible sur le site du W3C.</texte>
+				</paragraphe>
+				<paragraphe titre="&#201;dition" ancre="outilsedition">
+					<texte>Comme <code type="langage">SVG</code> est un format <code type="langage">XML</code>, n'importe quel éditeur de texte fait en théorie l'affaire. Il est néanmoins recommandé d'utiliser de préférence un éditeur dédié à XML si l'on choisit cette option, comme <reference href="http://www.jasc.com/products/webdraw/"><logiciel>WebDraw</logiciel></reference> de Jasc, ou <reference href="http://www.inkscape.org/">InkScape</reference>. <logiciel>Adobe Illustrator</logiciel>, <logiciel>Corel Draw</logiciel> permettent aussi d'exporter au format <code type="langage">SVG</code> -et cela pour ne parler que des logiciels les plus connus. Google a lancé en 2010 un <reference href="http://code.google.com/p/svg-edit/">éditeur SVG en ligne</reference>.</texte>
+				</paragraphe>
+				<paragraphe titre="Visualisation" ancre="outilsvisual">
+					<texte><code type="langage">SVG</code> n'est actuellement pas supporté en natif par tous les navigateurs. On distingue plusieurs degrés d'avancement&#160;:</texte>
+					<liste>
+						<item><texte><logiciel lang="en">Internet Explorer</logiciel> ne le supporte pas en natif. Il est donc nécessaire d'installer soi-même un <autrelangue>plugin</autrelangue>. Le plus répandu d'entre eux est, à la date de révision de ce cours (mars 2008), le <autrelangue>plugin</autrelangue>&#160;<logiciel>SVG&#160;Viewer&#160;3.03</logiciel>, téléchargeable gratuitement sur le site d'Adobe&#160;: <reference href="http://www.adobe.com/svg/">http://www.adobe.com/svg/</reference></texte></item>
+						<item><texte><logiciel lang="en">FireFox</logiciel>, <reference href="http://developer.mozilla.org/en/docs/SVG_in_Firefox_1.5">à partir de sa version 1.5</reference>, a entrepris de supporter en natif le format <code type="langage">SVG</code>, mais son <reference href="http://developer.mozilla.org/en/docs/SVG_in_Firefox_1.5">support</reference> reste partiel. Le <reference href="http://www.croczilla.com/svg/samples/">panorama du support SVG de FireFox</reference> donne néanmoins un aperçu des fonctionnalités de ce format.</texte></item>
+						<item><texte><logiciel>Opera</logiciel> a commencé à prendre en charge le SVG dans sa version 8.0. Le <reference href="http://www.opera.com/features/svg/index.dml">support SVG d'<logiciel>Opera</logiciel></reference> inclut maintenant des animations.</texte></item>
+					</liste>
+				</paragraphe>
+			</section>
+		</partie>
+		<partie titre="SVG de base" ancre="svgbase">
+			<section titre="Structure d'une simple page SVG" ancre="structure">
+				<paragraphe titre="Prologue" ancre="prologue">
+					<texte>Un fichier <code type='typefichier'>SVG</code> commence par une déclaration de version <code type="langage">XML</code> standard, comme par exemple</texte>
+					<exemple type="XML">
+						<prologue standalone="no"/>
+					</exemple>
+					<texte>Il faut alors ajouter le DocType correspondant à la version SVG utilisée&#160;:</texte>
+					<exemple type="XML">
+						<typedocument nomracine="svg" type="PUBLIC" href="http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" identifiant="-//W3C//DTD SVG 1.0//EN"/>
+					</exemple>
+					<texte>Il est cependant préférable, en cours de développement, de copier localement la <reference href="svg10.dtd"><code type='typefichier'>DTD de SVG</code></reference>, et d'y accéder en local&#160;:</texte>
+					  <exemple type="XML">
+					  	<typedocument nomracine="svg" type="SYSTEM" href="svg10.dtd"/>
+					  </exemple>
+					<texte>La <reference href="http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-flat.dtd">version&#160;1.1  de la DTD SVG</reference> existe également, mais représente une évolution en terme de modularisation hors de propos ici.</texte>
+				</paragraphe>
+				<paragraphe titre="Élément racine" ancre="racine">
+					<texte>La racine d'un fichier <code type='typefichier'>SVG</code> est un élément... <code>svg</code>. Mais il est nécessaire de définir deux espaces de noms, un par défaut et un second permettant d'avoir accès à d'autres fonctionnalités que nous verrons par la suite, comme suit&#160;:</texte>
+					<exemple type="XML">
+						<element nom="svg"><attribut nom="xmlns">http://www.w3.org/2000/svg</attribut><attribut nom="xmlns:link">http://www.w3.org/1999/xlink</attribut><contenu>(..)</contenu></element>
+					</exemple>
+					<texte>La taille de la fenêtre <code type="langage">SVG</code> est définie par les attributs <code>width</code> et <code>height</code> de l'élément <code><![CDATA[<svg>]]></code>&#160;: <code><![CDATA[<svg width="400" height="250" xmlns="http://www.w3.org/2000/svg">]]></code></texte>
+				</paragraphe>
+			</section>
+			<section titre="Imbrication d'un fichier SVG dans HTML" ancre="imbrication">
+				<paragraphe>
+					<texte>À moyen terme on devrait pouvoir insérer directement du code <code type="langage">SVG</code> dans du code <code type="langage">XHTML</code>. Certaines <reference href="http://www.mozilla.org/projects/svg/">variantes de Mozilla</reference> possèdent cette fonctionnalité avec un sous-ensemble de <code type="langage">SVG</code>.</texte>
+					<texte>La version canonique demande d'utiliser la balise <code><![CDATA[<object>]]></code>. On peut en consulter un exemple sur le site de l'INSEE avec l'<reference href="http://www.insee.fr/fr/indicateur/indic_cons/sip/sip.htm">évolution des prix à la consommation depuis 2000</reference>.</texte>
+					<texte>La solution la plus souple d'emploi reste d'utiliser un environnement <code><![CDATA[<iframe>]]></code>. Par exemple&#160;:</texte>
+					<exemple type="HTML">
+						<element nom="iframe" indent="oui">
+							<attribut nom="src">salut-tout-le-monde.svg</attribut>
+							<attribut nom="height">540</attribut>
+							<attribut nom="width">95%</attribut>
+							<attribut nom="frameborder">0</attribut>
+							<element nom="p" niveau="1">(Contenu alternatif: image+texte, texte seulement...)</element>
+						</element>
+					</exemple>
+				</paragraphe>
+			</section>
+<!--http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-flat.dtd. -->
+		</partie>
+		<partie titre="Éléments graphiques de base" ancre="graphiquebase">
+			<section titre="Introduction" ancre="grfintro">
+				<paragraphe>
+					<texte>SVG définit un certain nombre d'éléments graphiques de base. Voici la liste des éléments les plus importants&#160;:</texte>
+					<liste type="ordonnee">
+						<item><texte>Texte avec <code>text</code>&#160;;</texte></item>
+						<item><texte>Rectangles <code>rect</code>&#160;;</texte></item>
+						<item><texte>Le cercle <code>circle</code> et l'ellipse <code>ellipse</code>&#160;;</texte></item>
+						<item><texte>Lignes <code>line</code> et poly-lignes <code>polyline</code>&#160;;</texte></item>
+						<item><texte>Polygones&#160;;</texte></item>
+						<item><texte>Formes arbitraires avec <code>path</code>.</texte></item>
+					</liste>
+					<texte>Chaque élément graphique est représenté par un élément <code type="langage">XML</code> qui est paramétrable avec des attributs <code type="langage">XML</code> et hérite d'attributs de ses parents.</texte>
+					<texte>Comme dans d'autres langages vectoriels (par exemple <code type="langage">VRML</code>), il existe des formes géométriques de base (rectangle, ellipse, cercle, lignes, poly-lignes et polygone). Il existe également une méthode permettant de produire des formes complexes.</texte>
+				</paragraphe>
+			</section>
+			<section titre="Mécanismes principaux" ancre="principaux">
+				<paragraphe titre="Attributs" ancre="attributs">
+					<texte>Il faut se référer à la spécification pour connaître tous les détails. Ici, nous ne montrons en règle générale qu'un petit extrait, car leur nombre est énorme&#160;!</texte>
+					<texte>La plupart des éléments se partagent un nombre commun d'attributs comme par exemple l'attribut <code>id</code> (identificateur) ou encore <code>style</code> (les propriétés de style suivent les règles du <code type="langage">CSS2</code>).</texte>
+					<texte>La plupart des valeurs d'attributs sont assez intuitives (pour ceux qui connaissent un peu <code type="langage">CSS</code>). En revanche pour certains il existe de véritables sous-grammaires (voir la création de <reference href="#path">formes arbitraires</reference> avec <code>path</code> par exemple)</texte>
+				</paragraphe>
+				<paragraphe titre="Positionnement et unités" ancre="positionnement">
+					<texte>Les objets <code type='typefichier'>SVG</code> se positionnent dans un système de coordonnées qui commence en haut et à gauche (pratique standard en graphisme informatique). Il est possible de travailler avec des coordonnées locales.</texte>
+					<texte>Les unités à utiliser sont les mêmes qu'en <code type="langage">CSS2</code>.</texte>
+				</paragraphe>
+				<paragraphe titre="Transformations" ancre="ptransformations">
+					<texte>Chaque objet peut être translaté, orienté et changé de taille. Il hérite des transformations de l'objet parent.</texte>
+				</paragraphe>
+			</section>
+			<section titre="Le rendu" ancre="fillstroke">
+				<paragraphe titre="Introduction" ancre="fillstrokeintro">
+					<texte><code type="langage">SVG</code> définit quelques dizaines d'attributs-propriétés applicables à certains éléments. En ce qui concerne les éléments graphiques, voici les deux plus importants&#160;:</texte>
+					<liste>
+						<item><texte><code>stroke</code> définit la forme du bord d'un objet&#160;;</texte></item>
+						<item><texte><code>fill</code> définit comment le contenu d'un objet est rempli.</texte></item>
+					</liste>
+					<texte><code type="langage">SVG</code> possède deux syntaxes différentes pour définir la mise en forme d'un élément&#160;:</texte>
+						<liste>
+							<item><texte>L'attribut <code>style</code> reprend la syntaxe et les styles de <code type="langage">CSS2</code>&#160;;</texte></item>
+							<item><texte>Pour chaque style, il existe aussi un attribut de présentation <code type="langage">SVG</code>. Cela simplifie la génération de contenus <code type="langage">SVG</code> avec <code type="langage">XSLT</code>.</texte></item>
+						</liste>
+					<texte>Par exemple&#160;:</texte>
+					<exemple type="XML">
+						<element nom="rect" vide="oui">
+							<attribut nom="x">200</attribut>
+							<attribut nom="y">100</attribut>
+							<attribut nom="width">60</attribut>
+							<attribut nom="height">30</attribut>
+							<attribut nom="fill">red</attribut>
+							<attribut nom="stroke">blue</attribut>
+							<attribut nom="stroke-width">3</attribut>
+						</element>
+					</exemple>
+					<texte>Le code précédent a le même effet que&#160;:</texte>
+					<exemple type="XML">
+						<element nom="rect" vide="oui">
+							<attribut nom="x">200</attribut>
+							<attribut nom="y">100</attribut>
+							<attribut nom="width">60</attribut>
+							<attribut nom="height">30</attribut>
+							<attribut nom="style">fill:red;stroke:blue;stroke-width:3</attribut>
+						</element>
+					</exemple>
+				</paragraphe>
+				<paragraphe titre="Propriétés fill" ancre="fill">
+					<texte><code>fill</code> permet de gérer le remplissage de l'élément. Ses propriétés sont&#160;:</texte>
+					<liste>
+						<item><texte>la couleur, avec les mêmes conventions de représentation qu'en <code type="langage">CSS</code> (exemple précédent&#160;: <code>fill="red"</code>).</texte></item>
+						<item><texte>l'URI d'une couleur, d'un gradient de couleur (pour obtenir un effet de dégradé) ou  d'un motif de remplissage.</texte></item>
+						<item><texte>une valeur d'opacité (<code>opacity</code>), comprise entre 0 et 1. Voir l'exemple <reference href="exemples/opacite.svg">opacite.svg</reference>.</texte></item>
+					</liste>
+				</paragraphe>
+				<paragraphe titre="Propriétés de stroke" ancre="stroke">
+					<texte><code>stroke</code> permet de gérer l'entourage d'un élément de dessin. Ses propriétés sont&#160;:</texte>
+					<liste>
+						<item><texte>la couleur, avec les mêmes conventions de représentation qu'en <code type="langage">CSS</code> (exemple précédent&#160;: <code>fill="red"</code>).</texte></item>
+						<item><texte>l'uri d'une couleur, d'un gradient de couleur (pour obtenir un effet de dégradé) ou  d'un motif de remplissage.</texte></item>
+						<item><texte>une valeur d'opacité (<code>opacity</code>), comprise entre 0 et 1.</texte></item>
+						<item><texte>l'épaisseur (<code>width</code>) du trait&#160;;</texte></item>
+						<item><texte>la jonction de ligne (<code>linejoin</code>), qui peut prendre les valeurs <code>miter</code>, <code>round</code> ou <code>bevel</code>. Voir l'exemple <reference href="exemples/strokejoin.svg">strokejoin.svg</reference>.</texte></item>
+						<item><texte>la forme des angles (<code>linecap</code>) qui peut être <code>butt</code>( les lignes s'arrêtent brutalement à leur fin), <code>round</code> ou <code>square</code> (des carrés sont tracés en bout de chaque ligne). Voir l'exemple <reference href="exemples/strokecap.svg">strokecap.svg</reference>.</texte></item>
+						<item><texte>des pointillés éventuels avec la propriété <code>dasharray</code>, qui doit prendre comme valeur, si spécifiée, une chaîne de valeurs numériques séparées par des espaces. Voir par exemple <reference href="exemples/strokedash.svg">strokedash.svg</reference>. On peut spécifier un décalage de démarrage des pointillés avec la propriété <code>dashoffset</code>.</texte></item>
+					</liste>
+				</paragraphe>
+			</section>
+			<section titre="Figures géométriques" ancre="figgeom">
+				<paragraphe titre="Rectangles" ancre="rectangles">
+					<texte>L'élément <code>rect</code> permet de définir des rectangles, y compris avec des coins arrondis sans passer par une modification de l'attribut <code>stroke-linejoin</code>. Les attributs de base sont&#160;:</texte>
+					<liste>
+						<item><texte><code>x</code> et <code>y</code>, qui donnent la position du coin supérieur gauche.</texte></item>
+						<item><texte><code>width</code> et <code>height</code>, qui permettent de définir respectivement largeur et hauteur du rectangle.</texte></item>
+						<item><texte><code>rx</code> et <code>ry</code>, qui sont les axes x et y de l'ellipse utilisée pour arrondir&#160;; les nombres négatifs sont interdits, et on ne peut dépasser la moitié de la largeur (longueur) du rectangle.</texte></item>
+					</liste>
+					<texte>Voir l'exemple <reference href="exemples/rectangle.svg">rectangle.svg</reference>.</texte>
+				</paragraphe>
+				<paragraphe titre="Cercles et ellipses" ancre="cercles">
+					<texte>Un cercle est créé par l'élément <code>circle</code> et une ellipse par l'élément... <code>ellipse</code>. Leurs attributs sont&#160;:</texte>
+					<liste>
+						<item><texte><code>cx</code> et <code>cy</code> qui définissent les coordonnées du centre.</texte></item>
+						<item><texte><code>r</code> qui définit le rayon du cercle.</texte></item>
+						<item><texte><code>rx</code> et <code>ry</code> qui définissent les demi-axes x et y de l'ellipse.</texte></item>
+					</liste>
+					<texte>Voir l'exemple <reference href="exemples/cercleellipse.svg">cercleellipse.svg</reference>.</texte>
+				</paragraphe>
+				<paragraphe titre="Lignes et polylignes" ancre="lignes">
+					<texte>Une ligne est définie avec l'élément <code>line</code>, une poly-ligne par l'élément... <code>polyline</code>.</texte>
+					<texte>Les attributs de <code>line</code> sont&#160;:</texte>
+					<liste>
+						<item><texte><code>x1</code> et <code>y1</code>, qui définissent les coordonnées du point de départ.</texte></item>
+						<item><texte><code>x2</code> et <code>y2</code>, qui définissent les coordonnées du point d'arrivée.</texte></item>
+					</liste>
+					<texte>L'attribut de base de <code>polyline</code> est <code>points</code>, qui prend comme valeur une suite de coordonnées. Voir l'exemple <reference href="exemples/lignes.svg">lignes.svg</reference> pour plus de détails.</texte>
+				</paragraphe>
+				<paragraphe titre="Polygones" ancre="polygones">
+					<texte>Un polygone est une courbe fermée, une poly-ligne une courbe ouverte. L'élément permettant de définir un polygone est <code>polygon</code>. L'attribut de base de cet élément est <code>points</code>, qui s'utilise de la même manière qu'avec une polyligne. Voir des exemples dans le fichier <reference href="exemples/polygones.svg">polygones.svg</reference>.</texte>
+				</paragraphe>
+				<exercice titre="Éléments géométriques de base" ancre="exobase">
+					<enonce href="exercices/exo12.html#base"/>		
+				</exercice>
+				<exercice titre="Rendu visuel" ancre="exorendu">
+					<enonce href="exercices/exo12.html#rendu"/>
+				</exercice>
+			</section>
+			<section titre="Formes arbitraires avec path" ancre="path">
+				<paragraphe titre="Introduction" ancre="pathintro">
+					<texte>L'élément <code>path</code> permet de définir des formes arbitraires. Ces formes peuvent avoir un contour et servir de support pour d'autres éléments (voir plus loin un exemple avec <reference href="#exochemin">du texte</reference>).</texte>
+				</paragraphe>
+				<paragraphe titre="Attributs de base" ancre="pathattr">
+					<texte>Ces attributs sont au nombre de 2&#160;:</texte>
+					<liste>
+						<item><texte><code>d</code>, au nom peu explicite, sert à définir les <autrelangue>path data</autrelangue>, autrement dit la liste de commande permettant de tracer le chemin.</texte></item>
+						<item><texte><code>nominalLength</code>, facultatif, permet de définir éventuellement la longueur totale du chemin.</texte></item>
+					</liste>
+				</paragraphe>
+				<paragraphe titre="Path data" ancre="pathdata">
+					<texte>Les <autrelangue>path data</autrelangue> suivent les règles suivantes&#160;:</texte>
+          					<liste>
+						<item><texte>Toutes les instructions peuvent être abrégées en un seul caractère</texte></item>
+						<item><texte>Les espaces peuvent être éliminés</texte></item>
+						<item><texte>On peut omettre de répéter une commande</texte></item>
+						<item>
+							<texte>Il existe toujours deux versions des commandes&#160;:</texte>
+							<liste>
+								<item><texte>en majuscules&#160;: coordonnées absolues</texte></item>
+								<item><texte>en minuscules&#160;: coordonnées relatives</texte></item>
+							</liste>
+						</item>
+          					</liste>
+					<texte>Ces règles visent à diminuer au maximum la taille requise par la description des chemins. Les commandes sont&#160;:</texte>
+					<liste>
+						<item><texte><code>M</code> ou <code>m</code> (<autrelangue>moveto</autrelangue>) x,y démarre un nouveau sous-chemin</texte></item>
+						<item><texte><code>Z</code> ou <code>z</code> (<autrelangue>closepath</autrelangue>) ferme un sous-chemin en traçant une ligne droite entre le point courant et le dernier <code>moveto</code></texte></item>
+						<item>
+							<texte><autrelangue>lineto</autrelangue></texte>
+							<liste>
+								<item><texte><code>L</code> ou <code>l</code> (<autrelangue>lineto</autrelangue>)  x , y trace une ligne droite entre le point courant et le point (x,y).</texte></item>
+								<item><texte><code>H</code> ou <code>h</code> (<autrelangue>horizontal lineto</autrelangue>) x trace une ligne horizontale entre le point courant et le point (x,y0).</texte></item>
+								<item><texte><code>V</code> ou <code>v</code>&#160;: (<autrelangue>vertical lineto</autrelangue>) <code>y</code> trace une ligne verticale entre le point courant et le point ( x0,y ).</texte></item>
+							</liste>
+						</item>
+					</liste>
+					<!-- Ajouter les arcs de cercle -->
+					<texte>Il existe également des commandes permettant de tracer des courbes (courbes de Bézier, arcs...).</texte>
+					<texte>Un exemple de tracé simple et un autre de tracé de courbes sont visibles dans le fichier <reference href="exemples/path.svg">path.svg</reference>.</texte>
+				</paragraphe>
+			</section>
+			<section titre="Texte" ancre="texte">
+				<paragraphe titre="La balise text" ancre="text">
+					<texte>L'élément balise <code>text</code> est considérée comme un objet graphique, et est donc gérée comme tel. Il possède deux attributs&#160;: <code>x</code> et <code>y</code>, qui donnent les coordonnées du point de départ du texte. La mise en forme est réalisée par des propriétés de style CSS.</texte>
+				</paragraphe>
+				<paragraphe titre="Éléments d'ajustement" ancre="tspan">
+					<texte>À l'intérieur d'un élément <code>text</code>, on peut ajuster la position du texte, sa valeur ou la police grâce à l'élément <code>tspan</code>. Cet élément possède, outre les attributs <code>x</code> et <code>y</code>, des attributs <code>dx</code> et <code>dy</code> permettant de spécifier les <valeur>décalages</valeur> à apporter dans l'écriture du texte par rapport à la position par défaut. Voir par exemple le fichier <reference href="exemples/texte.svg">texte.svg</reference>.</texte>
+				</paragraphe>
+				<paragraphe titre="Lien avec les chemins" ancre="textetchemin">
+					<texte>Il est possible d'écrire un texte le long d'un chemin (<autrelangue>path</autrelangue>) défini par ailleurs, par un élément <code>path</code> en appelant un élément <code>textPath</code>. Voir l'exemple <reference href="exemples/textpath.svg">textpath.svg</reference>.</texte>
+				</paragraphe>
+				<exercice titre="Écriture de texte le long d'un chemin" ancre="exochemin">
+					<enonce href="exercices/exo12.html#path"/>		
+					<correction href="exercices/exo12_3.svg"/>
+				</exercice>
+			</section>
+		</partie>
+		<partie titre="Structuration: éléments de groupage et références" ancre="structuration">
+			<section titre="Introduction" ancre="grouoageintro">
+				<paragraphe>
+					<texte>Chaque langage informatique de haut niveau doit permettre de regrouper des objets dans des blocs, de les nommer et de les réutiliser. <code type="langage">SVG</code> possède plusieurs constructions intéressantes.</texte>
+					<texte>Il faut noter également que les objets <code type="langage">SVG</code> (comme les objets <code type="langage">HTML</code>) héritent le style de leurs parents. Autrement dit, les styles «&#160;cascadent&#160;» le long de l'arborescence. Voici la liste des éléments les plus importants. Notez qu'il faut se référer à la spécification pour connaître tous les attributs de ces éléments. Ici, nous ne montrons qu'un petit extrait.</texte>
+					<liste type="ordonnee">
+						<item><texte>Le fragment d'un document <code type='typefichier'>SVG</code>&#160;: <code>svg</code>&#160;;</texte></item>
+						<item><texte>Groupage d'éléments avec <code>g</code>&#160;;</texte></item>
+						<item><texte>Objets abstraits (chablons) <code>symbol</code>&#160;;</texte></item>
+						<item><texte>Section de définition <code>def</code>&#160;;</texte></item>
+						<item><texte>Utilisation d'éléments <code>use</code>&#160;;</texte></item>
+						<item><texte>Titre <code>title</code> et description <code>desc</code>.</texte></item>
+					</liste>
+				</paragraphe>
+			</section>
+			<section titre="Le fragment d'un document SVG&#160;: svg" ancre="svg">
+				<paragraphe>
+					<texte><code>svg</code> est la racine d'un graphisme <code type='typefichier'>SVG</code>. Mais on peut aussi imbriquer des éléments <code>svg</code> parmi d'autres et les positionner. Chaque <code>svg</code> crée un nouveau système de coordonnées. Ainsi on peut facilement réutiliser des fragments graphiques sans devoir modifier des coordonnées. Voir l'exemple <reference href="exemples/salut2.svg">salut2.svg</reference>.</texte>
+				</paragraphe>
+				<!-- Topo sur les espaces de vue -->
+			</section>
+			<section titre="Groupage d'éléments avec g" ancre="g">
+				<paragraphe>
+					<texte>Cet élément sert à regrouper les éléments graphiques, ainsi que vous avez pu le constater en regardant le code source des exemples précédents. En voici une autre illustration avec <reference href="exemples/g.svg">g.svg</reference>. Notez l'héritage des propriétés, mais aussi leur redéfinition locale possible.</texte>
+				</paragraphe>
+			</section>
+			<section titre="Objets abstraits avec symbol, defs et use" ancre="symboluse">
+				<paragraphe titre="Symboles (élément symbol)" ancre="symbol">
+					<texte>Cet élément permet de définir des objets graphiques réutilisables en plusieurs endroits, avec l'élément <code>use</code>. <code>symbol</code> ressemble à <code>g</code>, sauf que l'objet lui-même n'est pas dessiné. Cet élément possède des attributs supplémentaires, comme <code>viewBox</code> et <code>preserveAspectRatio</code>, dont nous ne parlerons pas.</texte>
+				</paragraphe>
+				<paragraphe titre="Définitions (élément defs)" ancre="defs">
+					<texte>Cet élément ressemble un peu à <code>symbol</code>, mais est plus simple. De même, l'objet défini n'est pas dessiné.</texte>
+				</paragraphe>
+				<paragraphe titre="Utilisation d'objets: l'élément use" ancre="use">
+					<texte><code>use</code> permet de réutiliser les objets suivants&#160;: <code>svg</code>, <code>symbol</code>, <code>g</code>, les éléments graphiques et <code>use</code>. Cet élément se comporte légèrement différemment selon le type d'objet défini (voir la <reference href="http://www.w3.org/TR/SVG11/">spécification</reference>). Il s'agit donc d'un instrument de base pour éviter de répéter du code.</texte>
+					<texte>Les objets réutilisés doivent avoir un identificateur <code type="langage">XML</code>. Par exemple, <code><![CDATA[<rect id="rectanglerouge" fill="red" width="20" height="10"/>]]></code>.</texte>
+					<texte>Les attributs <code>x</code>, <code>y</code>, <code>width</code> et <code>height</code> permettent de redéfinir la taille et la position de l'élément appelé. <code>xlink:href</code> permet de renvoyer à l'élément défini. Voir par exemple les fichiers <reference href="exemples/use.svg">use.svg</reference>, <reference href="exemples/use2.svg">use2.svg</reference> et <reference href="exemples/use3.svg">use3.svg</reference>.</texte>
+				</paragraphe>
+				<exercice titre="Groupage d'éléments" ancre="exogroupe">
+					<enonce href="exercices/exo12.html#groupement"/>		
+				</exercice>
+			</section>
+			<section titre="Titre title et descriptions desc" ancre="titledesc">
+				<paragraphe>
+					<texte>Ces éléments permettent de documenter le code. Ils ne sont pas affichés tels quels. En revanche, un outil de consultation peut par exemple décider de les afficher comme des infobulles. Ces documentations peuvent être utiles pour principalement deux raisons&#160;: éventuellement mieux comprendre le code (même s'il est bien sûr toujours possible de le faire <autrelangue>via</autrelangue> des commentaires <code><![CDATA[<!-- (...) --!>]]></code>), mais aussi permettre un meilleur référencement du <code type='typefichier'>SVG</code> par un moteur de recherche.</texte>
+				</paragraphe>
+			</section>
+			<section titre="Insertion d'images: l'élément image" ancre="images">
+				<paragraphe titre="Élément image" ancre="image">
+					<texte>Les formats supportés sont <code type="langage">jpeg</code> et <code type="langage">png</code>. L'élément <code>image</code> permet également d'insérer un autre fichier <code type='typefichier'>SVG</code>. Les attributs sont&#160;:</texte>
+					<liste>
+						<item><texte><code>x</code> et <code>y</code>, qui définissent la position de l'image&#160;;</texte></item>
+						<item><texte><code>width</code> et <code>height</code>, qui définissent la taille de l'image&#160;;</texte></item>
+						<item><texte><code>xlink:href</code> indique l'URI de l'image (équivalent de l'attribut <code>src</code> de l'élément <code>img</code> en <code type="langage">HTML</code>.</texte></item>
+					</liste>
+					<texte>Cet élément possède également un attribut supplémentaire, <code>preserveAspectRatio</code>.</texte>
+				</paragraphe>
+				<paragraphe titre="L'attribut preserveAspectRatio" ancre="preserveaspectratio">		
+					<texte>L'attribut supplémentaire <code>preserveAspectRatio</code> permet de définir la manière dont l'affichage de l'image doit s'adapter à son cadre. Il est utilisé également pour nombre d'autres éléments, dont par exemple <code>symbol</code>, ce qui explique que la description suivante se place souvent dans la perspective d'un élément à redimensionner non limité à un unique rectangle. Il peut prendre plusieurs valeurs&#160;:</texte>
+					<liste>
+						<item><texte>rien (valeur par défaut)&#160;: la mise à l'échelle est telle que les valeurs extrêmes en x et en y touchent les bords du rectangle de point de vue.</texte></item>
+						<item><texte><code>xMinYmin</code>&#160;: mise à l'échelle uniforme. La plus petite largeur de l'image est ajustée à la plus petite largeur du cadre.</texte></item>
+						<item><texte><code>xMidYMin</code>&#160; mise à l'échelle uniforme. La valeur moyenne des x de l'élément est ajustée à la valeur moyenne des x du cadre.</texte></item>
+					</liste>
+					<texte>Il y a aussi toutes les autres variantes en <code>Min</code>, <code>Max</code> et <code>Mid</code> pour chacune des deux coordonnées.</texte>
+					<texte>Cet attribut peut également prendre comme valeur un paramètre, <code>meet</code> ou <code>slice</code>, optionnel&#160;:</texte>
+					<liste>
+						<item><texte><code>meet</code> (valeur par défaut) met à l'échelle le graphique de sorte que le rapport d'aspect soit préservé, tous les éléments soient visibles (pour une image, qu'elle ne soit pas coupée), et que le cadre soit calculé le plus large possible.</texte></item>
+						<item><texte><code>slice</code> met à l'échelle le graphique de telle sorte que le rapport d'aspect soit préservé,  tous l'esapce du cadre soit occupé par la boîte, et que le cadre soit calculé le plus petit possible.</texte></item>
+					</liste>
+					<texte>Une illustration complète est visible avec le fichier <reference href="exemples/preserveaspectratio.svg">preserveaspectratio.svg</reference>.</texte>
+				</paragraphe>
+			</section>
+		</partie>
+		<partie titre="Transformations" ancre="transformations">
+			<section titre="Introduction" ancre="transformintro">
+				<paragraphe>
+					<texte>Jusqu'à présent, nous avons vu comment placer des éléments graphiques parfois complexes dans un cadre donné. Afin d'aller plus loin, il serait possible d'explorer dans le détail la manière dont le format <code type="langage">SVG</code> gère les systèmes de coordonnées, et de faire une étude détaillée des transformations et changements de repère d'un point de vue mathématique -le seul à même de produire une démarche rigoureuse de l'ensemble des transformations à appliquer pour obtenir un effet voulu. Nous allons cependant ici nous contenter d'aborder chaque transformation indépendamment, tout en gardant présent à l'esprit que ce système de transformations est extrêmement complexe.</texte>
+				</paragraphe>
+			</section>
+			<section titre="Transformations avec l'attribut transform" ancre="transform">
+				<paragraphe titre="Introduction" ancre="transformintroduction">
+					<texte>Cet attribut est disponible pour l'ensemble des éléments de groupement (par exemple <code><![CDATA[<g>]]></code>), aussi bien que pour tous les éléments graphiques (figures géométriques, texte, etc.). Il accepte un certain nombre de paramètres permettant d'opérer translations, rotations, redimensionnement, transformations quelconques avec une matrice, etc.</texte>
+				</paragraphe>
+				<paragraphe titre="Translations avec le paramètre translate" ancre="translate">
+					<texte>La syntaxe est par exemple <code><![CDATA[<g transform="translate(50, 40)">]]></code>, permettant d'opérer un déplacement du groupe de 50 pixels vers la droite, et 40 pixels vers le bas. Le code suivant...</texte>
+					<exemple type="XML">
+						<element nom="rect" indent="oui" vide="oui"><attribut nom="width">100</attribut><attribut nom="height">50</attribut><attribut nom="x">10</attribut><attribut nom="y">50</attribut><attribut nom="transform">translate(10,-20)</attribut></element>
+					</exemple>
+					<texte>... déclare un rectangle placé initialement au point de coordonnées (10,50), mais translaté de 10 pixels vers la droite et 20 pixels vers le haut, ce qui le place finalement au point de coordonnées (20,30).</texte>
+				</paragraphe>
+				<paragraphe titre="Redimensionnement avec scaling" ancre="scaling">
+					<texte>La syntaxe est <code>scale(&lt;sx&gt;[,&lt;sy&gt;])</code>. Lorsque <code>sy</code> n'est pas indiqué, on considère que <code>sy=sx</code>.Attention, le système de coordonnées est modifié. Le code suivant...</texte>
+					<exemple type="XML">
+						<element nom="rect" indent="oui" vide="oui"><attribut nom="width">100</attribut><attribut nom="height">50</attribut><attribut nom="x">10</attribut><attribut nom="y">50</attribut><attribut nom="transform">scale(2)</attribut></element>
+					</exemple>
+					<texte>... déclare un rectangle de 100 pixels de large et 50 pixels de haut, placé initialement au point de coordonnées (10,50). Une fois mis à l'échelle, ici augmenté d'un facteur 2 dans les deux directions, il devient un rectangle de 200 pixels de large et 100 pixels de haut, placé au point de coordonnées (20,100).</texte>
+				</paragraphe>
+				<paragraphe titre="Rotation avec le paramètre rotate" ancre="rotate">
+					<texte>La syntaxe est <code><![CDATA[rotate(<rotate-angle> [<cx>,<cy>])]]></code>. L'angle de rotation est indiqué en degrés. <code>cx</code> et <code>cy</code> définissent le centre de rotation. <valeur>Attention</valeur>&#160;! Par défaut, il s'agit de l'origine du système de coordonnées locales, <valeur>pas</valeur> du centre de l'objet&#160;!</texte>
+				</paragraphe>
+				<paragraphe titre="Ordre des opérations" ancre="ordretransform">
+					<texte>L'ordre des opérations est séquentiel. <valeur>Attention</valeur>, à chaque transformation on obtient un nouveau système de coordonnées&#160;!</texte>
+				</paragraphe>
+				<exercice titre="Transformations" ancre="exotransform">
+					<enonce href="exercices/exo17.html"/>
+					<correction href="exercices/exo17cor.svg"/>
+				</exercice>
+			</section>
+			<exercice titre="Récapitulation" ancre="exorecap">
+				<enonce href="exercices/exo12.html#generation"/>
+				<correction href="exercices/exo12_5_1.xsl" description="Génération SVG"/>
+				<correction href="exercices/exo12_5_2.xsl" description="Génération HTML"/>
+			</exercice>
+		</partie>
+		<partie titre="Autres fonctionnalités" ancre="autres">
+			<section titre="Masquage, filtrage" ancre="masque">
+				<paragraphe><texte>Il est possible d'appliquer des filtres numériques à un élément graphique, aussi bien que de lui appliquer un masque afin de le modifier&#160;: voir par exemple le fichier <reference href="exemples/filters01.svg">filters01.svg</reference> tiré de la spécification <code type="langage">SVG</code>.</texte></paragraphe>
+			</section>
+			<section titre="Animations" ancre="animations">
+				<paragraphe><texte>On peut évidemment appliquer des effets d'animation sur les éléments graphiques, grâce à un jeu d'éléments et d'attributs développés en collaboration avec l'équipe en charge de l'élaboration de <code type="langage">SMIL</code>. Les graphiques <code type='typefichier'>SVG</code> peuvent être animés par les éléments d'animation <code type="langage">SVG</code>, mais aussi directement par l'interface du DOM. Voir par exemple le fichier <reference href="exemples/anim01.svg">anim01.svg</reference> tiré de la spécification <code type="langage">SVG</code>.</texte></paragraphe>
+			</section>
+			<section titre="Définition de polices" ancre="polices">
+				<paragraphe><texte><code type="langage">SVG</code> permet également de définir de nouvelles polices, qu'il peut importer. Voir par exemple le fichier <reference href="exemples/font.svg">font.svg</reference> tiré de la spécification <code type="langage">SVG</code>.</texte></paragraphe>
+			</section>
+			<section titre="Interactivité" ancre="interaction">
+				<paragraphe><texte>On peut insérer des éléments interactifs par le biais de scripts, ou bien par l'utilisation d'éléments spécifiques.</texte></paragraphe>
+			</section>
+		</partie>
+		<partie titre="Conclusion" ancre="conclusion">
+			<paragraphe><texte><code type="langage">SVG</code> est un langage graphique extrêmement riche, dont il est impossible de faire le tour en si peu de temps. Je vous engage -une fois n'est pas coutume- à explorer la <reference href="http://www.w3.org/TR/2003/REC-SVG11-20030114/">spécification du W3C</reference>, qui fourmille d'exemples particulièrement parlants des possibilités de ce langage.</texte></paragraphe>
+		</partie>
+	</corpus>
+</chapitre>

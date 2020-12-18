@@ -1,0 +1,129 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Cours de XML</title>
+      <meta name="author" content="Gilles Chagnon">
+      <meta name="keywords" content="XML, XSL, DTD, Schema XML, SVG, SMIL, XPath, XForms, services Web">
+      <meta name="description" content="Cours d'initiation à XML, orienté multimédia: bases du XML, DTD, Schémas, XSL(T). Exemples d'application avec SVG et SMIL. Formulaires XForms et services Web.">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML</h1>
+         <p><span class="version">version 5.01d</span>, dernière mise à jour le 12 janvier 2010.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#avantpropos" tabindex="6">Introduction</a></li>
+         <li class="page"><a href="#tablemat" accesskey="s" tabindex="7">Contenu de ces cours</a></li>
+         <li class="cours"><a href="historique.html" title="Historique de ce document" tabindex="10">Historique</a></li>
+         <li class="cours"><a href="exercices.html" tabindex="9">Exercices</a></li>
+         <li class="cours"><a href="toc.html" tabindex="8">Table des matières</a></li>
+         <li class="cours"><span class="actif">Accueil du cours</span></li>
+      </ul>
+      <div id="avantpropos">
+         <h2>Introduction</h2>
+         <p>Ce cours a été initialement présenté à des étudiants de <a href="http://www.licence.elec.upmc.fr/S_tec/">licence multimédia</a> de l'Université Pierre et Marie Curie. Il présente, classés par thèmes, les bases du format XML, des notions sur sa manipulation,
+            enfin quelques exemples de formats dédiés au multimédia.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="tablemat">
+         <h2>Contenu de ces pages</h2>
+         <div class="impair">
+            <h3>Pour bien débuter</h3>
+            <p class="intro">Ces pages abordent les bases de cette famille de langages, ainsi qu'un bref tutoriel sur deux éditeurs.</p>
+            <h4><a href="base.html">Concepts de base</a></h4>
+            <p>Ce chapitre présente un bref historique et les concepts de base de XML.</p>
+            <h4><a href="xmlcooktop.html">Prise en main d'XML CookTop</a></h4>
+            <p>XMLCookTop est un environnement de développement simple d'emploi, limité à des fonctionalités de base, fonctionnant sous Windows.</p>
+            <h4><a href="oxygenxml.html">Prise en main d'oXygen XML Editor</a></h4>
+            <p>Ce chapitre présente rapidement l'environnement de développement oXygen XML Editor 3.1.</p>
+         </div>
+         <div class="pair">
+            <h3>Définir le format d'un document&nbsp;: DTD et Schémas</h3>
+            <p class="intro">Un fichier <acronym title="eXtended Markup Language">XML</acronym> doit non seulement respecter des règles d'écriture vues précédemment&nbsp;; il peut aussi, si on le désire, suivre des règles
+               strictes d'enchâssements des éléments. Il existe deux grands langages de description pour ce faire.
+            </p>
+            <h4><a href="dtd.html">Déclarations de Type de Document</a></h4>
+            <p>Une DTD permet de décrire les éléments et leurs attributs autorisés dans un document XML.</p>
+            <h4><a href="schema.html">Initiation aux Schema XML</a></h4>
+            <p>Les schémas XML permettent de décrire plus finement que les DTD l'ensemble des éléments et attributs autorisés dans un fichier
+               XML.
+            </p>
+         </div>
+         <div class="impair">
+            <h3>Mettre en forme et transformer&nbsp;: CSS et XSL</h3>
+            <p class="intro">Un fichier <acronym title="eXtended Markup Language">XML</acronym> peut être à loisir mis en forme et adapté à des formats de visualisation variés, comme par exemple une page Web ou un document
+               <acronym title="Portable Document Format">PDF</acronym>. Voici les techniques qui le permettent.
+            </p>
+            <h4><a href="stylexsl.html">Mise en forme à l'aide de feuilles de style XSL : initiation à XSLT</a></h4>
+            <p>XSL est un langage de feuilles de style permettant la mise en forme d'un fichier XML.</p>
+            <h4><a href="recapxsl.html">Mise en forme à l'aide de feuilles de style XSL : instructions XSLT</a></h4>
+            <p>XSLT est un langage de transformation complexe, doté de nombreuses capacités que ce chapitre récapitule.</p>
+            <h4><a href="fonctionsxpath.html">Fonctions XPath</a></h4>
+            <p>XPath est un langage de requête permettant à une feuille XSL d'inspecter un document XML.</p>
+            <h4><a href="domxslt.html">Utilisation du DOM et XSLT dynamique</a></h4>
+            <p>Ce chapitre présente une initiation aux techniques de script permettant la gestion du Document Object Model via une feuille
+               de style XSL.
+            </p>
+         </div>
+         <div class="pair">
+            <h3>Du XML pour le multimédia&nbsp;: SMIL et SVG</h3>
+            <p class="intro">Certains formats <acronym title="eXtended Markup Language">XML</acronym> particuliers ont été créés afin de permettre la description de contenu multimédia&nbsp;: images vectorielles avec <acronym title="Scalable Vector Graphics">SVG</acronym> et synchronisation de son et vidéo avec <acronym title="Synchronized Multimedia Integration Language">SMIL</acronym>.
+            </p>
+            <h4><a href="smil.html">Synchroniser des contenus multimédia avec SMIL</a></h4>
+            <p>SMIL est un format permettant la synchronisation de données multimédia.</p>
+            <h4><a href="svg.html">Un format de dessin vectoriel en XML: SVG</a></h4>
+            <p>Le SVG est un format graphique vectoriel permettant la production de figures et de diagrammes.</p>
+            <h4><a href="svgdynamique.html">L'animation dans le SVG</a></h4>
+            <p>Un fichier au format SVG peut être manipulé et modifié dynamiquement grâce à quelques lignes de JavaScript.</p>
+         </div>
+         <div class="impair">
+            <h3>Divers autres formats XML</h3>
+            <p class="intro">Une multitude de formats a été développée pour certaines tâches précises. Ces pages en décrivent quelques-uns dans cette galaxie.</p>
+            <h4><a href="xforms.html">Plus loin que les formulaires HTML: XForms</a></h4>
+            <p>XForms est un format de description de formulaires dotés de fonctionnalités avancées par rapport à leur ancêtre de la norme
+               HTML.
+            </p>
+            <h4><a href="servicesweb.html">Quelques mots sur les Services Web</a></h4>
+            <p>Les "Services Web" sont une technologie permettant l'échange d'informations entre un poste client et un poste serveur. Ce
+               chapitre en dresse un rapide portrait.
+            </p>
+         </div>
+         <div class="pair">
+            <h3>Conditions d'utilisation&nbsp;: <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-by-sa</a></h3>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

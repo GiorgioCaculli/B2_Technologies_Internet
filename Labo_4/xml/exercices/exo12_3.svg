@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" >
+
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<path d="M 50 50
+		h250
+		a250,250 0 0,1 -250,250
+		z" fill="magenta" id="quartcercle">
+	</path>
+	
+	<text fill="red" style="font-family:Verdana">
+		<textPath xlink:href="#quartcercle"><tspan dy="-10">Les sanglots longs des violons de l'automne blessent mon coeur d'une langueur monotone...</tspan></textPath>
+	</text>
+</svg>

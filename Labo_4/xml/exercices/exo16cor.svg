@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" [
+    <!ENTITY duree "5s">
+    <!ENTITY duree2 "10s">
+]>
+<svg width="700" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <symbol id="triangle">
+                <polygon points="20,0 40,40 0,40 20,0"/>
+            </symbol>
+            <filter id="flou">
+                <feGaussianBlur stdDeviation="1">
+                    <animate attributeName="stdDeviation" values="0;4;0" dur="&duree2;" repeatCount="indefinite"/>
+                </feGaussianBlur>
+            </filter>
+        </defs>
+    <circle r="140" cx="220" cy="200" stroke="red" fill="none"/>
+    <circle r="2" cx="220" cy="200" stroke="black" fill="black"/>
+    <use xlink:href="#triangle" x="200" y="200" fill-opacity="0.6" filter="url(#flou)" fill="blue">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0, 220, 200" to="1080,220,200" dur="&duree;" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="translate" values="0,0;0,100;0,0" additive="sum" dur="&duree2;" repeatCount="indefinite"/>
+        <animateColor attributeName="fill" attributeType="CSS" values="#0000FF;#00FF00;#0000FF" dur="&duree2;" additive="sum" repeatCount="indefinite"/>
+    </use>
+</svg>

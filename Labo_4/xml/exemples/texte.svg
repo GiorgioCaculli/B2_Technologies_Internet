@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd">
+
+<svg width="10cm" height="5cm" xmlns="http://www.w3.org/2000/svg">
+
+  <g style="font-family:Verdana; font-size:12pt">
+    <text x="1cm" y="1.5cm" style="fill:blue">
+      Voici un
+        <tspan style="font-weight:bold; fill:red">texte</tspan>
+      écrit droit.
+    </text>
+    
+     <text x="2cm" y="3cm" style="fill:blue">
+      Et en voici
+        <tspan dx="2em" dy="-.5cm" style="font-weight:bold; fill:red">
+          un autre
+        </tspan>
+        <tspan dy="1cm">
+           un peu décalé...
+        </tspan>
+    </text>
+  </g>
+  
+
+  
+</svg>

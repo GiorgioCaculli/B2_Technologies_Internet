@@ -1,0 +1,1247 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Mise en forme à l'aide de feuilles de style XSL : instructions XSLT</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="XSL, XSLT, base, concept, introduction, expression de sélection">
+      <meta name="description" content="XSLT est un langage de transformation complexe, doté de nombreuses capacités que ce chapitre récapitule.">
+      <link rel="next" href="fonctionsxpath.html">
+      <link rel="prev" href="stylexsl.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Mise en forme à l'aide de feuilles de style XSL : instructions XSLT</h1>
+         <p><span class="version">version 1.50</span>, dernière mise à jour le 22 janvier 2008.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#p1" title="Les expressions de sélection">Les expressions de sélection</a><ol>
+                     <li><a href="#p1s1" title="Introduction">Introduction</a></li>
+                     <li><a href="#p1s2" title="Sélection d'éléments et d'attributs">Sélection d'éléments et d'attributs</a><ol>
+                           <li><a href="#p1s2p1" title="Sélection d'élément, syntaxe de base">Sélection d'élément, syntaxe de base</a></li>
+                           <li><a href="#p1s2p2" title="Sélection d'élément, appel de fonctions">Sélection d'élément, appel de fonctions</a></li>
+                           <li><a href="#p1s2p3" title="Sélection d'élément et DOM">Sélection d'élément et DOM</a></li>
+                           <li><a href="#p1s2p4" title="Sélection d'attributs">Sélection d'attributs</a></li>
+                           <li><a href="#p1s2p5" title="Opérateurs logiques">Opérateurs logiques</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#p2" title="XPath">XPath</a><ol>
+                     <li><a href="#p2s1" title="Introduction">Introduction</a></li>
+                     <li><a href="#p2s2" title="Chemin de localisation">Chemin de localisation</a><ol>
+                           <li><a href="#p2s2p1" title="Introduction">Introduction</a></li>
+                           <li><a href="#p2s2p2" title="Axes">Axes</a></li>
+                           <li><a href="#p2s2p3" title="Prédicats">Prédicats</a></li>
+                           <li><a href="#p2s2p4" title="Syntaxe non abrégée">Syntaxe non abrégée</a></li>
+                           <li><a href="#p2s2p5" title="Syntaxe abrégée">Syntaxe abrégée</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#p2s3" title="Fonctions de base">Fonctions de base</a><ol>
+                           <li><a href="#p2s3p1" title="Généralités">Généralités</a></li>
+                           <li><a href="#p2s3p2" title="Manipulation de n&#339;uds">Manipulation de n&#339;uds</a></li>
+                           <li><a href="#p2s3p3" title="Manipulation de chaînes de caractères">Manipulation de chaînes de caractères</a></li>
+                           <li><a href="#p2s3p4" title="Manipulation de booléens">Manipulation de booléens</a></li>
+                           <li><a href="#p2s3p5" title="Manipulation de nombres">Manipulation de nombres</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#p3" title="Éléments XSLT">Éléments XSLT</a><ol>
+                     <li><a href="#p3s1" title="Généralités">Généralités</a><ol>
+                           <li><a href="#p3s1p1" title="Introduction">Introduction</a></li>
+                           <li><a href="#p3s1p2" title="Rappel : prologue d'un document XSL">Rappel : prologue d'un document XSL</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#p3s2" title="Les fondamentaux">Les fondamentaux</a><ol>
+                           <li><a href="#p3s2p1" title="Généralités">Généralités</a></li>
+                           <li><a href="#stylesheet" title="<xsl:stylesheet&gt;">&lt;xsl:stylesheet&gt;</a></li>
+                           <li><a href="#output" title="<xsl:output&gt;">&lt;xsl:output&gt;</a></li>
+                           <li><a href="#template" title="<xsl:template&gt;">&lt;xsl:template&gt;</a></li>
+                           <li><a href="#value" title="<xsl:value-of&gt;">&lt;xsl:value-of&gt;</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#p3s3" title="Ajout d'éléments et d'attributs">Ajout d'éléments et d'attributs</a><ol>
+                           <li><a href="#element" title="<xsl:element&gt;">&lt;xsl:element&gt;</a></li>
+                           <li><a href="#attribute" title="<xsl:attribute&gt;">&lt;xsl:attribute&gt;</a></li>
+                           <li><a href="#accolades" title="Syntaxe courte">Syntaxe courte</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#p3s4" title="Gestion des boucles">Gestion des boucles</a><ol>
+                           <li><a href="#for-each" title="<xsl:for-each&gt;">&lt;xsl:for-each&gt;</a></li>
+                           <li><a href="#sort" title="<xsl:sort&gt;">&lt;xsl:sort&gt;</a></li>
+                           <li><a href="#number" title="<xsl:number&gt;">&lt;xsl:number&gt;</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#p3s5" title="Conditions de test">Conditions de test</a><ol>
+                           <li><a href="#if" title="<xsl:if&gt;">&lt;xsl:if&gt;</a></li>
+                           <li><a href="#choose" title="<xsl:choose&gt;">&lt;xsl:choose&gt;</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#varparam" title="Variables et paramètres">Variables et paramètres</a><ol>
+                           <li><a href="#varparamintro" title="Introduction">Introduction</a></li>
+                           <li><a href="#xslvariable" title="Élément <xsl:variable&gt;">Élément &lt;xsl:variable&gt;</a></li>
+                           <li><a href="#calltemplate" title="L'élément <xsl:call-template&gt;">L'élément &lt;xsl:call-template&gt;</a></li>
+                           <li><a href="#param" title="Les éléments <xsl:param&gt; et <xsl:with-param&gt;">Les éléments &lt;xsl:param&gt; et &lt;xsl:with-param&gt;</a></li>
+                           <li>Exercice&nbsp;: <a href="#exoxsl" title="Utilisation d'éléments XSL">Utilisation d'éléments XSL</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>IV. <a href="#module" title="Conception modulaire des feuilles de style">Conception modulaire des feuilles de style</a><ol>
+                     <li><a href="#moduleIntro" title="Introduction">Introduction</a></li>
+                     <li><a href="#templates" title="Utilisation des templates">Utilisation des templates</a><ol>
+                           <li><a href="#templateIntro" title="Introduction">Introduction</a></li>
+                           <li><a href="#templateExemple" title="Exemple">Exemple</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#inclusions" title="Inclusions de feuilles de style">Inclusions de feuilles de style</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="p1" href="#p1" id="p1"></a>I. Les expressions de sélection
+         </h3>
+         <h4><a name="p1s1" id="p1s1" href="#p1s1"></a>1. Introduction
+         </h4>
+         <p>Connues en anglais sous le nom de <span lang="en" class="autrelangue">XSL patterns</span>, les expressions de sélection sont des chaînes de caractères qui permettent de sélectionner des n&#339;uds dans un document source.
+            Il est également possible d'utiliser une syntaxe spéciale, appelée <a href="fonctionsxpath.html"><code class="langage">XPath</code></a>, qui permet, en se fondant sur la structure arborescente du document <code class="typefichier">XML</code> (le <span lang="en" class="autrelangue">Document Object Model</span> -<acronym title="Document Object Model">DOM</acronym>), de faire référence à des éléments et/ou des attributs.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p1s2" id="p1s2" href="#p1s2"></a>2. Sélection d'éléments et d'attributs
+         </h4>
+         <h5><a href="#p1s2p1" name="p1s2p1" id="p1s2p1"></a>a. Sélection d'élément, syntaxe de base
+         </h5>
+         <p>L'exemple le plus simple d'expression de sélection est le <em>nom</em> d'un type d'élément. Cette expression sélectionne tous les éléments du type précisé descendant ou ancêtre d'un n&#339;ud donné.
+            Exemple&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">nom_element</span>"&nbsp;/&gt;</span><br></p>
+         <p>L'opérateur <code class="code">/</code> permet de définir le chemin d'accès aux éléments à sélectionner, et donc leur parenté. Par exemple, <code class="code">section/paragraphe</code> sélectionne les éléments <code class="code">section</code> du n&#339;ud courant et pour chaque élément <code class="code">section</code>, sélectionne les éléments <code class="code">paragraphe</code> qu'il contient. En d'autres termes, cette expression sélectionne les petits-fils <code class="code">paragraphe</code> du n&#339;ud courant qui ont pour père un n&#339;ud <code class="code">section</code>.
+         </p>
+         <p>Un nom d'élément peut être remplacé par <code class="code">*</code> dans une expression. Par exemple, <code class="code">*/paragraphe</code> sélectionne tous les petits-fils <code class="code">paragraphe</code> quel que soit leur père.
+         </p>
+         <p>L'utilisation de <code class="code">//</code> permet d'appliquer la recherche aux descendants et non pas seulement aux fils directs. Par exemple, <code class="code">section//paragraphe</code> sélectionne tous les éléments <code class="code">paragraphe</code> descendant d'un élément <code class="code">section</code> fils direct du n&#339;ud courant.
+         </p>
+         <p>Le caractère <code class="code">.</code> sélectionne le n&#339;ud courant. Par exemple, <code class="code">.//paragraphe</code> sélectionne tous les descendants <code class="code">paragraphe</code> du n&#339;ud courant.
+         </p>
+         <p>La chaîne <code class="code">..</code> sélectionne le père du n&#339;ud courant. Par exemple, <code class="code">../paragraphe</code> sélectionne tous les n&#339;uds <code class="code">paragraphe</code> frères du n&#339;ud courant.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s2p1" title="Retour à la TdM (Sélection d'élément, syntaxe de base)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p1s2p2" name="p1s2p2" id="p1s2p2"></a>b. Sélection d'élément, appel de fonctions
+         </h5>
+         <ul>
+            <li>
+               <p>L'expression <code class="code">comment()</code> sélectionne tous les n&#339;uds commentaires fils du n&#339;ud courant.
+               </p>
+            </li>
+            <li>
+               <p>L'expression <code class="code">text()</code> sélectionne tous les n&#339;uds fils du n&#339;ud courant, ne contenant que du texte.
+               </p>
+            </li>
+            <li>
+               <p>L'expression <code class="code">node()</code> sélectionne tous les n&#339;uds fils du n&#339;ud courant.
+               </p>
+            </li>
+            <li>
+               <p>L'expression <code class="code">id("UnIdentifiant")</code> sélectionne l'élément, normalement unique, qui a un attribut <code class="code">attr</code> de type ID (<span lang="latin" class="autrelangue">cf.</span> le paragraphe <a href="dtd.html#p3s3">"Déclaration d'attribut de type ID"</a>) valant <code class="code">"UnIdentifiant"</code>.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p1s2p2" title="Retour à la TdM (Sélection d'élément, appel de fonctions)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p1s2p3" name="p1s2p3" id="p1s2p3"></a>c. Sélection d'élément et DOM
+         </h5>
+         <p>Il est également possible de «&nbsp;naviguer&nbsp;» dans les branches de l'arborescence du document <code class="typefichier">XML</code>, en utilisant les ressources du DOM. Différents types de syntaxes sont possibles, fondées sur une expression de la forme
+            <code class="code">Element[Expression]</code>. Par exemple&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">elt[i]</code> où <code class="code">i</code> est un nombre entier désigne le <code class="code">i</code>-ème descendant direct d'un même parent ayant le nom indiqué. Par exemple, <code class="code">paragraphe[3]</code> désigne le <em>3</em>ème enfant de l'élément courant, portant le nom <code class="code">paragraphe</code>. <em>Attention</em>, la numérotation commence à 1 et non à 0.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">elt[position()&gt;i]</code> où <code class="code">i</code> est un nombre entier sélectionne tous les éléments précédés d'au moins <code class="code">i</code> éléments de même nom comme descendants du même parent. Par exemple, <code class="code">paragraphe[position()&gt;5]</code> sélectionne tous les éléments <code class="code">paragraphe</code> dont le numéro d'ordre est strictement supérieur à 5.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">elt[position() mod 2=1]</code> sélectionne tout élément qui est un descendant impair.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">elt[souselt]</code> sélectionne tout élément <code class="code">elt</code> qui a au moins un descendant <code class="code">souselt</code> (à ne pas confondre avec <code class="code">elt/souselt</code>, qui sélectionne tout élément <code class="code">souselt</code> ayant pour parent <code class="code">elt</code>...).
+               </p>
+            </li>
+            <li>
+               <p><code class="code">elt[first-of-any()]</code> sélectionne le premier élément <code class="code">elt</code> fils de l'élément courant.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">elt[last-of-any()]</code> sélectionne le dernier élément <code class="code">elt</code> fils de l'élément courant.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">elt[first-of-type()]</code> sélectionne l'élément <code class="code">elt</code> fils de l'élément courant, s'il est premier de son type. Considérons l'exemple suivant. L'élément <code class="code">elt</code> peut contenir des n&#339;uds de type texte <code class="code">elt1</code> et <code class="code">elt2</code> dans n'importe quel ordre. On cherche à évaluer l'expression <code class="code">elt2[first-of-type()]</code>. Deux cas se présentent&nbsp;: soit <code class="code">elt</code> commence par au moins un élément <code class="code">elt1</code>, avec <em>éventuellement</em> un élément <code class="code">elt2</code> ensuite, soit il commence par un élément <code class="code">elt2</code>. L'expression ne sélectionne le premier élément <code class="code">elt2</code> que dans le second cas, où il n'est précédé par aucun élément de même type.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">elt[last-of-type()]</code> sélectionne de même l'élément <code class="code">elt</code> fils de l'élément courant, s'il est le dernier de son type.
+               </p>
+            </li>
+         </ul>
+         <p>Par exemple, l'expression <code class="code">section/paragraphe[last-of-type() and first-of-type()]</code> sélectionne les éléments <code class="code">paragraphe</code> fils uniques dont le père est un élément <code class="code">section</code>&nbsp;; l'expression <code class="code">section/paragraphe[last-of-any() and first-of-any()]</code> sélectionne les éléments <code class="code">paragraphe</code> dont le père est un élément <code class="code">section</code> qui ne contient qu'un seul élément <code class="code">paragraphe</code>.
+         </p>
+         <p>La fonction <code class="code">ancestor()</code> permet la sélection d'un ancêtre du n&#339;ud courant. Elle reçoit en argument une expression de sélection et recherche le premier
+            ancêtre du nom correspondant à la sélection. Par exemple, <code class="code">ancestor(chapitre)/titre</code> sélectionne l'élément <code class="code">titre</code> du chapitre contenant l'élément courant.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s2p3" title="Retour à la TdM (Sélection d'élément et DOM)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p1s2p4" name="p1s2p4" id="p1s2p4"></a>d. Sélection d'attributs
+         </h5>
+         <p>Les attributs d'un élément sont sélectionnés en faisant précéder leur nom par le caractère <code class="code">@</code>. Les règles relatives à la sélection des éléments s'appliquent également aux attributs&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">section[@titre]</code> sélectionne les éléments <code class="code">section</code> qui ont un attribut <code class="code">titre</code>.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">section[@titre="Introduction"]</code> sélectionne les éléments <code class="code">section</code> dont l'attribut <code class="code">titre</code> a pour valeur <code class="code">Introduction</code>.
+               </p>
+            </li>
+         </ul>
+         <p>Si l'on veut <em>afficher</em> le contenu de l'attribut, on le fait précéder du caractère <code class="code">/</code>. Par exemple, <code class="code">&lt;xsl:value-of select="paragraphe/@titre" /&gt;</code> permet l'affichage du titre de l'élément paragraphe fils de l'élément courant (si rien n'est précisé, par défaut il s'agit
+            du premier élément paragraphe fils).
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s2p4" title="Retour à la TdM (Sélection d'attributs)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p1s2p5" name="p1s2p5" id="p1s2p5"></a>e. Opérateurs logiques
+         </h5>
+         <p>Les opérateurs logiques <code class="code">not()</code>, <code class="code">and</code> et <code class="code">or</code> peuvent être utilisés, comme par exemple <code class="code">section[not(@titre)]</code>, qui sélectionne les éléments <code class="code">section</code> qui n'ont pas d'attribut <code class="code">titre</code>. Attention&nbsp;: lorsque, dans la <code class="typefichier">DTD</code> par exemple, l'attribut est défini comme ayant une <a href="dtd.html#p3s1">valeur par défaut</a>, même s'il n'est pas explicité dans le document <code class="typefichier">XML</code>, il est considéré comme existant.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s2" title="Retour à la TdM (Sélection d'éléments et d'attributs)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="p2" href="#p2" id="p2"></a>II. XPath
+         </h3>
+         <h4><a name="p2s1" id="p2s1" href="#p2s1"></a>1. Introduction
+         </h4>
+         <p>Comme son nom l'indique, <code class="langage">XPath</code> est une spécification fondée sur l'utilisation de chemin d'accès permettant de se déplacer au sein du document <code class="typefichier">XML</code>. Dans ce but, un certain nombre de fonctions ont été définies. Elles permettent de traiter les chaînes de caractères, les
+            booléens et les nombres.
+         </p>
+         <p>Le <code class="langage">XPath</code> établit un arbre de n&#339;uds correspondant au document <code class="typefichier">XML</code>. Les types de n&#339;uds peuvent être différents&nbsp;: n&#339;ud d'élément, n&#339;ud d'attribut et n&#339;ud de texte. En vue d'une utilisation
+            plus aisée, le <code class="langage">XPath</code> comprend un mécanisme qui associe à tous ces types une chaîne de caractères.
+         </p>
+         <p>La syntaxe de base du <code class="langage">XPath</code> est fondée sur l'utilisation d'expressions. Une expression peut s'appliquer à quatre types d'objets&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>un ensemble non ordonné de n&#339;uds&nbsp;;</p>
+            </li>
+            <li>
+               <p>une valeur booléenne (vrai ou faux)&nbsp;;</p>
+            </li>
+            <li>
+               <p>un nombre en virgule flottante&nbsp;;</p>
+            </li>
+            <li>
+               <p>une chaîne de caractères.</p>
+            </li>
+         </ul>
+         <p>Chaque évaluation d'expression dépend du contexte courant. Une des expressions les plus importantes dans le standard <code class="langage">XPath</code> est le <em>chemin de localisation</em>. Cette expression sélectionne un ensemble de n&#339;uds à partir d'un n&#339;ud contextuel.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s2" id="p2s2" href="#p2s2"></a>2. Chemin de localisation
+         </h4>
+         <h5><a href="#p2s2p1" name="p2s2p1" id="p2s2p1"></a>a. Introduction
+         </h5>
+         <p>Un chemin de localisation peut être de type absolu ou relatif.</p>
+         <ul>
+            <li>
+               <p>Dans le cas où il est de type absolu, il commence toujours par le signe <code class="code">/</code> indiquant la racine du document <code class="typefichier">XML</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Dans le cas où il est de type relatif, le n&#339;ud de départ est le n&#339;ud contextuel courant.</p>
+            </li>
+         </ul>
+         <p>La syntaxe de composition d'un chemin de localisation peut être de type abrégé ou non abrégé. Toute syntaxe non abrégée ne
+            trouve pas forcément d'équivalenct en syntaxe abrégée.
+         </p>
+         <p>Un chemin de localisation est composé de trois parties&nbsp;:</p>
+         <ul>
+            <li>
+               <p>un <em>axe</em>, définissant le sens de la relation entre le n&#339;ud courant et le jeu de n&#339;uds à localiser;
+               </p>
+            </li>
+            <li>
+               <p>un n&#339;ud spécifiant le type de n&#339;ud à localiser;</p>
+            </li>
+            <li>
+               <p>0 à n <em>prédicats</em> permettant d'affiner la recherche sur le jeu de n&#339;uds à récupérer.
+               </p>
+            </li>
+         </ul>
+         <p>Par exemple, dans le chemin <code class="code">child::section[position()=1]</code>, <code class="code">child</code> est le nom de l'axe, <code class="code">section</code> le type de n&#339;ud à localiser (élément ou attribut) et <code class="code">[position()=1]</code> est un prédicat. Les doubles <code class="code">::</code> sont obligatoires.
+         </p>
+         <p>La syntaxe d'une localisation s'analyse de gauche à droite. Dans notre cas, on cherche dans le n&#339;ud courant, un n&#339;ud section
+            qui est le premier n&#339;ud de son type.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2p1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s2p2" name="p2s2p2" id="p2s2p2"></a>b. Axes
+         </h5>
+         <p><code class="code">child</code>&nbsp;: contient les enfants directs du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">descendant</code>&nbsp;: contient les descendants du n&#339;ud contextuel. Un descendant peut être un enfant, un petit-enfant...
+         </p>
+         <p><code class="code">parent</code>&nbsp;: contient le parent du n&#339;ud contextuel, s'il y en a un.
+         </p>
+         <p><code class="code">ancestor</code>&nbsp;: contient les ancêtres du n&#339;ud contextuel. Cela comprend son père, le père de son père... Cet axe contient toujours le n&#339;ud
+            racine, excepté dans le cas où le n&#339;ud contextuel serait lui-même le n&#339;ud racine.
+         </p>
+         <p><code class="code">following-sibling</code>&nbsp;: contient tous les n&#339;uds cibles du n&#339;ud contextuel. Dans le cas où ce n&#339;ud est un attribut ou un espace de noms, la cible
+            suivante est vide.
+         </p>
+         <p><code class="code">preceding-sibling</code>&nbsp;: contient tous les prédécesseurs du n&#339;ud contextuel&nbsp;; si le n&#339;ud contextuel est un attribut ou un espace de noms, la cible
+            précédente est vide.
+         </p>
+         <p><code class="code">following</code>&nbsp;: contient tous les n&#339;uds du même nom que le n&#339;ud contextuel situés après le n&#339;ud contextuel dans l'ordre du document, à
+            l'exclusion de tout descendant, des attributs et des espaces de noms.
+         </p>
+         <p><code class="code">preceding</code>&nbsp;: contient tous les n&#339;uds du même nom que le n&#339;ud contextuel situés avant lui dans l'ordre du document, à l'exclusion de
+            tout descendant, des attributs et des espaces de noms.
+         </p>
+         <p><code class="code">attribute</code>&nbsp;: contient les attributs du n&#339;ud contextuel&nbsp;; l'axe est vide quand le n&#339;ud n'est pas un élément.
+         </p>
+         <p><code class="code">namespace</code>&nbsp;: contient tous les n&#339;uds des espaces de noms du n&#339;ud contextuel&nbsp;; l'axe est vide quand le n&#339;ud contextuel n'est pas un élément.
+         </p>
+         <p><code class="code">self</code>&nbsp;: contient seulement le n&#339;ud contextuel.
+         </p>
+         <p><code class="code">descendant-or-self</code>&nbsp;: contient le n&#339;ud contextuel et ses descendants.
+         </p>
+         <p><code class="code">ancestor-or-self</code>&nbsp;: contient le n&#339;ud contextuel et ses ancêtres. Cet axe contiendra toujours le n&#339;ud racine.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2p2" title="Retour à la TdM (Axes)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s2p3" name="p2s2p3" id="p2s2p3"></a>c. Prédicats
+         </h5>
+         <p>Le contenu d'un prédicat est une prédiction. Chaque expression est évaluée et le résultat est un booléen.</p>
+         <p>Par exemple, <code class="code">section[3]</code> est équivalent à <code class="code">section[position()=3]</code>.
+         </p>
+         <p>Ces deux expressions sont équivalentes&nbsp;: chacune d'entre elles produit un booléen. Dans le premier cas, il n'y a pas de test,
+            on sélectionne simplement le troisième élément, l'expression est obligatoirement vraie. Dans le second cas, un test est effectué
+            par rapport à la position de l'élément <code class="code">section</code>&nbsp;; lorsque la position sera égale à 3, l'expression sera vraie.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2p3" title="Retour à la TdM (Prédicats)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s2p4" name="p2s2p4" id="p2s2p4"></a>d. Syntaxe non abrégée
+         </h5>
+         <p>Cette syntaxe va être présentée par plusieurs exemples... Les parties qui dépendent du fichier <code class="typefichier">XML</code> analysé sont écrites <i><code class="code">de cette manière</code></i>.
+         </p>
+         <p><code class="code">child::</code><i><code class="code">para</code></i>&nbsp;: sélectionne l'élément <i><code class="code">para</code></i> enfant du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">child::*</code>&nbsp;: sélectionne tous les éléments enfants du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">child::text()</code>&nbsp;: sélectionne tous les n&#339;uds de type texte du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">child::node()</code>&nbsp;: sélectionne tous les enfants du n&#339;ud contextuel, quel que soit leur type.
+         </p>
+         <p><code class="code">attribute::</code><i><code class="code">name</code></i>&nbsp;: sélectionne tous les attributs <i><code class="code">name</code></i> du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">attribute::</code><i><code class="code">*</code></i>&nbsp;: sélectionne tous les attributs du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">descendant::</code><i><code class="code">para</code></i>&nbsp;: sélectionne tous les descendants <i><code class="code">para</code></i> du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">ancestor::</code><i><code class="code">div</code></i>&nbsp;: sélectionne tous les ancêtres <i><code class="code">div</code></i> du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">ancestor-or-self::</code><i><code class="code">div</code></i>&nbsp;: sélectionne tous les ancêtres <i><code class="code">div</code></i> du n&#339;ud contextuel et le n&#339;ud contextuel lui-même si c'est un <i><code class="code">div</code></i>.
+         </p>
+         <p><code class="code">descendant-or-self::</code><i><code class="code">para</code></i>&nbsp;: sélectionne tous les descendants <i><code class="code">para</code></i> du n&#339;ud contextuel et le n&#339;ud contextuel lui-même si c'est un <i><code class="code">para</code></i>.
+         </p>
+         <p><code class="code">self::</code><i><code class="code">para</code></i>&nbsp;: sélectionne le n&#339;ud contextuel si c'est un élément <i><code class="code">para</code></i>, et rien dans le cas contraire.
+         </p>
+         <p><code class="code">child::</code><i><code class="code">chapitre</code></i><code class="code">/descendant::</code><i><code class="code">para</code></i>&nbsp;: sélectionne les descendants <i><code class="code">para</code></i> de l'élément <i><code class="code">chapitre</code></i> enfant du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">child::*/child::</code><i><code class="code">para</code></i>&nbsp;: sélectionne tous les petits-enfants <i><code class="code">para</code></i> du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">/child::</code>&nbsp;: sélectionne l'élément racine du document.
+         </p>
+         <p><code class="code">/descendant::</code><i><code class="code">para</code></i>&nbsp;: sélectionne tous les éléments <i><code class="code">para</code></i> descendants du document contenant le n&#339;ud contextuel.
+         </p>
+         <p><code class="code">/descendant::</code><i><code class="code">olist</code></i><code class="code">/child::</code><i><code class="code">item</code></i>&nbsp;: sélectionne tous les éléments <i><code class="code">item</code></i> qui ont un parent <i><code class="code">olist</code></i> et qui sont dans le même document que le n&#339;ud contextuel.
+         </p>
+         <p><code class="code">child::</code><i><code class="code">para</code></i><code class="code">[position()=1]</code>&nbsp;: sélectionne le premier enfant <i><code class="code">para</code></i> du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">child::</code><i><code class="code">para</code></i><code class="code">[position()=last()]</code>&nbsp;: sélectionne le dernier enfant <i><code class="code">para</code></i> du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">child::</code><i><code class="code">para</code></i><code class="code">[position()=last()-1]</code>&nbsp;: sélectionne l'avant-dernier enfant <i><code class="code">para</code></i> du n&#339;ud contextuel.
+         </p>
+         <p><code class="code">child::</code><i><code class="code">para</code></i><code class="code">[position()1]</code>&nbsp;: sélectionne tous les enfants <i><code class="code">para</code></i> du n&#339;ud contextuel autres que le premier.
+         </p>
+         <p><code class="code">following-sibling::</code><i><code class="code">para</code></i><code class="code">[position()=1]</code>&nbsp;: sélectionne  le prochain <i><code class="code">para</code></i> frère du n&#339;ud contextuel.
+         </p>
+         <p>On pourrait continuer encore longtemps cette liste d'exemples. Cette syntaxe non-abrégée permet beaucoup de raffinement. <code class="code">child::*[self::</code><i><code class="code">chapitre</code></i><code class="code"> or self::</code><i><code class="code">sstitre</code></i><code class="code">][position()=last()]</code> permet ainsi de sélectionner le dernier enfant <i><code class="code">chapitre</code></i> ou <i><code class="code">sstitre</code></i> du n&#339;ud contextuel.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2p4" title="Retour à la TdM (Syntaxe non abrégée)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s2p5" name="p2s2p5" id="p2s2p5"></a>e. Syntaxe abrégée
+         </h5>
+         <p>Cette syntaxe recoupe en fait la «&nbsp;syntaxe de base&nbsp;» vue <a href="#p1s2p1">plus haut</a>. Elle permet d'obtenir des expressions du type <code class="code">para[@type="avertissement"][5]</code>, qui sélectionne le cinquième enfant de l'élément <code class="code">para</code>, parmi ceux qui ont un attribut <code class="code">type</code> ayant la valeur <code class="code">avertissement</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s2" title="Retour à la TdM (Chemin de localisation)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s3" id="p2s3" href="#p2s3"></a>3. Fonctions de base
+         </h4>
+         <h5><a href="#p2s3p1" name="p2s3p1" id="p2s3p1"></a>a. Généralités
+         </h5>
+         <p>De nombreuses fonctions peuvent être utilisées. Ces fonctions concernent quatre catégories d'objets&nbsp;: n&#339;uds, chaînes de caractères,
+            booléens, nombres. Chaque fonction peut avoir zéro ou plusieurs arguments. Dans les descriptions suivantes, lorsqu'un élément
+            est suivi du caractère <code class="code">?</code>, cela signifie qu'il est optionnel. Cette liste est loin d'être exhaustive. Le chapitre suivant présente les <a href="fonctionsxpath.html">fonctions XPath</a> de manière plus complète.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s3p1" title="Retour à la TdM (Généralités)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s3p2" name="p2s3p2" id="p2s3p2"></a>b. Manipulation de n&#339;uds
+         </h5>
+         <ul>
+            <li>
+               <p><em>Fonctions retournant un nombre&nbsp;:</em></p>
+               <ul>
+                  <li>
+                     <p><code class="code">last()</code>&nbsp;: retourne un nombre égal à l'index du dernier n&#339;ud dans le contexte courant.
+                     </p>
+                  </li>
+                  <li>
+                     <p><code class="code">position()</code>&nbsp;: retourne un nombre égal à la position du n&#339;ud dans le contexte courant.
+                     </p>
+                  </li>
+               </ul>
+            </li>
+            <li>
+               <p><em>Fonction retournant un jeu de n&#339;uds</em>&nbsp;: <code class="code">id(objet)</code>, permet de sélectionner les éléments par leur identifiant.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p2s3p2" title="Retour à la TdM (Manipulation de n&#339;uds)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s3p3" name="p2s3p3" id="p2s3p3"></a>c. Manipulation de chaînes de caractères
+         </h5>
+         <p>Beaucoup de fonctions existent. Citons pour mémoire notamment&nbsp;:</p>
+         <ul>
+            <li>
+               <p><code class="code">string(n&#339;ud?)</code>&nbsp;: cette fonction convertit un objet en chaîne de caractères selon les règles suivantes&nbsp;:
+               </p>
+               <ul>
+                  <li>
+                     <p>un ensemble de n&#339;uds est converti en chaîne de caractères en retournant la valeur textuelle du premier n&#339;ud de l'ensemble
+                        dans l'ordre du document. Si l'ensemble des n&#339;uds est vide, une chaîne vide est retournée.
+                     </p>
+                  </li>
+                  <li>
+                     <p>un nombre est converti en chaîne suivant des règles dépendant de sa nature (<code class="code">NaN</code>, nombre entier, non-entier, zéro...).
+                     </p>
+                  </li>
+                  <li>
+                     <p>la valeur booléenne <code class="code">false</code> est convertie en chaîne de caractères <code class="code">"false"</code>, de même pour la valeur booléenne <code class="code">true</code>.
+                     </p>
+                  </li>
+               </ul>
+               <p>Cette fonction n'a pas pour objet de convertir des nombres en chaînes de caractères pour les présenter aux utilisateurs&nbsp;;
+                  il existe des fonctions de transformations <code class="langage">XSLT</code> pour ce faire (<code class="code">format-number</code> et <code class="code">xsl:number</code>)
+               </p>
+            </li>
+            <li>
+               <p><code class="code">concat(chaine1, chaine2, chaine*)</code>&nbsp;: retourne une chaîne résultant de la compilation des arguments
+               </p>
+            </li>
+            <li>
+               <p><code class="code">string-length(chaine?)</code>&nbsp;: cette fonction retourne le nombre de caractères de la chaîne. Dans le cas où l'argument est omis, la valeur retournée est
+                  égale à la longueur de la valeur textuelle du n&#339;ud courant
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p2s3p3" title="Retour à la TdM (Manipulation de chaînes de caractères)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s3p4" name="p2s3p4" id="p2s3p4"></a>d. Manipulation de booléens
+         </h5>
+         <p>Outre la fonction logique <code class="code">not()</code>, ainsi que les fonctions <code class="code">true()</code> et <code class="code">false()</code>, une fonction utile est <code class="code">lang(chaine)</code>. Elle teste l'argument <code class="code">chaine</code> par rapport à l'attribut <code class="code">xml:lang</code> du n&#339;ud contextuel ou de son plus proche ancêtre dans le cas où le n&#339;ud contextuel ne contient pas d'attribut de ce type.
+            La fonction retourne <code class="code">true</code> si l'argument est bien la langue utilisée ou si la langue utilisée est un sous-langage de l'argument (par exemple, <code class="code">en//us</code>). Sinon elle retourne <code class="code">false</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s3p4" title="Retour à la TdM (Manipulation de booléens)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p2s3p5" name="p2s3p5" id="p2s3p5"></a>e. Manipulation de nombres
+         </h5>
+         <p>Voici quelques fonctions de manipulations de nombres&nbsp;:</p>
+         <ul>
+            <li>
+               <p><code class="code">floor(nombre)</code>&nbsp;: retourne le plus grand entier inférieur à l'argument passé à la fonction.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">ceiling(nombre)</code>&nbsp;: retourne le plus petit entier supérieur à l'argument passé à la fonction.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">round(nombre)</code>&nbsp;: retourne l'entier le plus proche de l'argument passé à la fonction.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p2s3" title="Retour à la TdM (Fonctions de base)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="p3" href="#p3" id="p3"></a>III. Éléments XSLT
+         </h3>
+         <h4><a name="p3s1" id="p3s1" href="#p3s1"></a>1. Généralités
+         </h4>
+         <h5><a href="#p3s1p1" name="p3s1p1" id="p3s1p1"></a>a. Introduction
+         </h5>
+         <p>Dans cette partie, nous allons détailler quelques éléments <code class="langage">XSLT</code> et présenter des exemples d'utilisation. Ne sera introduite ici qu'environ la moitié des éléments de formatage <code class="langage">XSLT</code>&nbsp;; libre à vous de vous renseigner sur les éléments manquants.
+         </p>
+         <p>Le nom de domaine utilisé pour les exemples est celui de la spécification 1.0&nbsp;: <a href="http://www.w3.org/TR/xslt">http://www.w3.org/TR/xslt</a>. La spécification <a href="http://www.w3.org/TR/xslt20/"><code class="langage">XSLT 2.0</code></a> a été publiée en janvier 2007, mais les modifications qu'elle introduit sortent du cadre restreint d ce cours.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s1p1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#p3s1p2" name="p3s1p2" id="p3s1p2"></a>b. Rappel : prologue d'un document XSL
+         </h5>
+         <p>Un fichier <code class="typefichier">XSL</code> doit commencer par les lignes indiquant le numéro de version <code class="langage">XML</code> et l'encodage de caractères utilisé&nbsp;:
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p3s1" title="Retour à la TdM (Généralités)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s2" id="p3s2" href="#p3s2"></a>2. Les fondamentaux
+         </h4>
+         <h5><a href="#p3s2p1" name="p3s2p1" id="p3s2p1"></a>a. Généralités
+         </h5>
+         <p>Sont présentés ici les éléments de base du document <code class="typefichier">XSL</code>, ceux que l'on retrouve dans l'immense majorité des cas, voire la totalité pour certains.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s2p1" title="Retour à la TdM (Généralités)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#stylesheet" name="stylesheet" id="stylesheet"></a>b. &lt;xsl:stylesheet&gt;
+         </h5>
+         <p>Cet élément <em>doit</em> être l'élément racine du document <code class="typefichier">XSL</code>, et en tant que tel doit figurer juste après le prologue (et les commentaires éventuels qui suivraient celui-ci). Il contient
+            tous les autres éléments de mise en forme. Dans le cas général, l'utilisation de cet élément est de la forme&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> id</span>="<span class="valeurattribut">id</span>"<span class="nomattribut"> version</span>="<span class="valeurattribut">nombre</span>"<span class="nomattribut"> xmlns:pre</span>="<span class="valeurattribut">URI</span>"&gt;</span>
+            			
+            			
+            			
+            			(...)
+            		<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p><code class="code">id</code> est l'identifiant unique de la feuille de style. <code class="code">version</code> est le numéro de version de la feuille de style <code class="typefichier">XSLT</code>. À l'heure actuelle, la version peut être <code class="code">1.0</code> ou <code class="code">1.1</code>. <code class="code">xmlns:pre</code> correspond à la définition de l'espace de noms. <code class="code">pre</code> indique le préfixe qui sera utilisé dans la feuille de style pour faire référence à l'URI de l'espace nominal. Exemples&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> version</span>="<span class="valeurattribut">1.0</span>"<span class="nomattribut"> xmlns:xsl</span>="<span class="valeurattribut">uri:xsl</span>"&gt;</span>
+            			
+            			
+            			(...)
+            		<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p>... permet d'avoir accès uniquement à des fonctions de base.</p>
+         <p class="xml"><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> version</span>="<span class="valeurattribut">1.0</span>"<span class="nomattribut"> xmlns:xsl</span>="<span class="valeurattribut">http://www.w3.org/1999/XSL/Transform</span>"&gt;</span>
+            			
+            			
+            			(...)
+            		<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p>... permet d'avoir accès à des fonctions évoluées d'<code class="langage">XSLT</code>. C'est cette déclaration que nous allons utiliser dans la suite.
+         </p>
+         <p class="retourtdm"><a href="#tdm_stylesheet" title="Retour à la TdM (<xsl:stylesheet&gt;)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#output" name="output" id="output"></a>c. &lt;xsl:output&gt;
+         </h5>
+         <p>Cet élément vide, à placer comme premier enfant de <code class="code">&lt;xsl:stylesheet&gt;</code>, permet de spécifier des options concernant l'arbre de sortie. L'utilisation de cet élément est de la forme&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:output<span class="nomattribut"> method</span>="<span class="valeurattribut">xml | html | text</span>"<span class="nomattribut"> version</span>="<span class="valeurattribut">nmtoken</span>"<span class="nomattribut"> encoding</span>="<span class="valeurattribut">chaine</span>"<span class="nomattribut"> omit-xml-declaration</span>="<span class="valeurattribut">yes | no</span>"<span class="nomattribut"> standalone</span>="<span class="valeurattribut">yes | no</span>"<span class="nomattribut"> doctype-public</span>="<span class="valeurattribut">chaine</span>"<span class="nomattribut"> doctype-system</span>="<span class="valeurattribut">chaine</span>"<span class="nomattribut"> cdata-section-elements</span>="<span class="valeurattribut">elt</span>"<span class="nomattribut"> indent</span>="<span class="valeurattribut">yes | no</span>"<span class="nomattribut"> media-type</span>="<span class="valeurattribut">chaine</span>"&nbsp;/&gt;</span><br></p>
+         <ul>
+            <li>
+               <p><code class="code">method</code> identifie la méthode de transformation. Dans le cas où elle est égale à <code class="code">text</code>, aucune mise en forme n'est effectuée.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">version</code> identifie la version de la méthode de sortie (xml1.0, html4.01...).
+               </p>
+            </li>
+            <li>
+               <p><code class="code">encoding</code> indique la version du jeu de caractères à utiliser pour la sortie.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">omit-xml-declaration</code> indique au processeur XSLT s'il doit ajouter ou non une déclaration XML.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">standalone</code> indique au processeur XSLT s'il doit créer un arbre de sortie avec ou sans déclaration de type de document.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">doctype-public</code> indique l'identifiant public utilisé par la <code class="typefichier">DTD</code> associée à la transformation.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">doctype-system</code> indique l'identifiant system utilisé par la <code class="typefichier">DTD</code> associée à la transformation.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">cdata-section-elements</code> indique les éléments dont le contenu doit être traité lors de la transformation <span lang="latin" class="autrelangue">via</span> une section <code class="code">CDATA</code>.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">indent</code> présente la transformation sous forme d'arbre dans le cas où la valeur de cet attribut est égale à <code class="code">yes</code>.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">media-type</code> indique le type MIME des données résultantes de la transformation.
+               </p>
+            </li>
+         </ul>
+         <p>Par exemple&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;xsl:output<span class="nomattribut"> method</span>="<span class="valeurattribut">html</span>"<span class="nomattribut"> version</span>="<span class="valeurattribut">html4.01</span>"<span class="nomattribut"> encoding</span>="<span class="valeurattribut">ISO-8859-1</span>"<span class="nomattribut"> doctype-public</span>="<span class="valeurattribut">-//W3C//DTD HTML 4.01//EN</span>"<span class="nomattribut"> doctype-system</span>="<span class="valeurattribut">http://www.w3.org/TR/html4/strict.dtd</span>"&nbsp;/&gt;</span><br></p>
+         <p>... permet d'indiquer que le fichier de sortie sera au format HTML&nbsp;4.01, conforme à la <code class="typefichier">DTD</code> publique de l'<code class="langage">HTML</code> du W3C, et que le jeu de caractères utilisé est l'ISO-8859-1. Le résultat en sortie est un fichier <code class="typefichier">HTML</code> commençant par
+         </p>
+         <p class="xml"><span class="exempledtdexterne">&lt;!DOCTYPE html PUBLIC<span class="valeurattribut"> "-//W3C//DTD HTML 4.01//EN"</span><span class="valeurattribut"> "http://www.w3.org/TR/html4/strict.dtd"</span>&gt;<br></span></p>
+         <p>... et possédant dans son <code class="code">&lt;head&gt;</code></p>
+         <p class="xml"><span class="tag">&lt;meta<span class="nomattribut"> http-equiv</span>="<span class="valeurattribut">Content-Type</span>"<span class="nomattribut"> content</span>="<span class="valeurattribut">text/html; charset=ISO-8859-1</span>"&nbsp;/&gt;</span><br></p>
+         <p>L'utlisation d'un tel élément permet donc de se dispenser de la spécification explicite du codage de caractères via un élément
+            <code class="code">&lt;meta&gt;</code> lors de l'écriture de la feuille de style <code class="typefichier">XSL</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_output" title="Retour à la TdM (<xsl:output&gt;)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#template" name="template" id="template"></a>d. &lt;xsl:template&gt;
+         </h5>
+         <p>Cet élément définit un modèle à appliquer à un n&#339;ud et à un contexte spécifiques. L'utilisation de cet élément est de la forme&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;xsl:template<span class="nomattribut"> name</span>="<span class="valeurattribut">nommodele</span>"<span class="nomattribut"> match</span>="<span class="valeurattribut">expression</span>"<span class="nomattribut"> mode</span>="<span class="valeurattribut">modemodele</span>"&gt;</span>
+            			
+            			
+            			
+            		<span class="tag">&lt;/xsl:template&gt;</span><br></p>
+         <ul>
+            <li>
+               <p><code class="code">name</code> correspond au nom associé au modèle.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">match</code> indique quel jeu de n&#339;uds sera affecté par le modèle. Cette expression peut comprendre un test d'existence d'attribut, le
+                  caractère <code class="code">|</code> indiquant que le modèle s'applique à un élément ou à un autre, ainsi que tout élément permettant de définir un jeu d'attributs.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">mode</code> permet à un élément d'avoir plusieurs modèles, chacun générant une sortie différente.
+               </p>
+            </li>
+         </ul>
+         <p>Nous reviendrons plus loin sur les possibilités qu'offre cet élément pour une <a href="#module">conception modulaire de la feuille de style</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_template" title="Retour à la TdM (<xsl:template&gt;)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#value" name="value" id="value"></a>e. &lt;xsl:value-of&gt;
+         </h5>
+         <p>Cet élément permet d'insérer la valeur d'un n&#339;ud dans la transformation. Ce n&#339;ud est évalué en fonction d'une expression.
+            Cette expression peut correspondre à un élément, à un attribut ou à tout autre n&#339;ud contenant une valeur. L'utilisation de
+            cet élément est de la forme&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">expression</span>"<span class="nomattribut"> disable-output-escaping</span>="<span class="valeurattribut">yes | no</span>"&nbsp;/&gt;</span><br></p>
+         <ul>
+            <li>
+               <p>La valeur de <code class="code">select</code> est évaluée et c'est cette évaluation qui sera insérée dans la transformation.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">disable-output-escaping</code> agit sur la transformation des caractères. Dans le cas où sa valeur est <code class="code">yes</code>, la chaîne <code class="code">&amp;lt;</code> est insérée dans la transformation en tant que signe <code class="code">&lt;</code>, ce qui peut entraîner des erreurs. Dans le cas contraire, la chaîne <code class="code">&amp;lt;</code> est insérée telle quelle dans la transformation.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p3s2" title="Retour à la TdM (Les fondamentaux)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s3" id="p3s3" href="#p3s3"></a>3. Ajout d'éléments et d'attributs
+         </h4>
+         <h5><a href="#element" name="element" id="element"></a>a. &lt;xsl:element&gt;
+         </h5>
+         <p>Cet élément insère un nouvel élément dans la transformation. Le nom de l'élément est donné par l'attribut <code class="code">name</code>. L'utilisation de cet élément est de la forme&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:element<span class="nomattribut"> name</span>="<span class="valeurattribut">nomelement</span>"<span class="nomattribut"> use-attribute-sets</span>="<span class="valeurattribut">jeuattr</span>"&gt;</span>
+            			
+            			
+            		<span class="tag">&lt;/xsl:element&gt;</span><br></p>
+         <p><code class="code">name</code> correspond au nom de l'élément à créer. <code class="code">use-attribute-sets</code> correspond au jeu d'attributs à associer à l'élément créé. Par exemple&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:element<span class="nomattribut"> name</span>="<span class="valeurattribut">p</span>"&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">texte</span>"&nbsp;/&gt;</span><span class="tag">&lt;/xsl:element&gt;</span><br></p>
+         <p>... permet de créer dans le fichier <code class="typefichier">HTML</code> un élément de paragraphe renfermant le contenu de l'élément <code class="code">texte</code> du document <code class="typefichier">XML</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_element" title="Retour à la TdM (<xsl:element&gt;)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#attribute" name="attribute" id="attribute"></a>b. &lt;xsl:attribute&gt;
+         </h5>
+         <p>Cet élément définit un attribut et l'ajoute à l'élément résultat de la transformation. L'utilisation de cet élément est de
+            la forme&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">nom</span>"&gt;</span>valeur<span class="tag">&lt;/xsl:attribute&gt;</span><br></p>
+         <p><code class="code">name</code> correspond au nom de l'attribut à ajouter dans le contexte courant. <code class="code">valeur</code> correspond à la valeur à lui donner. Par exemple&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;image&gt;</span><span class="tag">&lt;xsl:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">src</span>"&gt;</span>test.gif<span class="tag">&lt;/xsl:attribute&gt;</span><span class="tag">&lt;/image&gt;</span><br></p>
+         <p>... permet d'ajouter à l'élément <code class="code">image</code> l'attribut <code class="code">src</code> et de lui affecter la valeur <code class="code">test.gif</code>, ce qui a pour effet de produire en sortie l'élément suivant&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;image<span class="nomattribut"> src</span>="<span class="valeurattribut">test.gif</span>"&gt;</span><span class="tag">&lt;/image&gt;</span><br></p>
+         <p>On aurait pu, de manière tout à fait équivalente, écrire</p>
+         <p class="xml"><span class="tag">&lt;xsl:element<span class="nomattribut"> name</span>="<span class="valeurattribut">image</span>"&gt;</span><span class="tag">&lt;xsl:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">src</span>"&gt;</span>test.gif<span class="tag">&lt;/xsl:attribute&gt;</span><span class="tag">&lt;/xsl:element&gt;</span><br></p>
+         <p>... ce qui a pour effet de produire en sortie</p>
+         <p class="xml"><span class="tag">&lt;image<span class="nomattribut"> src</span>="<span class="valeurattribut">test.gif</span>"&gt;</span><span class="tag">&lt;/image&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_attribute" title="Retour à la TdM (<xsl:attribute&gt;)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#accolades" name="accolades" id="accolades"></a>c. Syntaxe courte
+         </h5>
+         <p>Il est possible de créer des éléments de manière plus compacte, à l'aide d'une syntaxe particulière. Supposons par exemple
+            que nous ayons dans un fichier <code class="typefichier">XML</code> l'élément <code class="code">&lt;image source="test.gif" texte_alternatif="Image de test"/&gt;</code>, et que nous souhaitions obtenir dans le fichier de sortie l'élément <code class="code">&lt;img src="test.gif" alt="Image de test"/&gt;</code>. Il existe deux manières&nbsp;:
+         </p>
+         <ol>
+            <li>
+               <p>La syntaxe longue, avec...</p>
+               <p class="xml"><span class="tag">&lt;xsl:element<span class="nomattribut"> name</span>="<span class="valeurattribut">img</span>"&gt;</span><span class="tag">&lt;xsl:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">src</span>"&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">@source</span>"&nbsp;/&gt;</span><span class="tag">&lt;/xsl:attribute&gt;</span><span class="tag">&lt;xsl:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">alt</span>"&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">@texte_alternatif</span>"&nbsp;/&gt;</span><span class="tag">&lt;/xsl:attribute&gt;</span><span class="tag">&lt;/xsl:element&gt;</span><br></p>
+            </li>
+            <li>
+               <p>La syntaxe courte, utilisant des accolades...</p>
+               <p class="xml"><span class="tag">&lt;img<span class="nomattribut"> src</span>="<span class="valeurattribut">{@source}</span>"<span class="nomattribut"> alt</span>="<span class="valeurattribut">{@texte_alternatif}</span>"&nbsp;/&gt;</span><br></p>
+            </li>
+         </ol>
+         <p>La seconde syntaxe est plus compacte&nbsp;; mais elle présente deux inconvénients&nbsp;:</p>
+         <ol>
+            <li>
+               <p>Dès lors que des expressions XPath sont un peu longues, cette syntaxe complique la relecture de la feuille de style&nbsp;;</p>
+            </li>
+            <li>
+               <p>Une feuille <code class="typefichier">XSL</code> est avant tout un fichier <code class="typefichier">XML</code>. En tant que tel, on peut souhaiter sa transformation ou son traitement automatisé. La syntaxe longue s'y prête plus facilement.
+               </p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_p3s3" title="Retour à la TdM (Ajout d'éléments et d'attributs)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s4" id="p3s4" href="#p3s4"></a>4. Gestion des boucles
+         </h4>
+         <h5><a href="#for-each" name="for-each" id="for-each"></a>a. &lt;xsl:for-each&gt;
+         </h5>
+         <p>Cet <a href="stylexsl.html#p2s3">élément de bouclage</a>, que l'on a déjà rencontré, crée une boucle dans laquelle sont appliquées des transformations. Son utilisation est de la
+            forme&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">jeun&#339;ud</span>"&gt;</span><span class="tag">&lt;/xsl:for-each&gt;</span><br></p>
+         <p><code class="code">select</code> correspond au jeu de n&#339;uds devant être parcouru par la boucle. Exemple d'utilisation&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;ul&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">item</span>"&gt;</span><br>
+            				
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            		<span class="tag">&lt;/ul&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_for-each" title="Retour à la TdM (<xsl:for-each&gt;)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#sort" name="sort" id="sort"></a>b. &lt;xsl:sort&gt;
+         </h5>
+         <p>Cet élément permet d'effectuer un tri sur un jeu de n&#339;uds. Il doit être placé soit dans un élément <code class="code">&lt;xsl:for-each&gt;</code> soit dans un élément <code class="code">&lt;xsl:apply-templates&gt;</code>. C'est un élément vide qui peut être appelé plusieurs fois pour effectuer un tri multicritères. Chaque appel à cet élément
+            provoque un tri sur un champ spécifique, dans un ordre prédéfini. L'utilisation de cet élément est de la forme&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:sort<span class="nomattribut"> select</span>="<span class="valeurattribut">n&#339;ud</span>"<span class="nomattribut"> data-type</span>="<span class="valeurattribut">text | number | elt</span>"<span class="nomattribut"> order</span>="<span class="valeurattribut">ascending | descending</span>"<span class="nomattribut"> lang</span>="<span class="valeurattribut">nmtoken</span>"<span class="nomattribut"> case-order</span>="<span class="valeurattribut">upper-first | lower-first</span>"&nbsp;/&gt;</span><br></p>
+         <ul>
+            <li>
+               <p><code class="code">select</code> permet de spécifier un n&#339;ud comme clé de tri.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">data-type</code> correspond au type des données à trier. Dans le cas où le type est <code class="code">number</code>, les données sont converties puis triés.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">order</code> correspond à l'ordre de tri. Cet attribut vaut <code class="code">ascending</code> ou <code class="code">descending</code>.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">lang</code> spécifie quel jeu de caractères utiliser pour le tri&nbsp;; par défaut, il est déterminé en fonction des paramètres système.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">case-order</code> indique si le tri a lieu sur les majuscules ou minuscules en premier, selon qu'il prend la valeur <code class="code">upper-first</code> ou <code class="code">lower-first</code>.
+               </p>
+            </li>
+         </ul>
+         <p>Par exemple&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;ul&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">livre</span>"&gt;</span><br>
+            				
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:sort<span class="nomattribut"> select</span>="<span class="valeurattribut">auteur</span>"<span class="nomattribut"> order</span>="<span class="valeurattribut">descending</span>"&nbsp;/&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">auteur</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span><span class="tag">&lt;br&nbsp;/&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">titre</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            		<span class="tag">&lt;/ul&gt;</span><br></p>
+         <p>Dans cet exemple, la liste des livres est classée dans l'ordre alphabétique décroissant des noms d'auteur.</p>
+         <p class="retourtdm"><a href="#tdm_sort" title="Retour à la TdM (<xsl:sort&gt;)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#number" name="number" id="number"></a>c. &lt;xsl:number&gt;
+         </h5>
+         <p>Cet élément permet d"insérer un nombre formaté pouvant servir de compteur. L'utilisation de cet élément est de la forme&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;xsl:number<span class="nomattribut"> level</span>="<span class="valeurattribut">single | multiple | any</span>"<span class="nomattribut"> count</span>="<span class="valeurattribut">n&#339;ud</span>"<span class="nomattribut"> from</span>="<span class="valeurattribut">n&#339;ud</span>"<span class="nomattribut"> value</span>="<span class="valeurattribut">expression</span>"<span class="nomattribut"> format</span>="<span class="valeurattribut">chaine</span>"<span class="nomattribut"> lang</span>="<span class="valeurattribut">nmtoken</span>"<span class="nomattribut"> grouping-separator</span>="<span class="valeurattribut">car</span>"<span class="nomattribut"> grouping-size</span>="<span class="valeurattribut">nombre</span>"&nbsp;/&gt;</span><br></p>
+         <ul>
+            <li>
+               <p><code class="code">level</code> indique quels niveaux doivent être sélectionnés pour le comptage&nbsp;: <code class="code">single</code> permet de ne compter que la position du n&#339;ud par rapport à ses frères&nbsp;; <code class="code">multiple</code> permet de compter la position du n&#339;ud par rapport à ses ancêtres (par exemple de la forme 1.3.4)&nbsp;; enfin <code class="code">any</code> renvoie la position du n&#339;ud par rapport à l'ensemble des n&#339;uds de même nom dans tout le document.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">count</code> indique quels n&#339;uds doivent être comptés dans les niveaux sélectionnés&nbsp;; dans le cas où cet attribut n'est pas défini, les
+                  n&#339;uds comptés sont ceux ayant le même type que celui du n&#339;ud courant.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">from</code> identifie le n&#339;ud à partir duquel le comptage commence.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">value</code> indique l'expression correspondant à la valeur du compteur&nbsp;; si cet attribut n'est pas défini, le nombre inséré correspond
+                  à la position du n&#339;ud (<code class="code">position()</code>).
+               </p>
+            </li>
+            <li>
+               <p><code class="code">format</code> spécifie le format de l'affichage du nombre&nbsp;; cela peut être un chiffre, un caractère (a-z, A-Z) et comprendre un caractère
+                  de séparation tel que le point (<code class="code">.</code>), le trait d'union (<code class="code">-</code>) ou autre. Les formats possibles sont "1", "01", "a", "A", "i", "I".
+               </p>
+            </li>
+            <li>
+               <p><code class="code">lang</code> spécifie le jeu de caractères à utiliser&nbsp;; par défaut, il est déterminé en fonction des paramètres du système.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">grouping-separator</code> identifie le caractère permettant de définir la séparation entre les centaines et les milliers.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">grouping-size</code> spécifie le nombre de caractères formant un groupe de chiffres dans un nombre long&nbsp;; le plus souvent la valeur de cet attribut
+                  est 3. Ce dernier attribut fonctionne avec...
+               </p>
+            </li>
+            <li>
+               <p>...<code class="code">grouping-separator</code>&nbsp;; si l'un des deux manque, ils sont ignorés.
+               </p>
+            </li>
+         </ul>
+         <p>Exemple d'utilisation&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;ul&gt;</span><br>
+            			<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">livre</span>"&gt;</span><br>
+            				
+            				&nbsp;&nbsp;<span class="tag">&lt;xsl:sort<span class="nomattribut"> select</span>="<span class="valeurattribut">auteur</span>"&nbsp;/&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;xsl:number<span class="nomattribut"> level</span>="<span class="valeurattribut">any</span>"<span class="nomattribut"> from</span>="<span class="valeurattribut">/</span>"<span class="nomattribut"> format</span>="<span class="valeurattribut">1.</span>"&nbsp;/&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">auteur</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span><span class="tag">&lt;br&nbsp;/&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">titre</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            			<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            		<span class="tag">&lt;/ul&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p3s4" title="Retour à la TdM (Gestion des boucles)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s5" id="p3s5" href="#p3s5"></a>5. Conditions de test
+         </h4>
+         <h5><a href="#if" name="if" id="if"></a>a. &lt;xsl:if&gt;
+         </h5>
+         <p>Cet élément permet la fragmentation du modèle dans certaines conditions. Il est possible de tester la présence d'un attribut,
+            d'un élément, de savoir si un élément est bien le fils d'un autre, de tester les valeurs des éléments et attributs. L'utilisation
+            de cet élément est de la forme&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:if<span class="nomattribut"> test</span>="<span class="valeurattribut">condition</span>"&gt;</span>action<span class="tag">&lt;/xsl:if&gt;</span><br></p>
+         <p><code class="code">test</code> prend la valeur <code class="code">1</code> ou <code class="code">0</code> suivant le résultat de la condition (vrai ou faux). <code class="code">action</code> correspond à l'action devant être effectuée (texte à afficher, second test, gestion de chaîne...). Exemple d'utilisation:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:if<span class="nomattribut"> test</span>="<span class="valeurattribut">livre</span>"&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">livre</span>"&gt;</span><br>
+            					
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">auteur</span>"&nbsp;/&gt;</span><span class="tag">&lt;br&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">titre</span>"&nbsp;/&gt;</span>.<span class="tag">&lt;xsl:if<span class="nomattribut"> test</span>="<span class="valeurattribut">@langue='français'</span>"&gt;</span>Ce livre est en français.<span class="tag">&lt;/xsl:if&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/li&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            		<span class="tag">&lt;/xsl:if&gt;</span><br></p>
+         <p>Dans le code précédent, si l'attribut <code class="code">langue</code> de l'élément <code class="code">livre</code> vaut <code class="code">français</code>, le processeur ajoutera au fichier de sortie la phrase "Ce livre est en français". Il ne se passe rien si ce n'est pas le
+            cas.
+         </p>
+         <p class="retourtdm"><a href="#tdm_if" title="Retour à la TdM (<xsl:if&gt;)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#choose" name="choose" id="choose"></a>b. &lt;xsl:choose&gt;
+         </h5>
+         <p>Cet élément permet de définir une liste de choix et d'affecter à chaque choix une transformation différente. Chaque choix
+            est défini par un élément <code class="code">&lt;xsl:when&gt;</code> et un traitement par défaut peut être spécifié grâce à l'élément <code class="code">&lt;xsl:otherwise&gt;</code>. Exemple d'utilisation&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;ul&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">livre</span>"&gt;</span><br>
+            				
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">auteur</span>"&nbsp;/&gt;</span><span class="tag">&lt;br&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">titre</span>"&nbsp;/&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:choose&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:when<span class="nomattribut"> test</span>="<span class="valeurattribut">@langue='francais'</span>"&gt;</span>Ce livre est en français.<span class="tag">&lt;/xsl:when&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:when<span class="nomattribut"> test</span>="<span class="valeurattribut">@langue='anglais'</span>"&gt;</span>Ce livre est en anglais.<span class="tag">&lt;/xsl:when&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:otherwise&gt;</span>Ce livre est dans une langue non répertoriée.<span class="tag">&lt;/xsl:otherwise&gt;</span><br>
+            					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:choose&gt;</span><br>
+            				&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/li&gt;</span><br>
+            			&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            		<span class="tag">&lt;/ul&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p3s5" title="Retour à la TdM (Conditions de test)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="varparam" id="varparam" href="#varparam"></a>6. Variables et paramètres
+         </h4>
+         <h5><a href="#varparamintro" name="varparamintro" id="varparamintro"></a>a. Introduction
+         </h5>
+         <p>Il est possible en <code class="langage">XSLT</code> de définir des variables et des paramètres permettant de faire des calculs. Il est nécessaire pour cela de faire appel à
+            deux éléments XSL&nbsp;: <code class="code">xsl:variable</code> et <code class="code">xsl:param</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_varparamintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#xslvariable" name="xslvariable" id="xslvariable"></a>b. Élément &lt;xsl:variable&gt;
+         </h5>
+         <p>L'élément <code class="code">&lt;xsl:variable&gt;</code> sert à créer les variables dans XSLT. Il possède les attributs suivants&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">name</code>&nbsp;: cet attribut est obligatoire. Il spécifie le... nom de la variable.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">select</code>&nbsp;: expression <code class="langage">XPath</code> qui spécifie la valeur de la variable.
+               </p>
+            </li>
+         </ul>
+         <p>Par exemple&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;xsl:variable<span class="nomattribut"> name</span>="<span class="valeurattribut">nombre_livres</span>"<span class="nomattribut"> select</span>="<span class="valeurattribut">255</span>"&nbsp;/&gt;</span><br><span class="tag">&lt;xsl:variable<span class="nomattribut"> name</span>="<span class="valeurattribut">auteur</span>"<span class="nomattribut"> select</span>="<span class="valeurattribut">'Victor Hugo'</span>"&nbsp;/&gt;</span><br><span class="tag">&lt;xsl:variable<span class="nomattribut"> name</span>="<span class="valeurattribut">nombre_pages</span>"<span class="nomattribut"> select</span>="<span class="valeurattribut">livre/tome/@page</span>"&nbsp;/&gt;</span><br></p>
+         <p>On notera la présence des guillemets imbriqués quand il s'agit d'affecter une chaîne de caractères à une variable.</p>
+         <p>La portée d'une variable est limitée aux éléments-frères et à leurs descendants. Par conséquent, si une variable est déclarée
+            dans une boucle <code class="code">xsl:for-each</code> ou un élément  <code class="code">xsl:choose</code> ou <code class="code">xsl:if</code>, on ne peut s'en servir en-dehors de cet élément.
+         </p>
+         <p>Une variable est appelée en étant précédée du caractère <code class="code">$</code>&nbsp;: <code class="code">&lt;xsl:value-of select="$nombre_pages" /&gt;</code>.
+         </p>
+         <p>On peut utiliser une variable pour éviter la frappe répétitive d'une chaîne de caractères, et/ou faciliter la mise à jour
+            de la feuille de style.
+         </p>
+         <p class="retourtdm"><a href="#tdm_xslvariable" title="Retour à la TdM (Élément <xsl:variable&gt;)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#calltemplate" name="calltemplate" id="calltemplate"></a>c. L'élément &lt;xsl:call-template&gt;
+         </h5>
+         <p>L'élément <code class="code">&lt;xsl:template&gt;</code> peut être appelé indépendamment d'une sélection d'un n&#339;ud. Pour cela, il faut renseigner l'attribut <code class="code">name</code>, et l'appeler à l'aide de l'élément <code class="code">&lt;xsl:call-template&gt;</code>. Par exemple
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:template<span class="nomattribut"> name</span>="<span class="valeurattribut">separateur</span>"&gt;</span><br>
+            				
+            				&nbsp;&nbsp;<span class="tag">&lt;hr&nbsp;/&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;img<span class="nomattribut"> src</span>="<span class="valeurattribut">ligne.gif</span>"<span class="nomattribut"> alt</span>="<span class="valeurattribut">séparation</span>"<span class="nomattribut"> width</span>="<span class="valeurattribut">150</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">2</span>"&nbsp;/&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;hr&nbsp;/&gt;</span><br>
+            			<span class="tag">&lt;/xsl:template&gt;</span><br></p>
+         <p>Il suffit alors de l'appeler avec <code class="code">&lt;xsl:call-template name="separateur"/&gt;</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_calltemplate" title="Retour à la TdM (L'élément <xsl:call-template&gt;)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#param" name="param" id="param"></a>d. Les éléments &lt;xsl:param&gt; et &lt;xsl:with-param&gt;
+         </h5>
+         <p>Les paramètres créés avec ces deux éléments sont habituellement utilisés dans les modèles nommés, que nous venons de voir.
+            Ils permettent de passer des valeurs aux modèles. Un paramètre est créé avec l'élément <code class="code">&lt;xsl:param&gt;</code>, et passé à un modèle avec l'élément <code class="code">&lt;xsl:with-param&gt;</code>. Les deux ont deux attributs&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">name</code>, obligatoire, qui donne un nom au paramètre&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">select</code>, une expression <code class="langage">XPath</code> facultative permettant de donner une valeur par défaut au paramètre.
+               </p>
+            </li>
+         </ul>
+         <p>Par exemple, on peut imaginer un <code class="code">template</code> permettant d'évaluer le résultat d'une expression polynômiale&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:template<span class="nomattribut"> name</span>="<span class="valeurattribut">polynome</span>"&gt;</span><br>
+            				
+            				&nbsp;&nbsp;<span class="tag">&lt;xsl:param<span class="nomattribut"> name</span>="<span class="valeurattribut">variable_x</span>"&nbsp;/&gt;</span><br>
+            				&nbsp;&nbsp;<span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">2*$variable_x*$variable_x+(-5)*$variable_x+2</span>"&nbsp;/&gt;</span><br>
+            			<span class="tag">&lt;/xsl:template&gt;</span><br></p>
+         <p>Il suffit alors de l'appeler en lui passant diverses valeurs pour le paramètre <code class="code">variable_x</code> pour qu'il évalue cette expression. Ce comportement se rapproche de celui d'une fonction dans un langage de programmation.
+            Par exemple...
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:call-template<span class="nomattribut"> name</span>="<span class="valeurattribut">polynome</span>"&gt;</span><br>
+            				
+            				&nbsp;&nbsp;<span class="tag">&lt;xsl:with-param<span class="nomattribut"> name</span>="<span class="valeurattribut">variable_x</span>"<span class="nomattribut"> select</span>="<span class="valeurattribut">3.4</span>"&nbsp;/&gt;</span><br>
+            			<span class="tag">&lt;/xsl:call-template&gt;</span><br></p>
+         <p>... permet d'afficher le résultat de 2*3.4^2-5*3.4+2. On remarquera que&nbsp;:</p>
+         <ol>
+            <li>
+               <p>la soustraction d'un nombre se fait par addition du nombre (négatif) opposé&nbsp;;</p>
+            </li>
+            <li>
+               <p>la division se fait non par le caractère <code class="code">/</code>, mais par l'opérateur <code class="code">div</code>.
+               </p>
+            </li>
+         </ol>
+         <h4>Exercice&nbsp;<a name="exoxsl" href="#exoxsl" id="exoxsl"></a>1. Utilisation d'éléments XSL
+         </h4>
+         <h5><a href="exercices/exo9.html" title="Énoncé de l'exercice 'Utilisation d'éléments XSL'">Énoncé</a></h5>
+         <h5><a href="exercices/exo9cor.html" title="Correction 'Utilisation d'éléments XSL'">
+               				Correction</a></h5>
+         <p class="retourtdm"><a href="#tdm_varparam" title="Retour à la TdM (Variables et paramètres)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="module" href="#module" id="module"></a>IV. Conception modulaire des feuilles de style
+         </h3>
+         <h4><a name="moduleIntro" id="moduleIntro" href="#moduleIntro"></a>1. Introduction
+         </h4>
+         <p>Les feuilles de style que nous avons écrites jusqu'à présent conviennent à de petits projets. Cependant, lorsqu'un développement
+            doit être réalisé à plusieurs, ou lorsqu'il devient nécessaire de revenir après quelque temps sur du code déjà écrit, la possibilité
+            de mettre au point des feuilles de style modulaires prend toute sa valeur. Deux étages successifs le permettent&nbsp;:
+         </p>
+         <ol>
+            <li>
+               <p>Au sein d'une même feuille de style, la séparation du traitement de chaque n&#339;ud peut se faire en généralisant l'emploi des
+                  <span lang="en" class="autrelangue">templates</span>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Il est possible de scinder une feuille de styles en plusieurs fichiers, inclus les uns dans les autres.</p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_moduleIntro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="templates" id="templates" href="#templates"></a>2. Utilisation des templates
+         </h4>
+         <h5><a href="#templateIntro" name="templateIntro" id="templateIntro"></a>a. Introduction
+         </h5>
+         <p>Les feuilles de style que nous avons écrites jusqu'à présent utilisaient l'élément <code class="code">xsl:for-each</code> pour «&nbsp;inspecter&nbsp;» successivement tous les éléments renvoyés par une expression XPath. Lorsque le document <code class="typefichier">XML</code> initial ou le document de sortie deviennent un peu complexes, cette méthode aboutit à l'écriture d'une feuille de style consistant
+            en de multiples boucles imbriquées. Une solution commode est alors de séparer les traitements pour chaque n&#339;ud du document
+            initial grâce aux éléments <code class="code">xsl:template</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_templateIntro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#templateExemple" name="templateExemple" id="templateExemple"></a>b. Exemple
+         </h5>
+         <p>Revenons à la deuxième feuille de style que nous avions écrite pour présenter la liste des bouteilles&nbsp;:</p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> version</span>="<span class="valeurattribut">1.0</span>"<span class="nomattribut"> xmlns:xsl</span>="<span class="valeurattribut">http://www.w3.org/1999/XSL/Transform</span>"&gt;</span><br>
+            					
+            					
+            					<span class="tag">&lt;xsl:template<span class="nomattribut"> match</span>="<span class="valeurattribut">/</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;html&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;head&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Exemple de sortie HTML<span class="tag">&lt;/title&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;meta<span class="nomattribut"> http-equiv</span>="<span class="valeurattribut">Content-Type</span>"<span class="nomattribut"> content</span>="<span class="valeurattribut">text/html; charset=ISO-8859-1</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/head&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;body&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Bouteille de marque <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/marque</span>"&nbsp;/&gt;</span><span class="tag">&lt;/h1&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Composition:<span class="tag">&lt;/h2&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Ions positifs<span class="tag">&lt;/h3&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/composition/ion_positif</span>"&gt;</span><br>
+            										
+            										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Ions négatifs<span class="tag">&lt;/h3&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/composition/ion_negatif</span>"&gt;</span><br>
+            										
+            										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Autres matériaux<span class="tag">&lt;/h3&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">//autres_materiaux</span>"&gt;</span><br>
+            										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            								<span class="tag">&lt;h2&gt;</span>Lieu d'origine<span class="tag">&lt;/h2&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Ville de <span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/source/ville</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span>, dans le département <span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/source/departement</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span><span class="tag">&lt;/p&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Autres informations<span class="tag">&lt;/h2&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>Contenance: <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/contenance</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>pH: <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/ph</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/body&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/html&gt;</span><br>
+            					<span class="tag">&lt;/xsl:template&gt;</span><br>
+            				<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p>Modifions-la dans un premier temps afin qu'elle puisse s'adapter à un document <code class="typefichier">XML</code> listant plusieurs bouteilles&nbsp;:
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> version</span>="<span class="valeurattribut">1.0</span>"<span class="nomattribut"> xmlns:xsl</span>="<span class="valeurattribut">http://www.w3.org/1999/XSL/Transform</span>"&gt;</span><br>
+            					
+            					
+            					<span class="tag">&lt;xsl:template<span class="nomattribut"> match</span>="<span class="valeurattribut">/</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;html&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;head&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Exemple de sortie HTML<span class="tag">&lt;/title&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;meta<span class="nomattribut"> http-equiv</span>="<span class="valeurattribut">Content-Type</span>"<span class="nomattribut"> content</span>="<span class="valeurattribut">text/html; charset=ISO-8859-1</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/head&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;body&gt;</span><br>
+            								<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">//bouteille</span>"&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Bouteille de marque <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/marque</span>"&nbsp;/&gt;</span><span class="tag">&lt;/h1&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Composition:<span class="tag">&lt;/h2&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Ions positifs<span class="tag">&lt;/h3&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/composition/ion_positif</span>"&gt;</span><br>
+            										
+            										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Ions négatifs<span class="tag">&lt;/h3&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/composition/ion_negatif</span>"&gt;</span><br>
+            										
+            										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Autres matériaux<span class="tag">&lt;/h3&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">//autres_materiaux</span>"&gt;</span><br>
+            										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Lieu d'origine<span class="tag">&lt;/h2&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Ville de <span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/source/ville</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span>, dans le département <span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/source/departement</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span><span class="tag">&lt;/p&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Autres informations<span class="tag">&lt;/h2&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>Contenance: <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/contenance</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>pH: <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">bouteille/ph</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            							<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/body&gt;</span><br>&nbsp;&nbsp;<span class="tag">&lt;/html&gt;</span><br>
+            					<span class="tag">&lt;/xsl:template&gt;</span><br>
+            				<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p>Les imbrications de boucles <code class="code">xsl:for-each</code> peuvent devenir lourdes à gérer. Il est plus facile de maintenir la structure suivante&nbsp;:
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> version</span>="<span class="valeurattribut">1.0</span>"<span class="nomattribut"> xmlns:xsl</span>="<span class="valeurattribut">http://www.w3.org/1999/XSL/Transform</span>"&gt;</span><br>
+            					
+            					
+            					<span class="tag">&lt;xsl:output<span class="nomattribut"> method</span>="<span class="valeurattribut">html</span>"<span class="nomattribut"> version</span>="<span class="valeurattribut">html4.01</span>"<span class="nomattribut"> encoding</span>="<span class="valeurattribut">ISO-8859-1</span>"<span class="nomattribut"> doctype-public</span>="<span class="valeurattribut">-//W3C//DTD HTML 4.01//EN</span>"<span class="nomattribut"> doctype-system</span>="<span class="valeurattribut">http://www.w3.org/TR/html4/strict.dtd</span>"&nbsp;/&gt;</span><br>
+            					<br>
+            					<span class="tag">&lt;xsl:template<span class="nomattribut"> match</span>="<span class="valeurattribut">/</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;html&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;head&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Exemple de sortie HTML<span class="tag">&lt;/title&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/head&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;body&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:apply-templates&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/body&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/html&gt;</span><br>
+            					<span class="tag">&lt;/xsl:template&gt;</span><br>
+            					<br>
+            					<span class="tag">&lt;xsl:template<span class="nomattribut"> match</span>="<span class="valeurattribut">bouteille</span>"&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Bouteille de marque <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">marque</span>"&nbsp;/&gt;</span><span class="tag">&lt;/h1&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Composition:<span class="tag">&lt;/h2&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Ions positifs<span class="tag">&lt;/h3&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">composition/ion_positif</span>"&gt;</span><br>
+            								
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:apply-templates<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Ions négatifs<span class="tag">&lt;/h3&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">composition/ion_negatif</span>"&gt;</span><br>
+            								
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:apply-templates<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>Autres matériaux<span class="tag">&lt;/h3&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:for-each<span class="nomattribut"> select</span>="<span class="valeurattribut">autres_materiaux</span>"&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsl:apply-templates<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsl:for-each&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Lieu d'origine<span class="tag">&lt;/h2&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Ville de <span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">source/ville</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span>, dans le département <span class="tag">&lt;b&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">source/departement</span>"&nbsp;/&gt;</span><span class="tag">&lt;/b&gt;</span><span class="tag">&lt;/p&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Autres informations<span class="tag">&lt;/h2&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>Contenance: <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">contenance</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>pH: <span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">ph</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+            					<span class="tag">&lt;/xsl:template&gt;</span><br>
+            					<br>
+            					<span class="tag">&lt;xsl:template<span class="nomattribut"> match</span>="<span class="valeurattribut">ion_positif</span>"&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br><span class="tag">&lt;/xsl:template&gt;</span><br>
+            					<br>
+            					<span class="tag">&lt;xsl:template<span class="nomattribut"> match</span>="<span class="valeurattribut">ion_negatif</span>"&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br><span class="tag">&lt;/xsl:template&gt;</span><br>
+            					<br>
+            					<span class="tag">&lt;xsl:template<span class="nomattribut"> match</span>="<span class="valeurattribut">autres_materiaux</span>"&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">.</span>"&nbsp;/&gt;</span><span class="tag">&lt;/li&gt;</span><br><span class="tag">&lt;/xsl:template&gt;</span><br>
+            					<br>
+            				<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p>Le gain n'est pas très appréciable ici, mais si vous jetez un &#339;il à la feuille de style qui figure en lien en bas de cette
+            page, vous verrez un exemple d'utilisation plus complexe... et plus utile.
+         </p>
+         <p class="retourtdm"><a href="#tdm_templates" title="Retour à la TdM (Utilisation des templates)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="inclusions" id="inclusions" href="#inclusions"></a>3. Inclusions de feuilles de style
+         </h4>
+         <p>Il est parfois nécessaire de scinder une feuille de style en plusieurs fichiers différents&nbsp;:</p>
+         <ul>
+            <li>
+               <p>Cela permet d'en faciliter la maintenance, en rendant possible un travail collectif&nbsp;;</p>
+            </li>
+            <li>
+               <p>Cela permet aussi de créer des bibliothèques de modèles pouvant être réutilisés d'un projet à un autre</p>
+            </li>
+         </ul>
+         <p>Pour cela, il suffit de spécifier dans la feuille de style «&nbsp;maîtresse&nbsp;» un appel à une feuille de style autre, soit par l'élément
+            <code class="code">xsl:include</code> soit par l'élément <code class="code">xsl:import</code>. Par exemple...
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> version</span>="<span class="valeurattribut">1.0</span>"<span class="nomattribut"> xmlns:xsl</span>="<span class="valeurattribut">http://www.w3.org/1999/XSL/Transform</span>"&gt;</span><br>
+            					
+            					
+            					&nbsp;&nbsp;<span class="tag">&lt;xsl:include<span class="nomattribut"> href</span>="<span class="valeurattribut">feuille_incluse.xsl</span>"&nbsp;/&gt;</span><br>
+            				<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p>Les modèles et variables définis dans la feuille de style ainsi incluse sont directement incorporés à la feuille de style
+            appelante. Quand on utilise <code class="code">xsl:import</code>, s'il y a conflit entre une déclaration de <span lang="en" class="autrelangue">template</span> dans la feuille appelante et la feuille appelée, c'est la première qui est prioritaire. La syntaxe est la même&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:stylesheet<span class="nomattribut"> version</span>="<span class="valeurattribut">1.0</span>"<span class="nomattribut"> xmlns:xsl</span>="<span class="valeurattribut">http://www.w3.org/1999/XSL/Transform</span>"&gt;</span><br>
+            					
+            					
+            					&nbsp;&nbsp;<span class="tag">&lt;xsl:import<span class="nomattribut"> href</span>="<span class="valeurattribut">feuille_incluse.xsl</span>"&nbsp;/&gt;</span><br>
+            				<span class="tag">&lt;/xsl:stylesheet&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_inclusions" title="Retour à la TdM (Inclusions de feuilles de style)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours précédent&nbsp;: <a href="stylexsl.html">Mise en forme à l'aide de feuilles de style XSL : initiation à XSLT</a><br>Cours suivant&nbsp;: <a href="fonctionsxpath.html">Fonctions XPath</a></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="recapxsl.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 22 janvier 2008, version 1.50. Corrections de fautes de frappe et de syntaxe. Ajout d'une partie sur la conception modulaire des feuilles de style.</li>
+            <li>Le 9 septembre 2007, version 1.45. Correction de syntaxe.</li>
+            <li>Le 3 novembre 2006, version 1.44. Correction de fautes de frappe et syntaxiques. Mise à jour sur la Candidate Recommandation XSLT2.0.</li>
+            <li>Le 13 février 2006, version 1.43. Correction d'une coquille.</li>
+            <li>Le 9 janvier 2006, version 1.42. Correction d'une faute de frappe.</li>
+            <li>Le 14 décembre 2005, version 1.41. Correction d'un lien.</li>
+            <li>Le 1er décembre 2005, version 1.40. Corrections typographiques. Ajout d'une section sur la syntaxe courte (accolades).</li>
+            <li>Le 27 novembre 2005, version 1.31. Corrections typographiques et syntaxiques.</li>
+            <li>Le 11 juillet 2005, version 1.30. Réécriture des exemples.</li>
+            <li>Le 4 mars 2005, version 1.24. Correction de l'utilisation de l'élément output.</li>
+            <li>Le 16 juin 2004, version 1.23. Ajout des corrections des exercices.</li>
+            <li>Le 9 février 2004, version 1.22. Ajout d'un lien vers un exercice.</li>
+            <li>Le 6 février 2004, version 1.21. Corrections typographiques.</li>
+            <li>Le 28 novembre 2003, version 1.20. Ajout de deux éléments.</li>
+            <li>Le 30 juillet 2003, version 1.10. Corrections typographiques et quelques mises à jour sur le fond.</li>
+            <li>Le 31 mai 2002, version 1.01. Corrections typographiques.</li>
+            <li>Le 28 mai 2002, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

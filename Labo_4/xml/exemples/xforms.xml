@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ev="http://www.w3.org/2001/xml-events" 
+      xmlns:xf="http://www.w3.org/2002/xforms">
+  <head>
+    
+    <style type="text/css">
+      h1 {font-size: 12pt }
+      xf|input.itemClass { width:100px }
+      xf|input.custNumClass { width:100px }
+      xf|input.dateClass { width:80px }
+    </style>
+    <title>Enter Order</title>
+
+    <xf:model id="model1">
+
+      <xf:instance>
+        <order xmlns="" itemNum="">
+          <quantity/>
+          <custNum/>
+          <orderDate/>
+        </order>
+      </xf:instance>
+
+      <xf:submission id="s01" method="put"
+                     action="file:///temp/ex1order.xml" /> 
+
+      <xf:submission id="s02" method="post"
+                     action="http://xformstest.org/cgi-bin/showinstance.sh" /> 
+    </xf:model>
+  </head>
+
+  <body>
+
+    <h1>Enter Order</h1>
+    <p>Enter data for order below.</p>
+
+    <xf:input model="model1" class="itemClass" ref="@itemNum">
+      <xf:label>Item Number</xf:label>
+    </xf:input>
+
+    <xf:input model="model1" ref="quantity">
+      <xf:label>Quantity</xf:label>
+    </xf:input>
+
+    <xf:input model="model1" ref="custNum" class="custNumClass">
+      <xf:label>Customer Number</xf:label>
+    </xf:input>
+
+    <xf:input model="model1" ref="orderDate" class="dateClass">
+      <xf:label>Order Date</xf:label>
+    </xf:input>
+
+    <br />
+
+    <xf:submit submission="s01">
+      <xf:label>Save</xf:label>
+    </xf:submit>
+
+    <p>Click "Save" to store entered order.</p>
+
+  </body>
+</html>

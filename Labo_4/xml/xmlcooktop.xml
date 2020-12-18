@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+
+<cours nomfichier="xmlcooktop">Cours d'initiation à XML</cours>
+
+<entete>
+	<titre>Prise en main d'XML CookTop</titre>
+	<auteur email="cours@gchagnon.fr">G. Chagnon</auteur>
+	<resume>XMLCookTop est un environnement de développement simple d'emploi, limité à des fonctionalités de base, fonctionnant sous Windows.</resume>
+	<motsclefs>xmlcooktop</motsclefs>
+</entete>
+
+<corpus>
+
+<partie titre="Généralités" ancre="p1">
+
+<section titre="Introduction" ancre="p1s1">
+
+<paragraphe>
+	<texte>Il existe de nombreuses solutions permettant le développement de fichiers <code type="typefichier">XML</code>. Une des plus célèbres est l'environnement <logiciel>XMLSpy</logiciel>, mais qui offre néanmoins l'inconvénient d'être un <autrelangue type="en">shareware</autrelangue> et donc d'être à terme payant. On trouve également <logiciel>XMLNotePad</logiciel> de Microsoft, mais qui ne permet l'exploration que de petits fichiers <code type="typefichier">XML</code>.</texte>
+	<texte><logiciel>XMLCookTop</logiciel> est un <autrelangue type="en">freeware</autrelangue> qui permet de disposer d'un environnement simple d'emploi, et la manipulation de "gros" fichiers <code type="typefichier">XML</code>. En revanche, il ne supporte pas la validation d'après les schémas.</texte>
+</paragraphe>
+</section>
+
+<section titre="Quelques détails techniques" ancre="p1s2">
+<paragraphe>
+	<texte>Il est disponible en téléchargement sur le site <reference href="http://xmlcooktop.com">http://xmlcooktop.com</reference>. À la date d'écriture de ce cours, la
+ version courante pour toutes les plateformes Windows est la 2.200, qui est une beta version. Cependant, les premières versions de ce cours ont été préparées en utilisant cet environnement et sans rencontrer de <autrelangue type="en">bug</autrelangue> handicapant. La version 2.5.0.1204, plus récente, n'est disponible que pour Windows NT4, 2000 et XP.</texte>
+</paragraphe>
+</section>
+</partie>
+
+<partie titre="Interface" ancre="p2">
+
+<section titre="Fenêtre principale" ancre="p2s1">
+<paragraphe>
+	<texte>Au lancement, la fenêtre principale présente une zone éditable, avec cinq signets <code>source(xml)</code>, <code>xpath console</code>, <code>stylesheet(xsl)</code>, <code>result</code> et <code>result(html)</code>. Le fichier <code type="typefichier">XML</code> sera édité dans la première fenêtre. La deuxième ne sera pas utilisée dans ce cours. La troisième permettra d'éditer la feuille de style <code type="typefichier">XSL</code> associée au fichier source. La quatrième affichera le résultat brut de l'opération réalisée par le processeur XML à partir du fichier source et de la feuille de style. La dernière enfin est une fenêtre de visualisation dans le navigateur par défaut.</texte>
+	<texte>Les boutons présents sont habituels, à l'exception de quelques-uns qui sont propres à la compilation XML. Ce sont&#160;:</texte>
+	<liste>
+		<item><texte>le bouton en forme de V rouge, qui permet de tester la "validité" du fichier source. Cette fonction, <valeur>indispensable</valeur>, est également accessible par le raccourci clavier <code>F7</code>&#160;;</texte></item>
+		<item><texte>les deux flèches bleue et rouge qui permettent une indentation automatique du fichier en cours&#160;;</texte></item>
+		<item><texte>la flèche rouge avec le texte xslt permet de tester le passage de la feuille de style. En cliquant sur ce bouton, et sous réserve qu'une feuille de style soit fournie et qu'aucune erreur de compilation n'a lieu, l'affichage bascule alors vers la cinquième fenêtre. Un raccourci-clavier est la touche <code>F5</code>&#160;;</texte></item>
+		<item><texte>le bouton suivant, qui ressemble au précédent mais avec une feuille blanche en arrière-plan, semble buggé. Il devrait permettre l'affichage dans un navigateur extérieur&#160;;</texte></item>
+		<item><texte>le dernier bouton de ce style permet de sauvegarder le résultat de la compilation sous la forme d'un fichier, souvent <code type="langage">HTML</code> dans notre cas.</texte></item>
+	</liste>
+</paragraphe>
+</section>
+
+<section titre="Barre de menu" ancre="p2s2">
+<paragraphe>
+	<texte>Certains des menus sont habituels, comme File, Edit, Window ou Help, même si ce dernier donne accès à des ressources en ligne, que vous pourrez consulter en temps et heure...</texte>
+	<texte>D'autres menus sont plus adaptés au logiciel.</texte>
+	<liste>
+		<item><texte>XML permet d'insérer des chaînes de caractères répétitives, comme des commentaires ou des chaînes <code>&lt;![CDATA[(...)]]&gt;</code>, ou d'accéder aux fonctions de compilation&#160;;</texte></item>
+		<item><texte>Code Bits donne accès à des morceaux de code pré-écrits pour plusieurs types de fichiers&#160;;</texte></item>
+		<item><texte>Nous ne nous servirons pas de Tools lors de ce cours&#160;;</texte></item>
+		<item><texte>Peers permet de communiquer des informations grâce à la constitution d'une petite communauté&#160;; jamais testé.</texte></item>
+		<item><texte>Le menu Options permet entre autres de changer le processeur XSLT utilisé&#160;; selon le processeur, dans certains cas bien particulier le résultat de la compilation peut être légèrement différent. Pour pouvoir plus aisément comparer les résultats de nos compilations, nous nous limiterons au compilateur par défaut, <logiciel>MSXML&#160;4.0</logiciel>, qui est le compilateur utilisé par Internet Explorer.</texte></item>
+		<item><texte>Web permet d'accéder au navigateur interne.</texte></item>
+	</liste>
+</paragraphe>
+</section>
+
+</partie>
+
+<partie titre="Exercices" ancre="p3">
+
+<exercice titre="Vérification de validité" ancre="ex1">
+	<enonce href="exercices/exo2.html"/>
+	<correction href="exercices/exo1_cor.xml"/>
+</exercice>
+
+<exercice titre="Amusons-nous..." ancre="ex2">
+	<enonce href="exercices/exo3.html"/>
+</exercice>
+
+</partie>
+
+</corpus>
+
+</chapitre>

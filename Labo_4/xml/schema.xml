@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+<cours nomfichier="schema">Cours d'initiation à XML</cours>
+
+<entete>
+	<titre>Initiation aux Schema XML</titre>
+	<auteur email="Gilles.Chagnon@upmc.fr">G. Chagnon</auteur>
+	<resume>Les schémas XML permettent de décrire plus finement que les DTD l'ensemble des éléments et attributs autorisés dans un fichier XML.</resume>
+	<motsclefs>xml, dtd, schema</motsclefs>
+</entete>
+
+<corpus>
+	<partie titre="Introduction" ancre="gene">
+		<section titre="Limitations des DTD" ancre="introdtd">
+			<paragraphe>
+				<texte>Lors de son lancement, <code type="langage">XML</code> a été perçu comme une réelle chance pour les développeurs d'avoir à disposition un langage simple d'utilisation, portable sans difficulté d'une machine -et d'une application- à une autre, et libre de droits. Dans les premiers temps, un fichier <code type='typefichier'>XML</code>, si on voulait le standardiser en utilisant un vrai langage général de description, devait dépendre d'une <reference href="dtd.html"><code type='typefichier'>DTD</code></reference>. Mais ce format de description, hérité de <code type="langage">SGML</code>, souffre de nombreuses déficiences.</texte>
+				<liste type="ordonnee">
+					<item><texte>Premièrement, les <code type='typefichier'>DTD</code> ne sont pas au format <code type="langage">XML</code>. Cela signifie qu'il est nécessaire d'utiliser un outil spécial pour manipuler un tel fichier, différent de celui utilisé pour l'édition du fichier <code type='typefichier'>XML</code>.</texte></item>
+					<item><texte>Deuxièmement, les <code type='typefichier'>DTD</code> ne supportent pas les «&#160;espaces de nom&#160;» (nous reviendrons sur cette notion). En pratique, cela implique qu'il n'est pas possible d'importer des définitions de balises définies par ailleurs dans un fichier <code type='typefichier'>XML</code> défini par une <code type='typefichier'>DTD</code>.</texte></item>
+					<item><texte>Troisièmement, le «&#160;typage&#160;» des données (c'est-à-dire la possibilité de spécifier par exemple qu'un attribut ne doit être qu'un nombre entier) est extrêmement limité.</texte></item>
+				</liste>
+			</paragraphe>
+		</section>
+		<section titre="Apports des schémas" ancre="introschema">
+			<paragraphe>
+				<texte>Conçu pour pallier les déficiences pré-citées des <code type='typefichier'>DTD</code>, <code type="langage">XML Schema</code> propose des nouveautés en plus des fonctionnalités fournies par les DTD&#160;:</texte>
+				<liste>
+					<item><texte>Le typage des données est introduit, ce qui permet la gestion de booléens, d'entiers, d'intervalles de temps... Il est même possible de créer de nouveaux types à partir de types existants.</texte></item>
+					<item><texte>La notion d'héritage. Les éléments peuvent hériter du contenu et des attributs d'un autre élément..</texte></item>
+					<item><texte>Le support des espaces de nom.</texte></item>
+					<item><texte>Les indicateurs d'occurrences des éléments peuvent être tout nombre non négatif (rappel&#160;: dans une <code type='typefichier'>DTD</code>, on est limité à 0, 1 ou un nombre infini d'occurences pour un élément).</texte></item>
+					<item><texte>Les schémas sont très facilement concevables par modules.</texte></item>
+				</liste>
+			</paragraphe>
+		</section>
+	</partie>
+	
+	<partie titre="Les premiers pas" ancre="premierspas">
+		<section titre="Introduction" ancre="premiersintro">
+			<paragraphe>
+				<texte>Le but d'un schéma est de définir une classe de documents <code type='typefichier'>XML</code>. Il permet de décrire les autorisations d'imbrication et l'ordre d'apparition des éléments et de leurs attributs, tout comme une <code type='typefichier'>DTD</code>. Mais il permet aussi d'aller au-delà.</texte>
+				<texte>Un premier point intéressant est qu'un fichier <code type='typefichier'>Schema XML</code> est un document <code type='typefichier'>XML</code>. Cela permet à un tel document d'être manipulé de la même manière que n'importe quel autre fichier <code type='typefichier'>XML</code>, et en particulier par une feuille de style <code type='typefichier'>XSL</code>. Par exemple, il est notamment possible d'automatiser la création d'une documentation à partir d'un schéma, fondée sur les commentaires et explications qui s'y trouvent. C'est d'ailleurs chose facile avec l'éditeur <reference href="oxygenxml.html">oXygen</reference>, via le menu Modules d'extension&gt;Schema Documentation, à partir d'un <reference href="exemples/biblio10.xsd">exemple de schéma</reference>, de produire la <reference href="exemples/biblio10_doc_exemple.html">documentation correspondante</reference>.</texte>
+				<texte>Le vocabulaire de <code type="langage">XML Schema</code> est composé d'environ 30 éléments et attributs. Ce vocabulaire est, a priori de manière bizarrement récursive et «&#160;auto-référente&#160;», défini dans un Schéma. Mais il existe également une DTD.</texte>
+			</paragraphe>
+		</section>
+		<section titre="Structure de base" ancre="schemastruc">
+			<paragraphe>
+				<texte>Comme tout document <code type='typefichier'>XML</code>, un <code type='typefichier'>Schema XML</code> commence par un prologue, et a un élément racine.</texte>
+				<exemple type="XML">
+					<prologue/>
+					<element nom="xsd:schema"><attribut nom="xmlns:xsd">http://www.w3.org/2000/10/XMLSchema</attribut>
+						<commentaire niveau="1">déclarations d'éléments, d'attributs et de types ici</commentaire>
+					</element>
+				</exemple>
+				<texte>L'élément racine est l'élément <code>xsd:schema</code>. Pour le moment, oubliez l'attribut <code>xmlns:xsd</code> (dont le rôle est le même que celui que nous avons déjà rencontré lors du <reference href="stylexsl.html#p1s2">cours sur les feuilles de style</reference>), et qui fait référence à l'<reference href="#espacenom">espace de noms</reference> utilisé pour l'écriture du fichier. Il faut simplement retenir que tout élément d'un schéma doit commencer par le préfixe <code>xsd.</code></texte>
+				<texte>Nous allons voir, par la suite, comment déclarer éléments et attributs à l'aide d'un schéma.</texte>
+			</paragraphe>
+		</section>
+	</partie>
+	
+	<partie titre="Déclarations d'éléments et d'attributs" ancre="declarations">
+		<section titre="Déclarations d'éléments" ancre="declarelt">
+			<paragraphe>
+				<texte>Un élément, dans un schéma, se déclare avec la balise <code><![CDATA[<xsd:element>]]></code>. Par exemple,</texte>
+				<exemple type="XML">
+					<prologue/>
+					<element nom="xsd:schema"><attribut nom="xmlns:xsd">http://www.w3.org/2000/10/XMLSchema</attribut>
+						<element nom="xsd:element" vide="oui" niveau="1"><attribut nom="name">contacts</attribut><attribut nom="type">typeContacts</attribut></element>
+						<element nom="xsd:element" vide="oui" niveau="1"><attribut nom="name">remarque</attribut><attribut nom="type">xsd:string</attribut></element>
+						<commentaire>déclarations de types ici</commentaire>
+					</element>
+				</exemple>
+				<texte>Le schéma précédent déclare deux éléments&#160;: un élément <code>contacts</code> et un élément <code>remarque</code>. Chaque élément est «&#160;typé&#160;» -c'est-à-dire qu'il doit respecter un certain format de données. L'élément <code>contacts</code> est ainsi du type <code>typeContacts</code>, qui est un <reference href="#typescomplexes">type complexe</reference> défini par l'utilisateur. L'élément remarque quant à lui est du type <code>xsd:string</code> qui est un <reference href="#typessimples">type simple</reference> prédéfini de <code type="langage">XML Schema</code>.</texte>
+				<texte>Chaque élément déclaré est associé à un type de données via l'attribut <code>type</code>. Les éléments pouvant contenir des élément-enfants ou posséder des attributs sont dits de type <valeur>complexe</valeur>, tandis que les éléments n'en contenant pas sont dits de type <valeur>simple</valeur>. Nous reviendrons plus loin sur cette notion de <reference href="#types">type de données</reference>.</texte>
+			</paragraphe>
+		</section>
+		<section titre="Déclarations d'attributs" ancre="declaattr">
+			<paragraphe titre="Déclaration simple" ancre="declaattrsimple">
+				<texte>À la différence des éléments, un attribut ne peut être que de type simple. Cela signifie que les attributs, comme avec les <code type='typefichier'>DTD</code>, ne peuvent contenir d'autres éléments ou attributs. De plus, les déclarations d'attributs doivent être placées <valeur>après</valeur> les définitions des types complexes, autrement dit, après les éléments <code>xsd:sequence</code>, <code>xsd:choice</code> et <code>xsd:all</code> (voir plus loin). Pour mémoire, rappelons que dans une <code type='typefichier'>DTD</code>, l'ordre des déclarations n'a pas d'importance.</texte>
+				<texte>L'exemple suivant montre la déclaration d'un attribut <code>maj</code> de type <code>xsd:date</code> (un autre type simple) qui indique la date de dernière mise à jour de la liste des contacts.</texte>
+				<exemple type="XML">
+					<prologue/>
+					<element nom="xsd:schema" enligne="non"><attribut nom="xmlns:xsd">http://www.w3.org/2000/10/XMLSchema</attribut>
+						<element nom="xsd:element" niveau="1" vide="oui"><attribut nom="name">contacts</attribut><attribut nom="type">typeContacts</attribut></element>
+						<element nom="xsd:element" niveau="1"><attribut nom="name">remarque</attribut><attribut nom="type">xsd:string</attribut>
+							<commentaire niveau="2">déclarations de types ici</commentaire>
+							<element nom="xsd:complexType" niveau="2" indent="oui">
+								<commentaire niveau="2">déclarations du modèle de contenu ici</commentaire>
+								<element nom="xsd:attribute" niveau="3" vide="oui"><attribut nom="name">maj</attribut><attribut nom="type">xsd:date</attribut></element>
+							</element>
+						</element>
+					</element>
+				</exemple>
+			</paragraphe>
+			<paragraphe titre="Contraintes d'occurences" ancre="declaattroccur">
+				<texte>Tout comme dans une <code type='typefichier'>DTD</code>, un attribut peut avoir un indicateur d'occurences.</texte>
+				<texte>L'élément <code>attribute</code> d'un <code type="typefichier">Schema XML</code> peut avoir trois attributs optionnels&#160;: <code>use</code>, <code>default</code> et <code>fixed</code>. Des combinaisons de ces trois attributs permettent de paramétrer ce qui est acceptable ou non dans le fichier <code type='typefichier'>XML</code> final (attribut obligatoire, optionnel, possédant une valeur par défaut...). Par exemple, la ligne suivante permet de rendre l'attribut <code>maj</code> optionnel, avec une valeur par défaut au 11 octobre 2003 s'il n'apparaît pas (le format de date est standardisé&#160;: cette date s'écrit donc à l'anglo-saxonne année-mois-jour&#160;; cela permet en outre de plus facilement classer les dates).</texte>
+				<exemple type="XML">
+					<element nom="xsd:attribute" vide="oui"><attribut nom="name">maj</attribut><attribut nom="type">xsd:date</attribut><attribut nom="use">optional</attribut><attribut nom="default">2003-10-11</attribut></element>
+				</exemple>
+				<texte>Quand l'attribut <code>fixed</code> est renseigné, la seule valeur que peut prendre l'attribut déclaré est celle de l'attribut <code>fixed</code>. Cet attribut permet de "réserver" des noms d'attributs pour une utilisation future, dans le cadre d'une mise à jour du schéma.</texte>
+				<texte>Le tableau suivant présente une comparaison entre le format <code type="langage">DTD</code> et le <code type="langage">XML Schema</code>.</texte>
+				<tableau>
+					<ligne type="header">
+						<colonne id="dtd"><texte>DTD</texte></colonne>
+						<colonne id="use"><texte>Attribut <code>use</code></texte></colonne>
+						<colonne id="default"><texte>Attribut <code>default</code></texte></colonne>
+						<colonne id="comment"><texte>Commentaire</texte></colonne>
+					</ligne>
+					<ligne>
+						<colonne headers="dtd"><texte>#REQUIRED</texte></colonne>
+						<colonne headers="use"><texte>required</texte></colonne>
+						<colonne headers="default"><texte>-</texte></colonne>
+						<colonne headers="comment"><texte></texte></colonne>
+					</ligne>
+					<ligne>
+						<colonne headers="dtd"><texte>"blabla" #REQUIRED</texte></colonne>
+						<colonne headers="use"><texte>required</texte></colonne>
+						<colonne headers="default"><texte>blabla</texte></colonne>
+						<colonne headers="comment"><texte></texte></colonne>
+					</ligne>
+					<ligne>
+						<colonne headers="dtd"><texte>#IMPLIED</texte></colonne>
+						<colonne headers="use"><texte>optional</texte></colonne>
+						<colonne headers="default"><texte>-</texte></colonne>
+						<colonne headers="comment"><texte></texte></colonne>
+					</ligne>
+					<ligne>
+						<colonne headers="dtd"><texte>"blabla" #IMPLIED</texte></colonne>
+						<colonne headers="use"><texte>optional</texte></colonne>
+						<colonne headers="default"><texte>blabla</texte></colonne>
+						<colonne headers="comment"><texte></texte></colonne>
+					</ligne>
+					<ligne>
+						<colonne headers="dtd"><texte>-</texte></colonne>
+						<colonne headers="use"><texte>prohibited</texte></colonne>
+						<colonne headers="default"><texte>-</texte></colonne>
+						<colonne headers="comment"><texte>Cet attribut ne doit pas apparaître</texte></colonne>
+					</ligne>
+					<legende>Contraintes d'occurences fixables par les attributs <code>use</code> et <code>default</code>.</legende>
+				</tableau>
+				<texte>Il est à noter que la valeur de l'attribut <code>default</code> doit être conforme au type déclaré. Par exemple...</texte>
+				<exemple type="XML">
+					<element nom="xsd:attribute" vide="oui"><attribut nom="name">maj</attribut><attribut nom="type">xsd:date</attribut><attribut nom="use">optional</attribut><attribut nom="default">-43</attribut></element>
+				</exemple>
+				<texte>... produirait une erreur à la validation du schéma.</texte>
+				<texte>Un autre type de déclaration d'attributs dans les <code type='typefichier'>DTD</code>, la liste de choix, est possible grâce à une <reference href="#restrictionexemple">restriction de type</reference>&#160;; nous y reviendrons.</texte>
+			</paragraphe>
+			<paragraphe titre="Regroupements d'attributs" ancre="declaattrregp">
+				<texte><code type="langage">XML Schema</code> propose une fonctionnalité supplémentaire, permettant de déclarer des groupes d'attributs (groupes auxquels il est possible de faire appel lors d'une déclaration d'éléments). Cela permet d'éviter de répéter des informations de déclarations.</texte>
+			</paragraphe>
+			<paragraphe titre="Déclaration d'élément ne contenant que du texte avec un (ou plusieurs) attribut(s)" ancre="unouplusieursattr">
+				<texte>Un tel élément est de type complexe, car il contient au moins un attribut. Afin de spécifier qu'il peut contenir également du texte, on utilise l'attribut <code>mixed</code> de l'élément <code>xsd;complexType</code>. Par défaut, <code>mixed="false"</code>; il faut dans ce cas forcer <code>mixed="true"</code>. Par exemple,</texte>
+				<exemple type="XML">
+					<element nom="xsd:element" indent="oui">
+						<attribut nom="name">elt</attribut>
+						<element nom="xsd:complexType" niveau="1" indent="oui">
+							<attribut nom="mixed">true</attribut>
+							<element nom="xsd:attribute" niveau="2" vide="oui">
+								<attribut nom="name">attr</attribut>
+								<attribut nom="type">xsd:string</attribut>
+								<attribut nom="use">optional</attribut>
+							</element>
+						</element>
+					</element>
+				</exemple>
+			</paragraphe>
+		</section>
+		<section titre="Déclaration et référencement" ancre="declareference">
+			<paragraphe>
+				<texte>La procédure précédente de déclaration d'éléments peut amener à une structure de type «&#160;poupée russe&#160;» des déclarations. Pour des raisons de clarté, il est beaucoup plus avantageux d'ordonner ces déclarations, ainsi qu'on peut le voir sur <reference href="exemples/biblio10.xsd">cet exemple</reference> (on ne fera pas attention, pour le moment, aux «&#160;définitions de type&#160;»).</texte>
+				<texte>Il est recommandé de commencer par déclarer les éléments et attributs de type simple, puis ceux de type complexe. On peut en effet faire référence, dans une déclaration de type complexe, à un élément de type simple prélablement défini. Par exemple...</texte>
+				<exemple type="XML">
+					<element nom="xsd:element" indent="oui">
+						<attribut nom="name">livre</attribut>
+						<element nom="xsd:complexType" niveau="1" indent="oui">
+							<element nom="xsd:sequence" niveau="2" indent="oui">
+								<element nom="xsd:element" vide="oui" niveau="3"><attribut nom="name">auteur</attribut><attribut nom="type">xsd:string</attribut></element>
+								<element nom="xsd:element" vide="oui" niveau="3"><attribut nom="name">pages</attribut><attribut nom="type">xsd:positiveInteger</attribut></element>
+							</element>
+						</element>
+					</element>
+				</exemple>
+				<texte>... est plus difficile à maintenir que... </texte>
+				<exemple type="XML">
+					<element nom="xsd:element" vide="oui"><attribut nom="name">pages</attribut><attribut nom="type">xsd:positiveInteger</attribut></element>
+					<element nom="xsd:element" vide="oui"><attribut nom="name">auteur</attribut><attribut nom="type">xsd:string</attribut></element>
+					<element nom="xsd:element" indent="oui">
+						<attribut nom="name">livre</attribut>
+						<element nom="xsd:complexType" niveau="1" indent="oui">
+							<element nom="xsd:sequence" niveau="2" indent="oui">
+								<element nom="xsd:element" niveau="3" vide="oui"><attribut nom="ref">auteur</attribut></element>
+								<element nom="xsd:element" niveau="3" vide="oui"><attribut nom="ref">pages</attribut></element>
+							</element>
+						</element>
+					</element>
+				</exemple>
+			</paragraphe>
+		</section>
+	</partie>
+	
+	<partie titre="Les types de données" ancre="types">
+		<section titre="Introduction" ancre="introtypes">
+			<paragraphe>
+				<texte>Ainsi que nous l'avons déjà brièvement signalé, <code type="langage">XML Schema</code> permet de spécifier des types de données bien plus finement que le langage <code type="langage">DTD</code>. Il distingue notamment <reference href="#typessimples">types simples</reference> et <reference href="#typescomplexes">types complexes</reference>.</texte>
+			</paragraphe>
+		</section>
+		<section titre="Types simples" ancre="typessimples">
+			<paragraphe titre="Généralités" ancre="simplesgene">
+				<texte>Les types de données simples ne peuvent comporter ni attributs, ni éléments enfants. Il en existe de nombreux, prédéfinis, mais il est également possible d'en "dériver" de nouveaux (nous reviendrons <reference href="#derivation">plus loin</reference> sur cette fonctionnalité). Enfin, il est possible de déclarer des "<reference href="#simplesliste">listes</reference>" de types.</texte>
+			</paragraphe>
+			<paragraphe titre="Bibliothèque de types intégrés" ancre="simplesintegres">
+				<texte>Nombreux sont les types prédéfinis dans la bibliothèque de types intégrés de <code type="langage">XML Schema.</code> la figure suivante en donne la hiérarchie, et leur <reference href="http://www.w3.org/TR/xmlschema-0/#CreatDt">liste détaillée</reference> figure sur le site du W3C.</texte>
+				<image src="xmldatatypes.png" alt="Hiérarchie des types simples intégrés" largeur="700" hauteur="426" classe="illustration"/>
+				<texte>Les types de données les plus simples (les chaînes de caractères) que permettaient les DTDs sont conservés, mais d'autres ont fait leur apparition. On pourra envisager, par exemple, dans un schéma décrivant un bon de commande, la déclaration d'un attribut <code>quantite</code>&#160;:</texte>
+				<exemple type="XML">
+					<element nom="xsd:attribute" vide="oui"><attribut nom="name">quantite</attribut><attribut nom="type">xsd:positiveInteger</attribut><attribut nom="use">default</attribut><attribut nom="value">1</attribut></element>
+				</exemple>
+				<texte>... qui force la valeur de l'attribut à un être un entier positif. Un bon de commande <code type='typefichier'>XML</code> suivant ce schéma, ayant une commande spécifiant <code>quantite="-3"</code> sera alors automatiquement refusé par le système. Un document respectant un tel schéma peut dès lors être enregistré directement dans une base de données, sans contrôle supplémentaire sur ce point.</texte>
+			</paragraphe>
+			<paragraphe titre="Listes" ancre="simplesliste">
+				<texte>Les types listes sont des suites de types simples (ou <valeur>atomiques</valeur>). <code type="langage">XML Schema</code> possède trois types de listes intégrés&#160;: <code>NMTOKENS</code>, <code>ENTITIES</code> et <code>IDREFS</code>. Il est également possible de créer une liste personnalisée, par «&#160;dérivation&#160;» de types existants. Par exemple,</texte>
+				<exemple type="XML">
+					<element nom="xsd:simpleType" indent="oui">
+						<attribut nom="name">numéroDeTéléphone</attribut>
+						<element nom="xsd:list" niveau="1" vide="oui">
+							<attribut nom="itemType">xsd:unsignedByte</attribut>
+						</element>
+					</element>
+				</exemple>
+				<texte>Un élément conforme à cette déclaration serait <code>&lt;téléphone&gt;01 44 27 60 11&lt;/téléphone&gt;</code>.</texte>
+				<texte>Il est également possible d'indiquer des contraintes plus fortes sur les types simples&#160;; ces contraintes s'appellent des «&#160;facettes&#160;». Elles permettent par exemple de limiter la longueur de notre numéro de téléphone à 10 nombres. Nous reviendrons sur <reference href="#restriction">les facettes</reference>.</texte>
+			</paragraphe>
+			<paragraphe titre="Unions" ancre="simplesunion">
+				<texte>Les listes et les types simples intégrés ne permettent pas de choisir le type de contenu d'un élément. On peut désirer, par exemple, qu'un type autorise soit un nombre, soit une chaîne de caractères particuliers. Il est possible de le faire à l'aide d'une déclaration d'union. Par exemple, sous réserve que le type simple <code>numéroDeTéléphone</code> ait été préalablement défini (voir précédemment), on peut déclarer...</texte>
+				<exemple type="XML">
+					<element nom="xsd:simpleType" indent="oui">
+						<attribut nom="name">numéroDeTéléphoneMnémoTechnique</attribut>
+						<element nom="xsd:union" niveau="1" vide="oui">
+							<attribut nom="memberTypes">xsd:string numéroDeTéléphone</attribut>
+						</element>
+					</element>
+				</exemple>
+				<texte>Les éléments suivants sont alors des "instances" valides de cette déclaration&#160;:</texte>
+				<exemple type="XML">
+					<element nom="téléphone">18</element>
+					<element nom="téléphone">Pompiers</element>
+				</exemple>
+			</paragraphe>
+		</section>
+		<section titre="Les types complexes" ancre="typescomplexes">
+			<paragraphe titre="Introduction" ancre="complintro">
+				<texte>Un élément de type simple ne peut contenir pas de sous-élément. Il est nécessaire pour cela de le déclarer de type complexe. On peut alors déclarer des <reference href="#complsequence">séquences</reference> d'éléments, des types de <reference href="#complchoix">choix</reference> ou des <reference href="#comploccur">contraintes d'occurences</reference></texte>
+			</paragraphe>
+			<paragraphe titre="Séquences d'éléments" ancre="complsequence">
+				<texte>Nous savons déjà comment, dans une <code type='typefichier'>DTD</code>, nous pouvons déclarer un élément comme pouvant contenir une suite de sous-éléments dans un ordre déterminé. Il est bien sûr possible de faire de même avec un schéma.</texte>
+				<texte>On utilise pour ce faire l'élément <code>xsd:sequence</code>, qui reproduit l'opérateur <code>,</code> du langage <code type="langage">DTD</code>. Ainsi...</texte>
+				<exemple type="XML">
+					<element nom="xsd:complexType" indent="oui">
+						<element nom="xsd:sequence" niveau="1" indent="oui">
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">nom</attribut><attribut nom="type">xsd:string</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">prénom</attribut><attribut nom="type">xsd:string</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">dateDeNaissance</attribut><attribut nom="type">xsd:date</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">adresse</attribut><attribut nom="type">xsd:string</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">adresseElectronique</attribut><attribut nom="type">xsd:string</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">téléphone</attribut><attribut nom="type">numéroDeTéléphone</attribut></element>
+						</element>
+					</element>
+				</exemple>
+				<texte>... est équivalent à une déclaration d'élément, dans une <code type='typefichier'>DTD</code>, où apparaîtrait <code>(nom, prénom, dateDeNaissance, adresse, adresseElectronique, téléphone)</code>.</texte>
+			</paragraphe>
+			<paragraphe titre="Choix d'élément" ancre="complchoix">
+				<texte>On peut vouloir modifier la déclaration de type précédente en stipulant qu'on doive indiquer soit l'adresse d'une personne, soit son adresse électronique. Pour cela, il suffit d'utiliser un élément <code>xsd:choice</code>&#160;:</texte>
+				<exemple type="XML">
+					<element nom="xsd:complexType" indent="oui">
+						<attribut nom="name">typePersonne</attribut>
+						<element nom="sequence" niveau="1" indent="oui">
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">nom</attribut><attribut nom="type">xsd:string</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">prénom</attribut><attribut nom="type">xsd:string</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">dateDeNaissance</attribut><attribut nom="type">xsd:date</attribut></element>
+							<element nom="xsd:choice" niveau="2" indent="oui">
+								<element nom="xsd:element" niveau="3" vide="oui"><attribut nom="name">adresse</attribut><attribut nom="type">xsd:string</attribut></element>
+								<element nom="xsd:element" niveau="3" vide="oui"><attribut nom="name">adresseElectronique</attribut><attribut nom="type">xsd:string</attribut></element>
+							</element>
+						</element>
+						<element nom="xsd:element" vide="oui" niveau="1"><attribut nom="name">téléphone</attribut><attribut nom="type">numéroDeTéléphone</attribut></element>
+					</element>
+				</exemple>
+				<texte>Ce connecteur a donc les mêmes effets que l'opérateur <code>|</code> dans une <code type='typefichier'>DTD</code>.</texte>
+			</paragraphe>
+			<paragraphe titre="L'élément all" ancre="complall">
+				<texte>Cet élément est une nouveauté par rapport aux <code type='typefichier'>DTD</code>. Il indique que les éléments enfants doivent apparaître une fois (ou pas du tout), mais dans n'importe quel ordre. Cet élément <code>xsd:all</code> doit être un enfant direct de l'élément <code>xsd:complexType</code>. Par exemple...</texte>
+				<exemple type="XML">
+					<element nom="xsd:complexType" indent="oui">
+						<element nom="xsd:all" niveau="1" indent="oui">
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">nom</attribut><attribut nom="type">xsd:string</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">prénom</attribut><attribut nom="type">xsd:string</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">dateDeNaissance</attribut><attribut nom="type">xsd:date</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">adresse</attribut><attribut nom="type">xsd:string</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">adresseElectronique</attribut><attribut nom="type">xsd:string</attribut></element>
+							<element nom="xsd:element" vide="oui" niveau="2"><attribut nom="name">téléphone</attribut><attribut nom="type">numéroDeTéléphone</attribut></element>
+						</element>
+					</element>
+				</exemple>
+				<texte>... indique que chacun de ces éléments peut apparaître une fois ou pas du tout (équivalent de l'opérateur <code>?</code> dans une <code type='typefichier'>DTD</code>), et que l'ordre des éléments n'a pas d'importance (cela n'a pas d'équivalent dans une <code type='typefichier'>DTD</code>).</texte>
+			</paragraphe>
+			<paragraphe titre="Indicateurs d'occurences" ancre="comploccur">
+				<texte>Dans une <code type='typefichier'>DTD</code>, un indicateur d'occurence ne peut prendre que les valeurs 0, 1 ou l'infini. On peut forcer un élément <code>sselt</code> à être présent 378 fois, mais il faut pour cela écrire <code>(sselt, sselt..., sselt, sselt)</code> 378 fois. <code type="langage">XML Schema</code> permet de déclarer directement une telle occurence, car tout nombre entier non négatif peut être utilisé. Pour déclarer qu'un élément peut être présent un nombre illimité de fois, on utilise la valeur <code>unbounded</code>. Les attributs utiles sont <code>minOccurs</code> et <code>maxOccurs</code>, qui indiquent respectivement les nombres minimal et maximal de fois où un élément peut apparaître. Le tableau suivant récapitule les possibilités&#160;:</texte>
+				<tableau>
+					<ligne type="header">
+						<colonne id="d2"><texte>Dans une <code type='typefichier'>DTD</code></texte></colonne>
+						<colonne id="min"><texte>Valeur de <code>minOccurs</code></texte></colonne>
+						<colonne id="max"><texte>Valeur de <code>maxOccurs</code></texte></colonne>
+					</ligne>
+					<ligne>
+						<colonne headers="d2"><texte><code>*</code></texte></colonne>
+						<colonne headers="min"><texte>0</texte></colonne>
+						<colonne headers="max"><texte><code>unbounded</code></texte></colonne>
+					</ligne>
+					<ligne>
+						<colonne headers="d2"><texte><code>+</code></texte></colonne>
+						<colonne headers="min"><texte>1 (pas nécessaire, valeur par défaut)</texte></colonne>
+						<colonne headers="max"><texte><code>unbounded</code></texte></colonne>
+					</ligne>
+					<ligne>
+						<colonne headers="d2"><texte><code>?</code></texte></colonne>
+						<colonne headers="min"><texte>0</texte></colonne>
+						<colonne headers="max"><texte>1 (pas nécessaire, valeur par défaut)</texte></colonne>
+					</ligne>
+					<ligne>
+						<colonne headers="d2"><texte>rien</texte></colonne>
+						<colonne headers="min"><texte>1 (pas nécessaire, valeur par défaut)</texte></colonne>
+						<colonne headers="max"><texte>1 (pas nécessaire, valeur par défaut)</texte></colonne>
+					</ligne>
+					<ligne>
+						<colonne headers="d2"><texte>impossible</texte></colonne>
+						<colonne headers="min"><texte>nombre entier n quelconque</texte></colonne>
+						<colonne headers="max"><texte>nombre entier m quelconque supérieur ou égal à n</texte></colonne>
+					</ligne>
+					<legende>Liste des indicateurs d'occurence.</legende>
+				</tableau>
+			</paragraphe>
+			<paragraphe titre="Création de type complexe à partir de types simples" ancre="complcreation">
+				<texte>Il est possible également de créer un type complexe à partir d'un type simple.</texte>
+				<texte>On peut avoir besoin de définir un élément contenant une valeur simple, et possédant un attribut, comme <code><![CDATA[<poids unite="kg">67</poids>]]></code>, par exemple. Un tel élément ne peut pas être déclaré de type simple, car il contient un attribut. Il faut <valeur>dériver</valeur> un type complexe à partir du type simple <code>positiveInteger</code>&#160;:</texte>
+				<exemple type="XML">
+					<element nom="xsd:complexType" indent="oui">
+						<attribut nom="name">typePoids</attribut>
+						<element nom="xsd:simpleContent" indent="oui" niveau="1">
+							<element nom="xsd:extension" niveau="2" indent="oui">
+								<attribut nom="base">xsd:positiveInteger</attribut>
+								<element nom="xsd:attribute" vide="oui" niveau="3"><attribut nom="name">unite</attribut><attribut nom="type">xsd:string</attribut></element>
+							</element>
+						</element>
+					</element>
+				</exemple>
+				<texte>L'élément <code>xsd:simpleContent</code> indique que le nouvel élément ne contient pas de sous-élément.</texte>
+			</paragraphe>
+			<exercice titre="Déclaration d'éléments" ancre="exoelt">
+				<enonce href="exercices/exo13.html#exoelt"/>
+				<correction href="exercices/exo13_1cor.xsd"/>
+			</exercice>
+			<exercice titre="Déclaration d'attributs" ancre="exoattr">
+				<enonce href="exercices/exo13.html#exoattr"/>
+				<correction href="exercices/exo13_2cor.xsd"/>
+			</exercice>
+			<exercice titre="Déclaration de types" ancre="exotypes">
+				<enonce href="exercices/exo13.html#exotypes"/>
+				<correction href="exercices/exo13_3cor.xsd"/>
+			</exercice>
+		</section>
+	</partie>
+	
+	<partie titre="Espaces de nom" ancre="espacenom">
+		<section titre="Introduction" ancre="espaceintro">
+			<paragraphe>
+				<texte>La notion d'espace de nom est complexe&#160;; elle permet à un document <code type='typefichier'>XML</code> quelconque d'utiliser les balises définies dans un schéma donné... quelconque. Nous avons déjà utilisé cette notion&#160;:</texte>
+				<liste>
+					<item><texte>dans les feuilles de style <code type='typefichier'>XSL</code>, où nous utilisions des éléments <valeur>préfixés</valeur> par <code>xsl</code>, après avoir écrit <code><![CDATA[<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">]]></code></texte></item>
+					<item><texte>dans un schéma, où nous utilisions des éléments préfixés par <code>xsd</code>, après avoir écrit <code><![CDATA[<xsd:schema xmlns:xsd="http://www.w3.org/2000/10/XMLSchema">]]></code>.</texte></item>
+				</liste>
+				<texte>Cela signifie que l'<valeur>espace de nom</valeur> auquel ces balises font référence, là où elles sont définies , est un schéma particulier que l'on peut consulter.</texte>
+			</paragraphe>
+		</section>
+		<section titre="Comment lier un fichier XML à un schéma&#160;?" ancre="espaceliaison">
+			<paragraphe>
+				<texte>Nous n'allons pas ici entrer dans les détails de la notion d'espace de nom, mais simplement apprendre à valider un document <code type='typefichier'>XML</code> d'après un <code type='typefichier'>Schema XML</code>. On utilise pour ce faire le préfixe <code>xmlns</code>.</texte>
+				<liste>
+					<item><texte>Nous avons déjà vu le cas, équivalent à une <code type='typefichier'>DTD</code> de type <code>PUBLIC</code>, où le schéma est... public. Un schéma est en effet un document <code type='typefichier'>XML</code>, et on trouve dans son élément racine l'attribut <code>xmlns:xsd="http://www.w3.org/2001/XMLSchema"</code>. Cela signifie que dans le document, tous les éléments commençant par <code>xsd</code> sont référencés à cette URL. Donc si on a déposé un schéma à l'adresse http://www.monsite.org/collection_schemas/biblio, on peut l'appeler par <code><![CDATA[<xsd:biblio xmlns="http://www.monsite.org/collection_schemas/biblio">]]></code>.</texte></item>
+					<item><texte>Dans le cas d'une référence locale, correspondant à une <code type='typefichier'>DTD</code> de type <code>SYSTEM</code>, on fait référence au schéma dans le document <code type='typefichier'>XML</code> en utilisant l'attribut <code>noNamespaceSchemaLocation</code>, par <code><![CDATA[<biblio xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="lien_relatif_vers_le_schema">]]></code>. Par exemple,</texte>
+					<texte><code><![CDATA[<biblio xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="biblio10.xsd">]]></code>.</texte></item>
+				</liste>
+			</paragraphe>
+		</section>
+	</partie>
+	
+	<partie titre="Les dérivations" ancre="derivation">
+		<section titre="Introduction" ancre="derivintro">
+			<paragraphe>
+				<texte>Les types simples et complexes permettent déjà de faire plus de choses que les déclarations dans le langage <code type="langage">DTD</code>. Il est possible de raffiner leur déclaration de telle manière qu'ils soient une "restriction" ou une extension d'un type déjà existant, en vue de préciser un peu plus leur forme. Nous allons nous limiter dans ce cours d'initiation à la restriction des types simples.</texte>
+			</paragraphe>
+		</section>
+		<section titre="Restriction de type" ancre="restriction">
+			<paragraphe titre="Généralités" ancre="restrictiongene">
+				<texte>On peut appliquer une dérivation aussi bien à un type simple, qu'à un type complexe. La dérivation par restriction permet de créer de nouveaux types simples à partir des types simples prédéfinis par le format <code type="langage">XML Schema</code>. On utilise pour ce faire des <valeur>facettes</valeur>, qui sont des contraintes supplémentaires appliquées à un type simple particulier.</texte>
+				<texte>Une facette permet de placer une contrainte sur l'ensemble des valeurs que peut prendre un type de base. Par exemple, on peut souhaiter créer un type simple, appelé <code>MonEntier</code>, limité aux valeurs comprises entre 0 et 99 inclus. On dérive ce type à partir du type simple prédéfini <code>nonNegativeInteger</code>, en utilisant la facette <code>maxExclusive</code>.</texte>
+				<exemple type="XML">
+					<element nom="xsd:simpleType" indent="oui">
+						<attribut nom="name">monEntier</attribut>
+						<element nom="xsd:restriction" niveau="1" indent="oui">
+							<attribut nom="base">nonNegativeInteger</attribut>
+							<element nom="xsd:maxExclusive" niveau="2" vide="oui"><attribut nom="value">100</attribut></element>
+						</element>
+					</element>
+				</exemple>
+				<texte>Il existe un nombre important de facettes qui permettent de&#160;:</texte>
+				<liste>
+					<item><texte>fixer, restreindre ou augmenter la longueur minimale ou maximale d'un type simple</texte></item>
+					<item><texte>énumérer toutes les valeurs possibles d'un type</texte></item>
+					<item><texte>prendre en compte des expressions régulières</texte></item>
+					<item><texte>fixer la valeur minimale ou maximale d'un type (voir l'exemple ci-dessus)</texte></item>
+					<item><texte>fixer la précision du type...</texte></item>
+				</liste>
+			</paragraphe>
+			<paragraphe titre="Exemples" ancre="restrictionexemple">
+				<texte>On peut utiliser cette fonctionnalité pour reproduire ce qui, dans les <code type='typefichier'>DTD</code>, permettait de limiter les valeurs de certains attributs. Ainsi...</texte>
+				<exemple type="XML">
+					<element nom="xsd:attribute" vide="oui">
+						<attribut nom="name">jour</attribut>
+						<attribut nom="type">typeJourSemaine</attribut>
+						<attribut nom="use">required</attribut>
+					</element>
+					<element nom="xsd:simpleType" indent="oui">
+						<attribut nom="name">typeJourSemaine</attribut>
+						<element nom="xsd:restriction" niveau="1" indent="oui">
+							<attribut nom="base">xsd:string</attribut>
+							<element nom="xsd:enumeration" niveau="2" vide="oui">
+								<attribut nom="value">lundi</attribut>
+							</element>
+							<element nom="xsd:enumeration" niveau="2" vide="oui">
+								<attribut nom="value">mardi</attribut>
+							</element>
+							<element nom="xsd:enumeration" niveau="2" vide="oui">
+								<attribut nom="value">mercredi</attribut>
+							</element>
+							<element nom="xsd:enumeration" niveau="2" vide="oui">
+								<attribut nom="value">jeudi</attribut>
+							</element>
+							<element nom="xsd:enumeration" niveau="2" vide="oui">
+								<attribut nom="value">vendredi</attribut>
+							</element>
+							<element nom="xsd:enumeration" niveau="2" vide="oui">
+								<attribut nom="value">samedi</attribut>
+							</element>
+							<element nom="xsd:enumeration" niveau="2" vide="oui">
+								<attribut nom="value">dimanche</attribut>
+							</element>
+						</element>
+					</element>
+				</exemple>
+				<texte>Pour limiter la longueur d'une chaîne&#160;:</texte>
+				<exemple type="XML">
+					<element nom="xsd:simpleType" indent="oui">
+						<attribut nom="name">typeMotLangueFrancaise</attribut>
+						<element nom="xsd:restriction" indent="oui" niveau="1">
+							<attribut nom="base">xsd:string</attribut>
+							<element nom="xsd:length" vide="oui" niveau="2"><attribut nom="value">21</attribut></element>
+						</element>
+					</element>
+				</exemple>
+				<texte>Plus complexe, on peut utiliser des <valeur>expressions régulières</valeur>, qui permettent de spécifier quels sont les caractères autorisés, à l'aide de l'élément <code>xsd:pattern</code>. Par exemple...</texte>
+				<exemple type="XML">
+					<element nom="xsd:simpleType" indent="oui">
+						<attribut nom="name">typeAdresseElectronique</attribut>
+						<element nom="xsd:restriction" indent="oui" niveau="1">
+							<attribut nom="base">xsd:string</attribut>
+							<element nom="xsd:pattern" vide="oui" niveau="2"><attribut nom="value">(.)+@(.)+</attribut></element>
+						</element>
+					</element>
+				</exemple>
+				<texte>Dans cet exemple, <code>(.)+</code> signifie que l'on peut mettre n'importe quel caractère au moins une fois, et qu'entre les deux chaînes doit impérativement apparaître le caractère <code>@</code>.</texte>
+				<texte>Un numéro ISBN est un référent international pour une publication. Il s'agit d'un numéro à 10 ou 13 chiffres. On peut le déclarer ainsi&#160;:</texte>
+				<exemple type="XML">
+					<element nom="xsd:simpleType" indent="oui">
+						<attribut nom="name">typeISBN</attribut>
+						<element nom="xsd:restriction" indent="oui" niveau="1">
+							<attribut nom="base">xsd:string</attribut>
+							<element nom="xsd:pattern" vide="oui" niveau="2"><attribut nom="value">[0-9]{10}</attribut></element>
+						</element>
+					</element>
+				</exemple>
+				<texte>Bien sûr, toutes les facettes ne sont pas acceptées par tous les types. Il serait fastidieux ici d'en donner la liste&#160;; elle est accessible sur le site du W3C à l'adresse <reference href="http://www.w3.org/TR/xmlschema-0/#SimpleTypeFacets">http://www.w3.org/TR/xmlschema-0/#SimpleTypeFacets</reference>.</texte>
+			</paragraphe>
+		</section>
+	</partie>
+	
+	<partie titre="Diverses autres fonctionnalités" ancre="autresfonctions">
+		<section titre="Inclusion de schémas" ancre="inclusion">
+			<paragraphe>
+				<texte>Un <code type='typefichier'>Schema XML</code> a rapidement tendance à devenir verbeux. Autrement dit, il devient rapidement suffisamment long pour que sa complexité apparente rebute l'œil humain. Il est alors plus raisonnable de le scinder en plusieurs morceaux, chacun chargé de définir précisément tel ou tel sous-domaine du schéma. Il est en effet possible d'<valeur>inclure</valeur> plusieurs schémas dans un seul, à l'aide de l'élément <code>xsd:include</code>. Cela offre de plus l'énorme avantage de modulariser un schéma, et donc de pouvoir sans difficulté importer certaines parties à partir de schémas déjà existants. Nul besoin de réinventer la roue, ou de procéder à de massifs «&#160;copier/coller&#160;», en ayant besoin de tout reprendre à zéro à chaque fois que l'on fait une mise à jour.</texte>
+				<texte>Supposons par exemple que nous ayons défini le schéma d'une bibliographie dans le cadre plus général de l'écriture d'un mémoire. Ce <code type='typefichier'>Schema XML</code> est stocké à l'URL http://www.monsite.org/schemas/biblio.xsd. Nous avons besoin d'une bibliographie pour une autre aplication -par exemple, dresser la liste d'un ensemble de ressources pour un site Web de e-formation. Nous pouvons inclure le schéma précédemment écrit à l'aide de la commande...</texte>
+				<exemple type="XML">
+					<element nom="xsd:include" vide="oui">
+						<attribut nom="schemaLocation">http://www.monsite.org/schemas/biblio.xsd</attribut>
+					</element>
+				</exemple>
+				<texte>Il s'agit d'une sorte de «&#160;copier-coller&#160;» du contenu de la bibliographie dans le schéma en cours d'écriture. La seule condition est que le <code>targetNameSpace</code> soit le même dans le <code type='typefichier'>Schema XML</code> inclus et dans le <code type='typefichier'>Schema XML</code> importateur.</texte>
+			</paragraphe>
+		</section>
+		<section titre="Documentation" ancre="documentation">
+			<paragraphe>
+				<texte><code type="langage">XML Schema</code> permet, outre l'utilisation des commentaires comme tout format <code type="langage">XML</code>, l'adjonction de documentation aux éléments.</texte>
+				<texte>La documentation à l'intention des lecteurs humains peut être définie dans des éléments <code>xsd:documentation</code>, tandis que les informations à l'intention de programmes doivent être incluses dans des éléments <code>xsd:appinfo</code>. Ces deux éléments doivent être placés dans un élément <code>xsd:annotation</code>. Ils disposent d'attributs optionnels&#160;: <code>xml:lang</code> et <code>source</code>, qui est une référence à une URI pouvant être utilisée pour identifier l'objectif du commentaire ou de l'information.</texte>
+				<texte>Les éléments <code>xsd:annotation</code> peuvent être ajoutés au début de la plupart des constructions. Voir par exemple le schéma <reference href="exemples/biblio10.xsd">biblio10.xsd</reference> déjà donné. </texte>
+			</paragraphe>
+		</section>
+		<section titre="Attribut null" ancre="null">
+			<paragraphe>
+				<texte>Il est toujours préférable de pouvoir indiquer explicitement qu'un élément est non renseigné plutôt que d'omettre cet élément. La valeur null des bases de données relationnelles est utilisée dans ce but. <code type="langage">XML Schema</code> intègre un mécanisme similaire permettant d'indiquer qu'un élément peut être non renseigné.</texte>
+				<texte>Nous déclarons maintenant l'élément <code>courriel</code> comme pouvant être <code>null</code> à l'aide de l'attribut nullable du vocabulaire de <code type="langage">XML Schema</code>&#160;:</texte>
+				<exemple type="XML">
+					<element nom="personne" indent="oui">
+						<element nom="nom" niveau="1">Jean Dupont</element>
+						<element nom="courriel" niveau="1"><attribut nom="xsi:null" pseudo="oui"></attribut></element>
+					</element>
+				</exemple>
+				<texte>Cet attribut doit toujours être préfixé par <code>xsi</code>. Quant à l'élément portant cet attribut, il peut contenir d'autres attributs, mais pas de sous-élément.</texte>
+			</paragraphe>
+		</section>
+	</partie>
+
+</corpus>
+</chapitre>

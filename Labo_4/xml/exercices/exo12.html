@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Exercices 12</title>    
+</head>
+<body>
+      
+<h1>Exercice&nbsp;12&nbsp;: Initiation à SVG</h1>
+
+<h2><a name="base"></a>I.&nbsp;SVG de base</h2>
+
+<p>Réaliser un fichier SVG contenant un rectangle, un cercle, une ligne, du texte et quelques polygones, avec les réglages par défaut.</p>
+
+    <p><a href="../svg.html#exobase">Retour au cours</a></p>   
+
+<h2><a name="rendu"></a>II.&nbsp;Rendu</h2>
+
+<p>Reprendre le fichier précédent en essayant les différents réglages de rendu (opacité, couleurs, formes, etc.). Utiliser des éléments <code>&lt;tspan&gt;</code> pour modifier localement l'apparence du texte.</p>
+  <p><a href="../svg.html#exorendu">Retour au cours</a></p>   
+
+<h2><a name="path"></a>III.&nbsp;Texte le long d'un chemin</h2>
+
+<ol>
+	<li>Afficher un chemin (<code>path</code>) en forme de quart de cercle (quadrant inférieur droit) de rayon 250&nbsp;pixels, centré au point de coordonnées 50, 50&nbsp;;</li>
+	<li>Ecrire un texte le long de ce chemin&nbsp;;</li>
+	<li>Ecarter ce texte de 10 pixels du chemin, avec une balise <code>tspan</code>.</li>
+</ol>
+    <p><a href="../svg.html#exochemin">Retour au cours</a></p>   
+
+<h2><a name="groupement"></a>IV.&nbsp;Eléments de groupage</h2>
+
+<p>Utiliser des éléments de groupage <code>g</code>, <code>symbol</code>, <code>defs</code> pour appliquer des commandes à des ensembles d'éléments graphiques.</p>
+    <p><a href="../svg.html#exogroupe">Retour au cours</a></p>   
+
+<h2><a name="generation"></a>V.&nbsp;Génération d'un document SVG avec une feuille de style XSL</h2>
+
+<p>On travaille à partir du fichier <a href="exo12_5.xml">exo12_5.xml</a>. Le but de cet exercice est d'écrire des feuilles de style, qui transformeront ce fichier de données XML en fichier SVG.</p>
+
+<h3>V.1&nbsp;Génération du fichier SVG</h3>
+
+<p>Ecrire une feuille de style qui produira un fichier selon la commande <code>&lt;xsl:output encoding="ISO-8859-1" doctype-public="-//W3C//DTD SVG 1.0//EN" doctype-system="http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" standalone="no"/&gt;</code>, donc suivant la DTD de SVG&nbsp;1.0.</p>
+
+<p>Pour chaque mois, il faut afficher un élément de rectangle de largeur 1cm et de couleur <code>lime</code>. Sa hauteur est égale à la valeur de l'élément <code>mois</code>. Son coin supérieur gauche doit être à une distance égale à 50 fois le numéro du mois, plus un "offset" de 50 pixels, du bord gauche du cadre. Les bases de tous les rectangles doivent être alignées.</p>
+
+<h3>V.2&nbsp;Génération du fichier HTML</h3>
+
+<p>Ecrire une feuille de style qui produit un fichier HTML. Ce fichier&nbsp;:</p>
+
+<ol>
+	<li>affiche la liste des mois et, pour chaque mois, le nombre correspondant&nbsp;;</li>
+	<li>en utilisant un <code>iframe</code>, affiche le fichier SVG précédemment obtenu.</li>
+</ol>
+    <p><a href="../svg.html#exorecap">Retour au cours</a></p>   
+</body>
+</html>

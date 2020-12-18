@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" >
+
+<svg width="600px" height="500px" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+     <pattern id="mypattern" x="0" y="0" width="30" height="30">
+       <rect width="30" height="30" style="fill:yellow" />
+       <path style="fill:none;stroke:blue" d="M0,0 L 30,30 M0,30 L 30,0" />
+     </pattern>
+  </defs>
+
+  <g style="text-rendering:optimizeLegibility" >
+    <text x="5" y="20" style="font-size:22">SVG Demo: Filling and stroking with a custom pattern</text>
+  </g>
+
+  <g style="stroke:none; shape-rendering:default" >
+    <ellipse cx="150" cy="150" rx="100" ry="100" style="fill:url(#mypattern)" />
+    <rect x="300" y="50" width="150" height="150" style="fill:url(#mypattern)" />
+    <ellipse cx="250" cy="350" rx="200" ry="75" style="stroke:url(#mypattern);fill:none;stroke-width:20" />
+  </g>
+
+</svg> 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" >
+
+<svg width="680" height="500" xmlns="http://www.w3.org/2000/svg">
+
+    <text x="5" y="20" style="font-size:15">SVG Demo: quelques polygones réguliers</text>
+
+<g style="stroke:green; fill:lime; stroke-width:5" >
+      <polygon points="99,50,143,125,56,124,99,50" />
+      <polygon points="225,50,275,99,225,150,175,100,224,50" />
+      <polygon points="350,50,397,84,379,140,320,140,302,84,350,50" />
+      <polygon points="475,50,518,74,518,125,475,150,431,124,431,75,475,50" />
+      <polygon points="99,175,138,193,148,235,122,269,79,270,51,237,59,195,97,175" />
+      <polygon points="225,175,260,189,275,225,260,260,225,275,189,260,175,225,189,189,224,175" />
+      <polygon points="350,175,382,186,399,216,393,250,367,271,332,271,306,250,300,216,317,186,350,175" />
+      <polygon points="475,175,504,184,522,209,522,240,504,265,475,275,445,265,427,240,427,209,445,184,475,175" />
+</g>
+
+</svg>

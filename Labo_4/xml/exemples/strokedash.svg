@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" >
+
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+
+    <text x="5" y="20" style="font-size:10">SVG Demo: pointillés avec stroke.</text>
+
+<g stroke-width="15px" stroke="black">
+	<line x1="50" x2="350" y1="100" y2="100" stroke-dasharray="10 5"></line>
+	<line x1="50" x2="350" y1="150" y2="150" stroke-dasharray="10 5 20 10"></line>
+	<line x1="50" x2="350" y1="200" y2="200" stroke-dasharray="2cm 1cm"></line>
+	<line x1="50" x2="350" y1="250" y2="250" stroke-dasharray="2cm 1cm" stroke-dashoffset="0.5cm"></line>
+</g>
+
+</svg> 

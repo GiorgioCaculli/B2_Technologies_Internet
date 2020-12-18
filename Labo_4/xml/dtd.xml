@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+    <cours nomfichier="dtd">Cours d'initiation à XML</cours>
+    <entete>
+        <titre>Déclarations de Type de Document</titre>
+        <auteur email="Gilles.Chagnon@upmc.fr">G. Chagnon</auteur>
+        <resume>Une DTD permet de décrire les éléments et leurs attributs autorisés dans un document XML.</resume>
+        <motsclefs>xml, base, concept, introduction</motsclefs>
+    </entete>
+<corpus>
+<partie ancre="p0" titre="Introduction">
+	<paragraphe>
+		<texte>Il peut être parfois nécessaire de préciser les balises et attributs auxquels on a droit lors de la rédaction d'un document <code type='typefichier'>XML</code>, par exemple si l'on veut pouvoir partager le même type de document avec une communauté d'autres rédacteurs. Deux solutions sont possibles&#160;: les «&#160;<reference href="schema.html">Schémas XML</reference>&#160;» et les «&#160;<autrelangue type="en">Document Type Definition</autrelangue>&#160;». Ces dernières sont les plus simples à manipuler et sont apparues en premier, alors que les Schémas n'étaient pas encore définis. Ce sont les raisons pour lesquelles nous allons nous limiter à elles pour le moment. Il faut néanmoins garder à l'esprit qu'il existe une autre solution, plus complexe certes, mais aussi plus puissante. Elle permet notamment d'informer plus efficacement l'utilisateur sur les balises auxquelles il a droit, ou bien de spécifier de manière plus détaillée le format autorisé pour le contenu de l'élément ou de l'attribut.</texte>
+	</paragraphe>
+</partie>
+	
+<partie ancre="p1" titre="Types de DTD">
+	<section ancre="p1s0" titre="Introduction">
+		<paragraphe>
+			<texte>Une <code type="typefichier">DTD</code> peut être stockée dans deux endroits différents. Elle peut être incorporée au document <code type='typefichier'>XML</code> (elle est alors dite <valeur>interne</valeur>), ou bien être un fichier à part (on parle alors de <code type='typefichier'>DTD</code> <valeur>externe</valeur>). Cette dernière possibilité permet de la partager entre plusieurs documents <code type='typefichier'>XML</code>. Il est possible de mêler <code type='typefichier'>DTD</code> interne et externe.</texte>
+			<texte>ll existe de surcroît deux types de <code type='typefichier'>DTD</code> externes&#160;: privé ou public. Les <code type='typefichier'>DTD</code> privées sont accessibles uniquement en local (sur la machine de développement), tandis que les publiques sont disponibles pour tout le monde, étant accessibles grâce à un <acronyme titre="Uniform Resource Identifier">URI</acronyme> (<autrelangue type="en">Uniform Resource Identifier</autrelangue>).</texte>
+			<texte>Une déclaration de type de document est de la forme&#160;:</texte>
+				<exemple type="XML">
+					<typedocument nomracine="elt.racine" type="..."  identifiant="..." href="..."/>
+				</exemple>
+			<texte>Nous verrons progressivement par quoi remplacer les points de suspension. Cette déclaration se place juste après le prologue du document. L'élément
+ racine du document <code type='typefichier'>XML</code> rattaché à cette <code type='typefichier'>DTD</code> est alors obligatoirement <code>elt.racine</code>. Par exemple...</texte>
+			<exemple type="XML">
+				<prologue/>
+				<typedocument nomracine="commande" type="..."  identifiant="..." href="boncommande.dtd"/>
+				<element nom="commande" indent="oui">
+					<element nom="item">(...)</element>
+					<element nom="item">(...)</element>
+					<element nom="item">(...)</element>
+				</element>
+			</exemple>
+		</paragraphe>
+	</section>
+	<section ancre="p1s1" titre="Syntaxe">
+		<paragraphe>
+			<texte>Le contenu ne change pas suivant le type de <code type="typefichier">DTD</code>, mais les déclarations d'une <code type="typefichier">DTD</code> interne sont écrites à l'intérieur du prologue du document <code type="typefichier">XML</code> alors que celles d'une <code type="typefichier">DTD</code> externe sont stockées dans un fichier... externe.  </texte>
+			<texte>Exemple de déclarations pour une <code type="typefichier">DTD</code> interne&#160;:  </texte>
+			<exemple type="XML">
+				<typedocument_interne nomracine="biblio">
+					<declaration_element nom="biblio" type="(livre)*"/>
+					<declaration_element nom="livre" type="(titre, auteur, nb_pages)">
+						<declaration_attribut nomattr="type" valeur="(roman | nouvelles | poemes | théâtre)" type="IMPLIED"/>
+						<declaration_attribut nomattr="lang" valeur="CDATA" type="chaine" defaut="fr"/>
+					</declaration_element>
+					<declaration_element nom="titre" type="(#PCDATA)"/>
+					<declaration_element nom="auteur" type="(#PCDATA)"/>
+					<declaration_element nom="nb_pages" type="(#PCDATA)"/>
+				</typedocument_interne>
+			</exemple>
+		</paragraphe>
+	</section>
+	<section ancre="p1s2" titre="DTD externe">
+		<paragraphe>
+			<texte>Les deux types de <code type='typefichier'>DTD</code> externes sont les <code type='typefichier'>DTD</code> de type <autrelangue type="en">public</autrelangue> et les <code type='typefichier'>DTD</code> de type <autrelangue type="en">system</autrelangue>. Le mot-clef <code>SYSTEM</code> indique que le fichier spécifié se trouve sur l'ordinateur local et qu'il est disponible uniquement à titre privé. Le mot-clé <code>PUBLIC</code> indique une ressource disponible pour tous sur un serveur distant.</texte>
+			<texte>Exemple de déclaration de <code type="typefichier">DTD</code> externe de type <code>SYSTEM</code>&#160;:</texte>
+			<exemple type="XML">
+				<typedocument nomracine="biblio" type="SYSTEM" href="bibliographie.dtd"/>
+			</exemple>
+			<texte>Le fichier associé est le suivant&#160;:  </texte>
+			<exemple type="XML">
+				<declaration_element nom="biblio" type="(livre*)"/>
+				<declaration_element nom="livre" type="(titre, auteur, nb_pages)">
+					<declaration_attribut nomattr="type" type="IMPLIED" valeur="(roman | nouvelles | poemes | théâtre)"/>
+					<declaration_attribut nomattr="lang" valeur="CDATA" type="chaine" defaut="fr"/>
+				</declaration_element>
+				<declaration_element nom="titre" type="(#PCDATA)"/>
+				<declaration_element nom="auteur" type="(#PCDATA)"/>
+				<declaration_element nom="nb_pages" type="(#PCDATA)"/>
+			</exemple>
+			<texte>Exemple de déclaration de <code type="typefichier">DTD</code> externe de type <code>PUBLIC</code> &#160;:  </texte>
+			<exemple type="XML">
+				<typedocument nomracine="html" type="PUBLIC" href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" identifiant="-//W3C//DTD XHTML 1.0 Strict//EN"/>
+			</exemple>
+			<texte>Dans l'exemple précédent, la chaîne de caractères après le mot PUBLIC fait référence tout d'abord à l'identifiant de la DTD (ici <code>-</code>, qui signifie que la DTD n'a pas de numéro d'enregistrement officiel), au propriétaire de la DTD (ici le W3C), puis son nom, enfin sa langue.</texte>
+		</paragraphe>
+	</section>
+</partie>
+	
+<partie ancre="p2" titre="Déclarations d'éléments">
+	<section ancre="p2s0" titre="Généralités">
+		<paragraphe>
+			<texte>Une déclaration d'élément est de la forme&#160;:</texte>
+			<exemple type="XML">
+				<declaration_element nom="nom" type="type_element"/>
+			</exemple>
+			<texte><code>nom</code> est le nom de l'élément et <code>type_element</code> est le type auquel il est associé. Un élément peut être de type texte, vide, séquence ou choix d'élément. Dans ces deux derniers cas, on indique la liste des éléments-enfants. Passons ces types en revue.</texte>
+		</paragraphe>
+	</section>
+	<section ancre="p2s1" titre="Élément texte">
+		<paragraphe>
+			<texte>Cet élément est le plus répandu, puisque c'est celui qui contient... du texte. Il se déclare ainsi&#160;:</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt" type="(#PCDATA)"/>
+			</exemple>
+		</paragraphe>
+	</section>
+	<section ancre="p2s4" titre="Élément vide">
+		<paragraphe>
+			<texte>Un élément vide est, comme son nom l'indique, un élément qui n'a aucun contenu -que ce soit de type texte, ou bien un autre élément. Le mot-clef utilisé pour la déclaration de ce type d'élément est <code>EMPTY</code>&#160;:</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt" type="EMPTY"/>
+			</exemple>
+			<texte>Exemple d'utilisation&#160;:</texte>
+			<exemple type="XML">
+				<element nom="elt" vide="oui"/>
+			</exemple>
+			<texte>Un élément vide peut cependant fort bien posséder un ou plusieurs attributs. Par exemple</texte>
+			<exemple type="XML">
+				<element nom="img" vide="oui">
+					<attribut nom="width">100</attribut>
+					<attribut nom="height">30</attribut>
+					<attribut nom="src">paysage.jpg</attribut>
+					<attribut nom="alt">Paysage de neige</attribut>
+				</element>
+			</exemple>
+		</paragraphe>
+	</section>
+	<section ancre="p2s2" titre="Séquence d'éléments">
+		<paragraphe>
+			<texte>Une séquence d'éléments est une liste ordonnée des éléments qui doivent apparaître en tant qu'éléments-enfants de l'élément que l'on est en train de définir. Ce dernier ne pourra contenir <valeur>aucun</valeur> autre élément que ceux figurant dans la séquence. Cette liste est composée d'éléments séparés par des virgules et est placée entre parenthèses.</texte>
+			<texte>Chaque élément-enfant doit de plus être déclaré par ailleurs dans la <code type='typefichier'>DTD</code> (avant ou après la définition de la liste, peu importe). Dans le fichier <code type='typefichier'>XML</code>, ils doivent apparaître <valeur>dans l'ordre</valeur> de la séquence.</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt0" type="(elt1, elt2, elt3)"/>
+			</exemple>
+			<texte>Exemple d'utilisation valide&#160;:</texte>
+			<exemple type="XML">
+				<element nom="elt0" indent="oui">
+					<element nom="elt1" niveau="1">(...)</element>
+					<element nom="elt2" niveau="1">(...)</element>
+					<element nom="elt3" niveau="1">(...)</element>
+				</element>
+			</exemple>
+			<texte>Exemples d'utilisations non valides&#160;:</texte>
+			<liste>
+				<item>
+					<exemple type="XML">
+						<element nom="elt0" indent="oui">
+							<element nom="elt1" niveau="1">(...)</element>
+							<element nom="elt3" niveau="1">(...)</element>
+						</element>
+					</exemple>
+					<texte>... car l'élément <code>elt2</code> est manquant.</texte>
+				</item>
+				<item>
+					<exemple type="XML">
+						<element nom="elt0" indent="oui">
+							<element nom="elt1" niveau="1">(...)</element>
+							<element nom="elt3" niveau="1">(...)</element>
+							<element nom="elt2" niveau="1">(...)</element>
+						</element>
+					</exemple>
+					<texte>... car l'ordre des éléments n'est pas respecté.</texte>
+				</item>
+			</liste>
+		</paragraphe>
+	</section>
+	<section ancre="p2s3" titre="Choix d'éléments">
+		<paragraphe>
+			<texte>Un choix d'élément donne... le choix dans une liste de plusieurs éléments possibles. L'utilisation précise dépend des indicateurs d'occurence. De même que pour la séquence, les éléments-enfants doivent être déclarés dans la <code type='typefichier'>DTD</code>. Cette liste est composée d'éléments séparés par le caractère <code>|</code> (combinaison de touches <code>AltGr+6</code> sur un clavier AZERTY).</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt0" type="(elt1 | elt2 | elt3)"/>
+			</exemple>
+			<texte>Exemple d'utilisation valide&#160;:</texte>
+			<exemple type="XML">
+				<element nom="elt0"><element nom="elt2" enligne="oui">(...)</element></element>
+			</exemple>
+			<texte>Exemple d'utilisation non valide&#160;:</texte>
+			<exemple type="XML">
+				<element nom="elt0" indent="oui">
+					<element nom="elt2" niveau="1">(...)</element>
+					<element nom="elt3" niveau="1">(...)</element>
+				</element>
+			</exemple>
+		</paragraphe>
+	</section>
+	<section ancre="indicoccur" titre="Indicateurs d'occurence">
+		<paragraphe titre="Syntaxe" ancre="occsyntaxe">
+			<texte>Lors de la déclaration de séquence ou de choix d'éléments, à chaque élément enfant peut être attribuée une indication d'occurence (<code>?</code>, <code>+</code> ou <code>*</code>).</texte>
+			<texte>Exemples d'indicateur d'occurences&#160;:</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt0" type="(elt1, elt2?, elt3+, elt*)"/>
+			</exemple>
+			<liste>
+				<item><texte><code>elt1</code> ne comprend aucune indication d'occurence. Il doit donc apparaître une <valeur>seule et unique fois</valeur> dans l'élément <code>elt0</code>&#160;;</texte></item>
+				<item><texte><code>elt2</code> a pour indication d'occurence <code>?</code>. Cela signifie que l'élément doit apparaître <valeur>au maximum</valeur> une fois (il peut ne pas apparaître du tout)&#160;;</texte></item>
+				<item><texte><code>elt3</code> a pour indication d'occurence <code>+</code>. Cela signifie que l'élément doit apparaître <valeur>au moins</valeur> une fois&#160;;</texte></item>
+				<item><texte><code>elt4</code> a pour indication d'occurence <code>*</code>. Cela signifie que l'élément peut apparaître autant de fois que l'auteur le désire, voire pas du tout.</texte></item>
+			</liste>
+		</paragraphe>
+		<paragraphe titre="Exemples" ancre="occexemples">
+			<texte>Les indicateurs d'occurence peuvent être utilisés en conjonction avec les séquences ou les choix d'éléments. Ainsi...</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt0" type="(elt1+, elt2*, elt3?)"/>
+			</exemple>
+			<texte>... permet d'indiquer une séquence composée d'au moins un élément <code>elt1</code>, puis d'un nombre indéterminé d'éléments <code>elt2</code> (éventuellement nul), enfin au plus un élément <code>elt3</code>.</texte>
+			<texte>Exemple d'utilisation d'un choix d'éléments avec indicateurs d'occurence par élément&#160;:  </texte>
+			<exemple type="XML">
+				<declaration_element nom="choix.elt" type="(elt1* | elt2* | elt3*)"/>
+			</exemple>
+			<texte>Exemple d'utilisation valide&#160;:</texte>
+			<exemple type="XML">
+				<element nom="elt0" indent="oui">
+					<element nom="elt2" niveau="1">(...)</element>
+					<element nom="elt2" niveau="1">(...)</element>
+				</element>
+			</exemple>
+			<texte>Exemples d'utilisation non valide&#160;:</texte>
+			<exemple type="XML">
+				<element nom="elt0" indent="oui">
+					<element nom="elt3" niveau="1">(...)</element>
+					<element nom="elt2" niveau="1">(...)</element>
+				</element>
+			</exemple>
+			<exemple type="XML">
+				<element nom="elt0" indent="oui">
+					<element nom="elt2" niveau="1">(...)</element>
+					<element nom="elt3" niveau="1">(...)</element>
+				</element>
+			</exemple>
+			<texte>Exemple d'utilisation d'un choix d'éléments avec indicateur d'occurence global&#160;:</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt0" type="(elt1 | elt2 | elt3)*"/>
+			</exemple>
+			<texte>Exemple d'utilisation valide&#160;:</texte>
+			<exemple type="XML">
+				<element nom="elt0" indent="oui">
+					<element nom="elt2" niveau="1">(...)</element>
+					<element nom="elt3" niveau="1">(...)</element>
+					<element nom="elt1" niveau="1">(...)</element>
+				</element>
+			</exemple>
+			<texte>Dans ce dernier cas, il n'y a pas de contrainte visible sur l'ordre d'apparition des éléments. C'est la déclaration la plus souple possible.</texte>
+		</paragraphe>
+	</section>
+	<section ancre="p2s5" titre="Élément quelconque">
+		<paragraphe>
+			<texte>L'élément quelconque est l'élément-«&#160;fourre-tout&#160;» dans une <code type='typefichier'>DTD</code>. Il peut contenir tout autre élément défini dans la <code type='typefichier'>DTD</code>, aussi bien qu'être vide ou contenir du texte. Les éléments-enfants éventuels peuvent apparaître dans n'importe quel ordre, et en quantité non définie. Il est préférable de ne pas utiliser trop souvent ce type de déclaration, car on perd les avantages qu'offre la rédaction d'une <code type='typefichier'>DTD</code>, qui sont de fixer des contraintes précises sur la structure du document <code type='typefichier'>XML</code> qui lui est lié. Le mot-clef utilisé pour la déclaration de ce type d'élément est <code>ANY</code>.</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt" type="ANY"/>
+			</exemple>
+		</paragraphe>
+	</section>
+	<section ancre="p2s6" titre="Élément à contenu mixte">
+		<paragraphe>
+			<texte>Un élément à contenu mixte peut contenir aussi bien du texte que des éléments-enfants. Il se présente comme une liste de choix, avec des indicateurs d'occurence bien choisis. Le texte contenu peut se trouver à n'importe quel endroit dans l'élément, et peut être une <reference href="base.html#p3s4p6">section <code>CDATA</code></reference>.</texte>
+			<texte>Exemple de déclaration&#160;:</texte>
+			<exemple type="XML">
+				<declaration_element nom="citation" type="(#PCDATA | auteur)*"/>
+			</exemple>
+			<texte>Exemple d'utilisation&#160;:</texte>
+			<exemple type="XML">
+				<element nom="citation" indent="oui" enligne="non">
+					<element nom="auteur" niveau="1" enligne="oui">Shakespeare</element><contenu>Être ou ne pas être</contenu>
+				</element>
+			</exemple>
+		</paragraphe>
+	</section>
+		<exercice ancre="ex1" titre="Écriture d'une DTD avec éléments">
+			<enonce href="exercices/exo4.html"/>
+			<correction href="exercices/exo4_cor.dtd"/>
+		</exercice>
+</partie>
+	
+<partie ancre="p3" titre="Déclarations d'attributs">
+	<section ancre="p3s0" titre="Introduction">
+		<paragraphe>
+			<texte>Comme on peut trouver dans un document <code type='typefichier'>XML</code> des éléments possédant des attributs, il est normal que la <code type='typefichier'>DTD</code> permette de définir des contraintes sur ces derniers. On peut déclarer et attacher à un élément donné chaque attribut séparément, mais il est souvent préférable, afin d'améliorer la lisibilité du code, de les réunir sous la forme d'une liste. Chaque attribut défini dans la liste possède un nom et un type. On peut lui donner une valeur par défaut, ou bien le spécifier obligatoire. Le mot-clef de cette déclaration est <code>ATTLIST</code>.</texte>
+		</paragraphe>
+	</section>
+	<section ancre="p3s2" titre="Type chaîne de caractères">
+		<paragraphe>
+			<texte>Il s'agit là du type d'attribut le plus courant. Une chaîne de caractères peut être composée de caractères ainsi que d'<reference href="#p4">entités analysables</reference>. Le mot-clef utilisé pour la déclaration de chaîne de caractère est <code>CDATA</code>.</texte>
+			<texte>Exemple de déclaration de <code>CDATA</code> (nous reviendrons dans un instant sur la signification du mot-clef <code>#IMPLIED</code>)&#160;:</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt" type="(...)">
+					<declaration_attribut nomattr="attr" valeur="CDATA" type="IMPLIED"/>
+				</declaration_element>
+			</exemple>
+			<texte>Exemples d'utilisations&#160;:</texte>
+			<liste>
+				<item>
+					<exemple type="XML">
+						<element nom="elt"><attribut nom="attr">Chaîne de caractères</attribut>(...)</element>
+					</exemple>
+				</item>
+				<item>
+					<exemple type="XML">
+						<declaration_entite nom="car" valeur="caractères"/>
+						<element nom="elt"><attribut nom="attr">Chaîne de &amp;car;</attribut>(...)</element>
+					</exemple>
+				</item>
+			</liste>
+		</paragraphe>
+	</section>
+	<section ancre="p3s1" titre="Valeurs par défaut">
+		<paragraphe>
+			<texte>Chaque attribut peut être requis, optionnel ou fixe et avoir une valeur par défaut. Les exemples suivants montrent la déclaration d'un attribut appelé <code>attr</code> attaché à un élément nommé <code>elt</code>.</texte>
+			<liste type="ordonnee">
+				<item>
+					<texte>Déclaration d'un attribut avec une valeur par défaut&#160;:</texte>
+					<exemple type="XML">
+						<declaration_element nom="elt" type="(...)">
+							<declaration_attribut nomattr="attr" valeur="CDATA" type="chaine" defaut="valeur"/>
+						</declaration_element>
+					</exemple>
+					<texte>Un tel attribut n'est pas obligatoire. S'il est omis dans le fichier <code type='typefichier'>XML</code> lors de l'utilisation de l'élément <code>elt</code>, il est considéré comme valant <code>valeur</code>. Dans cet exemple, si on écrit <code><![CDATA[<elt>(...)</elt>]]></code>, cela est équivalent à écrire <code><![CDATA[<elt attr="valeur">(...)>/elt>]]></code>.</texte>
+				</item>
+				<item>
+					<texte>Déclaration d'un attribut requis&#160;:</texte>
+					<exemple type="XML">
+						<declaration_element nom="elt" type="(...)">
+							<declaration_attribut nomattr="attr" valeur="CDATA" type="REQUIRED"/>
+						</declaration_element>
+					</exemple>
+					<texte>Un tel attribut est obligatoire. Son absence déclenche une erreur du vérificateur syntaxique sur le fichier <code type="typefichier">XML</code>.</texte>
+				</item>
+				<item>
+					<texte>Déclaration d'un attribut optionnel&#160;:</texte>
+					<exemple type="XML">
+						<declaration_element nom="elt" type="(...)">
+							<declaration_attribut nomattr="attr" valeur="CDATA" type="IMPLIED"/>
+						</declaration_element>
+					</exemple>
+				</item>
+				<item>
+					<texte>Déclaration d'un attribut avec une valeur fixe&#160;:</texte>
+					<exemple type="XML">
+						<declaration_element nom="elt" type="(...)">
+							<declaration_attribut nomattr="attr" valeur="CDATA" type="FIXED" defaut="valeur"/>
+						</declaration_element>
+					</exemple>
+					<texte>L'utilité d'un tel attribut peut sembler bizarre à première vue, puisqu'il ne peut prendre qu'une seule valeur. Cette fonctionnalité est cependant utile lors d'une mise à jour d'une <code type='typefichier'>DTD</code>, pour anticiper la compatibilité avec des versions ultérieures.</texte>
+				</item>
+			</liste>
+		</paragraphe>
+	</section>
+	<section ancre="p3s3" titre="Type ID">
+		<paragraphe>
+			<texte>Ce type sert à indiquer que l'attribut en question peut servir d'<valeur>identifiant</valeur> dans le fichier <code type='typefichier'>XML</code>. Deux éléments ne pourront pas posséder le même atribut possédant la même valeur.</texte>
+			<texte>Exemple de déclaration de type <code>ID</code> optionnel&#160;:</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt" type="(...)">
+					<declaration_attribut nomattr="attr" valeur="ID" type="IMPLIED"/>
+				</declaration_element>
+				<declaration_element nom="elt1" type="(...)">
+					<declaration_attribut nomattr="attr" valeur="ID" type="IMPLIED"/>
+				</declaration_element>
+				<declaration_element nom="elt2" type="(...)">
+					<declaration_attribut nomattr="attr" valeur="ID" type="IMPLIED"/>
+				</declaration_element>
+			</exemple>
+			<texte>La déclaration précédente interdit par exemple...</texte>
+			<exemple type="XML">
+				<element nom="elt1"><attribut nom="attr">machin</attribut></element>
+				<element nom="elt2"><attribut nom="attr">truc</attribut></element>
+				<element nom="elt1"><attribut nom="attr">machin</attribut></element>
+			</exemple>
+			<texte>... ainsi que</texte>
+			<exemple type="XML">
+				<element nom="elt1"><attribut nom="attr">machin</attribut></element>
+				<element nom="elt2"><attribut nom="attr">machin</attribut></element>
+				<element nom="elt1"><attribut nom="attr">truc</attribut></element>
+			</exemple>
+		</paragraphe>
+	</section>
+	<section ancre="p3s4" titre="Type énuméré">
+		<paragraphe>
+			<texte>On peut parfois désirer limiter la liste de valeurs possibles pour un attribut. On le définit alors comme étant de type énuméré. Donner une autre valeur dans le fichier <code type='typefichier'>XML</code> provoque une erreur.</texte>
+			<texte>Exemple de déclaration d'une liste de choix d'attributs&#160;:</texte>
+			<exemple type="XML">
+				<declaration_element nom="img" type="EMPTY">
+					<declaration_attribut nomattr="format" valeur="(GIF | JPEG | PNG)" type="chaine" defaut="PNG"/>
+				</declaration_element>
+			</exemple>
+			<texte>Cet exemple déclare un attribut <code>format</code> d'un élément <code>img</code>. La valeur de cet attribut peut être <code>PNG</code>, <code>GIF</code> ou <code>JPEG</code>. Si aucune valeur n'est affectée à cet attribut, c'est la valeur par défaut qui le sera, ici <code>PNG</code>. On notera l'absence de guillemets dans la liste des valeurs possibles. En ajouter est une erreur courante dans la rédaction d'une <code type='typefichier'>DTD</code>.</texte>
+		</paragraphe>
+	</section>
+	<section titre="Utilisation de liste pour les attributs" ancre="decllisteattr">
+		<paragraphe>
+			<texte>On utilise le fait qu'il est possible de «&#160;factoriser&#160;» le nom de l'élément. Par exemple...</texte>
+			<exemple type="XML">
+				<declaration_element nom="elt" type="(...)">
+					<declaration_attribut nomattr="attr1" valeur="CDATA" type="IMPLIED"/>
+					<declaration_attribut nomattr="attr2" valeur="CDATA" type="REQUIRED"/>
+				</declaration_element>
+			</exemple>
+		</paragraphe>
+	</section>
+		<exercice ancre="ex2" titre="Écriture d'une DTD avec attributs">
+			<enonce href="exercices/exo5.html"/>
+			<correction href="exercices/exo5_cor.dtd"/>
+		</exercice>
+</partie>
+	
+<partie ancre="p4" titre="Déclarations d'entités">
+	<section ancre="p4s0" titre="Introduction">
+		<paragraphe>
+			<texte>Les déclarations d'entités permettent de disposer de l'équivalent de raccourcis clavier et de caractères <autrelangue type="latin">a priori</autrelangue> non accessibles dans le jeu de caractères sélectionné.  </texte>
+		</paragraphe>
+	</section>
+	<section ancre="p4s1" titre="Les entités paramétriques">
+		<paragraphe>
+			<texte>Elles servent à définir des symboles qui seront utilisés ailleurs dans la <code type="typefichier">DTD</code>. Ce sont en quelque sorte des raccourcis d'écriture&#160;: partout où une entité est mentionnée, elle peut être remplacée par la chaîne de caractères qui lui est associée. Ce mécanisme s'apparente à un mécanisme de «&#160;macro&#160;».</texte>
+			<texte>Les entités paramétriques ne peuvent pas être utilisées en-dehors d'une <code type="typefichier">DTD</code>.</texte>
+			<texte>Exemple tiré de la <reference href="http://www.w3.org/TR/html401/sgml/dtd.html">spécification du langage <code type="langage">HTML</code></reference>&#160;:</texte>
+			<exemple type="XML">
+				<declaration_entite nom="heading" valeur="H1|H2|H3|H4|H5|H6" type="paramétrique"/>
+			</exemple>
+			<texte>L'exemple précédent a pour effet d'indiquer au système que toute occurence de <code>%heading;</code> doit être remplacée par <code>H1|H2|H3|H4|H5|H6</code> dans la <code type="typefichier">DTD</code>.</texte>
+			<texte>Ce mécanisme peut également servir à utiliser un nom relativement compréhensible à la place d'une séquence de caractères peu évocatrice. La définition d'une entité peut également faire référence à d'autres entités&#160;; la substitution est alors effectuée de proche en proche.</texte>
+		</paragraphe>
+	</section>
+	<section ancre="p4s2" titre="Les entités de caractères">
+		<paragraphe>
+			<texte>Elle servent à donner un nom facilement lisible à des caractères qui ne sont pas représentables dans l'alphabet utilisé, ou qui ne sont pas disponibles au clavier.</texte>
+			<texte>Exemples tirés de la <code type='typefichier'>DTD</code> du langage <code type="langage">HTML&#160;4.01</code>&#160;:  </texte>
+			<exemple type="XML">
+				<declaration_entite nom="nbsp" valeur="&amp;#160;"/>
+				<declaration_entite nom="eacute" valeur="&amp;#233;"/>
+			</exemple>
+			<texte>Les entités de caractères définies dans une <code type="typefichier">DTD</code> peuvent être utilisées dans un document <code type="typefichier">XML</code> référençant cette <code type="typefichier">DTD</code> à l'aide de la notation <code><![CDATA[&NomEntité;]]></code> (par exemple <code>&amp;ecaute;</code> pour reprendre une des entités précédentes).</texte>
+		</paragraphe>
+	</section>
+	<section ancre="p4s3" titre="Les entités internes">
+		<paragraphe>
+			<texte>Ce sont des symboles pouvant être définis dans une <code type="typefichier">DTD</code> et utilisés dans un document <code type="typefichier">XML</code> comme raccourcis d'écriture. La définition complète du symbole est entièrement incluse dans la <code type="typefichier">DTD</code>, mais cela n'est possible que pour les <code type="typefichier">DTD</code> <valeur>internes</valeur>. Exemple&#160;:  </texte>
+			<exemple type="XML">
+			<typedocument_interne nomracine="eltRacine"><declaration_entite nom="ADN" valeur="Acide désoxyribonucléique"/></typedocument_interne>
+				<element nom="eltRacine"><contenu>L'&amp;ADN; est une molécule complexe.</contenu></element>
+			</exemple>
+			<texte>Dans le fichier <code type="typefichier">XML</code>, l'appel à <code><![CDATA[&ADN;]]></code> sera aumatiquement remplacé, lors de l'affichage ou du traitement, par la chaîne de caractères "Acide désoxyribonucléique".</texte>
+		</paragraphe>
+	</section>
+	<section ancre="p4s4" titre="Les entités externes">
+		<paragraphe>
+			<texte>Il s'agit...</texte>
+			<liste>
+				<item>
+					<texte>... soit de symboles pouvant être définis dans un autre fichier, mais pouvant être utilisés dans un document <code type="typefichier">XML</code> ou la <code type="typefichier">DTD</code> elle-même. Par exemple&#160;:</texte>
+					<exemple type="XML">
+						<declaration_entite nom="Inclusion" valeur="toto.xml" syspub="system"/>
+						<declaration_entite nom="Inclusion" valeur="toto.inc" syspub="system" type="paramétrique"/>
+					</exemple>
+					<texte>Dans le fichier <code type="typefichier">XML</code>, le contenu du fichier <code type="typefichier">toto.xml</code> sera inséré à l'appel de l'entité <code><![CDATA[&Inclusion;]]></code>, et dans la <code type="typefichier">DTD</code>, le contenu du fichier <code type="typefichier">toto.inc</code> sera inséré à l'appel de l'entité <code><![CDATA[&Inclusion;]]></code></texte>
+				</item>
+				<item>
+					<texte>... soit de symboles pouvant être définis dans une autre <code type="typefichier">DTD</code> et utilisés dans la <code type="typefichier">DTD</code> courante&#160;:</texte>
+					<exemple type="XML">
+						<declaration_entite nom="HTMLSpecial" valeur="-//W3C//ENTITIES Special for XHTML//EN" identifiant="http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent" syspub="public" type="paramétrique"/>
+					</exemple>
+					<texte>Le contenu de cette <code type="typefichier">DTD</code> (qui peut être de type <code>SPECIAL</code> ou <code>PUBLIC</code>) est importé dans la <code type="typefichier">DTD</code> courante par l'appel de <code>%HTMLSpecial;</code>.</texte>
+				</item>
+			</liste>
+		</paragraphe>
+	</section>
+		<exercice ancre="p4exo1" titre="Déclarations d'entités">
+			<enonce href="exercices/exo6.html"/>
+			<correction description="Fichier XML" href="exercices/exo6.xml"/>
+			<correction description="DTD" href="exercices/exo6.dtd"/>
+		</exercice>
+</partie>
+</corpus>
+</chapitre>

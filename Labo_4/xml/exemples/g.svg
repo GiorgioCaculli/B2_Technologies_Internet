@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg">
+	
+<g stroke="green" stroke-dasharray="9 1" >
+	<title content="structured text">Mon plus beau dessin</title>
+	<line x1="15" y1="80" x2="155" y2="80" stroke-width="30" stroke="magenta" stroke-dasharray="none" stroke-linecap="round"/>
+	<line x1="15" y1="30" x2="30" y2="100" stroke-width="5" stroke-opacity="0.7"/>
+	<line x1="40" y1="30" x2="60" y2="100" stroke-width="10" stroke-opacity="0.7" />
+	<line x1="70" y1="30" x2="90" y2="100" stroke-width="15" stroke-opacity="0.7" />
+	<line x1="100" y1="30" x2="120" y2="100" stroke-width="20" stroke-opacity="0.7" />
+	<line x1="130" y1="30" x2="140" y2="100" stroke-width="25" stroke-opacity="0.7" />
+</g>
+
+</svg>

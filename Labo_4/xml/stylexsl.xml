@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+
+<cours nomfichier="stylexsl">Cours d'initiation à XML</cours>
+
+<entete>
+	<titre>Mise en forme à l'aide de feuilles de style XSL : initiation à XSLT</titre>
+	<auteur email="Gilles.Chagnon@upmc.fr">G. Chagnon</auteur>
+	<resume>XSL est un langage de feuilles de style permettant la mise en forme d'un fichier XML.</resume>
+	<motsclefs>XSL, XSLT, base, concept, introduction</motsclefs>
+</entete>
+
+<corpus>
+
+<partie titre="Présentation" ancre="p1">
+
+<section titre="Introduction" ancre="p1s1">
+	<paragraphe>
+	<texte><code type="langage">XSL</code> signifie <valeur>eXtensive Stylesheet Langage</valeur>, ou langage extensible de feuille de style. Cette abréviation recouvre en fait trois langages&#160;:</texte>
+		<liste>
+			<item><texte><code type="langage">XPath</code> désigne un moyen d'accéder à un nœud quelconque de l'arborescence d'un document <code type="typefichier">XML</code> à partir d'un autre nœud quelconque.</texte></item>
+			<item><texte><code type="langage">XSLT</code> signifie <valeur lang="en">eXtensible Stylesheet Langage Transformation</valeur>.</texte></item>
+			<item><texte><code type="langage">XSL-FO</code> signifie <valeur lang="en">eXtensible Stylesheet Langage - Formating Objects</valeur>, et désigne un langage permettant le contrôle de la mise en page finale de la transformation. Ce langage est particulièrement destiné à la production de contenus au format <abreviation titre="Portable Document Format" lang="en"><code type="langage">PDF</code></abreviation>.</texte></item>
+		</liste>
+	<texte>Ce cours se limitera à aborder les deux premiers langages.</texte>
+	<texte>Comme son nom l'indique, le <code type="langage">XSLT</code> ne sert pas uniquement de langage de feuille de style. Il est aussi un très puissant manipulateur d'éléments. Il permet de transformer un document <code type='typefichier'>XML</code> source en un autre, permettant ainsi, à l'extrême, d'en bouleverser la structure.</texte>
+	<texte>Le fonctionnement du <code type="langage">XSL</code> est fondé sur les manipulations de modèles (<autrelangue type="en">templates</autrelangue>). Les éléments du document <code type="typefichier">XML</code> d'origine sont remplacés (ou plus ou moins légèrement modifiés) par ces modèles. Un modèle contient ainsi le texte (éléments, attributs, texte...) de remplacement d'un élément donné.</texte>
+		<texte>Tout élément pouvant être remplacé dans le fichier de sortie par tout type de contenu texte, <code type="langage">XSL</code> est un outil privilégié de production de fichiers <code type="typefichier">HTML</code> à partir de sources <code type="typefichier">XML</code>. <code type="langage">PHP</code> fait ainsi appel à des bibliothèques de procédures de type <code type="langage">XSL</code> comme <reference href="http://xmlsoft.org/XSLT/">libxslt</reference> quand il doit gérer l'interfaçage avec des bases de données <code type="langage">XML</code>.</texte>
+		<texte>Un fichier <code type="typefichier">XSL</code> étant un fichier <code type="typefichier">XML</code>, il doit respecter les <reference href="base.html#p3s5">normes de syntaxe</reference> de ce format.</texte>
+	</paragraphe>
+</section>
+
+<section titre="Structure d'un document XSL" ancre="p1s2">
+	<paragraphe>
+	<texte>La structure de base d'un document <code type='typefichier'>XSL</code> commence par un <valeur>prologue</valeur>, puis un élément <code>xsl:stylesheet</code> pouvant contenir quelques attributs, notamment une déclaration d'espace de noms ainsi que le numéro de version. L'exemple suivant présente l'appel à cet élément tel que nous le pratiquerons dans ce cours&#160;:</texte>
+		<exemple type="XML">
+			<prologue/>
+			<element nom="xsl:stylesheet" enligne="non">
+			<attribut nom="version">1.0</attribut>
+			<attribut nom="xmlns:xsl">http://www.w3.org/1999/XSL/Transform</attribut>
+			(...)
+		</element>
+	</exemple>
+	<texte>L'élément <code>xsl:stylesheet</code> est l'élément racine du document <code type='typefichier'>XSL</code>. C'est lui qui contient tous les modèles (les <autrelangue type="en">templates</autrelangue>), y compris celui qui est associé à la racine du document <code type='typefichier'>XML</code>, modèle que l'on note <code><![CDATA[<xsl:template match="/">]]></code>. L'attribut <code>match="/"</code> indique que ce modèle s'applique à la racine du document <code type="typefichier">XML</code>.</texte>
+	</paragraphe>
+</section>
+</partie>
+
+<partie titre="Exemples de mises en forme" ancre="p2">
+
+<section titre="Exemple simple" ancre="p2s2">
+
+<paragraphe titre="Introduction" ancre="p2s2p1">
+	<texte>Il est possible de traiter de manière simple un fichier <code type='typefichier'>XML</code> contenant une information relativement linéaire. Ainsi, l'exemple déjà présenté d'une composition de bouteille d'eau, dans le cas d'une seule bouteille, se prête facilement à une simple mise en forme <code type="langage">HTML</code>.</texte>
+</paragraphe>
+
+<paragraphe titre="Exemple" ancre="p2s2p2">
+	<texte>Exemple d'un document <code type='typefichier'>XML</code> lié à une feuille de style <code type='typefichier'>XSL</code> simple à l'aide d'une <reference href="base.html#p3s2p2">instruction de traitement</reference>&#160;:</texte>
+	<exemple type="XML">
+		<prologue/>
+		<instruction_traitement nom="xml-stylesheet" type="text/xsl" href="bouteille1.xsl"/>
+		<element nom="bouteille" indent="oui">
+			<element nom="marque" niveau="1">Cristaline</element>
+			<element nom="composition" niveau="1">calcium 71mg/l, magnésium 5,5mg/l, chlorure 20mg/l, nitrate 1mg/l, traces de fer.</element>
+			<element nom="source" niveau="1" indent="oui">
+				<element nom="ville" niveau="2">St-Cyr la Source</element>
+				<element nom="departement" niveau="2">Loiret</element>
+			</element>
+			<element nom="code_barre" niveau="1">3274080005003</element>
+			<element nom="contenance" niveau="1">150cl</element>
+			<element nom="ph" niveau="1">7,45</element>
+		</element>
+	</exemple>
+	<texte>Et voici la feuille de style <code type='typefichier'>XSL</code> associée&#160;:</texte>
+	<exemple type="XML">
+		<prologue/>
+		<element nom="xsl:stylesheet" indent="oui">
+			<attribut nom="version">1.0</attribut>
+			<attribut nom="xmlns:xsl">http://www.w3.org/1999/XSL/Transform</attribut>
+		<element nom="xsl:template" indent="oui">
+			<attribut nom="match">/</attribut>
+			<element nom="html" niveau="1" indent="oui">
+				<element nom="head" indent="oui" niveau="2">
+					<element nom="title" niveau="3">Exemple de sortie HTML</element>
+					<element nom="meta" niveau="3" vide="oui">
+						<attribut nom="http-equiv">Content-Type</attribut>
+						<attribut nom="content">text/html; charset=ISO-8859-1</attribut>
+					</element>
+				</element>
+				<element nom="body" indent="oui" niveau="2">
+					<element nom="h1" niveau="3">Bouteille de marque&#160;<element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/marque</attribut></element></element>
+					<element nom="h2" niveau="3">Composition:</element>
+					<element nom="p" niveau="3"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/composition</attribut></element></element>
+					<element nom="h2" niveau="3">Lieu d'origine:</element>
+					<element nom="p" niveau="3">Ville de&#160;<element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/source/ville</attribut></element></element>, dans le département&#160;<element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/source/departement</attribut></element></element></element>
+					<element nom="h2" niveau="3">Autres informations</element>
+					<element nom="ul" niveau="3" indent="oui">
+						<element nom="li" niveau="4">Contenance: <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/contenance</attribut></element></element>
+						<element nom="li" niveau="4">pH: <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/ph</attribut></element></element>
+					</element>
+				</element>
+			</element>
+		</element>
+		</element>
+	</exemple>
+</paragraphe>
+<paragraphe titre="Application à un exemple" ancre="p2s2p3">
+	<texte>Appliquer cette dernière feuille de style au fichier <code type='typefichier'>XML</code> produit un <reference href="exemples/bouteille1.html">fichier <code type="typefichier">HTML</code></reference> avec la mise en page désirée.</texte>
+</paragraphe>
+
+</section>
+
+<exercice titre="Mise en forme simple à l'aide de XSL" ancre="exo1_2">
+	<enonce href="exercices/exo7.html"/>
+	<correction href="exercices/exo7.xsl"/>
+</exercice>
+
+<section titre="Exemple avec boucle" ancre="p2s3">
+
+<paragraphe titre="Introduction" ancre="p2s3p1">
+	<texte>Il arrive que la structure du document <code type='typefichier'>XML</code> ne soit pas linéaire, mais fondée sur, par exemple, des boucles, ou bien comporte un nombre indéterminé de fois un même élément&#160;; c'est d'ailleurs le plus souvent le cas.</texte>
+	<texte>On peut ainsi reprendre l'exemple de la bouteille d'eau, qui se présente sous la forme du fichier <code type='typefichier'>XML</code> suivant&#160;:</texte>
+	<exemple type="XML">
+		<prologue/>
+		<instruction_traitement nom="xml-stylesheet" type="text/xsl" href="bouteille1.xsl"/>
+		<element nom="bouteille" indent="oui">
+			<element nom="marque" niveau="2">Cristaline</element>
+			<element nom="composition" niveau="2" indent="oui">
+				<element nom="ion_positif" niveau="3">calcium 71mg/l</element>
+				<element nom="ion_negatif" niveau="3">nitrate 1mg/l</element>
+				<element nom="ion_positif" niveau="3">magnésium 5,5mg/l</element>
+				<element nom="ion_negatif" niveau="3">chlorure 20mg/l</element>
+				<element nom="autres_materiaux" niveau="3">fer</element>
+			</element>
+			<element nom="source" niveau="2" indent="oui">
+				<element nom="ville" niveau="3">St-Cyr la Source</element>
+				<element nom="departement" niveau="3">Loiret</element>
+			</element>
+			<element nom="code_barre" niveau="1">3274080005003</element>
+			<element nom="contenance" niveau="1">150cl</element>
+			<element nom="ph" niveau="1">7,45</element>
+		</element>
+	</exemple>
+	<texte>Cette fois-ci, il faut tenir compte d'un nombre <autrelangue type="latin">a priori</autrelangue> indéterminé d'éléments <code>ion_positif</code>, par exemple. Il suffit pour cela d'introduire dans la feuille de style un élément <code>xsl:for-each</code> avec un attribut <code>select</code> permettant d'indiquer les nœuds sur lesquels s'effectue la boucle&#160;:</texte>
+	<exemple type="XML"><prologue/>
+		<element nom="xsl:stylesheet" indent="oui">
+			<attribut nom="version">1.0</attribut>
+			<attribut nom="xmlns:xsl">http://www.w3.org/1999/XSL/Transform</attribut>
+			<element nom="xsl:template" enligne="non" indent="oui">
+				<attribut nom="match">/</attribut>
+				<element nom="html" niveau="1" indent="oui">
+					<element nom="head" indent="oui" niveau="2">
+						<element nom="title" niveau="3">Exemple de sortie HTML</element>
+						<element nom="meta" niveau="3" vide="oui">
+							<attribut nom="http-equiv">Content-Type</attribut>
+							<attribut nom="content">text/html; charset=ISO-8859-1</attribut>
+						</element>
+					</element>
+					<element nom="body" indent="oui" niveau="2">
+						<element nom="h1" niveau="3">Bouteille de marque <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/marque</attribut></element></element>
+						<element nom="h2" niveau="3">Composition:</element>
+						<element nom="h3" niveau="3">Ions positifs</element>
+						<element nom="ul" indent="oui" niveau="3">
+							<element nom="xsl:for-each" indent="oui" niveau="4">
+								<attribut nom="select">bouteille/composition/ion_positif</attribut>
+								<element nom="li" niveau="5"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element>
+							</element>
+						</element>
+						<element nom="h3" niveau="3">Ions négatifs</element>
+						<element nom="ul" indent="oui" niveau="3">
+							<element nom="xsl:for-each" indent="oui" niveau="4">
+								<attribut nom="select">bouteille/composition/ion_negatif</attribut>
+								<element nom="li" niveau="5"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element>
+							</element>
+						</element>
+						<element nom="h3" niveau="3">Autres matériaux</element>
+						<element nom="ul" niveau="3" indent="oui">
+							<element nom="xsl:for-each" niveau="4" indent="oui"><attribut nom="select">//autres_materiaux</attribut>
+								<element nom="li" niveau="5"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element>
+							</element>
+						</element>
+						<element nom="h2">Lieu d'origine</element>
+						<element nom="p" niveau="3">Ville de <element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/source/ville</attribut></element></element>, dans le département <element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/source/departement</attribut></element></element></element>
+						<element nom="h2" niveau="3">Autres informations</element>
+						<element nom="ul" niveau="3" indent="oui">
+							<element nom="li" niveau="4">Contenance: <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/contenance</attribut></element></element>
+							<element nom="li" niveau="4">pH: <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/ph</attribut></element></element>
+						</element>
+					</element>
+				</element>
+			</element>
+		</element>	
+	</exemple>
+	<texte>
+		Noter&#160;:
+	</texte>
+	<liste type="ordonnee">
+		<item><texte>la présence du caractère <code>/</code> à la fin de l'élément «&#160;Retour-Ligne&#160;» <code>br</code>. Dans le fichier <code type="typefichier">HTML</code> produit, il n'apparaît plus. Le <code>/</code> est obligatoire car en tant que fichier <code type="langage">XML</code>, la feuille de style XSLT doit être bien formée.</texte></item>
+		<item><texte>le réarrangement des entrées&#160;: les ions positifs sont de toutes manières affichés <valeur>avant</valeur> les ions négatifs.</texte></item>
+		<item><texte>la sélection des "autres matériaux" avec <code>select="//autres_materiaux"</code>. Cela est une des manières de faire référence à un élément dans l'arbre des éléments. Nous verrons la liste de ces sélecteurs plus tard.</texte></item>
+	</liste>
+</paragraphe>
+<paragraphe titre="Exemple" ancre="p2s3p2">
+	<texte>On trouvera un deuxième exemple dans une <reference href="#exo_compl">variante</reference> de l'exercice précédent...</texte>
+</paragraphe>
+</section>
+
+<exercice titre="Mise en forme avec réarrangement" ancre="exo_compl">
+	<enonce href="exercices/exo8.html"/>
+	<correction href="exercices/exo8.xsl"/>
+</exercice>
+
+</partie>
+
+</corpus>
+
+</chapitre>

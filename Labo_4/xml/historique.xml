@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<misesAJour xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="historique10.xsd">
+	<quand date="2010-01-12">
+		<maj où="dtd" type="4">Correction d'une erreur pour les entités internes.</maj>
+		<maj où="svg" type="4">Mention de l'éditeur en ligne lancé par Google.</maj>
+	</quand>
+	<quand date="2009-05-20">
+		<maj où="xforms" type="4">Mise à jour des outils de visualisation.</maj>
+	</quand>
+	<quand date="2009-03-12">
+		<maj où="svgdynamique" type="4">Corrections syntaxiques.</maj>
+	</quand>
+	<quand date="2009-01-20">
+		<maj où="dtd" type="3">Syntaxe. Refonte légère du plan.</maj>
+		<maj où="stylexsl" type="4">Corrections syntaxiques.</maj>
+	</quand>
+	<quand date="2009-01-13">
+		<maj où="base" type="4">Corrections syntaxiques.</maj>
+		<maj où="oxygenxml" type="4">Corrections syntaxiques. Ajout d'un lien.</maj>
+	</quand>
+	<quand date="2008-11-19">
+		<maj où="cours" type="1">Passage en licence <lien href="http://creativecommons.org/licenses/by-sa/3.0/">CC-by-sa</lien>.</maj>
+	</quand>
+	<quand date="2008-03-11">
+		<maj où="schema" type="4">Corrections de syntaxe et de fautes de frappe.</maj>
+		<maj où="svg" type="4">Corrections de syntaxe et de fautes de frappe.</maj>
+	</quand>
+	<quand date="2008-01-25">
+		<maj où="base" type="4">Correction d'une erreur (copier/coller!) sur les normes pour les documents bien formés.</maj>
+	</quand>
+	<quand date="2008-01-22">
+		<maj où="schema" type="4">Remplacement de la figure illustrant les types intégrés.</maj>
+		<maj où="stylexsl" type="4">Corrections de fautes de frappe et de syntaxe.</maj>
+		<maj où="fonctionsxpath" type="4">Corrections de fautes de frappe et de syntaxe.</maj>
+		<maj où="recapxsl" type="3">Corrections de fautes de frappe et de syntaxe. Ajout d'une partie sur la conception modulaire des feuilles de style.</maj>
+	</quand>
+	<quand date="2008-01-16">
+		<maj où="dtd" type="4">Syntaxe.</maj>
+	</quand>
+	<quand date="2008-01-15">
+		<maj où="base" type="3">Syntaxe. Ajout d'un complément sur les éléments vides et du support par Opera.</maj>
+	</quand>
+	<quand date="2007-11-05">
+		<maj où="xforms" type="4">Lien vers la troisième version de la recommandation. Mention de l'extension Mozilla XForms.</maj>
+	</quand>
+	<quand date="2007-09-09">
+		<maj où="svg"  type="4">Correction du nom d'un élément.</maj>
+		<maj où="recapxsl" type="4">Correction de syntaxe.</maj>
+	</quand>
+	<quand date="2007-08-07">
+		<maj où="schema" type="4">Correction d'une erreur dans un exemple de déclaration de type d'attribut.</maj>
+	</quand>
+	<quand date="2007-02-02">
+		<maj où="schema" type="4">Correction de fautes de frappe.</maj>
+	</quand>
+	<quand date="2006-11-03">
+		<maj où="stylexsl" type="4">Correction de fautes de frappe.</maj>
+		<maj où="recapxsl" type="4">Correction de fautes de frappe et syntaxiques. Mise à jour sur la Candidate Recommandation XSLT2.0.</maj>
+	</quand>
+	<quand date="2006-09-17">
+		<maj où="cours" type="2">Ajout d'une page présentant l'<lien href="../ressources/apropos.html">auteur et sa démarche</lien>.</maj>
+	</quand>
+	<quand date="2006-06-06">
+		<maj où="xforms" type="4">Corrections typographiques et ajout de la référence à la seconde édition de la recommandation.</maj>
+	</quand>
+	<quand date="2006-05-23">
+		<maj où="smil" type="4">Ajout de la référence à SMIL 2.1.</maj>
+	</quand>
+	<quand date="2006-02-13">
+		<maj où="recapxsl" type="4">Correction d'une coquille.</maj>
+		<maj où="oxygenxml" type="4">Ajout de la correction d'un exercice.</maj>
+		<maj où="xmlcooktop" type="4">Ajout de la correction d'un exercice.</maj>
+	</quand>
+	<quand date="2006-01-30">
+		<maj où="svg" type="3">Ajout d'un exercice et d'exemples sur les transformations.</maj>
+		<maj où="svgdynamique" type="4">Corrections de coquilles.</maj>
+	</quand>
+	<quand date="2006-01-13">
+		<maj où="svg" type="4">Corrections de coquilles et syntaxiques.</maj>
+		<maj où="svgdynamique" type="4">Corrections de coquilles et syntaxiques.</maj>
+	</quand>
+	<quand date="2006-01-09">
+		<maj où="dtd" type="4">Correction d'une faute de frappe.</maj>
+		<maj où="recapxsl" type="4">Correction d'une faute de frappe.</maj>
+	</quand>
+	<quand date="2006-01-04">
+		<maj où="stylexsl" type="4">Corrections typographiques.</maj>
+		<maj où="cours" type="2">Mise en forme des exercices.</maj>
+	</quand>
+	<quand date="2005-12-14">
+		<maj où="recapxsl" type="4">Correction d'un lien.</maj>
+		<maj où="svg" type="3">Corrections typographiques, réécriture de la présentation du support.</maj>
+	</quand>
+	<quand date="2005-12-01">
+		<maj où="fonctionsxpath" type="3">Ajout d'une introduction, d'une section sur la fonction document(), corrections typographiques et syntaxiques.</maj>
+		<maj où="recapxsl" type="3">Corrections typographiques. Ajout d'une section sur la syntaxe courte (accolades).</maj>
+	</quand>
+	<quand date="2005-11-27">
+		<maj où="stylexsl" type="3">Réécriture de l'introduction.</maj>
+		<maj où="recapxsl" type="4">Corrections typographiques et syntaxiques.</maj>
+	</quand>
+	<quand date="2005-11-22">
+		<maj où="dtd" type="4">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2005-11-09">
+		<maj où="cours" type="4">Modifications des résumés de chaque chapitre.</maj>
+	</quand>
+	<quand date="2005-10-27">
+		<maj où="base" type="4">Quelques corrections de syntaxe et suppression d'un paragraphe introductif.</maj>
+		<maj où="oxygenxml" type="4">Correction de syntaxe.</maj>
+	</quand>
+	<quand date="2005-10-26">
+		<maj où="cours" type="1">Renouvellement de la charte graphique.</maj>
+	</quand>
+	<quand date="2005-10-17">
+		<maj où="base" type="4">Correction typographique.</maj>
+	</quand>
+	<quand date="2005-09-28">
+		<maj où="dtd" type="4">Correction d'une erreur dans la déclaration d'un élément à contenu mixte.</maj>
+	</quand>
+	<quand date="2005-09-12">
+		<maj type="4" où="xforms">Corrections typographiques.</maj>
+		<maj où="servicesweb" type="4">Corrections typographiques.</maj>
+		<maj type="4" où="svgdynamique">Corrections typographiques.</maj>
+		<maj type="4" où="svg">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2005-07-14">
+		<maj où="dtd" type="3">Réécriture des exemples.</maj>
+	</quand>
+	<quand date="2005-07-13">
+		<maj où="fonctionsxpath" type="3">Réécriture des exemples.</maj>
+		<maj où="servicesweb" type="3">Réécriture des exemples.</maj>
+		<maj où="smil" type="3">Réécriture des exemples.</maj>
+		<maj où="svg" type="3">Réécriture des exemples.</maj>
+		<maj où="svgdynamique" type="3">Réécriture des exemples.</maj>
+		<maj où="xforms" type="3">Réécriture des exemples.</maj>
+	</quand>
+	<quand date="2005-07-12">
+		<maj où="schema" type="3">Réécriture des exemples.</maj>
+	</quand>
+	<quand date="2005-07-11">
+		<maj où="stylexsl" type="3">Réécriture des exemples.</maj>
+		<maj où="recapxsl" type="3">Réécriture des exemples.</maj>
+		<maj où="domxslt" type="3">Réécriture des exemples.</maj>
+	</quand>
+	<quand date="2005-07-08">
+		<maj type="3" où="base">Mise à jour pour Netscape et réécriture des exemples.</maj>
+	</quand>
+	<quand date="2005-06-03">
+		<maj où="svgdynamique" type="3">Ajout des exercices.</maj>
+	</quand>
+	<quand date="2005-04-18">
+		<maj où="domxslt" type="4">Corrections typographiques.</maj>
+		<maj où="dtd" type="4">Corrections typographiques.</maj>
+		<maj type="3" où="cours">Corrections sur les entités utilisées pour l'affichage sous FireFox.</maj>
+	</quand>
+	<quand date="2005-03-16">
+		<maj type="2" où="svgdynamique">Création du cours</maj>
+		<maj où="svg" type="4">Remarque sur le support de SVG par Opera.</maj>
+	</quand>
+	<quand date="2005-03-11">
+		<maj où="schema" type="4">Corrections typographiques.</maj>
+		<maj où="svg" type="4">Corrections typographiques.</maj>
+		<maj type="4" où="cours">Ajout de liens dans les mises à jour.</maj>
+	</quand>
+	<quand date="2005-03-04">
+		<maj où="recapxsl" type="4">Correction de l'utilisation de l'élément output.</maj>
+	</quand>
+	<quand date="2005-02-15">
+		<maj où="base" type="4">Corrections typographiques.</maj>
+		<maj où="stylexsl" type="4">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2005-02-07">
+		<maj où="schema" type="4">Correction d'un lien.</maj>
+		<maj où="base" type="4">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2005-02-05">
+		<maj type="2" où="cours">Changement du système de suivi des numéros de version.</maj>
+	</quand>
+	<quand date="2005-02-04">
+		<maj où="base" type="4">Corrections typographiques.</maj>
+		<maj où="dtd" type="4">Corrections typographiques.</maj>
+		<maj où="oxygenxml" type="4">Mise à jour des versions d'Oxygen.</maj>
+	</quand>
+	<quand date="2005-01-18">
+		<maj type="3" où="schema">Réécriture partielle.</maj>
+	</quand>
+	<quand date="2004-12-07">
+		<maj où="dtd" type="2">Réécriture.</maj>
+	</quand>
+	<quand date="2004-12-06">
+		<maj où="base" type="2">Réécriture.</maj>
+	</quand>
+	<quand date="2004-10-04">
+		<maj type="1" où="cours">Passage du cours en licence GNU-FDL.</maj>
+	</quand>
+	<quand date="2004-06-28">
+		<maj où="smil" type="4">Ajout d'une remarque sur la correction d'un exercice.</maj>
+	</quand>
+	<quand date="2004-06-25">
+		<maj où="servicesweb" type="4">Corrections typographiques.</maj>
+		<maj où="oxygenxml" type="4">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2004-06-24">
+		<maj où="xforms" type="4">Corrections typographiques.</maj>
+		<maj où="schema" type="4">Corrections de liens.</maj>
+	</quand>
+	<quand date="2004-06-16">
+		<maj où="stylexsl" type="4">Ajout des corrections des exercices.</maj>
+		<maj où="domxslt" type="4">Ajout des corrections des exercices.</maj>
+		<maj où="svg" type="4">Ajout des corrections des exercices.</maj>
+		<maj où="schema" type="4">Ajout des corrections des exercices.</maj>
+		<maj où="recapxsl" type="4">Ajout des corrections des exercices.</maj>
+		<maj où="fonctionsxpath" type="4">Ajout des corrections des exercices.</maj>
+	</quand>
+	<quand date="2004-06-06">
+		<maj type="3" où="cours">Ajout d'une description générale pour le cours.</maj>
+	</quand>
+	<quand date="2004-05-23">
+		<maj type="3" où="cours">Modification des mots-clefs pour le cours et ajout d'un suivi des numéros de version.</maj>
+	</quand>
+	<quand date="2004-05-22">
+		<maj où="base" type="4">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2004-05-19">
+		<maj où="xforms" type="2">Création du cours</maj>
+		<maj où="servicesweb" type="2">Création du cours</maj>
+		<maj où="dtd" type="3">Corrections dans les déclarations d'entités et corrections typographiques.</maj>
+	</quand>
+	<quand date="2004-04-20">
+		<maj où="smil" type="3">Ajout d'un exercice.</maj>
+	</quand>
+	<quand date="2004-04-06">
+		<maj où="svg" type="4">Ajout du lien vers le plug-in Adobe beta pour Mozilla .</maj>
+	</quand>
+	<quand date="2004-03-31">
+		<maj où="schema" type="3">Corrections typographiques et ajout d'une remarque sur la déclaration d'un élément de type texte contenant un (ou plusieurs) attribut(s).</maj>
+	</quand>
+	<quand date="2004-03-29">
+		<maj où="svg" type="3">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2004-03-28">
+		<maj où="schema" type="2">Création du cours</maj>
+	</quand>
+	<quand date="2004-03-04">
+		<maj où="dtd" type="4">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2004-03-03">
+		<maj où="domxslt" type="4">Corrections typographiques et ajout de la limitation à Internet Explorer.</maj>
+	</quand>
+	<quand date="2004-02-09">
+		<maj type="3" où="fonctionsxpath">Corrections typographiques, complément d'explication sur la fonction sum() et ajout d'un exercice.</maj>
+		<maj où="recapxsl" type="4">Ajout d'un lien vers un exercice.</maj>
+	</quand>
+	<quand date="2004-02-06">
+		<maj où="recapxsl" type="4">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2004-02-04">
+		<maj où="stylexsl" type="3">Corrections typographiques et quelques mises à jour sur le fond.</maj>
+	</quand>
+	<quand date="2004-02-02">
+		<maj type="3" où="base">Ajouts de Mozilla et d'Opera.</maj>
+		<maj où="dtd" type="4">Corrections typographiques.</maj>
+		<maj où="oxygenxml" type="4">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2004-01-30">
+		<maj type="2" où="oxygenxml">Création du cours</maj>
+	</quand>
+	<quand date="2003-12-06">
+		<maj type="2" où="svg">Création du cours</maj>
+	</quand>
+	<quand date="2003-11-29">
+		<maj type="2" où="domxslt">Création du cours</maj>
+	</quand>
+	<quand date="2003-11-28">
+		<maj type="2" où="fonctionsxpath">Création du cours</maj>
+		<maj type="3" où="recapxsl">Ajout de deux éléments.</maj>
+	</quand>
+	<quand date="2003-11-06">
+		<maj où="dtd" type="4">Correction d'une erreur.</maj>
+	</quand>
+	<quand date="2003-10-31">
+		<maj type="1" où="cours">Changement de DTD.</maj>
+		<maj où="dtd" type="4">Correction typographique.</maj>
+		<maj type="3" où="stylexsl">Corrections typographiques et quelques mises à jour sur le fond.</maj>
+	</quand>
+	<quand date="2003-07-31">
+		<maj où="xmlcooktop" type="3">Corrections typographiques. Quelques mises à jour sur le fond.</maj>
+		<maj où="stylexsl" type="3">Corrections typographiques. Quelques mises à jour sur le fond.</maj>
+		<maj type="3" où="smil">Corrections typographiques et quelques mises à jour sur le fond.</maj>
+	</quand>
+	<quand date="2003-07-30">
+		<maj type="3" où="dtd">Corrections typographiques et quelques mises à jour sur le fond.</maj>
+		<maj type="3" où="recapxsl">Corrections typographiques et quelques mises à jour sur le fond.</maj>
+	</quand>
+	<quand date="2003-07-29">
+		<maj type="3" où="base">Corrections typographiques. Quelques mises à jour sur le fond.</maj>
+	</quand>
+	<quand date="2003-06-28">
+		<maj où="stylexsl" type="3">Quelques paragraphes en plus.</maj>
+		<maj type="4" où="cours">Correction sur le nommage des attributs.</maj>
+	</quand>
+	<quand date="2003-05-31">
+		<maj où="stylexsl" type="4">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2002-10-28">
+		<maj où="stylexsl" type="3">Quelques ajouts de titres.</maj>
+		<maj où="dtd" type="4">Suppression des _ dans les attributs.</maj>
+	</quand>
+	<quand date="2002-05-31">
+		<maj où="base" type="4">Corrections typographiques.</maj>
+		<maj où="stylexsl" type="4">Corrections typographiques.</maj>
+		<maj où="recapxsl" type="4">Corrections typographiques.</maj>
+		<maj où="dtd" type="4">Corrections typographiques.</maj>
+	</quand>
+	<quand date="2002-05-30">
+		<maj type="2" où="smil">Création du cours</maj>
+	</quand>
+	<quand date="2002-05-28">
+		<maj type="2" où="recapxsl">Création du cours</maj>
+	</quand>
+	<quand date="2002-05-21">
+		<maj où="stylexsl" type="2">Création du cours.</maj>
+		<maj type="3" où="dtd">Déclarations d'attributs et d'entités</maj>
+	</quand>
+	<quand date="2002-05-16">
+		<maj type="2" où="base">Création du cours</maj>
+		<maj type="2" où="dtd">Création du cours</maj>
+		<maj où="xmlcooktop" type="2">Création du cours.</maj>
+	</quand>
+	<quand date="2002-05-13">
+		<maj type="1" où="cours">Création.</maj>
+	</quand>
+</misesAJour>

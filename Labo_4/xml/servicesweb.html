@@ -1,0 +1,401 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Quelques mots sur les Services Web</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="service web, services web, web services, web service, e-commerce, concept, introduction">
+      <meta name="description" content="Les &#34;Services Web&#34; sont une technologie permettant l'échange d'informations entre un poste client et un poste serveur. Ce chapitre en dresse un rapide portrait.">
+      <link rel="prev" href="xforms.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Quelques mots sur les Services Web</h1>
+         <p><span class="version">version 1.11</span>, dernière mise à jour le 12 septembre 2005.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#gene" title="Généralités">Généralités</a><ol>
+                     <li><a href="#geneintro" title="Introduction">Introduction</a></li>
+                     <li><a href="#koikce" title="Qu'est-ce qu'un service Web?">Qu'est-ce qu'un service Web?</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#trouver" title="Trouver un service Web">Trouver un service Web</a><ol>
+                     <li><a href="#uddi" title="Universal Description, Discovery and Integration - UDDI">Universal Description, Discovery and Integration - UDDI</a></li>
+                     <li><a href="#wsdl" title="Web Service Description Language - WSDL">Web Service Description Language - WSDL</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#acceder" title="Accéder à un service Web">Accéder à un service Web</a><ol>
+                     <li><a href="#xmlrpc" title="XML Remote Procedure Calling - XML-RPC">XML Remote Procedure Calling - XML-RPC</a><ol>
+                           <li><a href="#rpcpcp" title="Principe">Principe</a></li>
+                           <li><a href="#rpcexemple" title="Exemple et limitations">Exemple et limitations</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#soap" title="Simple Object Access Protocol - SOAP">Simple Object Access Protocol - SOAP</a><ol>
+                           <li><a href="#soappcp" title="Principe">Principe</a></li>
+                           <li><a href="#soapexemple" title="Exemple et limitations">Exemple et limitations</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>IV. <a href="#utiliser" title="Utiliser un service Web: récapitulation et inconvénients">Utiliser un service Web: récapitulation et inconvénients</a><ol>
+                     <li><a href="#choisir" title="Comment choisir un service Web">Comment choisir un service Web</a></li>
+                     <li><a href="#inconvenients" title="Les inconvénients">Les inconvénients</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="gene" href="#gene" id="gene"></a>I. Généralités
+         </h3>
+         <h4><a name="geneintro" id="geneintro" href="#geneintro"></a>1. Introduction
+         </h4>
+         <p>Les services Web sont un mot à la mode, et sont actuellement promus par, entre autres, Sun, Oracle, HP, Microsoft et IBM.
+            Mot nouveau, mais concept ancien car il s'agit ni plus ni moins que de déporter le traitement de données d'un poste client,
+            vers un poste serveur sur lequel "tourne" l'application.
+         </p>
+         <p class="retourtdm"><a href="#tdm_" title="Retour à la TdM ()">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <p>Alors que voici quelques années, l'utilisation du réseau pour un tel débit de données était encore problématique, il n'en
+            est plus tout à fait de même aujourd'hui. Trois raisons pourraient inciter à opter pour un tel traitement déporté&nbsp;:
+         </p>
+         <ol>
+            <li>
+               <p>la machine distante peut être en possession des données, la nôtre non&nbsp;;</p>
+            </li>
+            <li>
+               <p>la machine distante peut disposer d'une puissance de calcul supérieure (attention, cela ne suffit pas&nbsp;: il faut également
+                  tenir compte de la rapidité du débit entre les deux machines)
+               </p>
+            </li>
+            <li>
+               <p>la machine distante dispose de logiciels plus adaptés au traitement des données.</p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_" title="Retour à la TdM ()">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <p>Par le passé, de nombreuses solutions propriétaires ont coexisté. Il était également possible de développer "au coup par coup"
+            des solutions adaptées à des situations particulières. Heureusement, des efforts de standardisation ont été récemment entrepris.
+         </p>
+         <p class="retourtdm"><a href="#tdm_geneintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="koikce" id="koikce" href="#koikce"></a>2. Qu'est-ce qu'un service Web?
+         </h4>
+         <p>C'est le fait de mettre des ressources à disposition (gratuite ou non) sur Internet, <span lang="en" class="autrelangue">via</span> un protocole d'échanges standardisé, pour des programmes écrits dans des langages quelconques.
+         </p>
+         <p>Cela nécessite&nbsp;:</p>
+         <ul>
+            <li>
+               <p>un encodage (toujours <code class="langage">XML</code>)&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>un transport (souvent <code class="langage">HTTP</code>)&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>une organisation des requêtes et des réponses.</p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_" title="Retour à la TdM ()">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <p>La procédure de fonctionnement d'un service Web est la suivante&nbsp;:</p>
+         <ol>
+            <li>
+               <p>le service Web définit un format pour les requêtes et les réponses&nbsp;;</p>
+            </li>
+            <li>
+               <p>un ordinateur demandeur effectue une requête&nbsp;;</p>
+            </li>
+            <li>
+               <p>le service Web effectue une action, et renvoie la réponse à l'ordinateur demandeur.</p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_" title="Retour à la TdM ()">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <p>Un service Web peut par exemple&nbsp;:</p>
+         <ul>
+            <li>
+               <p>récupérer un cours de bourse</p>
+            </li>
+            <li>
+               <p>faire une demande automatiquement mise à jour d'un prix&nbsp;;</p>
+            </li>
+            <li>
+               <p>accéder à un calendrier universel faisant les conversions entre calendriers internationaux et connaissant, pour chaque pays,
+                  les dates des jours fériés&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>traduire un passage</p>
+            </li>
+            <li>
+               <p>valider un numéro international de code postal...</p>
+            </li>
+         </ul>
+         <p>Les possibilités sont donc nombreuses.</p>
+         <p class="retourtdm"><a href="#tdm_" title="Retour à la TdM ()">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <p>Pour pouvoir utiliser un service Web, plusieurs étapes sont nécessaires&nbsp;:</p>
+         <ul>
+            <li>
+               <p>il faut savoir <a href="#trouver">le trouver</a>...
+               </p>
+            </li>
+            <li>
+               <p>... puis connaître la méthode pour <a href="#acceder">y accéder</a>...
+               </p>
+            </li>
+            <li>
+               <p>... enfin savoir <a href="#utiliser">l'utiliser</a> correctement.
+               </p>
+            </li>
+         </ul>
+         <p>Nous allons successivement examiner ces trois étapes.</p>
+         <p class="retourtdm"><a href="#tdm_koikce" title="Retour à la TdM (Qu'est-ce qu'un service Web?)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="trouver" href="#trouver" id="trouver"></a>II. Trouver un service Web
+         </h3>
+         <p>La première étape est de savoir où trouver un service Web, ensuite de savoir <em>précisément</em> ce qu'il fait. Pour cela, il existe un annuaire, <a href="#uddi"><acronym title="Universal Description, Discovery and Integration">UDDI</acronym></a>, et un protocole de description, <a href="#wsdl"><acronym title="Web Service Description Language">WSDL</acronym></a>.
+         </p>
+         <h4><a name="uddi" id="uddi" href="#uddi"></a>1. Universal Description, Discovery and Integration - UDDI
+         </h4>
+         <p>IBM, Microsoft et Ariba se sont entendus pour développer le projet UDDI. Il s'agt d'une sorte d'annuaire, disponible à <a href="http://www.uddi.org">http://www.uddi.org</a>, où il est possible de référencer un service Web, gratuitement (ce service pouvant lui-même être payant pour son utilisateur).
+         </p>
+         <p>L'ensemble est développé dans le cadre d'<a href="http://www.oasis-open.org"><acronym title="Organization for the Advancement of Structured Information Standards">Oasis</acronym></a>, un consortium d'entreprises dont le but est de promouvoir le développement des nouveaux formats, notamment <code class="langage">XML</code>, dans des échanges standardisés entre entreprises (ce consortium travaille par exemple sur un format de facture, des fichiers
+            de documentation -<a href="http://www.docbook.org/index.html">DocBook</a>-, etc.).
+         </p>
+         <p class="retourtdm"><a href="#tdm_uddi" title="Retour à la TdM (Universal Description, Discovery and Integration - UDDI)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="wsdl" id="wsdl" href="#wsdl"></a>2. Web Service Description Language - WSDL
+         </h4>
+         <p>Ce format, écrit en <code class="langage">XML</code>, a pour but de décrire, de manière normalisée, des API (<span lang="en" class="autrelangue">Application Programming Interfaces</span>). Il s'appuie sur les schémas XML. Il s'agit d'un langage très complexe, car il a été pensé dans le but de pouvoir être adaptable
+            à n'importe quel Service Web -y compris ceux qui existaient avant la généralisation des protocoles actuels.
+         </p>
+         <p>Le W3C, qui en est à l'origine, a mis à disposition la <a href="http://www.w3.org/TR/wsdl">recommandation officielle</a> sur <a href="http://www.w3.org">son site</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_" title="Retour à la TdM ()">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <p>Il permet de décrire notamment</p>
+         <ul>
+            <li>
+               <p>le fournisseur du service Web&nbsp;;</p>
+            </li>
+            <li>
+               <p>les informations que ce dernier peut donner&nbsp;;</p>
+            </li>
+            <li>
+               <p>le format des requêtes...</p>
+            </li>
+         </ul>
+         <p>Il existe une autre application de ce format. Comme la description d'un service Web répond à une forme standardisée, il est
+            possible d'en tirer automatiquement une documentation, plus lisible pour un être humain, sous la forme d'un WSDL simplifié
+            (<a href="http://www.capescience.com/articles/simplifiedWSDL/"><span lang="en" class="autrelangue">Simplified WSDL</span></a>).
+         </p>
+         <p>On peut également envisager l'écriture de clients analysant seuls, automatiquement, le fichier <code class="typefichier">WSDL</code> et en déduisant le format d'échanges et le protocole à utiliser pour "discuter" avec le Service Web.
+         </p>
+         <p class="retourtdm"><a href="#tdm_wsdl" title="Retour à la TdM (Web Service Description Language - WSDL)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="acceder" href="#acceder" id="acceder"></a>III. Accéder à un service Web
+         </h3>
+         <p>Il existe plusieurs formats concurrents pour définir le format de données en entrée et sortie d'un service Web. Nous allons
+            aborder <a href="#xmlrpc">XML-RPC</a> et, plus récent, <a href="#soap">SOAP</a>.
+         </p>
+         <h4><a name="xmlrpc" id="xmlrpc" href="#xmlrpc"></a>1. XML Remote Procedure Calling - XML-RPC
+         </h4>
+         <h5><a href="#rpcpcp" name="rpcpcp" id="rpcpcp"></a>a. Principe
+         </h5>
+         <p><a href="http://www.xmlrpc.com/"><acronym title="XML Remote Procedure Calling">XML-RPC</acronym></a> est le plus simple des formats d'échange. Le principe de base est le suivant&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>sur le poste client, une bibliothèque encode les paramètres de la requête en <code class="langage">XML</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>sur le poste serveur, une (autre) bibliothèque les décode et les transmet à l'application.</p>
+            </li>
+         </ul>
+         <p>La procédure inverse a lieu lors de l'envoi de la réponse à la requête vers le poste client. En définitive, le programmeur
+            n'a jamais besoin de coder lui-même le format de sortie en <code class="langage">XML</code>, puisque, dans le cadre du langage de programmation qu'il utilise, des fonctions se chargent des opérations à sa place. Il
+            n'en voit que le résultat final.
+         </p>
+         <p>Le transfert des données se fait selon le protocole <acronym title="Hyper Text Transfer Protocol">HTTP</acronym>.
+         </p>
+         <p>Il existe des bibliothèques en Perl, C, Python, Java, VB/.Net, PHP...</p>
+         <p class="retourtdm"><a href="#tdm_rpcpcp" title="Retour à la TdM (Principe)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#rpcexemple" name="rpcexemple" id="rpcexemple"></a>b. Exemple et limitations
+         </h5>
+         <p>Par exemple, <a href="http://www.adamsnames.tc/api/xmlrpc.html">Adam's Names</a>, qui est une sorte de "WhoIs" pour les sites hébergés dans plusieurs îles du Pacifique, utilise ce protocole.
+         </p>
+         <p>Le système a malheureusement des limites. En théorie, par exemple, les seuls transferts autorisés se font sous le format ASCII,
+            même si des extensions -non officielles- autorisent les transferts en Unicode. De plus, ce format n'est pas normalisé par
+            un organisme indépendant et neutre (comme le <a href="http://www.w3.org/Consortium/Points/">W3C</a>).
+         </p>
+         <p class="retourtdm"><a href="#tdm_xmlrpc" title="Retour à la TdM (XML Remote Procedure Calling - XML-RPC)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="soap" id="soap" href="#soap"></a>2. Simple Object Access Protocol - SOAP
+         </h4>
+         <h5><a href="#soappcp" name="soappcp" id="soappcp"></a>a. Principe
+         </h5>
+         <p>Il s'agit du protocole actuellement le plus en vogue -il est promu par le W3C lui-même et Microsoft, et la première <a href="http://www.w3.org/TR/soap">recommandation</a> date de juin 2003.
+         </p>
+         <p>Le principe est le même&nbsp;: le programmeur ne voit jamais le fichier <code class="typefichier">XML</code> que son poste émet ou reçoit, car tout est géré par une bibliothèque de fonctions et procédures dont il ne perçoit que le
+            résultat final, avec le format habituel de son langage de programmation favori.
+         </p>
+         <p>Des bibliothèques <code class="langage">SOAP</code> existent pour Perl, C, C#, Python, Java, VB/.Net, PHP, même Ada...
+         </p>
+         <p><code class="langage">SOAP</code> permet d'utiliser le même typage de données que <a href="schema.html#types">celui des schémas XML</a>, des tableaux, des structures... bref, il est plus complet (et donc plus complexe...) que <code class="langage">XML-RPC</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_soappcp" title="Retour à la TdM (Principe)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#soapexemple" name="soapexemple" id="soapexemple"></a>b. Exemple et limitations
+         </h5>
+         <p>L'exemple suivant illustre une requête <code class="langage">SOAP</code> simple, demandant à un serveur si un code postal est valable dans le Royaume Uni&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;env.Envelope<span class="nomattribut"> xmlns:env</span>="<span class="valeurattribut">http://www.w3.org/2001/06/soap-envelope</span>"&gt;</span><br>
+            					
+            					&nbsp;&nbsp;<span class="tag">&lt;env.Body&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;m:ValidatePostcodeResponse <span class="nomattribut"> m:env:encodingStyle</span>="<span class="valeurattribut">http://www.w3.org/2001/06/soap-encoding</span>"<span class="nomattribut"> xmlns:m</span>="<span class="valeurattribut">http://www.lesiteduserviceweb.com/Postcode</span>"&gt;</span><br>
+            							
+            							
+            							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;PostCode&gt;</span>WC1A8GH<span class="tag">&lt;/PostCode&gt;</span><br>
+            							<span class="tag">&lt;Country&gt;</span>UK<span class="tag">&lt;/Country&gt;</span><br>
+            						&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/m:ValidatePostcodeResponse &gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;/env.Body&gt;</span><br>
+            				<span class="tag">&lt;/env.Envelope&gt;</span><br></p>
+         <p>En réponse, le serveur enverra le même type d'"enveloppe"&nbsp;; mais le corps du message (<code class="code">&lt;env:Body&gt;</code>) se limitera à l'élément <code class="code">&lt;Valid&gt;Yes&lt;/Valid&gt;</code>.
+         </p>
+         <p>Une des limitations principales de ce format est, par sa nature <code class="langage">XML</code>, son côté "usine à gaz".
+         </p>
+         <p class="retourtdm"><a href="#tdm_soap" title="Retour à la TdM (Simple Object Access Protocol - SOAP)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="utiliser" href="#utiliser" id="utiliser"></a>IV. Utiliser un service Web: récapitulation et inconvénients
+         </h3>
+         <h4><a name="choisir" id="choisir" href="#choisir"></a>1. Comment choisir un service Web
+         </h4>
+         <p>Reprenons notre exemple de recherche de code postal, et plaçons-nous dans la peau du développeur d'une application, qui doit
+            entre autres (mais ce n'est pas là sa fonction première) vérifier la validité de codes postaux pour une trentaine de pays.
+         </p>
+         <p>Les données ne sont peut-être pas gratuites&nbsp;; développer un tel module dans l'application peut de surcroît prendre un temps
+            non négligeable. La solution peut être un service Web.
+         </p>
+         <p>Il suffit alors de regarder un annuaire -UDDI- pour constater si un tel service Web existe. Si oui, on vérifie (grâce au fichier
+            <code class="typefichier">WSDL</code>) que le service fait bien ce qu'on désire qu'il fasse, puis on peut prendre contact avec la compagnie qui le propose, vérifier
+            sa solvabilité, la fiabilité de sa connexion réseau, enfin acheter éventuellement le service si cela s'avère plus rentable.
+         </p>
+         <p class="retourtdm"><a href="#tdm_" title="Retour à la TdM ()">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <p>Une fois que l'on a décidé d'avoir recours à un service Web, l'essentiel est fait. Il suffit alors de lire la spécification
+            précise du service (une étape qui peut être automatisée si le service est décrit avec <code class="langage">WSDL</code>), et d'écrire le client en faisant appel aux fonctions et bibliothèques disponibles pour son langage de programmation favori
+            (par exemple, VB.Net).
+         </p>
+         <p>Du côté du développeur d'un service Web, une profonde réflexion doit avoir lieu en préalable à toute mise à disposition du
+            service au public, notamment sur une définition rigoureuse et stable de l'interface (il serait malvenu de demander à tous
+            les clients de mettre à jour leurs programmes, sous le simple prétexte qu'une balise a légèrement changé de nom...), mais
+            aussi sur les inévitables questions de sécurité et de confidentialité des échanges.
+         </p>
+         <p class="retourtdm"><a href="#tdm_choisir" title="Retour à la TdM (Comment choisir un service Web)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="inconvenients" id="inconvenients" href="#inconvenients"></a>2. Les inconvénients
+         </h4>
+         <p>A la date d'écriture de ce cours (mai 2004), quatre freins bloquent encore le développement de ces outils.</p>
+         <ol>
+            <li>
+               <p>les transferts se font en <code class="langage">XML</code>. Or un tel fichier est assez gros (par rapport, par exemple, à un fichier binaire), et pour peu que le service soit un tant
+                  soit peut complexe, les échanges peuvent être lents&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>la lenteur de ces échanges vient de l'utilisation du réseau. Cela signifie que si une partie importante du code d'une application
+                  dépend d'une requête à un service Web, et que le réseau, pour une raison quelconque, est paralysé, l'application sera dans
+                  l'incapacité de fonctionner correctement. Il y a donc une très forte dépendance de contraintes extérieures pas forcément contrôlables&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>les services Web ne sont pas encore très répandus&nbsp;; il est donc encore peu probable de trouver l'objet de sa recherche&nbsp;;</p>
+            </li>
+            <li>
+               <p>enfin, et cela est lié à la remarque précédente, ce qui est rare est cher... même si certains services Web sont gratuits.</p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_" title="Retour à la TdM ()">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <p>Certains services Web sont néanmoins d'ores et déjà accessibles&nbsp;:</p>
+         <ul>
+            <li>
+               <p><a href="http://www.google.com/apis/">Google</a> propose des services de recherche
+               </p>
+            </li>
+            <li>
+               <p>Amazon offre gratuitement l'accès à son <a href="http://www.amazon.com/gp/browse.html/103-5715902-3907065?node=3435361">service Web</a>...
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_inconvenients" title="Retour à la TdM (Les inconvénients)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours précédent&nbsp;: <a href="xforms.html">Plus loin que les formulaires HTML: XForms</a><br></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="servicesweb.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 12 septembre 2005, version 1.11. Corrections typographiques.</li>
+            <li>Le 13 juillet 2005, version 1.10. Réécriture des exemples.</li>
+            <li>Le 25 juin 2004, version 1.01. Corrections typographiques.</li>
+            <li>Le 19 mai 2004, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

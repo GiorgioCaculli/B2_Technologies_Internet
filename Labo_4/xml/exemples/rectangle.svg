@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" >
+
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <text x="5" y="20" style="font-size:10">SVG Demo: rectangle.</text>
+
+<g stroke-width="4px" stroke="black" fill="cyan">
+	<rect width="300" height="50" x="50" y="50"/>
+	<rect width="30" height="200" x="100" y="150" rx="10" ry="75"/>
+</g>
+
+<text x="150" y="275">Rectangle aux côtés arrondis</text>
+<text x="100" y="120">Rectangle à côtés droits</text>
+
+</svg> 

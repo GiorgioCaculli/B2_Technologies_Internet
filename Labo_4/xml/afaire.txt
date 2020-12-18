@@ -1,0 +1,4 @@
+- attention aux acronymes
+- mettre index 
+- numérotation exercices dans les chapitres
+- retirer licence GNU

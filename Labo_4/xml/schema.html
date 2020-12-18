@@ -1,0 +1,860 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Initiation aux Schema XML</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="xml, dtd, schema">
+      <meta name="description" content="Les schémas XML permettent de décrire plus finement que les DTD l'ensemble des éléments et attributs autorisés dans un fichier XML.">
+      <link rel="prev" href="dtd.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Initiation aux Schema XML</h1>
+         <p><span class="version">version 1.34</span>, dernière mise à jour le 11 mars 2008.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#gene" title="Introduction">Introduction</a><ol>
+                     <li><a href="#introdtd" title="Limitations des DTD">Limitations des DTD</a></li>
+                     <li><a href="#introschema" title="Apports des schémas">Apports des schémas</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#premierspas" title="Les premiers pas">Les premiers pas</a><ol>
+                     <li><a href="#premiersintro" title="Introduction">Introduction</a></li>
+                     <li><a href="#schemastruc" title="Structure de base">Structure de base</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#declarations" title="Déclarations d'éléments et d'attributs">Déclarations d'éléments et d'attributs</a><ol>
+                     <li><a href="#declarelt" title="Déclarations d'éléments">Déclarations d'éléments</a></li>
+                     <li><a href="#declaattr" title="Déclarations d'attributs">Déclarations d'attributs</a><ol>
+                           <li><a href="#declaattrsimple" title="Déclaration simple">Déclaration simple</a></li>
+                           <li><a href="#declaattroccur" title="Contraintes d'occurences">Contraintes d'occurences</a></li>
+                           <li><a href="#declaattrregp" title="Regroupements d'attributs">Regroupements d'attributs</a></li>
+                           <li><a href="#unouplusieursattr" title="Déclaration d'élément ne contenant que du texte avec un (ou plusieurs) attribut(s)">Déclaration d'élément ne contenant que du texte avec un (ou plusieurs) attribut(s)</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#declareference" title="Déclaration et référencement">Déclaration et référencement</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>IV. <a href="#types" title="Les types de données">Les types de données</a><ol>
+                     <li><a href="#introtypes" title="Introduction">Introduction</a></li>
+                     <li><a href="#typessimples" title="Types simples">Types simples</a><ol>
+                           <li><a href="#simplesgene" title="Généralités">Généralités</a></li>
+                           <li><a href="#simplesintegres" title="Bibliothèque de types intégrés">Bibliothèque de types intégrés</a></li>
+                           <li><a href="#simplesliste" title="Listes">Listes</a></li>
+                           <li><a href="#simplesunion" title="Unions">Unions</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#typescomplexes" title="Les types complexes">Les types complexes</a><ol>
+                           <li><a href="#complintro" title="Introduction">Introduction</a></li>
+                           <li><a href="#complsequence" title="Séquences d'éléments">Séquences d'éléments</a></li>
+                           <li><a href="#complchoix" title="Choix d'élément">Choix d'élément</a></li>
+                           <li><a href="#complall" title="L'élément all">L'élément all</a></li>
+                           <li><a href="#comploccur" title="Indicateurs d'occurences">Indicateurs d'occurences</a></li>
+                           <li><a href="#complcreation" title="Création de type complexe à partir de types simples">Création de type complexe à partir de types simples</a></li>
+                           <li>Exercice&nbsp;: <a href="#exoelt" title="Déclaration d'éléments">Déclaration d'éléments</a></li>
+                           <li>Exercice&nbsp;: <a href="#exoattr" title="Déclaration d'attributs">Déclaration d'attributs</a></li>
+                           <li>Exercice&nbsp;: <a href="#exotypes" title="Déclaration de types">Déclaration de types</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>V. <a href="#espacenom" title="Espaces de nom">Espaces de nom</a><ol>
+                     <li><a href="#espaceintro" title="Introduction">Introduction</a></li>
+                     <li><a href="#espaceliaison" title="Comment lier un fichier XML à un schéma&nbsp;?">Comment lier un fichier XML à un schéma&nbsp;?</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>VI. <a href="#derivation" title="Les dérivations">Les dérivations</a><ol>
+                     <li><a href="#derivintro" title="Introduction">Introduction</a></li>
+                     <li><a href="#restriction" title="Restriction de type">Restriction de type</a><ol>
+                           <li><a href="#restrictiongene" title="Généralités">Généralités</a></li>
+                           <li><a href="#restrictionexemple" title="Exemples">Exemples</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>VII. <a href="#autresfonctions" title="Diverses autres fonctionnalités">Diverses autres fonctionnalités</a><ol>
+                     <li><a href="#inclusion" title="Inclusion de schémas">Inclusion de schémas</a></li>
+                     <li><a href="#documentation" title="Documentation">Documentation</a></li>
+                     <li><a href="#null" title="Attribut null">Attribut null</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="gene" href="#gene" id="gene"></a>I. Introduction
+         </h3>
+         <h4><a name="introdtd" id="introdtd" href="#introdtd"></a>1. Limitations des DTD
+         </h4>
+         <p>Lors de son lancement, <code class="langage">XML</code> a été perçu comme une réelle chance pour les développeurs d'avoir à disposition un langage simple d'utilisation, portable
+            sans difficulté d'une machine -et d'une application- à une autre, et libre de droits. Dans les premiers temps, un fichier
+            <code class="typefichier">XML</code>, si on voulait le standardiser en utilisant un vrai langage général de description, devait dépendre d'une <a href="dtd.html"><code class="typefichier">DTD</code></a>. Mais ce format de description, hérité de <code class="langage">SGML</code>, souffre de nombreuses déficiences.
+         </p>
+         <ol>
+            <li>
+               <p>Premièrement, les <code class="typefichier">DTD</code> ne sont pas au format <code class="langage">XML</code>. Cela signifie qu'il est nécessaire d'utiliser un outil spécial pour manipuler un tel fichier, différent de celui utilisé
+                  pour l'édition du fichier <code class="typefichier">XML</code>.
+               </p>
+            </li>
+            <li>
+               <p>Deuxièmement, les <code class="typefichier">DTD</code> ne supportent pas les «&nbsp;espaces de nom&nbsp;» (nous reviendrons sur cette notion). En pratique, cela implique qu'il n'est pas
+                  possible d'importer des définitions de balises définies par ailleurs dans un fichier <code class="typefichier">XML</code> défini par une <code class="typefichier">DTD</code>.
+               </p>
+            </li>
+            <li>
+               <p>Troisièmement, le «&nbsp;typage&nbsp;» des données (c'est-à-dire la possibilité de spécifier par exemple qu'un attribut ne doit être
+                  qu'un nombre entier) est extrêmement limité.
+               </p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_introdtd" title="Retour à la TdM (Limitations des DTD)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="introschema" id="introschema" href="#introschema"></a>2. Apports des schémas
+         </h4>
+         <p>Conçu pour pallier les déficiences pré-citées des <code class="typefichier">DTD</code>, <code class="langage">XML Schema</code> propose des nouveautés en plus des fonctionnalités fournies par les DTD&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>Le typage des données est introduit, ce qui permet la gestion de booléens, d'entiers, d'intervalles de temps... Il est même
+                  possible de créer de nouveaux types à partir de types existants.
+               </p>
+            </li>
+            <li>
+               <p>La notion d'héritage. Les éléments peuvent hériter du contenu et des attributs d'un autre élément..</p>
+            </li>
+            <li>
+               <p>Le support des espaces de nom.</p>
+            </li>
+            <li>
+               <p>Les indicateurs d'occurrences des éléments peuvent être tout nombre non négatif (rappel&nbsp;: dans une <code class="typefichier">DTD</code>, on est limité à 0, 1 ou un nombre infini d'occurences pour un élément).
+               </p>
+            </li>
+            <li>
+               <p>Les schémas sont très facilement concevables par modules.</p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_introschema" title="Retour à la TdM (Apports des schémas)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="premierspas" href="#premierspas" id="premierspas"></a>II. Les premiers pas
+         </h3>
+         <h4><a name="premiersintro" id="premiersintro" href="#premiersintro"></a>1. Introduction
+         </h4>
+         <p>Le but d'un schéma est de définir une classe de documents <code class="typefichier">XML</code>. Il permet de décrire les autorisations d'imbrication et l'ordre d'apparition des éléments et de leurs attributs, tout comme
+            une <code class="typefichier">DTD</code>. Mais il permet aussi d'aller au-delà.
+         </p>
+         <p>Un premier point intéressant est qu'un fichier <code class="typefichier">Schema XML</code> est un document <code class="typefichier">XML</code>. Cela permet à un tel document d'être manipulé de la même manière que n'importe quel autre fichier <code class="typefichier">XML</code>, et en particulier par une feuille de style <code class="typefichier">XSL</code>. Par exemple, il est notamment possible d'automatiser la création d'une documentation à partir d'un schéma, fondée sur les
+            commentaires et explications qui s'y trouvent. C'est d'ailleurs chose facile avec l'éditeur <a href="oxygenxml.html">oXygen</a>, via le menu Modules d'extension&gt;Schema Documentation, à partir d'un <a href="exemples/biblio10.xsd">exemple de schéma</a>, de produire la <a href="exemples/biblio10_doc_exemple.html">documentation correspondante</a>.
+         </p>
+         <p>Le vocabulaire de <code class="langage">XML Schema</code> est composé d'environ 30 éléments et attributs. Ce vocabulaire est, a priori de manière bizarrement récursive et «&nbsp;auto-référente&nbsp;»,
+            défini dans un Schéma. Mais il existe également une DTD.
+         </p>
+         <p class="retourtdm"><a href="#tdm_premiersintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="schemastruc" id="schemastruc" href="#schemastruc"></a>2. Structure de base
+         </h4>
+         <p>Comme tout document <code class="typefichier">XML</code>, un <code class="typefichier">Schema XML</code> commence par un prologue, et a un élément racine.
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="tag">&lt;xsd:schema<span class="nomattribut"> xmlns:xsd</span>="<span class="valeurattribut">http://www.w3.org/2000/10/XMLSchema</span>"&gt;</span>
+            						&nbsp;&nbsp;<span class="commentaire">&lt;!--&nbsp;déclarations d'éléments, d'attributs et de types ici&nbsp;--&gt;</span><br>
+            					<span class="tag">&lt;/xsd:schema&gt;</span><br></p>
+         <p>L'élément racine est l'élément <code class="code">xsd:schema</code>. Pour le moment, oubliez l'attribut <code class="code">xmlns:xsd</code> (dont le rôle est le même que celui que nous avons déjà rencontré lors du <a href="stylexsl.html#p1s2">cours sur les feuilles de style</a>), et qui fait référence à l'<a href="#espacenom">espace de noms</a> utilisé pour l'écriture du fichier. Il faut simplement retenir que tout élément d'un schéma doit commencer par le préfixe
+            <code class="code">xsd.</code></p>
+         <p>Nous allons voir, par la suite, comment déclarer éléments et attributs à l'aide d'un schéma.</p>
+         <p class="retourtdm"><a href="#tdm_schemastruc" title="Retour à la TdM (Structure de base)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="declarations" href="#declarations" id="declarations"></a>III. Déclarations d'éléments et d'attributs
+         </h3>
+         <h4><a name="declarelt" id="declarelt" href="#declarelt"></a>1. Déclarations d'éléments
+         </h4>
+         <p>Un élément, dans un schéma, se déclare avec la balise <code class="code">&lt;xsd:element&gt;</code>. Par exemple,
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="tag">&lt;xsd:schema<span class="nomattribut"> xmlns:xsd</span>="<span class="valeurattribut">http://www.w3.org/2000/10/XMLSchema</span>"&gt;</span>
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">contacts</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">typeContacts</span>"&nbsp;/&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">remarque</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            						<span class="commentaire">&lt;!--&nbsp;déclarations de types ici&nbsp;--&gt;</span><br>
+            					<span class="tag">&lt;/xsd:schema&gt;</span><br></p>
+         <p>Le schéma précédent déclare deux éléments&nbsp;: un élément <code class="code">contacts</code> et un élément <code class="code">remarque</code>. Chaque élément est «&nbsp;typé&nbsp;» -c'est-à-dire qu'il doit respecter un certain format de données. L'élément <code class="code">contacts</code> est ainsi du type <code class="code">typeContacts</code>, qui est un <a href="#typescomplexes">type complexe</a> défini par l'utilisateur. L'élément remarque quant à lui est du type <code class="code">xsd:string</code> qui est un <a href="#typessimples">type simple</a> prédéfini de <code class="langage">XML Schema</code>.
+         </p>
+         <p>Chaque élément déclaré est associé à un type de données via l'attribut <code class="code">type</code>. Les éléments pouvant contenir des élément-enfants ou posséder des attributs sont dits de type <em>complexe</em>, tandis que les éléments n'en contenant pas sont dits de type <em>simple</em>. Nous reviendrons plus loin sur cette notion de <a href="#types">type de données</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_declarelt" title="Retour à la TdM (Déclarations d'éléments)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="declaattr" id="declaattr" href="#declaattr"></a>2. Déclarations d'attributs
+         </h4>
+         <h5><a href="#declaattrsimple" name="declaattrsimple" id="declaattrsimple"></a>a. Déclaration simple
+         </h5>
+         <p>À la différence des éléments, un attribut ne peut être que de type simple. Cela signifie que les attributs, comme avec les
+            <code class="typefichier">DTD</code>, ne peuvent contenir d'autres éléments ou attributs. De plus, les déclarations d'attributs doivent être placées <em>après</em> les définitions des types complexes, autrement dit, après les éléments <code class="code">xsd:sequence</code>, <code class="code">xsd:choice</code> et <code class="code">xsd:all</code> (voir plus loin). Pour mémoire, rappelons que dans une <code class="typefichier">DTD</code>, l'ordre des déclarations n'a pas d'importance.
+         </p>
+         <p>L'exemple suivant montre la déclaration d'un attribut <code class="code">maj</code> de type <code class="code">xsd:date</code> (un autre type simple) qui indique la date de dernière mise à jour de la liste des contacts.
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="tag">&lt;xsd:schema<span class="nomattribut"> xmlns:xsd</span>="<span class="valeurattribut">http://www.w3.org/2000/10/XMLSchema</span>"&gt;</span>
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">contacts</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">typeContacts</span>"&nbsp;/&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">remarque</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&gt;</span>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="commentaire">&lt;!--&nbsp;déclarations de types ici&nbsp;--&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:complexType&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;<span class="commentaire">&lt;!--&nbsp;déclarations du modèle de contenu ici&nbsp;--&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">maj</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:date</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsd:complexType&gt;</span><br>
+            						<span class="tag">&lt;/xsd:element&gt;</span><br>
+            					<span class="tag">&lt;/xsd:schema&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_declaattrsimple" title="Retour à la TdM (Déclaration simple)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#declaattroccur" name="declaattroccur" id="declaattroccur"></a>b. Contraintes d'occurences
+         </h5>
+         <p>Tout comme dans une <code class="typefichier">DTD</code>, un attribut peut avoir un indicateur d'occurences.
+         </p>
+         <p>L'élément <code class="code">attribute</code> d'un <code class="typefichier">Schema XML</code> peut avoir trois attributs optionnels&nbsp;: <code class="code">use</code>, <code class="code">default</code> et <code class="code">fixed</code>. Des combinaisons de ces trois attributs permettent de paramétrer ce qui est acceptable ou non dans le fichier <code class="typefichier">XML</code> final (attribut obligatoire, optionnel, possédant une valeur par défaut...). Par exemple, la ligne suivante permet de rendre
+            l'attribut <code class="code">maj</code> optionnel, avec une valeur par défaut au 11 octobre 2003 s'il n'apparaît pas (le format de date est standardisé&nbsp;: cette date
+            s'écrit donc à l'anglo-saxonne année-mois-jour&nbsp;; cela permet en outre de plus facilement classer les dates).
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">maj</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:date</span>"<span class="nomattribut"> use</span>="<span class="valeurattribut">optional</span>"<span class="nomattribut"> default</span>="<span class="valeurattribut">2003-10-11</span>"&nbsp;/&gt;</span><br></p>
+         <p>Quand l'attribut <code class="code">fixed</code> est renseigné, la seule valeur que peut prendre l'attribut déclaré est celle de l'attribut <code class="code">fixed</code>. Cet attribut permet de "réserver" des noms d'attributs pour une utilisation future, dans le cadre d'une mise à jour du schéma.
+         </p>
+         <p>Le tableau suivant présente une comparaison entre le format <code class="langage">DTD</code> et le <code class="langage">XML Schema</code>.
+         </p>
+         <table class="tableau" summary="Contraintes d'occurences fixables par les attributs use et default." border="1">
+            <tr>
+               <th id="dtd">
+                  <p>DTD</p>
+               </th>
+               <th id="use">
+                  <p>Attribut <code class="code">use</code></p>
+               </th>
+               <th id="default">
+                  <p>Attribut <code class="code">default</code></p>
+               </th>
+               <th id="comment">
+                  <p>Commentaire</p>
+               </th>
+            </tr>
+            <tr>
+               <td headers="dtd">
+                  <p>#REQUIRED</p>
+               </td>
+               <td headers="use">
+                  <p>required</p>
+               </td>
+               <td headers="default">
+                  <p>-</p>
+               </td>
+               <td headers="comment">
+                  <p></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="dtd">
+                  <p>"blabla" #REQUIRED</p>
+               </td>
+               <td headers="use">
+                  <p>required</p>
+               </td>
+               <td headers="default">
+                  <p>blabla</p>
+               </td>
+               <td headers="comment">
+                  <p></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="dtd">
+                  <p>#IMPLIED</p>
+               </td>
+               <td headers="use">
+                  <p>optional</p>
+               </td>
+               <td headers="default">
+                  <p>-</p>
+               </td>
+               <td headers="comment">
+                  <p></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="dtd">
+                  <p>"blabla" #IMPLIED</p>
+               </td>
+               <td headers="use">
+                  <p>optional</p>
+               </td>
+               <td headers="default">
+                  <p>blabla</p>
+               </td>
+               <td headers="comment">
+                  <p></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="dtd">
+                  <p>-</p>
+               </td>
+               <td headers="use">
+                  <p>prohibited</p>
+               </td>
+               <td headers="default">
+                  <p>-</p>
+               </td>
+               <td headers="comment">
+                  <p>Cet attribut ne doit pas apparaître</p>
+               </td>
+            </tr>
+         </table>
+         <p class="legende">Table&nbsp;1. Contraintes d'occurences fixables par les attributs <code class="code">use</code> et <code class="code">default</code>.
+         </p>
+         <p>Il est à noter que la valeur de l'attribut <code class="code">default</code> doit être conforme au type déclaré. Par exemple...
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">maj</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:date</span>"<span class="nomattribut"> use</span>="<span class="valeurattribut">optional</span>"<span class="nomattribut"> default</span>="<span class="valeurattribut">-43</span>"&nbsp;/&gt;</span><br></p>
+         <p>... produirait une erreur à la validation du schéma.</p>
+         <p>Un autre type de déclaration d'attributs dans les <code class="typefichier">DTD</code>, la liste de choix, est possible grâce à une <a href="#restrictionexemple">restriction de type</a>&nbsp;; nous y reviendrons.
+         </p>
+         <p class="retourtdm"><a href="#tdm_declaattroccur" title="Retour à la TdM (Contraintes d'occurences)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#declaattrregp" name="declaattrregp" id="declaattrregp"></a>c. Regroupements d'attributs
+         </h5>
+         <p><code class="langage">XML Schema</code> propose une fonctionnalité supplémentaire, permettant de déclarer des groupes d'attributs (groupes auxquels il est possible
+            de faire appel lors d'une déclaration d'éléments). Cela permet d'éviter de répéter des informations de déclarations.
+         </p>
+         <p class="retourtdm"><a href="#tdm_declaattrregp" title="Retour à la TdM (Regroupements d'attributs)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#unouplusieursattr" name="unouplusieursattr" id="unouplusieursattr"></a>d. Déclaration d'élément ne contenant que du texte avec un (ou plusieurs) attribut(s)
+         </h5>
+         <p>Un tel élément est de type complexe, car il contient au moins un attribut. Afin de spécifier qu'il peut contenir également
+            du texte, on utilise l'attribut <code class="code">mixed</code> de l'élément <code class="code">xsd;complexType</code>. Par défaut, <code class="code">mixed="false"</code>; il faut dans ce cas forcer <code class="code">mixed="true"</code>. Par exemple,
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">elt</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:complexType<span class="nomattribut"> mixed</span>="<span class="valeurattribut">true</span>"&gt;</span><br>
+            							
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">attr</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"<span class="nomattribut"> use</span>="<span class="valeurattribut">optional</span>"&nbsp;/&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:complexType&gt;</span><br>
+            					<span class="tag">&lt;/xsd:element&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_declaattr" title="Retour à la TdM (Déclarations d'attributs)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="declareference" id="declareference" href="#declareference"></a>3. Déclaration et référencement
+         </h4>
+         <p>La procédure précédente de déclaration d'éléments peut amener à une structure de type «&nbsp;poupée russe&nbsp;» des déclarations. Pour
+            des raisons de clarté, il est beaucoup plus avantageux d'ordonner ces déclarations, ainsi qu'on peut le voir sur <a href="exemples/biblio10.xsd">cet exemple</a> (on ne fera pas attention, pour le moment, aux «&nbsp;définitions de type&nbsp;»).
+         </p>
+         <p>Il est recommandé de commencer par déclarer les éléments et attributs de type simple, puis ceux de type complexe. On peut
+            en effet faire référence, dans une déclaration de type complexe, à un élément de type simple prélablement défini. Par exemple...
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">livre</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:complexType&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:sequence&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">auteur</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">pages</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:positiveInteger</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsd:sequence&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:complexType&gt;</span><br>
+            					<span class="tag">&lt;/xsd:element&gt;</span><br></p>
+         <p>... est plus difficile à maintenir que... </p>
+         <p class="xml"><span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">pages</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:positiveInteger</span>"&nbsp;/&gt;</span><br><span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">auteur</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br><span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">livre</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:complexType&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:sequence&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> ref</span>="<span class="valeurattribut">auteur</span>"&nbsp;/&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> ref</span>="<span class="valeurattribut">pages</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsd:sequence&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:complexType&gt;</span><br>
+            					<span class="tag">&lt;/xsd:element&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_declareference" title="Retour à la TdM (Déclaration et référencement)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="types" href="#types" id="types"></a>IV. Les types de données
+         </h3>
+         <h4><a name="introtypes" id="introtypes" href="#introtypes"></a>1. Introduction
+         </h4>
+         <p>Ainsi que nous l'avons déjà brièvement signalé, <code class="langage">XML Schema</code> permet de spécifier des types de données bien plus finement que le langage <code class="langage">DTD</code>. Il distingue notamment <a href="#typessimples">types simples</a> et <a href="#typescomplexes">types complexes</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_introtypes" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="typessimples" id="typessimples" href="#typessimples"></a>2. Types simples
+         </h4>
+         <h5><a href="#simplesgene" name="simplesgene" id="simplesgene"></a>a. Généralités
+         </h5>
+         <p>Les types de données simples ne peuvent comporter ni attributs, ni éléments enfants. Il en existe de nombreux, prédéfinis,
+            mais il est également possible d'en "dériver" de nouveaux (nous reviendrons <a href="#derivation">plus loin</a> sur cette fonctionnalité). Enfin, il est possible de déclarer des "<a href="#simplesliste">listes</a>" de types.
+         </p>
+         <p class="retourtdm"><a href="#tdm_simplesgene" title="Retour à la TdM (Généralités)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#simplesintegres" name="simplesintegres" id="simplesintegres"></a>b. Bibliothèque de types intégrés
+         </h5>
+         <p>Nombreux sont les types prédéfinis dans la bibliothèque de types intégrés de <code class="langage">XML Schema.</code> la figure suivante en donne la hiérarchie, et leur <a href="http://www.w3.org/TR/xmlschema-0/#CreatDt">liste détaillée</a> figure sur le site du W3C.
+         </p><span class="image"><img src="xmldatatypes.png" alt="Hiérarchie des types simples intégrés" width="700" height="426" class="illustration"></span><p>Les types de données les plus simples (les chaînes de caractères) que permettaient les DTDs sont conservés, mais d'autres
+            ont fait leur apparition. On pourra envisager, par exemple, dans un schéma décrivant un bon de commande, la déclaration d'un
+            attribut <code class="code">quantite</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">quantite</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:positiveInteger</span>"<span class="nomattribut"> use</span>="<span class="valeurattribut">default</span>"<span class="nomattribut"> value</span>="<span class="valeurattribut">1</span>"&nbsp;/&gt;</span><br></p>
+         <p>... qui force la valeur de l'attribut à un être un entier positif. Un bon de commande <code class="typefichier">XML</code> suivant ce schéma, ayant une commande spécifiant <code class="code">quantite="-3"</code> sera alors automatiquement refusé par le système. Un document respectant un tel schéma peut dès lors être enregistré directement
+            dans une base de données, sans contrôle supplémentaire sur ce point.
+         </p>
+         <p class="retourtdm"><a href="#tdm_simplesintegres" title="Retour à la TdM (Bibliothèque de types intégrés)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#simplesliste" name="simplesliste" id="simplesliste"></a>c. Listes
+         </h5>
+         <p>Les types listes sont des suites de types simples (ou <em>atomiques</em>). <code class="langage">XML Schema</code> possède trois types de listes intégrés&nbsp;: <code class="code">NMTOKENS</code>, <code class="code">ENTITIES</code> et <code class="code">IDREFS</code>. Il est également possible de créer une liste personnalisée, par «&nbsp;dérivation&nbsp;» de types existants. Par exemple,
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:simpleType<span class="nomattribut"> name</span>="<span class="valeurattribut">numéroDeTéléphone</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:list<span class="nomattribut"> itemType</span>="<span class="valeurattribut">xsd:unsignedByte</span>"&nbsp;/&gt;</span><br>
+            					<span class="tag">&lt;/xsd:simpleType&gt;</span><br></p>
+         <p>Un élément conforme à cette déclaration serait <code class="code">&lt;téléphone&gt;01 44 27 60 11&lt;/téléphone&gt;</code>.
+         </p>
+         <p>Il est également possible d'indiquer des contraintes plus fortes sur les types simples&nbsp;; ces contraintes s'appellent des «&nbsp;facettes&nbsp;».
+            Elles permettent par exemple de limiter la longueur de notre numéro de téléphone à 10 nombres. Nous reviendrons sur <a href="#restriction">les facettes</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_simplesliste" title="Retour à la TdM (Listes)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#simplesunion" name="simplesunion" id="simplesunion"></a>d. Unions
+         </h5>
+         <p>Les listes et les types simples intégrés ne permettent pas de choisir le type de contenu d'un élément. On peut désirer, par
+            exemple, qu'un type autorise soit un nombre, soit une chaîne de caractères particuliers. Il est possible de le faire à l'aide
+            d'une déclaration d'union. Par exemple, sous réserve que le type simple <code class="code">numéroDeTéléphone</code> ait été préalablement défini (voir précédemment), on peut déclarer...
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:simpleType<span class="nomattribut"> name</span>="<span class="valeurattribut">numéroDeTéléphoneMnémoTechnique</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:union<span class="nomattribut"> memberTypes</span>="<span class="valeurattribut">xsd:string numéroDeTéléphone</span>"&nbsp;/&gt;</span><br>
+            					<span class="tag">&lt;/xsd:simpleType&gt;</span><br></p>
+         <p>Les éléments suivants sont alors des "instances" valides de cette déclaration&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;téléphone&gt;</span>18<span class="tag">&lt;/téléphone&gt;</span><br><span class="tag">&lt;téléphone&gt;</span>Pompiers<span class="tag">&lt;/téléphone&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_typessimples" title="Retour à la TdM (Types simples)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="typescomplexes" id="typescomplexes" href="#typescomplexes"></a>3. Les types complexes
+         </h4>
+         <h5><a href="#complintro" name="complintro" id="complintro"></a>a. Introduction
+         </h5>
+         <p>Un élément de type simple ne peut contenir pas de sous-élément. Il est nécessaire pour cela de le déclarer de type complexe.
+            On peut alors déclarer des <a href="#complsequence">séquences</a> d'éléments, des types de <a href="#complchoix">choix</a> ou des <a href="#comploccur">contraintes d'occurences</a></p>
+         <p class="retourtdm"><a href="#tdm_complintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#complsequence" name="complsequence" id="complsequence"></a>b. Séquences d'éléments
+         </h5>
+         <p>Nous savons déjà comment, dans une <code class="typefichier">DTD</code>, nous pouvons déclarer un élément comme pouvant contenir une suite de sous-éléments dans un ordre déterminé. Il est bien
+            sûr possible de faire de même avec un schéma.
+         </p>
+         <p>On utilise pour ce faire l'élément <code class="code">xsd:sequence</code>, qui reproduit l'opérateur <code class="code">,</code> du langage <code class="langage">DTD</code>. Ainsi...
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:complexType&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:sequence&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">nom</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">prénom</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">dateDeNaissance</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:date</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">adresse</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">adresseElectronique</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">téléphone</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">numéroDeTéléphone</span>"&nbsp;/&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:sequence&gt;</span><br>
+            					<span class="tag">&lt;/xsd:complexType&gt;</span><br></p>
+         <p>... est équivalent à une déclaration d'élément, dans une <code class="typefichier">DTD</code>, où apparaîtrait <code class="code">(nom, prénom, dateDeNaissance, adresse, adresseElectronique, téléphone)</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_complsequence" title="Retour à la TdM (Séquences d'éléments)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#complchoix" name="complchoix" id="complchoix"></a>c. Choix d'élément
+         </h5>
+         <p>On peut vouloir modifier la déclaration de type précédente en stipulant qu'on doive indiquer soit l'adresse d'une personne,
+            soit son adresse électronique. Pour cela, il suffit d'utiliser un élément <code class="code">xsd:choice</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:complexType<span class="nomattribut"> name</span>="<span class="valeurattribut">typePersonne</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;sequence&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">nom</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">prénom</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">dateDeNaissance</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:date</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:choice&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">adresse</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">adresseElectronique</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsd:choice&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/sequence&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">téléphone</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">numéroDeTéléphone</span>"&nbsp;/&gt;</span><br>
+            					<span class="tag">&lt;/xsd:complexType&gt;</span><br></p>
+         <p>Ce connecteur a donc les mêmes effets que l'opérateur <code class="code">|</code> dans une <code class="typefichier">DTD</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_complchoix" title="Retour à la TdM (Choix d'élément)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#complall" name="complall" id="complall"></a>d. L'élément all
+         </h5>
+         <p>Cet élément est une nouveauté par rapport aux <code class="typefichier">DTD</code>. Il indique que les éléments enfants doivent apparaître une fois (ou pas du tout), mais dans n'importe quel ordre. Cet élément
+            <code class="code">xsd:all</code> doit être un enfant direct de l'élément <code class="code">xsd:complexType</code>. Par exemple...
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:complexType&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:all&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">nom</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">prénom</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">dateDeNaissance</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:date</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">adresse</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">adresseElectronique</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:element<span class="nomattribut"> name</span>="<span class="valeurattribut">téléphone</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">numéroDeTéléphone</span>"&nbsp;/&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:all&gt;</span><br>
+            					<span class="tag">&lt;/xsd:complexType&gt;</span><br></p>
+         <p>... indique que chacun de ces éléments peut apparaître une fois ou pas du tout (équivalent de l'opérateur <code class="code">?</code> dans une <code class="typefichier">DTD</code>), et que l'ordre des éléments n'a pas d'importance (cela n'a pas d'équivalent dans une <code class="typefichier">DTD</code>).
+         </p>
+         <p class="retourtdm"><a href="#tdm_complall" title="Retour à la TdM (L'élément all)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#comploccur" name="comploccur" id="comploccur"></a>e. Indicateurs d'occurences
+         </h5>
+         <p>Dans une <code class="typefichier">DTD</code>, un indicateur d'occurence ne peut prendre que les valeurs 0, 1 ou l'infini. On peut forcer un élément <code class="code">sselt</code> à être présent 378 fois, mais il faut pour cela écrire <code class="code">(sselt, sselt..., sselt, sselt)</code> 378 fois. <code class="langage">XML Schema</code> permet de déclarer directement une telle occurence, car tout nombre entier non négatif peut être utilisé. Pour déclarer qu'un
+            élément peut être présent un nombre illimité de fois, on utilise la valeur <code class="code">unbounded</code>. Les attributs utiles sont <code class="code">minOccurs</code> et <code class="code">maxOccurs</code>, qui indiquent respectivement les nombres minimal et maximal de fois où un élément peut apparaître. Le tableau suivant récapitule
+            les possibilités&nbsp;:
+         </p>
+         <table class="tableau" summary="Liste des indicateurs d'occurence." border="1">
+            <tr>
+               <th id="d2">
+                  <p>Dans une <code class="typefichier">DTD</code></p>
+               </th>
+               <th id="min">
+                  <p>Valeur de <code class="code">minOccurs</code></p>
+               </th>
+               <th id="max">
+                  <p>Valeur de <code class="code">maxOccurs</code></p>
+               </th>
+            </tr>
+            <tr>
+               <td headers="d2">
+                  <p><code class="code">*</code></p>
+               </td>
+               <td headers="min">
+                  <p>0</p>
+               </td>
+               <td headers="max">
+                  <p><code class="code">unbounded</code></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="d2">
+                  <p><code class="code">+</code></p>
+               </td>
+               <td headers="min">
+                  <p>1 (pas nécessaire, valeur par défaut)</p>
+               </td>
+               <td headers="max">
+                  <p><code class="code">unbounded</code></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="d2">
+                  <p><code class="code">?</code></p>
+               </td>
+               <td headers="min">
+                  <p>0</p>
+               </td>
+               <td headers="max">
+                  <p>1 (pas nécessaire, valeur par défaut)</p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="d2">
+                  <p>rien</p>
+               </td>
+               <td headers="min">
+                  <p>1 (pas nécessaire, valeur par défaut)</p>
+               </td>
+               <td headers="max">
+                  <p>1 (pas nécessaire, valeur par défaut)</p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="d2">
+                  <p>impossible</p>
+               </td>
+               <td headers="min">
+                  <p>nombre entier n quelconque</p>
+               </td>
+               <td headers="max">
+                  <p>nombre entier m quelconque supérieur ou égal à n</p>
+               </td>
+            </tr>
+         </table>
+         <p class="legende">Table&nbsp;2. Liste des indicateurs d'occurence.</p>
+         <p class="retourtdm"><a href="#tdm_comploccur" title="Retour à la TdM (Indicateurs d'occurences)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#complcreation" name="complcreation" id="complcreation"></a>f. Création de type complexe à partir de types simples
+         </h5>
+         <p>Il est possible également de créer un type complexe à partir d'un type simple.</p>
+         <p>On peut avoir besoin de définir un élément contenant une valeur simple, et possédant un attribut, comme <code class="code">&lt;poids unite="kg"&gt;67&lt;/poids&gt;</code>, par exemple. Un tel élément ne peut pas être déclaré de type simple, car il contient un attribut. Il faut <em>dériver</em> un type complexe à partir du type simple <code class="code">positiveInteger</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:complexType<span class="nomattribut"> name</span>="<span class="valeurattribut">typePoids</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:simpleContent&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:extension<span class="nomattribut"> base</span>="<span class="valeurattribut">xsd:positiveInteger</span>"&gt;</span><br>
+            								
+            								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">unite</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">xsd:string</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/xsd:extension&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:simpleContent&gt;</span><br>
+            					<span class="tag">&lt;/xsd:complexType&gt;</span><br></p>
+         <p>L'élément <code class="code">xsd:simpleContent</code> indique que le nouvel élément ne contient pas de sous-élément.
+         </p>
+         <h4>Exercice&nbsp;<a name="exoelt" href="#exoelt" id="exoelt"></a>1. Déclaration d'éléments
+         </h4>
+         <h5><a href="exercices/exo13.html#exoelt" title="Énoncé de l'exercice 'Déclaration d'éléments'">Énoncé</a></h5>
+         <h5><a href="exercices/exo13_1cor.xsd" title="Correction 'Déclaration d'éléments'">
+               				Correction</a></h5>
+         <h4>Exercice&nbsp;<a name="exoattr" href="#exoattr" id="exoattr"></a>2. Déclaration d'attributs
+         </h4>
+         <h5><a href="exercices/exo13.html#exoattr" title="Énoncé de l'exercice 'Déclaration d'attributs'">Énoncé</a></h5>
+         <h5><a href="exercices/exo13_2cor.xsd" title="Correction 'Déclaration d'attributs'">
+               				Correction</a></h5>
+         <h4>Exercice&nbsp;<a name="exotypes" href="#exotypes" id="exotypes"></a>3. Déclaration de types
+         </h4>
+         <h5><a href="exercices/exo13.html#exotypes" title="Énoncé de l'exercice 'Déclaration de types'">Énoncé</a></h5>
+         <h5><a href="exercices/exo13_3cor.xsd" title="Correction 'Déclaration de types'">
+               				Correction</a></h5>
+         <p class="retourtdm"><a href="#tdm_typescomplexes" title="Retour à la TdM (Les types complexes)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="espacenom" href="#espacenom" id="espacenom"></a>V. Espaces de nom
+         </h3>
+         <h4><a name="espaceintro" id="espaceintro" href="#espaceintro"></a>1. Introduction
+         </h4>
+         <p>La notion d'espace de nom est complexe&nbsp;; elle permet à un document <code class="typefichier">XML</code> quelconque d'utiliser les balises définies dans un schéma donné... quelconque. Nous avons déjà utilisé cette notion&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>dans les feuilles de style <code class="typefichier">XSL</code>, où nous utilisions des éléments <em>préfixés</em> par <code class="code">xsl</code>, après avoir écrit <code class="code">&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;</code></p>
+            </li>
+            <li>
+               <p>dans un schéma, où nous utilisions des éléments préfixés par <code class="code">xsd</code>, après avoir écrit <code class="code">&lt;xsd:schema xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"&gt;</code>.
+               </p>
+            </li>
+         </ul>
+         <p>Cela signifie que l'<em>espace de nom</em> auquel ces balises font référence, là où elles sont définies , est un schéma particulier que l'on peut consulter.
+         </p>
+         <p class="retourtdm"><a href="#tdm_espaceintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="espaceliaison" id="espaceliaison" href="#espaceliaison"></a>2. Comment lier un fichier XML à un schéma&nbsp;?
+         </h4>
+         <p>Nous n'allons pas ici entrer dans les détails de la notion d'espace de nom, mais simplement apprendre à valider un document
+            <code class="typefichier">XML</code> d'après un <code class="typefichier">Schema XML</code>. On utilise pour ce faire le préfixe <code class="code">xmlns</code>.
+         </p>
+         <ul>
+            <li>
+               <p>Nous avons déjà vu le cas, équivalent à une <code class="typefichier">DTD</code> de type <code class="code">PUBLIC</code>, où le schéma est... public. Un schéma est en effet un document <code class="typefichier">XML</code>, et on trouve dans son élément racine l'attribut <code class="code">xmlns:xsd="http://www.w3.org/2001/XMLSchema"</code>. Cela signifie que dans le document, tous les éléments commençant par <code class="code">xsd</code> sont référencés à cette URL. Donc si on a déposé un schéma à l'adresse http://www.monsite.org/collection_schemas/biblio,
+                  on peut l'appeler par <code class="code">&lt;xsd:biblio xmlns="http://www.monsite.org/collection_schemas/biblio"&gt;</code>.
+               </p>
+            </li>
+            <li>
+               <p>Dans le cas d'une référence locale, correspondant à une <code class="typefichier">DTD</code> de type <code class="code">SYSTEM</code>, on fait référence au schéma dans le document <code class="typefichier">XML</code> en utilisant l'attribut <code class="code">noNamespaceSchemaLocation</code>, par <code class="code">&lt;biblio xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="lien_relatif_vers_le_schema"&gt;</code>. Par exemple,
+               </p>
+               <p><code class="code">&lt;biblio xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="biblio10.xsd"&gt;</code>.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_espaceliaison" title="Retour à la TdM (Comment lier un fichier XML à un schéma&nbsp;?)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="derivation" href="#derivation" id="derivation"></a>VI. Les dérivations
+         </h3>
+         <h4><a name="derivintro" id="derivintro" href="#derivintro"></a>1. Introduction
+         </h4>
+         <p>Les types simples et complexes permettent déjà de faire plus de choses que les déclarations dans le langage <code class="langage">DTD</code>. Il est possible de raffiner leur déclaration de telle manière qu'ils soient une "restriction" ou une extension d'un type
+            déjà existant, en vue de préciser un peu plus leur forme. Nous allons nous limiter dans ce cours d'initiation à la restriction
+            des types simples.
+         </p>
+         <p class="retourtdm"><a href="#tdm_derivintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="restriction" id="restriction" href="#restriction"></a>2. Restriction de type
+         </h4>
+         <h5><a href="#restrictiongene" name="restrictiongene" id="restrictiongene"></a>a. Généralités
+         </h5>
+         <p>On peut appliquer une dérivation aussi bien à un type simple, qu'à un type complexe. La dérivation par restriction permet
+            de créer de nouveaux types simples à partir des types simples prédéfinis par le format <code class="langage">XML Schema</code>. On utilise pour ce faire des <em>facettes</em>, qui sont des contraintes supplémentaires appliquées à un type simple particulier.
+         </p>
+         <p>Une facette permet de placer une contrainte sur l'ensemble des valeurs que peut prendre un type de base. Par exemple, on peut
+            souhaiter créer un type simple, appelé <code class="code">MonEntier</code>, limité aux valeurs comprises entre 0 et 99 inclus. On dérive ce type à partir du type simple prédéfini <code class="code">nonNegativeInteger</code>, en utilisant la facette <code class="code">maxExclusive</code>.
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:simpleType<span class="nomattribut"> name</span>="<span class="valeurattribut">monEntier</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:restriction<span class="nomattribut"> base</span>="<span class="valeurattribut">nonNegativeInteger</span>"&gt;</span><br>
+            							
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:maxExclusive<span class="nomattribut"> value</span>="<span class="valeurattribut">100</span>"&nbsp;/&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:restriction&gt;</span><br>
+            					<span class="tag">&lt;/xsd:simpleType&gt;</span><br></p>
+         <p>Il existe un nombre important de facettes qui permettent de&nbsp;:</p>
+         <ul>
+            <li>
+               <p>fixer, restreindre ou augmenter la longueur minimale ou maximale d'un type simple</p>
+            </li>
+            <li>
+               <p>énumérer toutes les valeurs possibles d'un type</p>
+            </li>
+            <li>
+               <p>prendre en compte des expressions régulières</p>
+            </li>
+            <li>
+               <p>fixer la valeur minimale ou maximale d'un type (voir l'exemple ci-dessus)</p>
+            </li>
+            <li>
+               <p>fixer la précision du type...</p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_restrictiongene" title="Retour à la TdM (Généralités)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#restrictionexemple" name="restrictionexemple" id="restrictionexemple"></a>b. Exemples
+         </h5>
+         <p>On peut utiliser cette fonctionnalité pour reproduire ce qui, dans les <code class="typefichier">DTD</code>, permettait de limiter les valeurs de certains attributs. Ainsi...
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:attribute<span class="nomattribut"> name</span>="<span class="valeurattribut">jour</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">typeJourSemaine</span>"<span class="nomattribut"> use</span>="<span class="valeurattribut">required</span>"&nbsp;/&gt;</span><br><span class="tag">&lt;xsd:simpleType<span class="nomattribut"> name</span>="<span class="valeurattribut">typeJourSemaine</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:restriction<span class="nomattribut"> base</span>="<span class="valeurattribut">xsd:string</span>"&gt;</span><br>
+            							
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:enumeration<span class="nomattribut"> value</span>="<span class="valeurattribut">lundi</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:enumeration<span class="nomattribut"> value</span>="<span class="valeurattribut">mardi</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:enumeration<span class="nomattribut"> value</span>="<span class="valeurattribut">mercredi</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:enumeration<span class="nomattribut"> value</span>="<span class="valeurattribut">jeudi</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:enumeration<span class="nomattribut"> value</span>="<span class="valeurattribut">vendredi</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:enumeration<span class="nomattribut"> value</span>="<span class="valeurattribut">samedi</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:enumeration<span class="nomattribut"> value</span>="<span class="valeurattribut">dimanche</span>"&nbsp;/&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:restriction&gt;</span><br>
+            					<span class="tag">&lt;/xsd:simpleType&gt;</span><br></p>
+         <p>Pour limiter la longueur d'une chaîne&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;xsd:simpleType<span class="nomattribut"> name</span>="<span class="valeurattribut">typeMotLangueFrancaise</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:restriction<span class="nomattribut"> base</span>="<span class="valeurattribut">xsd:string</span>"&gt;</span><br>
+            							
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:length<span class="nomattribut"> value</span>="<span class="valeurattribut">21</span>"&nbsp;/&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:restriction&gt;</span><br>
+            					<span class="tag">&lt;/xsd:simpleType&gt;</span><br></p>
+         <p>Plus complexe, on peut utiliser des <em>expressions régulières</em>, qui permettent de spécifier quels sont les caractères autorisés, à l'aide de l'élément <code class="code">xsd:pattern</code>. Par exemple...
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:simpleType<span class="nomattribut"> name</span>="<span class="valeurattribut">typeAdresseElectronique</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:restriction<span class="nomattribut"> base</span>="<span class="valeurattribut">xsd:string</span>"&gt;</span><br>
+            							
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:pattern<span class="nomattribut"> value</span>="<span class="valeurattribut">(.)+@(.)+</span>"&nbsp;/&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:restriction&gt;</span><br>
+            					<span class="tag">&lt;/xsd:simpleType&gt;</span><br></p>
+         <p>Dans cet exemple, <code class="code">(.)+</code> signifie que l'on peut mettre n'importe quel caractère au moins une fois, et qu'entre les deux chaînes doit impérativement
+            apparaître le caractère <code class="code">@</code>.
+         </p>
+         <p>Un numéro ISBN est un référent international pour une publication. Il s'agit d'un numéro à 10 ou 13 chiffres. On peut le déclarer
+            ainsi&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:simpleType<span class="nomattribut"> name</span>="<span class="valeurattribut">typeISBN</span>"&gt;</span><br>
+            						
+            						&nbsp;&nbsp;<span class="tag">&lt;xsd:restriction<span class="nomattribut"> base</span>="<span class="valeurattribut">xsd:string</span>"&gt;</span><br>
+            							
+            							&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;xsd:pattern<span class="nomattribut"> value</span>="<span class="valeurattribut">[0-9]{10}</span>"&nbsp;/&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;/xsd:restriction&gt;</span><br>
+            					<span class="tag">&lt;/xsd:simpleType&gt;</span><br></p>
+         <p>Bien sûr, toutes les facettes ne sont pas acceptées par tous les types. Il serait fastidieux ici d'en donner la liste&nbsp;; elle
+            est accessible sur le site du W3C à l'adresse <a href="http://www.w3.org/TR/xmlschema-0/#SimpleTypeFacets">http://www.w3.org/TR/xmlschema-0/#SimpleTypeFacets</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_restriction" title="Retour à la TdM (Restriction de type)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="autresfonctions" href="#autresfonctions" id="autresfonctions"></a>VII. Diverses autres fonctionnalités
+         </h3>
+         <h4><a name="inclusion" id="inclusion" href="#inclusion"></a>1. Inclusion de schémas
+         </h4>
+         <p>Un <code class="typefichier">Schema XML</code> a rapidement tendance à devenir verbeux. Autrement dit, il devient rapidement suffisamment long pour que sa complexité apparente
+            rebute l'&#339;il humain. Il est alors plus raisonnable de le scinder en plusieurs morceaux, chacun chargé de définir précisément
+            tel ou tel sous-domaine du schéma. Il est en effet possible d'<em>inclure</em> plusieurs schémas dans un seul, à l'aide de l'élément <code class="code">xsd:include</code>. Cela offre de plus l'énorme avantage de modulariser un schéma, et donc de pouvoir sans difficulté importer certaines parties
+            à partir de schémas déjà existants. Nul besoin de réinventer la roue, ou de procéder à de massifs «&nbsp;copier/coller&nbsp;», en ayant
+            besoin de tout reprendre à zéro à chaque fois que l'on fait une mise à jour.
+         </p>
+         <p>Supposons par exemple que nous ayons défini le schéma d'une bibliographie dans le cadre plus général de l'écriture d'un mémoire.
+            Ce <code class="typefichier">Schema XML</code> est stocké à l'URL http://www.monsite.org/schemas/biblio.xsd. Nous avons besoin d'une bibliographie pour une autre aplication
+            -par exemple, dresser la liste d'un ensemble de ressources pour un site Web de e-formation. Nous pouvons inclure le schéma
+            précédemment écrit à l'aide de la commande...
+         </p>
+         <p class="xml"><span class="tag">&lt;xsd:include<span class="nomattribut"> schemaLocation</span>="<span class="valeurattribut">http://www.monsite.org/schemas/biblio.xsd</span>"&nbsp;/&gt;</span><br></p>
+         <p>Il s'agit d'une sorte de «&nbsp;copier-coller&nbsp;» du contenu de la bibliographie dans le schéma en cours d'écriture. La seule condition
+            est que le <code class="code">targetNameSpace</code> soit le même dans le <code class="typefichier">Schema XML</code> inclus et dans le <code class="typefichier">Schema XML</code> importateur.
+         </p>
+         <p class="retourtdm"><a href="#tdm_inclusion" title="Retour à la TdM (Inclusion de schémas)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="documentation" id="documentation" href="#documentation"></a>2. Documentation
+         </h4>
+         <p><code class="langage">XML Schema</code> permet, outre l'utilisation des commentaires comme tout format <code class="langage">XML</code>, l'adjonction de documentation aux éléments.
+         </p>
+         <p>La documentation à l'intention des lecteurs humains peut être définie dans des éléments <code class="code">xsd:documentation</code>, tandis que les informations à l'intention de programmes doivent être incluses dans des éléments <code class="code">xsd:appinfo</code>. Ces deux éléments doivent être placés dans un élément <code class="code">xsd:annotation</code>. Ils disposent d'attributs optionnels&nbsp;: <code class="code">xml:lang</code> et <code class="code">source</code>, qui est une référence à une URI pouvant être utilisée pour identifier l'objectif du commentaire ou de l'information.
+         </p>
+         <p>Les éléments <code class="code">xsd:annotation</code> peuvent être ajoutés au début de la plupart des constructions. Voir par exemple le schéma <a href="exemples/biblio10.xsd">biblio10.xsd</a> déjà donné. 
+         </p>
+         <p class="retourtdm"><a href="#tdm_documentation" title="Retour à la TdM (Documentation)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="null" id="null" href="#null"></a>3. Attribut null
+         </h4>
+         <p>Il est toujours préférable de pouvoir indiquer explicitement qu'un élément est non renseigné plutôt que d'omettre cet élément.
+            La valeur null des bases de données relationnelles est utilisée dans ce but. <code class="langage">XML Schema</code> intègre un mécanisme similaire permettant d'indiquer qu'un élément peut être non renseigné.
+         </p>
+         <p>Nous déclarons maintenant l'élément <code class="code">courriel</code> comme pouvant être <code class="code">null</code> à l'aide de l'attribut nullable du vocabulaire de <code class="langage">XML Schema</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;personne&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;nom&gt;</span>Jean Dupont<span class="tag">&lt;/nom&gt;</span><br>
+            						&nbsp;&nbsp;<span class="tag">&lt;courriel<span class="nomattribut"> xsi:null</span>&gt;</span><span class="tag">&lt;/courriel&gt;</span><br>
+            					<span class="tag">&lt;/personne&gt;</span><br></p>
+         <p>Cet attribut doit toujours être préfixé par <code class="code">xsi</code>. Quant à l'élément portant cet attribut, il peut contenir d'autres attributs, mais pas de sous-élément.
+         </p>
+         <p class="retourtdm"><a href="#tdm_null" title="Retour à la TdM (Attribut null)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours précédent&nbsp;: <a href="dtd.html">Déclarations de Type de Document</a><br></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="schema.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 11 mars 2008, version 1.34. Corrections de syntaxe et de fautes de frappe.</li>
+            <li>Le 22 janvier 2008, version 1.33. Remplacement de la figure illustrant les types intégrés.</li>
+            <li>Le 7 août 2007, version 1.32. Correction d'une erreur dans un exemple de déclaration de type d'attribut.</li>
+            <li>Le 2 février 2007, version 1.31. Correction de fautes de frappe.</li>
+            <li>Le 12 juillet 2005, version 1.30. Réécriture des exemples.</li>
+            <li>Le 11 mars 2005, version 1.22. Corrections typographiques.</li>
+            <li>Le 7 février 2005, version 1.21. Correction d'un lien.</li>
+            <li>Le 18 janvier 2005, version 1.20. Réécriture partielle.</li>
+            <li>Le 24 juin 2004, version 1.12. Corrections de liens.</li>
+            <li>Le 16 juin 2004, version 1.11. Ajout des corrections des exercices.</li>
+            <li>Le 31 mars 2004, version 1.10. Corrections typographiques et ajout d'une remarque sur la déclaration d'un élément de type texte contenant un (ou plusieurs)
+               attribut(s).
+            </li>
+            <li>Le 28 mars 2004, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

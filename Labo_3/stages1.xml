@@ -1,0 +1,61 @@
+<?xml version='1.0' ?>
+<?xml-stylesheet href="stages.xsl" type="text/xsl"?>
+<Stage>
+  <Student nom="Boursin" prenom="Aurélie" section="informatique" classe="3BI" >
+    <Entreprise nom="Fidexis" objet_social="assistance technique, commerciale, financière et administrative aux sociétés ou entreprises du groupe" responsable_service="Mr Duez Claude" responsable_stagiaire="Mr Libert" adresse="rue de la Charité, 13-17 1210 BRUXELLES" tel="02/209-02-73" />
+  </Student>
+  <Student nom="Cambier" prenom="Marylène" section="informatique" classe="3BI" >
+    <Entreprise nom="Pixelixir sprl" objet_social="" responsable_service="Mr Dumont" responsable_stagiaire="Me Dumont" adresse="Venelle de Terlongval, 45 1300 WAVRE" tel="0496/124857" />
+  </Student>
+  <Student nom="Coupet" prenom="Cindy" section="informatique" classe="3BI" >
+    <Entreprise nom="Scius - ICT" objet_social="" responsable_service="Mr Eeckout" responsable_stagiaire="Mr Ernoux" adresse="Avenue Franklin Roosevelt, 104 1332 GENVAL" tel="0477/277211" />
+  </Student>
+  <Student nom="Delbove" prenom="Florence" section="informatique" classe="3BI" >
+    <Entreprise nom="Systemat S.A." objet_social="achat et vente de matériel informatique et télématique" responsable_service="Mr Emmanuel GOFFAUX" responsable_stagiaire="Mr Marques" adresse="Chaussée de Louvain, 435  1380 LASNE" tel="02/4057000" />
+  </Student>
+  <Student nom="Detie" prenom="Charlotte" section="informatique" classe="3BI" >
+    <Entreprise nom="ECS - Hermès" objet_social="Consultance en IT" responsable_service="Mr Eric Mrzyglod" responsable_stagiaire="Mr De Neve" adresse="Rue de l'Industrie , 20  1400 NIVELLES" tel="0479/670016" />
+  </Student>
+  <Student nom="Di Costa" prenom="Estelle" section="informatique" classe="3BI" >
+    <Entreprise nom="T.D. Williamson S.A." objet_social="" responsable_service="Mr Ernoux" responsable_stagiaire="Mr Vellek" adresse="rue du Travail, 6  1400 NIVELLES" tel="067/21.36.29" />
+  </Student>
+  <Student nom="Francart" prenom="David" section="informatique" classe="3BI" >
+    <Entreprise nom="FABRICOM-GTI" objet_social="" responsable_service="Mr Ernst Vincent" responsable_stagiaire="Mr Lecocq" adresse="Chaussée de Tubize, 489 1420 BRAINE L'ALLEUD" tel="0478/154258" />
+  </Student>
+  <Student nom="Grumiaux" prenom="Nathan" section="informatique" classe="3BI" >
+    <Entreprise nom="Arafox SCRL" objet_social="développements open source" responsable_service="Mr Fabian Boiteux" responsable_stagiaire="Me Aventure" adresse="Avenue Leon Champagne, 2 1480 TUBIZE" tel="023/91.45.51" />
+  </Student>
+  <Student nom="Henry" prenom="Xavier" section="informatique" classe="3BI" >
+    <Entreprise nom="Stone-IT" objet_social="Security and Open Source consultant" responsable_service="Mr Fagnart" responsable_stagiaire="Mr Ronse" adresse="Minervastraat, 14  1930 ZAVENTEM" tel="02/720.88.35" />
+  </Student>
+  <Student nom="Lavenne" prenom="Florentin" section="informatique" classe="3BI" >
+    <Entreprise nom="T-Systems" objet_social="retransmissions mondiales des événements sportifs" responsable_service="Mr Feye Benjamin" responsable_stagiaire="Mr Van Snick" adresse="Atlas Park, 41  1930 ZAVENTEM" tel="02/716.81.68" />
+  </Student>
+  <Student nom="Legrand" prenom="Olivier" section="informatique" classe="3BI" >
+    <Entreprise nom="Alcatel Bell S.A. Namur" objet_social="Conception, construction et exploitation dun réseau de radiotéléphones " responsable_service=" Fouad Riane" responsable_stagiaire="Mr Verdonck" adresse="Bld Comte De Smet De Nayer, 14 5000 NAMUR" tel="081/23.52.08" />
+  </Student>
+  <Student nom="Lenoir" prenom="Sébastien" section="informatique" classe="3BI" >
+    <Entreprise nom="Electrabel Distribution Wallonie" objet_social="la vente (fourniture) délectricité aux clients raccordés au réseau" responsable_service="Mr François Lecardonnel" responsable_stagiaire="Mr Bailleux" adresse="Avenue Albert 1er   , 19      5000 NAMUR" tel="081/24.42.63" />
+  </Student>
+  <Student nom="Maréchal" prenom="Jonas" section="informatique" classe="3BI" >
+    <Entreprise nom="Province de Namur : Service Informatique et Télécommunications" objet_social="" responsable_service="Mr Frederik Pardon" responsable_stagiaire="Mr Van de Wiele" adresse="Rempart de la Vierge,2  5000 NAMUR" tel="081/257036" />
+  </Student>
+  <Student nom="Marreda" prenom="Florent" section="informatique" classe="3BI" >
+    <Entreprise nom="Virtual Technologies" objet_social="Designs, engineers, and manufactures custom communications products" responsable_service="Mr Goffin Henri" responsable_stagiaire="Mr Coppens" adresse="Rue Borgnet, 13 5000 NAMUR" tel="081/24-92-13" />
+  </Student>
+  <Student nom="Mathieu" prenom="Thibaut" section="informatique" classe="3BI" >
+    <Entreprise nom="I.E.B.S" objet_social="" responsable_service="Mr Hanot" responsable_stagiaire="Mr Davut" adresse="Chemin des artisans, 3c 5150 ZONNING DE FLOREFFE" tel="0479/400220" />
+  </Student>
+  <Student nom="Plaschaert" prenom="Charles" section="informatique" classe="3BI" >
+    <Entreprise nom="Bmedia" objet_social="Consultant en technologie des medias" responsable_service="Mr Herfurth Julien" responsable_stagiaire="Me Peters" adresse="Route de Mons, 27E 6000 CHARLEROI" tel="071/567169" />
+  </Student>
+  <Student nom="Spronken" prenom="Simon" section="informatique" classe="3BI" >
+    <Entreprise nom="Espace Santé" objet_social="" responsable_service="Mr Herplelinck Luc" responsable_stagiaire="Mr Breker" adresse="Boulevard Zoé Drion, 1 6000 CHARLEROI" tel="0477/201324" />
+  </Student>
+  <Student nom="Vallée" prenom="Anthony" section="informatique" classe="3BI" >
+    <Entreprise nom="LOGIC CONSULTANCE" objet_social="Consultant IT" responsable_service="Mr Grioli Johan" responsable_stagiaire="Mr Carlot" adresse="Boulevard Tirou,185 6000 CHARLEROI" tel="071/458629" />
+  </Student>
+  <Student nom="Vertosa" prenom="Damien" section="informatique" classe="3BI" >
+    <Entreprise nom="Alstom Belgium Transport" objet_social="opérateur industriel et financier dans le secteur des transport" responsable_service="Mr Iassinovski Sergueï" responsable_stagiaire="Mr Van de Wiele" adresse="Rue Cambier-Dupret, 50-52    6001 CHARLEROI" tel="071/743651" />
+  </Student>
+</Stage>

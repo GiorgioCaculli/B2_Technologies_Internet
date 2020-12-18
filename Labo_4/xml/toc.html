@@ -1,0 +1,546 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Table des matières détaillées du cours</title>
+      <meta name="author" content="Gilles Chagnon">
+      <meta name="keywords" content="XML, XSL, DTD, Schema XML, SVG, SMIL, XPath, XForms, services Web">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Table des matières</h1>
+         <p><span class="version">version 5.01d</span>, dernière mise à jour le 12 janvier 2010.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#avantpropos">Introduction</a></li>
+         <li class="page"><a href="#tablemat" accesskey="s">Table des matières succincte</a></li>
+         <li class="page"><a href="#tablemat2" accesskey="s">Table des matières détaillée</a></li>
+         <li class="cours"><a href="historique.html">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><span class="actif">Table des matières</span></li>
+         <li class="cours"><a href="index.html">Accueil du cours</a></li>
+      </ul>
+      <div id="avantpropos">
+         <h2>Introduction</h2>
+         <p>Vous trouverez la table des matières après la liste des têtes de chapitres vous permettant un accès plus rapide.</p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="tablemat">
+         <h2>Contenu de ces pages</h2>
+         <div class="impair">
+            <h3><a href="#t0">Pour bien débuter</a></h3>
+            <p class="intro">Ces pages abordent les bases de cette famille de langages, ainsi qu'un bref tutoriel sur deux éditeurs.</p>
+            <h4><a href="#chapbase.xml">Concepts de base</a></h4>
+            <p>Ce chapitre présente un bref historique et les concepts de base de XML.</p>
+            <h4><a href="#chapxmlcooktop.xml">Prise en main d'XML CookTop</a></h4>
+            <p>XMLCookTop est un environnement de développement simple d'emploi, limité à des fonctionalités de base, fonctionnant sous Windows.</p>
+            <h4><a href="#chapoxygenxml.xml">Prise en main d'oXygen XML Editor</a></h4>
+            <p>Ce chapitre présente rapidement l'environnement de développement oXygen XML Editor 3.1.</p>
+         </div>
+         <div class="pair">
+            <h3><a href="#t1">Définir le format d'un document&nbsp;: DTD et Schémas</a></h3>
+            <p class="intro">Un fichier XML doit non seulement respecter des règles d'écriture vues précédemment&nbsp;; il peut aussi, si on le désire, suivre des règles
+               strictes d'enchâssements des éléments. Il existe deux grands langages de description pour ce faire.
+            </p>
+            <h4><a href="#chapdtd.xml">Déclarations de Type de Document</a></h4>
+            <p>Une DTD permet de décrire les éléments et leurs attributs autorisés dans un document XML.</p>
+            <h4><a href="#chapschema.xml">Initiation aux Schema XML</a></h4>
+            <p>Les schémas XML permettent de décrire plus finement que les DTD l'ensemble des éléments et attributs autorisés dans un fichier
+               XML.
+            </p>
+         </div>
+         <div class="impair">
+            <h3><a href="#t2">Mettre en forme et transformer&nbsp;: CSS et XSL</a></h3>
+            <p class="intro">Un fichier XML peut être à loisir mis en forme et adapté à des formats de visualisation variés, comme par exemple une page Web ou un document
+               PDF. Voici les techniques qui le permettent.
+            </p>
+            <h4><a href="#chapstylexsl.xml">Mise en forme à l'aide de feuilles de style XSL : initiation à XSLT</a></h4>
+            <p>XSL est un langage de feuilles de style permettant la mise en forme d'un fichier XML.</p>
+            <h4><a href="#chaprecapxsl.xml">Mise en forme à l'aide de feuilles de style XSL : instructions XSLT</a></h4>
+            <p>XSLT est un langage de transformation complexe, doté de nombreuses capacités que ce chapitre récapitule.</p>
+            <h4><a href="#chapfonctionsxpath.xml">Fonctions XPath</a></h4>
+            <p>XPath est un langage de requête permettant à une feuille XSL d'inspecter un document XML.</p>
+            <h4><a href="#chapdomxslt.xml">Utilisation du DOM et XSLT dynamique</a></h4>
+            <p>Ce chapitre présente une initiation aux techniques de script permettant la gestion du Document Object Model via une feuille
+               de style XSL.
+            </p>
+         </div>
+         <div class="pair">
+            <h3><a href="#t3">Du XML pour le multimédia&nbsp;: SMIL et SVG</a></h3>
+            <p class="intro">Certains formats XML particuliers ont été créés afin de permettre la description de contenu multimédia&nbsp;: images vectorielles avec SVG et synchronisation de son et vidéo avec SMIL.</p>
+            <h4><a href="#chapsmil.xml">Synchroniser des contenus multimédia avec SMIL</a></h4>
+            <p>SMIL est un format permettant la synchronisation de données multimédia.</p>
+            <h4><a href="#chapsvg.xml">Un format de dessin vectoriel en XML: SVG</a></h4>
+            <p>Le SVG est un format graphique vectoriel permettant la production de figures et de diagrammes.</p>
+            <h4><a href="#chapsvgdynamique.xml">L'animation dans le SVG</a></h4>
+            <p>Un fichier au format SVG peut être manipulé et modifié dynamiquement grâce à quelques lignes de JavaScript.</p>
+         </div>
+         <div class="impair">
+            <h3><a href="#t4">Divers autres formats XML</a></h3>
+            <p class="intro">Une multitude de formats a été développée pour certaines tâches précises. Ces pages en décrivent quelques-uns dans cette galaxie.</p>
+            <h4><a href="#chapxforms.xml">Plus loin que les formulaires HTML: XForms</a></h4>
+            <p>XForms est un format de description de formulaires dotés de fonctionnalités avancées par rapport à leur ancêtre de la norme
+               HTML.
+            </p>
+            <h4><a href="#chapservicesweb.xml">Quelques mots sur les Services Web</a></h4>
+            <p>Les "Services Web" sont une technologie permettant l'échange d'informations entre un poste client et un poste serveur. Ce
+               chapitre en dresse un rapide portrait.
+            </p>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="tablemat2">
+         <h2>Table des matières détaillée</h2>
+         <h3 id="t0">A. Pour bien débuter</h3>
+         <ol>
+            <li id="chapbase.xml"><a href="base.html">Concepts de base</a><ol>
+                  <li><a href="base.html#p1">Historique&nbsp;: de SGML à XML</a><ol>
+                        <li><a href="base.html#p1s3">SGML et HTML</a></li>
+                        <li><a href="base.html#p1s4">XML</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="base.html#p2">Mise en &#339;uvre</a><ol>
+                        <li><a href="base.html#p2s1">Procédure</a></li>
+                        <li><a href="base.html#p2s2">Exemple : une bibliographie</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="base.html#p3">Structure d'un document XML</a><ol>
+                        <li><a href="base.html#p3s1">Généralités</a></li>
+                        <li><a href="base.html#p3s2">Le prologue</a></li>
+                        <li><a href="base.html#p3s3">Les commentaires</a></li>
+                        <li><a href="base.html#p3s4">L'arbre d'éléments</a></li>
+                        <li><a href="base.html#p3s5">Règles de composition</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="base.html#p4">Support par les navigateurs</a><ol>
+                        <li><a href="base.html#navigmozie">Famille Mozilla et Internet Explorer</a></li>
+                        <li><a href="base.html#p4s1">Netscape</a></li>
+                        <li><a href="base.html#navigopera">Opera</a></li>
+                        <li><a href="base.html#p4s3">Conclusion</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+            <li id="chapxmlcooktop.xml"><a href="xmlcooktop.html">Prise en main d'XML CookTop</a><ol>
+                  <li><a href="xmlcooktop.html#p1">Généralités</a><ol>
+                        <li><a href="xmlcooktop.html#p1s1">Introduction</a></li>
+                        <li><a href="xmlcooktop.html#p1s2">Quelques détails techniques</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="xmlcooktop.html#p2">Interface</a><ol>
+                        <li><a href="xmlcooktop.html#p2s1">Fenêtre principale</a></li>
+                        <li><a href="xmlcooktop.html#p2s2">Barre de menu</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="xmlcooktop.html#p3">Exercices</a><p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+            <li id="chapoxygenxml.xml"><a href="oxygenxml.html">Prise en main d'oXygen XML Editor</a><ol>
+                  <li><a href="oxygenxml.html#p1">Généralités</a><ol>
+                        <li><a href="oxygenxml.html#p1s1">Introduction</a></li>
+                        <li><a href="oxygenxml.html#p1s2">Quelques détails techniques</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="oxygenxml.html#p2">Interface</a><ol>
+                        <li><a href="oxygenxml.html#p2s1">Fenêtre principale</a></li>
+                        <li><a href="oxygenxml.html#p2s2">Barre de menu</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="oxygenxml.html#fonctionnalites">Fonctionnalités</a><p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="oxygenxml.html#p3">Exercices</a><p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+         </ol>
+         <p class="retourhaut"><a href="#tablemat">Retour à la table des matières succincte</a></p>
+         <h3 id="t1">B. Définir le format d'un document&nbsp;: DTD et Schémas</h3>
+         <ol>
+            <li id="chapdtd.xml"><a href="dtd.html">Déclarations de Type de Document</a><ol>
+                  <li><a href="dtd.html#p0">Introduction</a><p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="dtd.html#p1">Types de DTD</a><ol>
+                        <li><a href="dtd.html#p1s0">Introduction</a></li>
+                        <li><a href="dtd.html#p1s1">Syntaxe</a></li>
+                        <li><a href="dtd.html#p1s2">DTD externe</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="dtd.html#p2">Déclarations d'éléments</a><ol>
+                        <li><a href="dtd.html#p2s0">Généralités</a></li>
+                        <li><a href="dtd.html#p2s1">Élément texte</a></li>
+                        <li><a href="dtd.html#p2s4">Élément vide</a></li>
+                        <li><a href="dtd.html#p2s2">Séquence d'éléments</a></li>
+                        <li><a href="dtd.html#p2s3">Choix d'éléments</a></li>
+                        <li><a href="dtd.html#indicoccur">Indicateurs d'occurence</a></li>
+                        <li><a href="dtd.html#p2s5">Élément quelconque</a></li>
+                        <li><a href="dtd.html#p2s6">Élément à contenu mixte</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="dtd.html#p3">Déclarations d'attributs</a><ol>
+                        <li><a href="dtd.html#p3s0">Introduction</a></li>
+                        <li><a href="dtd.html#p3s2">Type chaîne de caractères</a></li>
+                        <li><a href="dtd.html#p3s1">Valeurs par défaut</a></li>
+                        <li><a href="dtd.html#p3s3">Type ID</a></li>
+                        <li><a href="dtd.html#p3s4">Type énuméré</a></li>
+                        <li><a href="dtd.html#decllisteattr">Utilisation de liste pour les attributs</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="dtd.html#p4">Déclarations d'entités</a><ol>
+                        <li><a href="dtd.html#p4s0">Introduction</a></li>
+                        <li><a href="dtd.html#p4s1">Les entités paramétriques</a></li>
+                        <li><a href="dtd.html#p4s2">Les entités de caractères</a></li>
+                        <li><a href="dtd.html#p4s3">Les entités internes</a></li>
+                        <li><a href="dtd.html#p4s4">Les entités externes</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+            <li id="chapschema.xml"><a href="schema.html">Initiation aux Schema XML</a><ol>
+                  <li><a href="schema.html#gene">Introduction</a><ol>
+                        <li><a href="schema.html#introdtd">Limitations des DTD</a></li>
+                        <li><a href="schema.html#introschema">Apports des schémas</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="schema.html#premierspas">Les premiers pas</a><ol>
+                        <li><a href="schema.html#premiersintro">Introduction</a></li>
+                        <li><a href="schema.html#schemastruc">Structure de base</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="schema.html#declarations">Déclarations d'éléments et d'attributs</a><ol>
+                        <li><a href="schema.html#declarelt">Déclarations d'éléments</a></li>
+                        <li><a href="schema.html#declaattr">Déclarations d'attributs</a></li>
+                        <li><a href="schema.html#declareference">Déclaration et référencement</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="schema.html#types">Les types de données</a><ol>
+                        <li><a href="schema.html#introtypes">Introduction</a></li>
+                        <li><a href="schema.html#typessimples">Types simples</a></li>
+                        <li><a href="schema.html#typescomplexes">Les types complexes</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="schema.html#espacenom">Espaces de nom</a><ol>
+                        <li><a href="schema.html#espaceintro">Introduction</a></li>
+                        <li><a href="schema.html#espaceliaison">Comment lier un fichier XML à un schéma&nbsp;?</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="schema.html#derivation">Les dérivations</a><ol>
+                        <li><a href="schema.html#derivintro">Introduction</a></li>
+                        <li><a href="schema.html#restriction">Restriction de type</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="schema.html#autresfonctions">Diverses autres fonctionnalités</a><ol>
+                        <li><a href="schema.html#inclusion">Inclusion de schémas</a></li>
+                        <li><a href="schema.html#documentation">Documentation</a></li>
+                        <li><a href="schema.html#null">Attribut null</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+         </ol>
+         <p class="retourhaut"><a href="#tablemat">Retour à la table des matières succincte</a></p>
+         <h3 id="t2">C. Mettre en forme et transformer&nbsp;: CSS et XSL</h3>
+         <ol>
+            <li id="chapstylexsl.xml"><a href="stylexsl.html">Mise en forme à l'aide de feuilles de style XSL : initiation à XSLT</a><ol>
+                  <li><a href="stylexsl.html#p1">Présentation</a><ol>
+                        <li><a href="stylexsl.html#p1s1">Introduction</a></li>
+                        <li><a href="stylexsl.html#p1s2">Structure d'un document XSL</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="stylexsl.html#p2">Exemples de mises en forme</a><ol>
+                        <li><a href="stylexsl.html#p2s2">Exemple simple</a></li>
+                        <li><a href="stylexsl.html#p2s3">Exemple avec boucle</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+            <li id="chaprecapxsl.xml"><a href="recapxsl.html">Mise en forme à l'aide de feuilles de style XSL : instructions XSLT</a><ol>
+                  <li><a href="recapxsl.html#p1">Les expressions de sélection</a><ol>
+                        <li><a href="recapxsl.html#p1s1">Introduction</a></li>
+                        <li><a href="recapxsl.html#p1s2">Sélection d'éléments et d'attributs</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="recapxsl.html#p2">XPath</a><ol>
+                        <li><a href="recapxsl.html#p2s1">Introduction</a></li>
+                        <li><a href="recapxsl.html#p2s2">Chemin de localisation</a></li>
+                        <li><a href="recapxsl.html#p2s3">Fonctions de base</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="recapxsl.html#p3">Éléments XSLT</a><ol>
+                        <li><a href="recapxsl.html#p3s1">Généralités</a></li>
+                        <li><a href="recapxsl.html#p3s2">Les fondamentaux</a></li>
+                        <li><a href="recapxsl.html#p3s3">Ajout d'éléments et d'attributs</a></li>
+                        <li><a href="recapxsl.html#p3s4">Gestion des boucles</a></li>
+                        <li><a href="recapxsl.html#p3s5">Conditions de test</a></li>
+                        <li><a href="recapxsl.html#varparam">Variables et paramètres</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="recapxsl.html#module">Conception modulaire des feuilles de style</a><ol>
+                        <li><a href="recapxsl.html#moduleIntro">Introduction</a></li>
+                        <li><a href="recapxsl.html#templates">Utilisation des templates</a></li>
+                        <li><a href="recapxsl.html#inclusions">Inclusions de feuilles de style</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+            <li id="chapfonctionsxpath.xml"><a href="fonctionsxpath.html">Fonctions XPath</a><ol>
+                  <li><a href="fonctionsxpath.html#xpathintro">Introduction</a><p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="fonctionsxpath.html#n%C5%93uds">Fonctions XPath applicables aux n&#339;uds</a><ol>
+                        <li><a href="fonctionsxpath.html#count">Fonction de comptage : la fonction count()</a></li>
+                        <li><a href="fonctionsxpath.html#positionlast">Obtenir la position d'un n&#339;ud&nbsp;: les fonctions position() et last()</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="fonctionsxpath.html#caracteres">Fonctions XPath applicables aux chaînes de caractères</a><ol>
+                        <li><a href="fonctionsxpath.html#concat">Concaténation de chaînes avec la fonction concat()</a></li>
+                        <li><a href="fonctionsxpath.html#containsstarts">Test de présence d'une sous-chaîne&nbsp;: les fonctions contains() et starts-with()</a></li>
+                        <li><a href="fonctionsxpath.html#extractstring">Extraction de sous-chaîne</a></li>
+                        <li><a href="fonctionsxpath.html#translate">Transformation des caractères d'une chaîne&nbsp;: la fonction translate()</a></li>
+                        <li><a href="fonctionsxpath.html#normalizespace">Suppression des espaces en surnombre&nbsp;: la fonction normalize-space()</a></li>
+                        <li><a href="fonctionsxpath.html#stringlength">Longueur d'une chaîne: la fonction string-length()</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="fonctionsxpath.html#xpathnombres">Fonctions XPath applicables aux nombres</a><ol>
+                        <li><a href="fonctionsxpath.html#operateurs">Rappel&nbsp;: opérateurs disponibles</a></li>
+                        <li><a href="fonctionsxpath.html#nombresfonctions">Fonctions de manipulation</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="fonctionsxpath.html#booleens">Fonctions booléennes</a><ol>
+                        <li><a href="fonctionsxpath.html#truefalse">Fonctions booléennes constantes&nbsp;: true() et false()</a></li>
+                        <li><a href="fonctionsxpath.html#not">La fonction not()</a></li>
+                        <li><a href="fonctionsxpath.html#lang">Test de la langue&nbsp;: la fonction lang()</a></li>
+                        <li><a href="fonctionsxpath.html#boolean">Conversion à un booléen&nbsp;: la fonction boolean()</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="fonctionsxpath.html#xpathautres">Autres fonctions</a><ol>
+                        <li><a href="fonctionsxpath.html#document">Accéder à un autre document avec document()</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+            <li id="chapdomxslt.xml"><a href="domxslt.html">Utilisation du DOM et XSLT dynamique</a><ol>
+                  <li><a href="domxslt.html#javascript">Insertion de code JavaScript dans une page</a><ol>
+                        <li><a href="domxslt.html#jsintro">Introduction</a></li>
+                        <li><a href="domxslt.html#jsinsertion">Insertion de code</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="domxslt.html#dom">Utilisation du DOM</a><ol>
+                        <li><a href="domxslt.html#objets">Objets, méthodes et propriétés</a></li>
+                        <li><a href="domxslt.html#majaffichage">Mise à jour de l'affichage</a></li>
+                        <li><a href="domxslt.html#exemple">Exemple</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+         </ol>
+         <p class="retourhaut"><a href="#tablemat">Retour à la table des matières succincte</a></p>
+         <h3 id="t3">D. Du XML pour le multimédia&nbsp;: SMIL et SVG</h3>
+         <ol>
+            <li id="chapsmil.xml"><a href="smil.html">Synchroniser des contenus multimédia avec SMIL</a><ol>
+                  <li><a href="smil.html#p1">Généralités</a><ol>
+                        <li><a href="smil.html#p1s1">Introduction</a></li>
+                        <li><a href="smil.html#p1s2">Moyens logiciels</a></li>
+                        <li><a href="smil.html#p1s3">Structure d'un document SMIL</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="smil.html#p2">Construction progressive d'un fichier SMIL</a><ol>
+                        <li><a href="smil.html#p2s1">Structure</a></li>
+                        <li><a href="smil.html#p2s2">Positionnement</a></li>
+                        <li><a href="smil.html#synchro">Synchronisation</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="smil.html#cl">Conclusion</a><ol>
+                        <li><a href="smil.html#cls1">D'autres effets possibles...</a></li>
+                        <li><a href="smil.html#cls2">Pour en savoir plus...</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+            <li id="chapsvg.xml"><a href="svg.html">Un format de dessin vectoriel en XML: SVG</a><ol>
+                  <li><a href="svg.html#intro">Introduction</a><ol>
+                        <li><a href="svg.html#origine">Origine et but</a></li>
+                        <li><a href="svg.html#pourquoi">Pourquoi SVG&nbsp;?</a></li>
+                        <li><a href="svg.html#outils">Outils</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="svg.html#svgbase">SVG de base</a><ol>
+                        <li><a href="svg.html#structure">Structure d'une simple page SVG</a></li>
+                        <li><a href="svg.html#imbrication">Imbrication d'un fichier SVG dans HTML</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="svg.html#graphiquebase">Éléments graphiques de base</a><ol>
+                        <li><a href="svg.html#grfintro">Introduction</a></li>
+                        <li><a href="svg.html#principaux">Mécanismes principaux</a></li>
+                        <li><a href="svg.html#fillstroke">Le rendu</a></li>
+                        <li><a href="svg.html#figgeom">Figures géométriques</a></li>
+                        <li><a href="svg.html#path">Formes arbitraires avec path</a></li>
+                        <li><a href="svg.html#texte">Texte</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="svg.html#structuration">Structuration: éléments de groupage et références</a><ol>
+                        <li><a href="svg.html#grouoageintro">Introduction</a></li>
+                        <li><a href="svg.html#svg">Le fragment d'un document SVG&nbsp;: svg</a></li>
+                        <li><a href="svg.html#g">Groupage d'éléments avec g</a></li>
+                        <li><a href="svg.html#symboluse">Objets abstraits avec symbol, defs et use</a></li>
+                        <li><a href="svg.html#titledesc">Titre title et descriptions desc</a></li>
+                        <li><a href="svg.html#images">Insertion d'images: l'élément image</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="svg.html#transformations">Transformations</a><ol>
+                        <li><a href="svg.html#transformintro">Introduction</a></li>
+                        <li><a href="svg.html#transform">Transformations avec l'attribut transform</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="svg.html#autres">Autres fonctionnalités</a><ol>
+                        <li><a href="svg.html#masque">Masquage, filtrage</a></li>
+                        <li><a href="svg.html#animations">Animations</a></li>
+                        <li><a href="svg.html#polices">Définition de polices</a></li>
+                        <li><a href="svg.html#interaction">Interactivité</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="svg.html#conclusion">Conclusion</a><p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+            <li id="chapsvgdynamique.xml"><a href="svgdynamique.html">L'animation dans le SVG</a><ol>
+                  <li><a href="svgdynamique.html#intro">Introduction</a><p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="svgdynamique.html#animate">Animation de base&nbsp;: l'élément animate</a><ol>
+                        <li><a href="svgdynamique.html#graphbase">Création du graphique de base</a></li>
+                        <li><a href="svgdynamique.html#premiereffet">Un premier effet</a></li>
+                        <li><a href="svgdynamique.html#pluscontrole">Un peu plus de contrôle</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="svgdynamique.html#autresanim">Des animations plus complexes</a><ol>
+                        <li><a href="svgdynamique.html#couleur">Changements de couleurs&nbsp;: l'élément animateColor</a></li>
+                        <li><a href="svgdynamique.html#transform">Rotations, mises à l'échelle et translations</a></li>
+                        <li><a href="svgdynamique.html#superpos">Superpositions d'effets</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+         </ol>
+         <p class="retourhaut"><a href="#tablemat">Retour à la table des matières succincte</a></p>
+         <h3 id="t4">E. Divers autres formats XML</h3>
+         <ol>
+            <li id="chapxforms.xml"><a href="xforms.html">Plus loin que les formulaires HTML: XForms</a><ol>
+                  <li><a href="xforms.html#xformsgene">Généralités</a><ol>
+                        <li><a href="xforms.html#limiteshtml">Limites des formulaires en HTML</a></li>
+                        <li><a href="xforms.html#pcpxforms">Principe de XForms</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="xforms.html#xformsfonctions">Fonctionnalités des formulaires XForms</a><ol>
+                        <li><a href="xforms.html#xformselt">Les éléments et leurs (éventuels) équivalents HTML</a></li>
+                        <li><a href="xforms.html#extensions">Extension des fonctionnalités HTML</a></li>
+                        <li><a href="xforms.html#gestionevt">Gestion des événements</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="xforms.html#pratique">Dans la pratique</a><ol>
+                        <li><a href="xforms.html#visualisation">Visualisation</a></li>
+                        <li><a href="xforms.html#xhtml">Inclusion en XHTML</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="xforms.html#papl">Pour aller plus loin...</a><p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+            <li id="chapservicesweb.xml"><a href="servicesweb.html">Quelques mots sur les Services Web</a><ol>
+                  <li><a href="servicesweb.html#gene">Généralités</a><ol>
+                        <li><a href="servicesweb.html#geneintro">Introduction</a></li>
+                        <li><a href="servicesweb.html#koikce">Qu'est-ce qu'un service Web?</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="servicesweb.html#trouver">Trouver un service Web</a><ol>
+                        <li><a href="servicesweb.html#uddi">Universal Description, Discovery and Integration - UDDI</a></li>
+                        <li><a href="servicesweb.html#wsdl">Web Service Description Language - WSDL</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="servicesweb.html#acceder">Accéder à un service Web</a><ol>
+                        <li><a href="servicesweb.html#xmlrpc">XML Remote Procedure Calling - XML-RPC</a></li>
+                        <li><a href="servicesweb.html#soap">Simple Object Access Protocol - SOAP</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+                  <li><a href="servicesweb.html#utiliser">Utiliser un service Web: récapitulation et inconvénients</a><ol>
+                        <li><a href="servicesweb.html#choisir">Comment choisir un service Web</a></li>
+                        <li><a href="servicesweb.html#inconvenients">Les inconvénients</a></li>
+                     </ol>
+                     <p class="retourhaut"><a href="#t0">Retour au thème</a></p>
+                  </li>
+               </ol>
+            </li>
+         </ol>
+         <p class="retourhaut"><a href="#tablemat">Retour à la table des matières succincte</a></p>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

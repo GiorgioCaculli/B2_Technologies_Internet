@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ev="http://www.w3.org/2001/xml-events" 
+      xmlns:xf="http://www.w3.org/2002/xforms">
+	<head>
+		<title>Premier document XForms</title>
+		<xf:model id="premier">
+			<xf:submission action="..."/>
+		</xf:model>
+	</head>
+	<body>
+		<p>Entrez votre code-client</p>
+		<xf:input ref="numero">
+			<xf:label>Code-client</xf:label>
+		</xf:input>
+		<p>...</p>
+		<xf:submit>
+			<xf:label>Soumettre</xf:label>
+		</xf:submit>
+	</body>
+	
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Prise en main d'oXygen XML Editor</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="oxygen xml">
+      <meta name="description" content="Ce chapitre présente rapidement l'environnement de développement oXygen XML Editor 3.1.">
+      <link rel="prev" href="xmlcooktop.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Prise en main d'oXygen XML Editor</h1>
+         <p><span class="version">version 1.06</span>, dernière mise à jour le 13 janvier 2009.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#p1" title="Généralités">Généralités</a><ol>
+                     <li><a href="#p1s1" title="Introduction">Introduction</a></li>
+                     <li><a href="#p1s2" title="Quelques détails techniques">Quelques détails techniques</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#p2" title="Interface">Interface</a><ol>
+                     <li><a href="#p2s1" title="Fenêtre principale">Fenêtre principale</a></li>
+                     <li><a href="#p2s2" title="Barre de menu">Barre de menu</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#fonctionnalites" title="Fonctionnalités">Fonctionnalités</a></li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>IV. <a href="#p3" title="Exercices">Exercices</a><ol>
+                     <li>Exercice&nbsp;: <a href="#ex1">Vérification de validité</a></li>
+                     <li>Exercice&nbsp;: <a href="#ex2">Amusons-nous...</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="p1" href="#p1" id="p1"></a>I. Généralités
+         </h3>
+         <h4><a name="p1s1" id="p1s1" href="#p1s1"></a>1. Introduction
+         </h4>
+         <p>Il existe de nombreuses solutions permettant le développement de fichiers <code class="typefichier">XML</code>. Une des plus célèbres est l'environnement <a href="http://www.altova.com/products/xmlspy/xml_editor.html"><code class="logiciel">XMLSpy</code></a>, mais elle présente l'inconvénient d'être un <span lang="en" class="autrelangue">shareware</span> et donc d'être à terme payant. On trouve également <code class="logiciel">XMLNotePad</code> de Microsoft, mais qui ne permet l'exploration que de petits fichiers <code class="typefichier">XML</code>. Il est possible d'utiliser un logiciel <span lang="en" class="autrelangue">freeware</span>, <code class="logiciel">XMLCooktop</code>, qui permet de disposer d'un environnement simple d'emploi, et la manipulation de «&nbsp;gros&nbsp;» fichiers <code class="typefichier">XML</code>. En revanche, il ne supporte pas la validation d'après les schémas et offre des fonctionnalités ergonomiques réduites. Bien
+            qu'il soit suffisant pour une utilisation ponctuelle, son développement est arrêté depuis 2003.
+         </p>
+         <p>Nous allons dans ce cours utiliser le logiciel <code class="logiciel">&lt;oXygen&gt; XML Editor&nbsp;3.1</code>. Il s'agit d'un logiciel offrant un certain nombre de fonctionnalités facilitant la saisie de code <code class="langage">XML</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p1s2" id="p1s2" href="#p1s2"></a>2. Quelques détails techniques
+         </h4>
+         <p>Une version d'évaluation limitée à 30 jours est disponible en téléchargement sur le site <a href="http://www.oxygenxml.com">http://www.oxygenxml.com</a>. Il s'agit d'un programme <code class="langage">Java</code>, qui est par conséquent portable sur n'importe quelle machine pouvant faire tourner une machine Java virtuelle. Il est également
+            disponible sous la forme d'un <span lang="en" class="autrelangue">plug-in</span> pour l'environnement de développement <a href="http://www.eclipse.org/">Eclipse</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s2" title="Retour à la TdM (Quelques détails techniques)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="p2" href="#p2" id="p2"></a>II. Interface
+         </h3>
+         <h4><a name="p2s1" id="p2s1" href="#p2s1"></a>1. Fenêtre principale
+         </h4>
+         <p>Au lancement, la fenêtre principale se divise en deux&nbsp;: à gauche, une barre latérale présentant le projet en cours et une
+            exploration du fichier <code class="typefichier">XML</code> en cours d'édition. A droite, et occupant la majeure partie de l'espace disponible, la fenêtre d'édition proprement dite.
+         </p>
+         <p>Les boutons présents sont habituels, à l'exception d'un bouton propre à l'édition XML. Ce bouton permet d'«&nbsp;éditer l'arbre
+            XML&nbsp;».
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s1" title="Retour à la TdM (Fenêtre principale)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s2" id="p2s2" href="#p2s2"></a>2. Barre de menu
+         </h4>
+         <p>Certains des menus sont habituels, comme Fichier, Édition, Recherche, Options, Fenêtre ou Aide, tandis que d'autres menus
+            sont plus adaptés au logiciel.
+         </p>
+         <ul>
+            <li>
+               <p><em>Éditeur d'Arbre XML</em> permet d'éditer un fichier <code class="typefichier">XML</code> directement à partir de son arborescence&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><em>Modules d'extension</em> permet d'appeler un certain nombre de modules supplémentaires&nbsp;; pour le moment, nous ne nous en servirons pas&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Nous ne nous servirons pas de <em>Outils</em> lors de ce cours&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><em>Outils externes</em> permet éventuellement d'utiliser des outils en ligne&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Le menu <em>XML</em> offre des fonctionnalités propres aux fichiers... <code class="typefichier">XML</code>. Ce sont&nbsp;:
+               </p>
+               <ul>
+                  <li>
+                     <p>la vérification de la validité du document en cours d'édition&nbsp;;</p>
+                  </li>
+                  <li>
+                     <p>l'appel et la configuration des fonctions de transformations du document (nous y reviendrons)&nbsp;;</p>
+                  </li>
+                  <li>
+                     <p>diverses autres fonctions d'édition.</p>
+                  </li>
+               </ul>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p2s2" title="Retour à la TdM (Barre de menu)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="fonctionnalites" href="#fonctionnalites" id="fonctionnalites"></a>III. Fonctionnalités
+         </h3>
+         <p>Cet outil est doté d'un certain nombre de fonctionnalités facilitant grandement la production de documents <code class="typefichier">XML</code> bien formés (et valides).
+         </p>
+         <ul>
+            <li>
+               <p>une édition possible à partir de l'arborescence&nbsp;;</p>
+            </li>
+            <li>
+               <p>une insertion des éléments en accord avec la <code class="typefichier">DTD</code> ou le Schéma en cours&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>une indentation automatique&nbsp;;</p>
+            </li>
+            <li>
+               <p>la possibilité de travailler sur des projets&nbsp;;</p>
+            </li>
+            <li>
+               <p>des modèles de documents prédéfinis et/ou personnalisables&nbsp;</p>
+            </li>
+            <li>
+               <p>il y a même un vérificateur orthographique&nbsp;!</p>
+            </li>
+         </ul>
+         <h3><a name="p3" href="#p3" id="p3"></a>IV. Exercices
+         </h3>
+         <h4>Exercice&nbsp;<a name="ex1" href="#ex1" id="ex1"></a>1. Vérification de validité
+         </h4>
+         <h5><a href="exercices/exo2.html" title="Énoncé de l'exercice 'Vérification de validité'">Énoncé</a></h5>
+         <h5><a href="exercices/exo1_cor.xml" title="Correction 'Vérification de validité'">
+               				Correction</a></h5>
+         <h4>Exercice&nbsp;<a name="ex2" href="#ex2" id="ex2"></a>2. Amusons-nous...
+         </h4>
+         <h5><a href="exercices/exo3.html" title="Énoncé de l'exercice 'Amusons-nous...'">Énoncé</a></h5>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours précédent&nbsp;: <a href="xmlcooktop.html">Prise en main d'XML CookTop</a><br></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="oxygenxml.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 13 janvier 2009, version 1.06. Corrections syntaxiques. Ajout d'un lien.</li>
+            <li>Le 13 février 2006, version 1.05. Ajout de la correction d'un exercice.</li>
+            <li>Le 27 octobre 2005, version 1.04. Correction de syntaxe.</li>
+            <li>Le 4 février 2005, version 1.03. Mise à jour des versions d'Oxygen.</li>
+            <li>Le 25 juin 2004, version 1.02. Corrections typographiques.</li>
+            <li>Le 2 février 2004, version 1.01. Corrections typographiques.</li>
+            <li>Le 30 janvier 2004, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

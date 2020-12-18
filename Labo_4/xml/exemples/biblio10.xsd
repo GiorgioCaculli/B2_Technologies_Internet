@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+	Schéma de définition d'une bibliographie.
+-->
+
+<!--
+	Version 1.0 du 23/01/2004
+		- Création.
+-->
+
+<!--<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace="schemas/biblio/" xmlns="schemas/biblio/"-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:annotation>
+		<xs:documentation>Schéma de définition d'une bibliographie.</xs:documentation>
+	</xs:annotation>
+	
+<!-- Définition de types -->
+
+	<xs:simpleType name="isbnType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="pagesType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]+[ à ][0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!-- Définition des éléments de type simple -->
+
+	<xs:element name="auteur" type="xs:string"/>
+	<xs:element name="editeur" type="xs:string"/>
+	<xs:element name="titre" type="xs:string"/>
+	<xs:element name="description" type="xs:string"/>
+	<xs:element name="revue" type="xs:string"/>
+	
+	<xs:attribute name="href" type="xs:anyURI"/>
+	<xs:attribute name="date" type="xs:date"/>
+	<xs:attribute name="ISBN" type="isbnType"/>
+	<xs:attribute name="annee" type="xs:gYear"/>
+	<xs:attribute name="lang" type="xs:language"/>
+	<xs:attribute name="pages" type="pagesType"/>
+	
+<!-- Définition des éléments de type complexe -->
+
+	<xs:element name="biblio">
+		<xs:annotation>
+			<xs:documentation>Elément racine</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="livre"/>
+				<xs:element ref="article"/>
+				<xs:element ref="lien"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="livre">
+		<xs:annotation>
+			<xs:documentation>Permet de déclarer les références d'un livre.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="titre"/>
+				<xs:element ref="auteur"/>
+				<xs:element ref="editeur"/>
+				<xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="annee" use="optional">
+				<xs:annotation><xs:documentation>Année de parution.</xs:documentation></xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ISBN" use="optional"/>
+			<xs:attribute name="lang" default="fr"/>
+			<xs:attribute ref="pages" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="article">
+		<xs:annotation>
+			<xs:documentation>Référence vers un article de journal, de revue...</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="titre"/>
+				<xs:element ref="auteur"/>
+				<xs:element ref="revue"/>
+				<xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute ref="pages" use="required"/>
+			<xs:attribute name="lang" default="fr"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="lien">
+		<xs:annotation><xs:documentation>Référence vers un site Web</xs:documentation></xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="titre"/>
+				<xs:element ref="auteur" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute ref="lang" default="fr"/>
+			<xs:attribute ref="href" use="required"/>
+			<xs:attribute ref="date" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	
+</xs:schema>

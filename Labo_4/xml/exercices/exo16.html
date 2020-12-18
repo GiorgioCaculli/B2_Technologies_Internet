@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+  <title>Exercice: animations en SVG</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+
+<h1>Animations en SVG</h1>
+
+<h2><a name="debut"></a>Création du fichier graphique de base</h2>
+
+<ol>
+	<li>Définir un symbole en forme de triangle, réalisé à l'aide d'un polygone entre les points (20,0), (40,40), (0,40) et (20,0). Placer ce triangle au point de coordonnées (200,200), en le remplissant avec la couleur bleue et une opacité de 0.6.</li>
+	<li>Placer un cercle centré au point de coordonnées (220,200), de rayon 140, de contour rouge et sans remplissage.</li>
+	<li>Placer un cercle centré au point de coordonnées (220,200), de rayon 2, de contour et de remplissage noirs.</li>
+</ol>
+    <p><a href="../svgdynamique.html#exographiquebase">Retour au cours</a></p>   
+
+<h2><a name="animationbase"></a>Animation de base</h2>
+
+<p>Utiliser l'élément &lt;animate&gt; pour déplacer le triangle horizontalement. Utiliser les attributs gérant la durée, la répétition. Contrôler l'animation par un clic sur un bouton.</p>
+    <p><a href="../svgdynamique.html#animationbase">Retour au cours</a></p>   
+
+<h2><a name="changementscouleur"></a>Changements de couleurs</h2>
+
+<p>Faire varier la couleur de bleue à verte, puis bleue, avec une période de dix secondes.</p>
+    <p><a href="../svgdynamique.html#changecouleurs">Retour au cours</a></p>   
+
+<h2><a name="transformations"></a>Rotations et translations</h2>
+
+<ol>
+	<li>Faire en sorte que le triangle fasse trois tours en dix secondes, autour du point de coordonnées (220,200).</li>
+	<li>Répéter ces rotations à l'infini.</li>
+	<li>En dix secondes également, modifier le paramètre de translation de (0,0) à (0,100), puis retour à (0,0).</li>
+</ol>
+    <p><a href="../svgdynamique.html#transformations">Retour au cours</a></p>   
+
+<h2><a name="plusloin"></a>Pour aller plus loin...</h2>
+
+<p>On peut également ajouter un filtrage. Dans la liste de définitions, ajouter les lignes suivantes&nbsp;:</p>
+<pre>
+&lt;filter id="flou"&gt;
+	&lt;feGaussianBlur stdDeviation="1"&gt;
+	&lt;/feGaussianBlur&gt;
+&lt;/filter&gt;
+</pre>
+<p>Ces lignes définissent un filtre gaussien, nommé <code>flou</code>. On l'applique au triangle avec <code>filter="url(#flou)"</code> dans son appel. Faire varier l'attribut <code>stdDeviation</code> de 0 à 4, puis 0 avec une période de dix secondes.</p>
+    <p><a href="../svgdynamique.html#plusloin">Retour au cours</a></p>   
+</body>
+</html>

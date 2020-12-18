@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" >
+
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <text x="5" y="20" style="font-size:10">SVG Demo: cercle et ellipse.</text>
+
+<g stroke-width="4px" stroke="black">
+	<circle r="50" cx="100" cy="100" fill="cyan" fill-opacity="1"/>
+	<ellipse rx="150" ry="100" cx="250" cy="150" fill="yellow" fill-opacity="0.5"/>
+</g>
+
+
+
+</svg> 

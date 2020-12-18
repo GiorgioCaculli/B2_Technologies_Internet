@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cours SYSTEM "cours.dtd">
+<?xml-stylesheet type="text/xsl" href="cours.xsl" ?>
+
+<cours nomfichier="cours">
+   <titre>Cours d'initiation à XML</titre>
+
+   <auteur>
+      <identite>Gilles Chagnon</identite>
+
+      <email>Gilles.Chagnon@upmc.fr</email>
+
+      <adresse>
+		<organisme>Formation Permanente - Université Paris VI</organisme>
+        <localisation>Couloir 24/25 - 3ème étage - Bureau 309</localisation>
+        <rue>4, Place Jussieu</rue>
+		<ville>75252 Paris Cedex 05</ville>
+      </adresse>
+
+      <telephone tel="01-44-27-60-11"/>
+   </auteur>
+
+   <date>2002/04/25</date>
+
+	<miseajour>
+		<maj>
+			<quand>28/10/2002</quand>
+			<qui>G. Chagnon</qui>
+			<quoi>Mise à jour du plan.</quoi>
+		</maj>
+		<maj>
+			<quand>14/06/2002</quand>
+			<qui>G. Chagnon</qui>
+			<quoi>Mise à jour du plan.</quoi>
+		</maj>
+		<maj>
+   			<quand>21/05/2002</quand>
+   			<qui>G. Chagnon</qui>
+   			<quoi>Durée totale ramenée à 15h de cours/TD.</quoi>
+   		</maj>
+		<maj>
+         <quand>13/05/2002</quand>
+
+         <qui>Gilles Chagnon</qui>
+
+         <quoi>Création.</quoi>
+		</maj>
+	</miseajour>
+
+   <resume>Cours d'initiation à XML. Prise en main du logiciel XMLCookTop. XML, DTD, Schémas, utilisation de feuilles de style. Exemples d'application avec SMIL, VML et WML.</resume>
+
+   <prerequis>Maîtrise de <code type="langage">HTML 4.01</code> et des feuilles CSS.</prerequis>
+
+   <plan>
+      <chapitre titre="Concepts de base" href="base.html">
+         <partie titre="Généralités" href="base.html#p1">
+         	<section titre="Avant-propos" href="base.html#p1s1">
+         	</section>
+         	<section titre="Historique" href="base.html#p1s2">
+         	</section>
+         	<section titre="SGML et HTML" href="base.html#p1s3">
+         		<paragraphe titre="SGML" href="base.html#p1s3p1" />
+         		<paragraphe titre="HTML" href="base.html#p1s3p2" />
+         	</section>
+         	<section titre="XML" href="base.html#p1s4">
+         	</section>
+         </partie>
+
+         <partie titre="Mise en oeuvre" href="base.html#p2">
+            <section titre="Procédure" href="base.html#p2s1">
+            </section>
+            <section titre="Exemple: une bibliographie" href="base.html#p2s2">
+            </section>
+         </partie>
+
+         <partie titre="Structure d'un document XML" href="base.html#p3">
+            <section titre="Généralités" href="base.html#p3s1">
+            </section>
+			<section titre="Le prologue" href="base.html#p3s2">
+            	<paragraphe titre="Déclaration XML" href="base.html#p3s2p1"/>
+            	<paragraphe titre="Instructions de traitement" href="base.html#p3s2p2"/>
+            	<paragraphe titre="Déclaration de type de document (DTD)" href="base.html#p3s2p3"/>
+            </section>
+            <section titre="Les commentaires" href="base.html#p3s3">
+            </section>
+            <section titre="L'arbre d'éléments" href="base.html#p3s4">
+            	<paragraphe titre="Introduction" href="base.html#p3s4p1"/>
+            	<paragraphe titre="L'élément racine" href="base.html#p3s4p2"/>
+            	<paragraphe titre="Les éléments" href="base.html#p3s4p3"/>
+            	<paragraphe titre="Les attributs" href="base.html#p3s4p4"/>
+            	<paragraphe titre="Les entités" href="base.html#p3s4p5"/>
+            	<paragraphe titre="Les sections CDATA" href="base.html#p3s4p6"/>
+            </section>
+            <section titre="Règles de composition" href="base.html#p3s5">
+         	</section>
+         </partie>
+         
+         <partie titre="Support par les navigateurs" href="base.html#p4">
+         	<section titre="Netscape" href="base.html#p4s1">
+         	</section>
+         	<section titre="Internet Explorer" href="base.html#p4s2"></section>
+         	<section titre="Conclusion" href="base.html#p4s3"></section>
+         </partie>
+      </chapitre>
+
+      <chapitre titre="Prise en main d'XMLCookTop" href="xmlcooktop.html">
+         <partie titre="Généralités" href="xmlcooktop.html#p1">
+         	<section titre="Introduction" href="xmlcooktop.html#p1s1">
+         	</section>
+         	<section titre="Quelques détails techniques" href="xmlcooktop.html#p1s2">
+         	</section>
+         </partie>
+
+         <partie titre="Interface" href="xmlcooktop.html#p2">
+            <section titre="Fenêtre principale" href="xmlcooktop.html#p2s1">
+            </section>
+
+            <section titre="Barre de menu" href="xmlcooktop.html#p2s2">
+            </section>
+         </partie>
+
+         <partie titre="Exercices">
+            <exercice titre="Vérification de validité">
+               <enonce href="exercices/exo2.html"/>
+            </exercice>
+            <exercice titre="Amusons-nous...">
+               <enonce href="exercices/exo3.html"/>
+            </exercice>
+         </partie>
+      </chapitre>
+
+      <chapitre titre="Déclaration de Type de Document" href="dtd.html">
+      	<partie titre="Introduction" href="dtd.html#p0"></partie>
+      	
+      	<partie titre="Types de DTD" href="dtd.html#p1">
+      		<section titre="Introduction" href="dtd.html#p1s0"></section>
+      		<section titre="DTD interne" href="dtd.html#p1s1"></section>
+      		<section titre="DTD externe" href="dtd.html#p1s2"></section>
+      	</partie>
+      	
+      	<partie titre="Déclarations d'éléments" href="dtd.html#p2">
+      		<section titre="Généralités" href="dtd.html#p2s0"></section>
+      		<section titre="Élément texte" href="dtd.html#p2s1"></section>
+      		<section titre="Séquence d'éléments" href="dtd.html#p2s2"></section>
+      		<section titre="Choix d'éléments" href="dtd.html#p2s3"></section>
+      		<section titre="Élément vide" href="dtd.html#p2s4"></section>
+      		<section titre="Élément quelconque" href="dtd.html#p2s5"></section>
+      		<section titre="Élément à contenu mixte" href="dtd.html#p2s6"></section>
+      	</partie>
+      		
+      	<partie titre="Exercices">
+      		<exercice titre="Écriture d'une DTD avec éléments" >
+      			<enonce href="exercices/exo4.html"/>
+      			<correction href="exercices/exo4_cor.dtd"/>
+      		</exercice>
+      	</partie>
+      </chapitre>
+
+	<chapitre titre="Mise en forme à l'aide de feuilles de style XSL (XSLT)" href="stylexsl.html">
+		<partie titre="Présentation" href="stylexsl.html#p1">
+        	<section titre="Introduction" href="stylexsl.html#p1s1"></section>
+        	<section titre="Structure d'un document XSL" href="stylexsl.html#p1s2" ></section>
+         </partie>
+         <partie titre="Exemples de mises en forme" href="stylexsl.html#p2">
+			<section titre="Exemple simple" href="stylexsl.html#p2s2">
+				<paragraphe titre="Introduction" href="stylexsl.html#p2s2p1" />
+				<paragraphe titre="Exemple" href="stylexsl.html#p2s2p2" />
+				<paragraphe titre="Application à un exemple" href="stylexsl.html#p2s2p3" />
+			</section>
+			<exercice titre="Mise en forme simple à l'aide de XSL">
+				<enonce href="exercices/exo7.html"/>
+				<correction href="exercices/exo7.xsl"/>
+			</exercice>
+			<section titre="Exemple avec boucle" href="stylexsl.html#p2s3">
+				<paragraphe titre="Introduction" href="stylexsl.html#p2s3p1" />
+				<paragraphe titre="Exemple" href="stylexsl.html#p2s3p2" />
+			</section>
+			<exercice titre="Mise en forme avec réarrangement">
+				<enonce href="exercices/exo8.html"/>
+				<correction href="exercices/exo8.xsl"/>
+			</exercice>
+		</partie>
+	</chapitre>
+
+	<chapitre titre="Mise en forme à l'aide de feuilles de style XSL (XSLT) 2)" href="recapxsl.html">
+		<partie titre="Les expressions de sélection" href="recapxsl.html#p1">
+			<section titre="Introduction" href="recapxsl.html#p1s1"></section>
+			<section titre="Sélection d'éléments et d'attributs" href="recapxsl.html#p1s2">
+				<paragraphe titre="Sélection d'élément, syntaxe de base" href="recapxsl.html#p1s2p1" />
+				<paragraphe titre="Sélection d'élément, appel de fonctions" href="recapxsl.html#p1s2p2" />
+				<paragraphe titre="Sélection d'élément et DOM" href="recapxsl.html#p1s2p3" />
+				<paragraphe titre="Sélection d'attributs" href="recapxsl.html#p1s2p4" />
+				<paragraphe titre="Opérateurs logiques" href="recapxsl.html#p1s2p5" />
+			</section>
+		</partie>
+		<partie titre="XPath" href="recapxsl.html#p2">
+			<section titre="Introduction" href="recapxsl.html#p2s1"></section>
+			<section titre="Chemin de localisation" href="recapxsl.html#p2s2">
+				<paragraphe titre="Introduction" href="recapxsl.html#p2s2p1" />
+				<paragraphe titre="Axes" href="recapxsl.html#p2s2p2" />
+				<paragraphe titre="Prédicats" href="recapxsl.html#p2s2p3" />
+				<paragraphe titre="Syntaxe non abrégée" href="recapxsl.html#p2s2p4" />
+				<paragraphe titre="Syntaxe abrégée" href="recapxsl.html#p2s2p5" />
+			</section>
+			<section titre="Fonctions de base" href="recapxsl.html#p2s3">
+				<paragraphe titre="Généralités" href="recapxsl.html#p2s3p1" />
+				<paragraphe titre="Manipulation de noeuds" href="recapxsl.html#p2s3p2" />
+				<paragraphe titre="Manipulation de chaînes de caractères" href="recapxsl.html#p2s3p3" />
+				<paragraphe titre="Manipulation de booléens" href="recapxsl.html#p2s3p4" />
+				<paragraphe titre="Manipulation de nombres" href="recapxsl.html#p2s3p5" />
+			</section>
+		</partie>
+		<partie titre="Éléments XSLT" href="recapxsl.html#p3">
+			<section titre="Généralités" href="recapxsl.html#p3s1">
+				<paragraphe titre="Introduction" href="recapxsl.html#p3s1p1" />
+				<paragraphe titre="Rappel&#160;: prologue d'un document XSL" href="recapxsl.html#p3s1p2" />
+			</section>
+			<section titre="Les fondamentaux" href="recapxsl.html#p3s2">
+				<paragraphe titre="Généralités" href="recapxsl.html#p3s2p1" />
+				<paragraphe titre="&lt;xsl:stylesheet&gt;" href="recapxsl.html#stylesheet" />
+				<paragraphe titre="&lt;xsl:output&gt;" href="recapxsl.html#output" />
+				<paragraphe titre="&lt;xsl:template&gt;" href="recapxsl.html#template" />
+				<paragraphe titre="&lt;xsl:value-of&gt;" href="recapxsl.html#value" />
+			</section>
+			<section titre="Ajout d'éléments et d'attributs" href="recapxsl.html#p3s3">
+				<paragraphe titre="&lt;xsl:element&gt;" href="recapxsl.html#element" />
+				<paragraphe titre="&lt;xsl:attribute&gt;" href="recapxsl.html#attribute"/>
+			</section>
+			<section titre="Gestion des boucles" href="recapxsl.html#p3s4">
+				<paragraphe titre="&lt;xsl:for-each&gt;" href="recapxsl.html#for-each" />
+				<paragraphe titre="&lt;xsl:sort&gt;" href="recapxsl.html#sort" />
+				<paragraphe titre="&lt;xsl:number&gt;" href="recapxsl.html#number" />
+			</section>
+			<section titre="Conditions de test" href="recapxsl.html#p3s5" >
+				<paragraphe titre="&lt;xsl:if&gt;" href="recapxsl.html#if" />
+				<paragraphe titre="&lt;xsl:choose&gt;" href="recapxsl.html#choose" />
+			</section>
+		</partie>
+	</chapitre>	
+
+	<chapitre titre="Initiation à SMIL" href="smil.html">
+		<partie titre="Généralités" href="smil.html#p1">
+			<section titre="Introduction" href="smil.html#p1s1"></section>
+			<section titre="Moyens logiciels" href="smil.html#p1s2"></section>
+			<section titre="Structure d'un document SMIL" href="smil.html#p1s3" ></section>
+		</partie>
+		<partie titre="Construction progressive d'un fichier SMIL" href="smil.html#p2">
+			<section titre="Structure" href="smil.html#p2s1"></section>
+			<section titre="Positionnement" href="smil.html#p2s2" >
+				<paragraphe titre="Introduction" href="smil.html#p2s2p1" />
+				<paragraphe titre="Élément de base" href="smil.html#p2s2p2" />
+				<paragraphe titre="Définition des régions" href="smil.html#p2s2p3" />
+				<paragraphe titre="z-index" href="smil.html#p2s2p4" />
+				<paragraphe titre="Ajustement de la taille de l'objet" href="smil.html#fit" />
+				<paragraphe titre="Types d'objets multimédia" href="smil.html#p2s2p5" />
+			</section>
+			<section titre="Synchronisation" href="smil.html#synchro">
+				<paragraphe titre="Gestion des paramètres temporels d'affichage" href="smil.html#syp1" />
+				<paragraphe titre="Séquence" href="smil.html#syp2" />
+				<paragraphe titre="Affichage en parallèle" href="smil.html#syp3" />
+			</section>
+		</partie>
+		<partie titre="Conclusion" href="smil.html#cl">
+			<section titre="D'autres effets possibles..." href="smil.html#cls1"></section>
+			<section titre="Pour en savoir plus..." href="smil.html#cls2"></section>
+		</partie>
+	</chapitre>
+   </plan>
+</cours>

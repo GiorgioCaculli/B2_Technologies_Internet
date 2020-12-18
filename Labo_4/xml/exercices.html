@@ -1,0 +1,209 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Exercices du Cours de XML</title>
+      <meta name="author" content="Gilles Chagnon">
+      <meta name="keywords" content="XML, XSL, DTD, Schema XML, SVG, SMIL, XPath, XForms, services Web">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Exercices</h1>
+         <p><span class="version">version 5.01d</span>, dernière mise à jour le 12 janvier 2010.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="cours"><a href="historique.html">Historique</a></li>
+         <li class="cours"><span class="actif">Exercices</span></li>
+         <li class="cours"><a href="toc.html" tabindex="8">Table des matières détaillée</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Liste des exercices par chapitre</h2>
+         <div class="impair">
+            <h3><a href="#t0">Pour bien débuter</a></h3>
+            <p class="intro">Ces pages abordent les bases de cette famille de langages, ainsi qu'un bref tutoriel sur deux éditeurs.</p>
+            <h4>Concepts de base</h4>
+            <ul>
+               <li><a href="exercices/exo1.html">Structuration d'informations 1</a><ul>
+                     <li><a href="exercices/exo1_cor.xml">Correction</a></li>
+                  </ul>
+               </li>
+               <li><a href="exercices/exo15.html">Structuration d'informations 2</a><ul>
+                     <li><a href="exercices/exo15cor.xml">Correction</a></li>
+                  </ul>
+               </li>
+            </ul>
+            <h4>Prise en main d'XML CookTop</h4>
+            <ul>
+               <li><a href="exercices/exo2.html">Vérification de validité</a><ul>
+                     <li><a href="exercices/exo1_cor.xml">Correction</a></li>
+                  </ul>
+               </li>
+               <li><a href="exercices/exo3.html">Amusons-nous...</a></li>
+            </ul>
+            <h4>Prise en main d'oXygen XML Editor</h4>
+            <ul>
+               <li><a href="exercices/exo2.html">Vérification de validité</a><ul>
+                     <li><a href="exercices/exo1_cor.xml">Correction</a></li>
+                  </ul>
+               </li>
+               <li><a href="exercices/exo3.html">Amusons-nous...</a></li>
+            </ul>
+         </div>
+         <div class="pair">
+            <h3><a href="#t1">Définir le format d'un document&nbsp;: DTD et Schémas</a></h3>
+            <p class="intro">Un fichier XML doit non seulement respecter des règles d'écriture vues précédemment&nbsp;; il peut aussi, si on le désire, suivre des règles
+               strictes d'enchâssements des éléments. Il existe deux grands langages de description pour ce faire.
+            </p>
+            <h4>Déclarations de Type de Document</h4>
+            <ul>
+               <li><a href="exercices/exo4.html">Écriture d'une DTD avec éléments</a><ul>
+                     <li><a href="exercices/exo4_cor.dtd">Correction</a></li>
+                  </ul>
+               </li>
+               <li><a href="exercices/exo5.html">Écriture d'une DTD avec attributs</a><ul>
+                     <li><a href="exercices/exo5_cor.dtd">Correction</a></li>
+                  </ul>
+               </li>
+               <li><a href="exercices/exo6.html">Déclarations d'entités</a><ul>
+                     <li>Correction&nbsp;: <a href="exercices/exo6.xml">Fichier XML</a></li>
+                     <li>Correction&nbsp;: <a href="exercices/exo6.dtd">DTD</a></li>
+                  </ul>
+               </li>
+            </ul>
+            <h4>Initiation aux Schema XML</h4>
+            <ul>
+               <li><a href="exercices/exo13.html#exoelt">Déclaration d'éléments</a><ul>
+                     <li><a href="exercices/exo13_1cor.xsd">Correction</a></li>
+                  </ul>
+               </li>
+               <li><a href="exercices/exo13.html#exoattr">Déclaration d'attributs</a><ul>
+                     <li><a href="exercices/exo13_2cor.xsd">Correction</a></li>
+                  </ul>
+               </li>
+               <li><a href="exercices/exo13.html#exotypes">Déclaration de types</a><ul>
+                     <li><a href="exercices/exo13_3cor.xsd">Correction</a></li>
+                  </ul>
+               </li>
+            </ul>
+         </div>
+         <div class="impair">
+            <h3><a href="#t2">Mettre en forme et transformer&nbsp;: CSS et XSL</a></h3>
+            <p class="intro">Un fichier XML peut être à loisir mis en forme et adapté à des formats de visualisation variés, comme par exemple une page Web ou un document
+               PDF. Voici les techniques qui le permettent.
+            </p>
+            <h4>Mise en forme à l'aide de feuilles de style XSL : initiation à XSLT</h4>
+            <ul>
+               <li><a href="exercices/exo7.html">Mise en forme simple à l'aide de XSL</a><ul>
+                     <li><a href="exercices/exo7.xsl">Correction</a></li>
+                  </ul>
+               </li>
+               <li><a href="exercices/exo8.html">Mise en forme avec réarrangement</a><ul>
+                     <li><a href="exercices/exo8.xsl">Correction</a></li>
+                  </ul>
+               </li>
+            </ul>
+            <h4>Mise en forme à l'aide de feuilles de style XSL : instructions XSLT</h4>
+            <ul>
+               <li><a href="exercices/exo9.html">Utilisation d'éléments XSL</a><ul>
+                     <li><a href="exercices/exo9cor.html">Correction</a></li>
+                  </ul>
+               </li>
+            </ul>
+            <h4>Fonctions XPath</h4>
+            <ul>
+               <li><a href="exercices/exo10.html">Utilisation des fonctions XPath</a><ul>
+                     <li><a href="exercices/exo10cor.html">Correction</a></li>
+                  </ul>
+               </li>
+            </ul>
+            <h4>Utilisation du DOM et XSLT dynamique</h4>
+            <ul>
+               <li><a href="exercices/exo11.html">Manipulation dynamique de la feuille de style XSL</a><ul>
+                     <li>Correction&nbsp;: <a href="exercices/exo11_1.xsl">partie 1</a></li>
+                     <li>Correction&nbsp;: <a href="exercices/exo11_2.xsl">partie 2</a></li>
+                  </ul>
+               </li>
+            </ul>
+         </div>
+         <div class="pair">
+            <h3><a href="#t3">Du XML pour le multimédia&nbsp;: SMIL et SVG</a></h3>
+            <p class="intro">Certains formats XML particuliers ont été créés afin de permettre la description de contenu multimédia&nbsp;: images vectorielles avec SVG et synchronisation de son et vidéo avec SMIL.</p>
+            <h4>Synchroniser des contenus multimédia avec SMIL</h4>
+            <ul>
+               <li><a href="exercices/exo14.html">Un premier fichier SMIL</a><ul>
+                     <li><a href="exercices/exo14.smil">Correction</a></li>
+                  </ul>
+               </li>
+            </ul>
+            <h4>Un format de dessin vectoriel en XML: SVG</h4>
+            <ul>
+               <li><a href="exercices/exo12.html#base">Éléments géométriques de base</a></li>
+               <li><a href="exercices/exo12.html#rendu">Rendu visuel</a></li>
+               <li><a href="exercices/exo12.html#path">Écriture de texte le long d'un chemin</a><ul>
+                     <li><a href="exercices/exo12_3.svg">Correction</a></li>
+                  </ul>
+               </li>
+               <li><a href="exercices/exo12.html#groupement">Groupage d'éléments</a></li>
+               <li><a href="exercices/exo17.html">Transformations</a><ul>
+                     <li><a href="exercices/exo17cor.svg">Correction</a></li>
+                  </ul>
+               </li>
+               <li><a href="exercices/exo12.html#generation">Récapitulation</a><ul>
+                     <li>Correction&nbsp;: <a href="exercices/exo12_5_1.xsl">Génération SVG</a></li>
+                     <li>Correction&nbsp;: <a href="exercices/exo12_5_2.xsl">Génération HTML</a></li>
+                  </ul>
+               </li>
+            </ul>
+            <h4>L'animation dans le SVG</h4>
+            <ul>
+               <li><a href="exercices/exo16.html#debut">Création du graphique de base</a></li>
+               <li><a href="exercices/exo16.html#animationbase">Animation de base</a></li>
+               <li><a href="exercices/exo16.html#changementscouleur">Changements de couleurs</a></li>
+               <li><a href="exercices/exo16.html#transformations">Transformations</a></li>
+               <li><a href="exercices/exo16.html#plusloin">Pour aller plus loin</a><ul>
+                     <li><a href="exercices/exo16cor.svg">Correction</a></li>
+                  </ul>
+               </li>
+            </ul>
+         </div>
+         <div class="impair">
+            <h3><a href="#t4">Divers autres formats XML</a></h3>
+            <p class="intro">Une multitude de formats a été développée pour certaines tâches précises. Ces pages en décrivent quelques-uns dans cette galaxie.</p>
+            <h4>Plus loin que les formulaires HTML: XForms</h4>
+            <h4>Quelques mots sur les Services Web</h4>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

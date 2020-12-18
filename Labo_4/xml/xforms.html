@@ -1,0 +1,483 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Plus loin que les formulaires HTML: XForms</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="xforms, xml, formulaire">
+      <meta name="description" content="XForms est un format de description de formulaires dotés de fonctionnalités avancées par rapport à leur ancêtre de la norme HTML.">
+      <link rel="next" href="servicesweb.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Plus loin que les formulaires HTML: XForms</h1>
+         <p><span class="version">version 1.14</span>, dernière mise à jour le 20 mai 2009.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#xformsgene" title="Généralités">Généralités</a><ol>
+                     <li><a href="#limiteshtml" title="Limites des formulaires en HTML">Limites des formulaires en HTML</a></li>
+                     <li><a href="#pcpxforms" title="Principe de XForms">Principe de XForms</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#xformsfonctions" title="Fonctionnalités des formulaires XForms">Fonctionnalités des formulaires XForms</a><ol>
+                     <li><a href="#xformselt" title="Les éléments et leurs (éventuels) équivalents HTML">Les éléments et leurs (éventuels) équivalents HTML</a></li>
+                     <li><a href="#extensions" title="Extension des fonctionnalités HTML">Extension des fonctionnalités HTML</a></li>
+                     <li><a href="#gestionevt" title="Gestion des événements">Gestion des événements</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#pratique" title="Dans la pratique">Dans la pratique</a><ol>
+                     <li><a href="#visualisation" title="Visualisation">Visualisation</a></li>
+                     <li><a href="#xhtml" title="Inclusion en XHTML">Inclusion en XHTML</a><ol>
+                           <li><a href="#xhtmlpcp" title="Principe">Principe</a></li>
+                           <li><a href="#xhtmlpremier" title="Un premier exemple">Un premier exemple</a></li>
+                           <li><a href="#xhtmldeuxieme" title="Un exemple plus élaboré">Un exemple plus élaboré</a></li>
+                           <li><a href="#interactif" title="Interactivité sans script">Interactivité sans script</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>IV. <a href="#papl" title="Pour aller plus loin...">Pour aller plus loin...</a></li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="xformsgene" href="#xformsgene" id="xformsgene"></a>I. Généralités
+         </h3>
+         <h4><a name="limiteshtml" id="limiteshtml" href="#limiteshtml"></a>1. Limites des formulaires en HTML
+         </h4>
+         <p>Les formulaires sont depuis plusieurs années une composante essentielle des sites Internet. Ils permettent en effet, à moindres
+            frais, d'apporter une touche d'interactivité à l'internaute. Néanmoins, les formulaires disponibles à l'aide des balises en
+            <code class="langage">HTML</code> présentent des limitations qui sont maintenant gênantes&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>une mauvaise intégration en XML&nbsp;: certains de ces éléments (comme <code class="code">&lt;input&gt;</code>, par exemple), sont des balises vides non fermées&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>des fonctionnalités limitées&nbsp;: pour réaliser de nombreuses actions, comme pré-remplir dynamiquement certains éléments du formulaire,
+                  ou bien vérifier la validité d'une saisie (comme une adresse électronique, par exemple), il est nécessaire de passer par un
+                  langage de script&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>un codage mêlant présentation et information&nbsp;;</p>
+            </li>
+            <li>
+               <p>un support des éléments affichables dépendant fortement de l'outil utilisé.</p>
+            </li>
+         </ul>
+         <p>Afin de répondre à ces exigences de la communauté, le W3C a mis sur pied un groupe de travail, dont le résultat fut la publication
+            en octobre 2003 de la <a href="http://www.w3.org/TR/2003/REC-xforms-20031014/">recommandation</a> pour le <a href="http://www.w3.org/MarkUp/Forms/">langage <code class="langage">XForms</code></a>. Une <a href="http://www.w3.org/TR/2006/REC-xforms-20060314/">seconde édition</a> a été publiée en mars 2006. La <a href="http://www.w3.org/TR/2007/REC-xforms-20071029/">troisième version</a> est sortie le 29 octobre 2007.
+         </p>
+         <p class="retourtdm"><a href="#tdm_limiteshtml" title="Retour à la TdM (Limites des formulaires en HTML)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="pcpxforms" id="pcpxforms" href="#pcpxforms"></a>2. Principe de XForms
+         </h4>
+         <p>Un formulaire collecte des données&nbsp;; la représentation interne au navigateur de ces données est une <span lang="en" class="autrelangue">instance data</span>, basée sur <code class="langage">XML</code>.
+         </p>
+         <p>Les relations entre les données au sein de ces représentations sont plus complexes qu'en <code class="langage">HTML</code> où, on le rappelle, on ne rencontre que des paires <code class="code">nom_variable=valeur</code>. Dans le cas de <code class="langage">XForms</code>, deux champs de formulaires peuvent être interdépendants.
+         </p>
+         <p>À une saisie de l'utilisateur correspond une <span lang="en" class="autrelangue">instance data</span>, traitée en mémoire, qui en retour agit sur le formulaire qui lui a donné «&nbsp;naissance&nbsp;», ce qui conditionne la saisie de
+            l'utilisateur, etc. La soumission elle-même n'a lieu qu'à la toute fin du processus. Cette soumission est effectuée selon
+            un formatage de données précis, conforme par exemple à un Schéma, et permettant un envoi au format <code class="langage">XML</code>, déjà acceptable sans traitement par le serveur.
+         </p>
+         <p>Afin d'alléger encore la charge du serveur, <code class="langage">XForms</code> permet de réaliser des calculs sur les données <em>avant</em> leur soumission. En fait, il est possible de réaliser tout ce que <a href="fonctionsxpath.html"><code class="langage">XPath</code></a> permet, ainsi que des calculs plus aboutis, des vérifications en temps réel du formatage des données saisies, la gestion
+            de champs de formulaires obligatoires, etc.
+         </p>
+         <p>Le but des membres du groupe de travail était de remplacer 80% des scripts nécessaires dans les formulaires en <code class="langage">HTML</code>, par seulement 20% de fonctionnalités. Cela est réalisé par un recours intensif&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>à <code class="langage">XPath</code> pour les calculs et manipulations de chaînes de caractères&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>à <code class="langage">XML Schema</code> pour les vérifications de formatage des données saisies&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>à des fonctions de calcul supplémentaires telles que <code class="code">average()</code>, <code class="code">min()</code>, <code class="code">max()</code>, etc.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_pcpxforms" title="Retour à la TdM (Principe de XForms)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="xformsfonctions" href="#xformsfonctions" id="xformsfonctions"></a>II. Fonctionnalités des formulaires XForms
+         </h3>
+         <h4><a name="xformselt" id="xformselt" href="#xformselt"></a>1. Les éléments et leurs (éventuels) équivalents HTML
+         </h4>
+         <p>Les éléments de formulaire <code class="langage">HTML</code> ont été remplacés par quelques équivalents <code class="langage">XForms</code>. D'autres sont nouveaux.
+         </p>
+         <table class="tableau" summary="Équivalents (X)HTML des nouveaux éléments XForms." border="1">
+            <tr>
+               <th id="xhtml2">
+                  <p>Élément <code class="langage">(X)HTML</code></p>
+               </th>
+               <th id="xforms">
+                  <p>Élément <code class="langage">XForms</code></p>
+               </th>
+            </tr>
+            <tr>
+               <td headers="xhtml2">
+                  <p><code class="code">&lt;input type="text"&gt;</code></p>
+               </td>
+               <td headers="xforms">
+                  <p><code class="code">&lt;input&gt;</code></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="xhtml2">
+                  <p><code class="code">&lt;textarea&gt;</code></p>
+               </td>
+               <td headers="xforms">
+                  <p><code class="code">&lt;textarea&gt;</code></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="xhtml2">
+                  <p><code class="code">&lt;input type="password"&gt;</code></p>
+               </td>
+               <td headers="xforms">
+                  <p><code class="code">&lt;secret&gt;</code></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="xhtml2">
+                  <p><code class="code">&lt;input type="file"&gt;</code></p>
+               </td>
+               <td headers="xforms">
+                  <p><code class="code">&lt;upload&gt;</code></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="xhtml2">
+                  <p><code class="code">&lt;button&gt;</code></p>
+               </td>
+               <td headers="xforms">
+                  <p><code class="code">&lt;trigger&gt;</code></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="xhtml2">
+                  <p><code class="code">&lt;input type="submit"&gt;</code></p>
+               </td>
+               <td headers="xforms">
+                  <p><code class="code">&lt;submit&gt;</code></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="xhtml2">
+                  <p><code class="code">&lt;select multiple="multiple"&gt;</code> ou plusieurs <code class="code">&lt;input type="checkbox"&gt;</code></p>
+               </td>
+               <td headers="xforms">
+                  <p><code class="code">&lt;select&gt;</code></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="xhtml2">
+                  <p><code class="code">&lt;select&gt;</code> ou plusieurs <code class="code">&lt;input type="radio"&gt;</code></p>
+               </td>
+               <td headers="xforms">
+                  <p><code class="code">&lt;select1&gt;</code></p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="xhtml2">
+                  <p>pas d'équivalent</p>
+               </td>
+               <td headers="xforms">
+                  <p><code class="code">&lt;output&gt;</code> (pour une zone d'affichage dynamique)
+                  </p>
+               </td>
+            </tr>
+            <tr>
+               <td headers="xhtml2">
+                  <p>pas d'équivalent</p>
+               </td>
+               <td headers="xforms">
+                  <p><code class="code">&lt;range&gt;</code> (pour un contrôle de la plage de valeurs autorisées pour une donnée)
+                  </p>
+               </td>
+            </tr>
+         </table>
+         <p class="legende">Table&nbsp;1. Équivalents <code class="langage">(X)HTML</code> des nouveaux éléments <code class="langage">XForms</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_xformselt" title="Retour à la TdM (Les éléments et leurs (éventuels) équivalents HTML)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="extensions" id="extensions" href="#extensions"></a>2. Extension des fonctionnalités HTML
+         </h4>
+         <p>Les éléments <code class="code">&lt;input&gt;</code>, <code class="code">&lt;textarea&gt;</code> et <code class="code">&lt;secret&gt;</code>, appliquées à des données de type chaîne de caractères, ont le même comportement qu'en <code class="langage">HTML</code>. Lorsqu'ils sont appliqués à une donnée d'un autre type, le comportement peut être adapté. On peut par exemple imaginer un
+            champ de saisie d'une donnée de type <code class="code">date</code> (voir les types prédéfinis dans le cours sur les <a href="schema.html#types">Schémas</a>), qui se présente non comme un champ de saisie de texte, mais comme un calendrier interactif.
+         </p>
+         <p>Les saisies de texte prévoient aussi des «&nbsp;modes d'entrée&nbsp;», du formatage automatique (par exemple, un champ ne peut accepter
+            les numéros de téléphone que sous une certaine forme, grâce à un type de donnée défini dans un schéma), mais aussi des fonctionnalités
+            simples de formatage au moment de la soumission (par exemple, une conversion majuscule vers minuscule automatique).
+         </p>
+         <p>L'élément <code class="code">&lt;select&gt;</code> dispose d'un attribut, <code class="code">appearance</code>, qui permet de spécifier si le champ doit se présenter sous la forme minimale (<code class="code">minimal</code>), compacte (<code class="code">compact</code>) ou complète (<code class="code">full</code>).
+         </p>
+         <p>L'élément <code class="code">&lt;output&gt;</code> permet l'affichage des données saisies en temps réel dans le formulaire. Par exemple (les données saisies dans le formulaire
+            sont <em>mises en valeur</em>)&nbsp;:
+         </p>
+         <p><code class="code">Vous êtes en train de commander </code><em>3756 briques</em><code class="code"> en </code><em>porcelaine de Chine</em><code class="code">. En êtes-vous sûr</code><em>e</em><code class="code">?</code></p>
+         <p>L'élément <code class="code">&lt;range&gt;</code> peut s'afficher comme une sorte de curseur coulissant le long d'une règle graduée, ou bien un bouton que l'on peut tourner.
+            L'avenir dira l'interface qui deviendra la plus habituelle.
+         </p>
+         <p>L'élément <code class="code">&lt;upload&gt;</code> va au-delà de la simple boîte de dialogue d'ouverture de fichier, puisque le groupe de travail XForms prévoit qu'il soit
+            possible de gérer par ce genre d'interface la capture à partir d'un scanner ou d'un appareil photo numérique connecté à la
+            machine, un micro, etc.
+         </p>
+         <p><code class="langage">XForms</code> offre aussi d'autres possibilités&nbsp;: champs de formulaires copiés (par exemple, pour entrer plusieurs fois des produits dans
+            chariot électronique), affichage/masquage de portions du formulaire, gestion de formulaires s'étendant sur plusieurs pages
+            <code class="typefichier">HTML</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_" title="Retour à la TdM ()">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <p>En fait, il apparaît que <code class="langage">XForms</code> peut être interprété comme un langage de réalisation d'interface pour des applications Web.
+         </p>
+         <p class="retourtdm"><a href="#tdm_extensions" title="Retour à la TdM (Extension des fonctionnalités HTML)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="gestionevt" id="gestionevt" href="#gestionevt"></a>3. Gestion des événements
+         </h4>
+         <p>En <code class="langage">HTML</code>, certains événements n'étaient accessibles que par des appels à des scripts (par exemple, les événements <code class="code">onfocus</code>, <code class="code">onblur</code>, <code class="code">onselect</code>...). <code class="langage">XForms</code> fait appel au modèle <a href="http://www.w3.org/TR/xml-events/">XML events</a>, qui peut prendre en charge&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>la «&nbsp;focalisation&nbsp;» sur un élément de formulaire</p>
+            </li>
+            <li>
+               <p>l'affichage d'un message</p>
+            </li>
+            <li>
+               <p>le chargement d'une nouvelle URL (dans la fenêtre courante ou une autre)</p>
+            </li>
+            <li>
+               <p>des calculs, des vérifications de conformité à un format prédéfini, des rafraîchissements d'écran...</p>
+            </li>
+            <li>
+               <p>la soumission ou la remise à zéro d'un formulaire</p>
+            </li>
+            <li>
+               <p>le défilement automatique le long d'un formulaire...</p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_gestionevt" title="Retour à la TdM (Gestion des événements)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="pratique" href="#pratique" id="pratique"></a>III. Dans la pratique
+         </h3>
+         <h4><a name="visualisation" id="visualisation" href="#visualisation"></a>1. Visualisation
+         </h4>
+         <p><code class="langage">XForms</code> est un langage nouveau et, en tant que tel, n'est pas encore supporté nativement par les navigateurs. Il est néanmoins d'ores
+            et déjà possible de tester son code&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>soit avec un <span lang="en" class="autrelangue">plug-in</span> d'Internet Explorer 6, <a href="http://www.formsplayer.com/">FormsPlayer</a>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>soit avec un petit navigateur Java dédié aux formats <code class="langage">XML</code>, <a href="http://www.x-smiles.org">X-Smiles</a> (ce navigateur implémente notamment en natif <code class="langage">SVG</code>, <code class="langage">SMIL</code>).
+               </p>
+            </li>
+            <li>
+               <p>soit avec l'<a href="https://addons.mozilla.org/fr/firefox/addon/824">extension Mozilla XForms</a> pour <code class="logiciel">FireFox</code></p>
+            </li>
+            <li>
+               <p><a href="http://www.orbeon.com/">Orbeon</a> et <a href="http://chiba.sourceforge.net/">Chiba</a> sont deux implémentations Open Source utilisant Ajax.
+               </p>
+            </li>
+         </ul>
+         <p>Une liste plus complète d'implémentations est disponible <a href="http://www.w3.org/MarkUp/Forms/#implementations">au W3C</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_visualisation" title="Retour à la TdM (Visualisation)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="xhtml" id="xhtml" href="#xhtml"></a>2. Inclusion en XHTML
+         </h4>
+         <h5><a href="#xhtmlpcp" name="xhtmlpcp" id="xhtmlpcp"></a>a. Principe
+         </h5>
+         <p><span lang="en" class="autrelangue">Via</span> les <a href="schema.html#espacenom">espaces de nom</a>, <code class="langage">XForms</code> peut être intégré dans n'importe quel fichier <code class="typefichier">XML</code>. Mais l'utilisation la plus répandue est dans un fichier <code class="typefichier">XHTML</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_xhtmlpcp" title="Retour à la TdM (Principe)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#xhtmlpremier" name="xhtmlpremier" id="xhtmlpremier"></a>b. Un premier exemple
+         </h5>
+         <p>Un exemple simple donne les principes de base&nbsp;: il est disponible <a href="exemples/xforms0.xml">en téléchargement</a>. On notera&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>l'appel à des espaces de nom pour l'insertion des éléments de formulaire&nbsp;;</p>
+            </li>
+            <li>
+               <p>un modèle dans l'entête du fichier <code class="typefichier">HTML</code>, et les balises non insérées dans un élément particulier dans le corps du fichier (il n'y a pas de balise <code class="code">&lt;form&gt;</code>)&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>la présence <em>obligatoire</em> d'éléments <code class="code">label</code>, qui permettent à la fois de décrire chaque élément de formulaire, mais aussi de fournir le texte destiné à être affiché
+                  sur les boutons.
+               </p>
+            </li>
+         </ul>
+         <p>Sous réserve de correctement libeller le modèle (ce qui n'est pas le cas ici), la chaîne de caractères envoyée par le formulaire
+            lors de la soumission est le fichier <code class="typefichier">XML</code> suivant&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;instanceData&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;numero&gt;</span>(...)<span class="tag">&lt;/numero&gt;</span><br>
+            				<span class="tag">&lt;/instanceData&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_xhtmlpremier" title="Retour à la TdM (Un premier exemple)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#xhtmldeuxieme" name="xhtmldeuxieme" id="xhtmldeuxieme"></a>c. Un exemple plus élaboré
+         </h5>
+         <p>Le deuxième exemple, disponible lui aussi <a href="exemples/xforms.xml">en téléchargement</a>, présente quelques autres principes de base en plus de ceux précédemment évoqués&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>Le modèle doit répondre à deux tâches&nbsp;:</p>
+               <ol>
+                  <li>
+                     <p>il doit définir la structure de l'<span lang="en" class="autrelangue">instance data</span>, dans la balise <code class="code">&lt;instance&gt;</code>&nbsp;;
+                     </p>
+                  </li>
+                  <li>
+                     <p>il doit aussi définir ce qui arrive lors de la soumission du formulaire.</p>
+                  </li>
+               </ol>
+            </li>
+         </ul>
+         <p>La balise <code class="code">&lt;instance&gt;</code> définit les éléments <code class="langage">XML</code> qui figureront dans la soumission du formulaire. Il est possible, au lieu de simplement écrire, dans l'ordre, la liste de
+            ces éléments, de faire référence à un schéma externe, à l'aide d'un attribut <code class="code">src</code>. Cette possibilité permet d'appliquer plus de contraintes aux données qui doivent être saisies.
+         </p>
+         <p>La balise <code class="code">&lt;submission&gt;</code> possède beaucoup d'attributs&nbsp;; les trois plus importants sont <code class="code">id</code>, <code class="code">action</code> et <code class="code">method</code>, comme en <code class="langage">HTML</code>. L'exemple donné en propose deux illustrations&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>Comme en <code class="langage">HTML</code>, <code class="code">id</code> permet d'... identifier le modèle de soumission&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>la création d'un fichier local (méthode "put"). On peut se servir de cette méthode si on doit réaliser l'interface d'une application
+                  Web destinée à aider des utilisateurs novices à produire des fichiers <code class="typefichier">XML</code> selon un format précis.
+               </p>
+            </li>
+            <li>
+               <p>l'envoi "classique" (méthode "post"). Cette méthode est particulièrement adaptée à l'utilisation de <a href="servicesweb.html">Services Web</a>.
+               </p>
+            </li>
+         </ul>
+         <p>Dans le formulaire lui-même, dans le corps du document, on note pour chaque champ l'utilisation de quelques attributs&nbsp;:</p>
+         <ul>
+            <li>
+               <p>L'attribut <code class="code">model</code> "pointe" vers le modèle d'<span lang="en" class="autrelangue">instance data</span> utilisé&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>L'attribut <code class="code">ref</code> pointe, pour l'<span lang="en" class="autrelangue">instance data</span> sélectionnée, vers la balise à remplir&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>L'attribut <code class="code">class</code> permet de faire référence à une propriété <code class="langage">CSS</code> gérant l'apparence de l'élément.
+               </p>
+            </li>
+         </ul>
+         <p>L'élément <code class="code">&lt;submit&gt;</code>, enfin, possède un attribut <code class="code">submission</code> désignant le type de soumission à employer. Cet attribut fait référence à la balise <code class="code">&lt;submission&gt;</code> d'identifiant correspondant.
+         </p>
+         <p class="retourtdm"><a href="#tdm_xhtmldeuxieme" title="Retour à la TdM (Un exemple plus élaboré)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#interactif" name="interactif" id="interactif"></a>d. Interactivité sans script
+         </h5>
+         <p>Le troisième exemple <a href="exemples/xforms2.xml">en téléchargement</a> ajoute quelques éléments&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>Une balise <code class="code">&lt;repeat&gt;</code> permet d'indiquer une collection d'éléments de formulaire répétables.
+               </p>
+            </li>
+            <li>
+               <p>L'élément <code class="code">&lt;trigger&gt;</code>, qui désigne un bouton, permet de spécifier une action de répétition. Pour cela, lorsque l'événement indiqué par l'attribut
+                  <code class="code">ev:event</code> est activé, le formulaire s'ajoute (sans script, balise <code class="code">&lt;insert&gt;</code>) un élément <code class="code">&lt;order&gt;</code> (<code class="code">nodeset=order</code>, après le dernier élément de même nom dans l'<span lang="en" class="autrelangue">instance data</span> (<code class="code">at="last()" position="after"</code>)
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_xhtml" title="Retour à la TdM (Inclusion en XHTML)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="papl" href="#papl" id="papl"></a>IV. Pour aller plus loin...
+         </h3>
+         <p>Outre ses indéniables avantages par rapport aux formulaires <code class="langage">HTML</code> en termes d'allègement de code (en limitant le recours aux langages de script, notamment), <code class="langage">XForms</code> est un langage qui semble spécifiquement dédié à la réalisation d'interface pour des applications Web, mais aussi pour des
+            Services Web.
+         </p>
+         <p>Il s'agit néanmoins d'un langage complexe -on n'a rien sans rien.</p>
+         <p>Le plus simple, pour un auteur habitué aux formulaires <code class="langage">HTML</code> et désireux d'explorer ce nouveau langage, est de jeter un oeil sur le document du W3C intitulé <a href="http://www.w3.org/MarkUp/Forms/2003/xforms-for-html-authors.html">XForms for HTML Authors</a>.
+         </p>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours suivant&nbsp;: <a href="servicesweb.html">Quelques mots sur les Services Web</a></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="xforms.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 20 mai 2009, version 1.14. Mise à jour des outils de visualisation.</li>
+            <li>Le 5 novembre 2007, version 1.13. Lien vers la troisième version de la recommandation. Mention de l'extension Mozilla XForms.</li>
+            <li>Le 6 juin 2006, version 1.12. Corrections typographiques et ajout de la référence à la seconde édition de la recommandation.</li>
+            <li>Le 12 septembre 2005, version 1.11. Corrections typographiques.</li>
+            <li>Le 13 juillet 2005, version 1.10. Réécriture des exemples.</li>
+            <li>Le 24 juin 2004, version 1.01. Corrections typographiques.</li>
+            <li>Le 19 mai 2004, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

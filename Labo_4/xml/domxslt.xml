@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+	<cours nomfichier="domxslt">Introduction à XML</cours>
+	<entete>
+		<titre>Utilisation du DOM et XSLT dynamique</titre>
+		<auteur>G. Chagnon</auteur>
+		<resume>Ce chapitre présente une initiation aux techniques de script permettant la gestion du Document Object Model via une feuille de style XSL.</resume>
+		<motsclefs>DOM, XSL, XSLT, JavaScript, XML</motsclefs>
+	</entete>
+	<corpus>
+		<partie titre="Insertion de code JavaScript dans une page" ancre="javascript">
+			<section titre="Introduction" ancre="jsintro">
+				<paragraphe>
+					<texte>XSLT permet de créer, entre autres, des pages <code type='typefichier'>HTML</code>. On peut désirer que ces pages puissent être dotées d'un comportement dynamique&#160;; cela est réalisable <autrelangue>via</autrelangue> l'insertion de code JavaScript. Mais un certain nombre de précautions doivent être prises afin d'éviter l'interprétation du code ainsi inséré. Deux approches, à ce niveau, sont possibles. La première consiste à écrire le code JavaScript destiné à la manipulation du code HTML, ainsi que nous l'avons fait en <code type="langage">DHTML</code>. Le côté "dynamique" est donc déporté sur la gestion du document <code type='typefichier'>HTML</code> créé. La seconde méthode, que nous allons explorer dans ce cours, consiste à incorporer un code JavaScript permettant de modifier la feuille de style <code type="typefichier">XSL</code> elle-même. Cette méthode, rendue obsolète par les progrès de la standardisation et de l'accès au DOM par les navigateurs, est implémentée <autrelangue>via</autrelangue> une interface propriétaire sous <logiciel>Internet Explorer&#160;6</logiciel>.</texte>
+				</paragraphe>
+			</section>
+			<section titre="Insertion de code" ancre="jsinsertion">
+				<paragraphe>
+					<texte>Un code JavaScript, en effet, peut contenir un certain nombre de caractères <code>&lt;</code> ou <code>&gt;</code>, qui risquent d'être interprétés par un <autrelangue>parser</autrelangue> <code type="langage">XSL</code>. Le code doit donc être inséré dans un élément <code type="langage">XML</code> non interprété. Cela donne ainsi l'exemple suivant&#160;:</texte>
+					<exemple type="XML">
+						<element nom="script"><attribut nom="type">text/javascript</attribut><cdat>(Emplacement du code)</cdat></element>
+					</exemple>
+					<texte>Il est alors possible d'écrire le code JavaScript (ou autre...) sans se soucier d'éventuelles incompatibilités de syntaxe.</texte>
+				</paragraphe>
+			</section>
+		</partie>
+		
+		<partie titre="Utilisation du DOM" ancre="dom">
+			<section titre="Objets, méthodes et propriétés" ancre="objets">
+				<paragraphe titre="Accéder aux fichiers XML et XSL" ancre="accesfichiers">
+					<texte>Avant toute chose, il faut être en mesure de pouvoir <valeur>lire</valeur> les fichiers sources <code type='typefichier'>XML</code> et <code type='typefichier'>XSL</code>. Pour cela, on utilise deux collections, <code>document.XMLDocument</code> et <code>document.XSLDocument</code>&#160;:</texte>
+					<exemplejavascript><declaration nomvariable="XMLsource" valeur="Object"/><finligne/>
+						<declaration nomvariable="XSLsource" valeur="Object"/><finligne/>
+						<variable name="XMLsource"/><autres> = document.XMLDocument</autres><finligne/>
+						<variable name="XSLsource"/><autres> = document.XSLDocument</autres><finligne/>
+					</exemplejavascript>
+				</paragraphe>
+				<paragraphe titre="Sélection des éléments dans un fichier XML" ancre="selectelt">
+					<texte>Une fois que le fichier <code type="typefichier">XML</code> est déclaré, il faut pouvoir accéder à ses différents éléments. Cela est réalisé par un appel à la méthode <code>selectNodes()</code>, qui prend comme argument une expression <code type='langage'>XPath</code>, appliquée à la collection <code>documentElement</code> de l'objet précédemment défini.</texte>
+					<exemplejavascript>
+						<variable name="XMLsource"/><autres>.documentElement.</autres><fonction name="selectNodes"><autres>livre/auteur/@nom</autres></fonction><finligne/>
+					</exemplejavascript>
+					<texte>On peut également modifier un élément de la feuille XSL&#160;</texte>
+					<exemplejavascript>
+						<variable name="collection_element"/><autres>=</autres><variable name="XSLsource"/><autres>.documentElement.</autres><fonction name="selectNodes"><autres>"xsl:for-each[@select='livre']"</autres></fonction><finligne/>
+						<variable name="element"/><autres>=</autres><variable name="collection_element"/><autres>[0]</autres><finligne/>
+						<variable name="element"/><autres>.</autres><fonction name="setAttribute"><autres>"select"</autres><autres>auteur/@nom</autres></fonction>
+					</exemplejavascript>
+				</paragraphe>
+			</section>
+			<section titre="Mise à jour de l'affichage" ancre="majaffichage">
+				<paragraphe>
+					<texte>Il est nécessaire, pour terminer, de mettre à jour l'afichage avec les modifications désirées. Cela est réalisé en utilisant la propriété <code>innerHTML</code> de l'objet <code>document.body</code>, et lui affectant le résultat de la transformation de l'objet XML par l'objet XSL modifié&#160;:</texte>
+					<exemplejavascript>
+						<autres>document.body.innerHTML = </autres><variable name="XMLsource"/><autres>.</autres><fonction name="transformNode"><variable name="XSLsource"/></fonction><finligne/>
+					</exemplejavascript>
+				</paragraphe>
+			</section>
+			<section titre="Exemple" ancre="exemple">
+				<paragraphe>
+					<texte>Consulter l'exemple de tri sur la collection de nuages (<reference href="exemples/nuages.xml">source</reference> et <reference href="exemples/exemple1.xsl">feuille de style</reference>).</texte>
+				</paragraphe>
+				<exercice titre="Manipulation dynamique de la feuille de style XSL" ancre="exomanipxsl">
+					<enonce href="exercices/exo11.html"/>
+					<correction href="exercices/exo11_1.xsl" description="partie 1"/>
+					<correction href="exercices/exo11_2.xsl" description="partie 2"/>
+				</exercice>
+			</section>
+		</partie>
+	</corpus>
+</chapitre>

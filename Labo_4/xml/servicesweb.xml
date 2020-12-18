@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+
+<cours nomfichier="servicesweb">Cours d'initiation à XML</cours>
+
+<entete>
+	<titre>Quelques mots sur les Services Web</titre>
+	<auteur email="Gilles.Chagnon@upmc.fr">G. Chagnon</auteur>
+	<resume>Les "Services Web" sont une technologie permettant l'échange d'informations entre un poste client et un poste serveur. Ce chapitre en dresse un rapide portrait.</resume>
+	<motsclefs>service web, services web, web services, web service, e-commerce, concept, introduction</motsclefs>
+</entete>
+
+<corpus>
+
+<partie titre="Généralités" ancre="gene">
+	<section titre="Introduction" ancre="geneintro">
+		<paragraphe>
+			<texte>Les services Web sont un mot à la mode, et sont actuellement promus par, entre autres, Sun, Oracle, HP, Microsoft et IBM. Mot nouveau, mais concept ancien car il s'agit ni plus ni moins que de déporter le traitement de données d'un poste client, vers un poste serveur sur lequel "tourne" l'application.</texte>
+		</paragraphe>
+		<paragraphe>
+			<texte>Alors que voici quelques années, l'utilisation du réseau pour un tel débit de données était encore problématique, il n'en est plus tout à fait de même aujourd'hui. Trois raisons pourraient inciter à opter pour un tel traitement déporté&#160;:</texte>
+			<liste type="ordonnee">
+				<item><texte>la machine distante peut être en possession des données, la nôtre non&#160;;</texte></item>
+				<item><texte>la machine distante peut disposer d'une puissance de calcul supérieure (attention, cela ne suffit pas&#160;: il faut également tenir compte de la rapidité du débit entre les deux machines)</texte></item>
+				<item><texte>la machine distante dispose de logiciels plus adaptés au traitement des données.</texte></item>
+			</liste>
+		</paragraphe>
+		<paragraphe>
+			<texte>Par le passé, de nombreuses solutions propriétaires ont coexisté. Il était également possible de développer "au coup par coup" des solutions adaptées à des situations particulières. Heureusement, des efforts de standardisation ont été récemment entrepris.</texte>
+		</paragraphe>
+	</section>
+	<section titre="Qu'est-ce qu'un service Web?" ancre="koikce">
+		<paragraphe>
+			<texte>C'est le fait de mettre des ressources à disposition (gratuite ou non) sur Internet, <autrelangue>via</autrelangue> un protocole d'échanges standardisé, pour des programmes écrits dans des langages quelconques.</texte>
+			<texte>Cela nécessite&#160;:</texte>
+			<liste>
+				<item><texte>un encodage (toujours <code type="langage">XML</code>)&#160;;</texte></item>
+				<item><texte>un transport (souvent <code type="langage">HTTP</code>)&#160;;</texte></item>
+				<item><texte>une organisation des requêtes et des réponses.</texte></item>
+			</liste>
+		</paragraphe>
+		<paragraphe>
+			<texte>La procédure de fonctionnement d'un service Web est la suivante&#160;:</texte>
+			<liste type="ordonnee">
+				<item><texte>le service Web définit un format pour les requêtes et les réponses&#160;;</texte></item>
+				<item><texte>un ordinateur demandeur effectue une requête&#160;;</texte></item>
+				<item><texte>le service Web effectue une action, et renvoie la réponse à l'ordinateur demandeur.</texte></item>
+			</liste>
+		</paragraphe>
+		<paragraphe>
+			<texte>Un service Web peut par exemple&#160;:</texte>
+			<liste>
+				<item><texte>récupérer un cours de bourse</texte></item>
+				<item><texte>faire une demande automatiquement mise à jour d'un prix&#160;;</texte></item>
+				<item><texte>accéder à un calendrier universel faisant les conversions entre calendriers internationaux et connaissant, pour chaque pays, les dates des jours fériés&#160;;</texte></item>
+				<item><texte>traduire un passage</texte></item>
+				<item><texte>valider un numéro international de code postal...</texte></item>
+			</liste>
+			<texte>Les possibilités sont donc nombreuses.</texte>
+		</paragraphe>
+		<paragraphe>
+			<texte>Pour pouvoir utiliser un service Web, plusieurs étapes sont nécessaires&#160;:</texte>
+			<liste>
+				<item><texte>il faut savoir <reference href="#trouver">le trouver</reference>...</texte></item>
+				<item><texte>... puis connaître la méthode pour <reference href="#acceder">y accéder</reference>...</texte></item>
+				<item><texte>... enfin savoir <reference href="#utiliser">l'utiliser</reference> correctement.</texte></item>
+			</liste>
+			<texte>Nous allons successivement examiner ces trois étapes.</texte>
+		</paragraphe>
+	</section>
+</partie>
+
+<partie titre="Trouver un service Web" ancre="trouver">
+	<paragraphe>
+		<texte>La première étape est de savoir où trouver un service Web, ensuite de savoir <valeur>précisément</valeur> ce qu'il fait. Pour cela, il existe un annuaire, <reference href="#uddi"><acronyme titre="Universal Description, Discovery and Integration">UDDI</acronyme></reference>, et un protocole de description, <reference href="#wsdl"><acronyme titre="Web Service Description Language">WSDL</acronyme></reference>.</texte>
+	</paragraphe>
+	<section titre="Universal Description, Discovery and Integration - UDDI" ancre="uddi">
+		<paragraphe>
+			<texte>IBM, Microsoft et Ariba se sont entendus pour développer le projet UDDI. Il s'agt d'une sorte d'annuaire, disponible à <reference href="http://www.uddi.org">http://www.uddi.org</reference>, où il est possible de référencer un service Web, gratuitement (ce service pouvant lui-même être payant pour son utilisateur).</texte>
+			<texte>L'ensemble est développé dans le cadre d'<reference href="http://www.oasis-open.org"><acronyme titre="Organization for the Advancement of Structured Information Standards">Oasis</acronyme></reference>, un consortium d'entreprises dont le but est de promouvoir le développement des nouveaux formats, notamment <code type="langage">XML</code>, dans des échanges standardisés entre entreprises (ce consortium travaille par exemple sur un format de facture, des fichiers de documentation -<reference href="http://www.docbook.org/index.html">DocBook</reference>-, etc.).</texte>
+		</paragraphe>
+	</section>
+	<section titre="Web Service Description Language - WSDL" ancre="wsdl">
+		<paragraphe>
+			<texte>Ce format, écrit en <code type="langage">XML</code>, a pour but de décrire, de manière normalisée, des API (<autrelangue>Application Programming Interfaces</autrelangue>). Il s'appuie sur les schémas XML. Il s'agit d'un langage très complexe, car il a été pensé dans le but de pouvoir être adaptable à n'importe quel Service Web -y compris ceux qui existaient avant la généralisation des protocoles actuels.</texte>
+			<texte>Le W3C, qui en est à l'origine, a mis à disposition la <reference href="http://www.w3.org/TR/wsdl">recommandation officielle</reference> sur <reference href="http://www.w3.org">son site</reference>.</texte>
+		</paragraphe>
+		<paragraphe>
+			<texte>Il permet de décrire notamment</texte>
+			<liste>
+				<item><texte>le fournisseur du service Web&#160;;</texte></item>
+				<item><texte>les informations que ce dernier peut donner&#160;;</texte></item>
+				<item><texte>le format des requêtes...</texte></item>
+			</liste>
+			<texte>Il existe une autre application de ce format. Comme la description d'un service Web répond à une forme standardisée, il est possible d'en tirer automatiquement une documentation, plus lisible pour un être humain, sous la forme d'un WSDL simplifié (<reference href="http://www.capescience.com/articles/simplifiedWSDL/"><autrelangue>Simplified WSDL</autrelangue></reference>).</texte>
+			<texte>On peut également envisager l'écriture de clients analysant seuls, automatiquement, le fichier <code type="typefichier">WSDL</code> et en déduisant le format d'échanges et le protocole à utiliser pour "discuter" avec le Service Web.</texte>
+		</paragraphe>
+	</section>
+</partie>
+
+<partie titre="Accéder à un service Web" ancre="acceder">
+	<paragraphe>
+		<texte>Il existe plusieurs formats concurrents pour définir le format de données en entrée et sortie d'un service Web. Nous allons aborder <reference href="#xmlrpc">XML-RPC</reference> et, plus récent, <reference href="#soap">SOAP</reference>.</texte>
+	</paragraphe>
+	<section titre="XML Remote Procedure Calling - XML-RPC" ancre="xmlrpc">
+		<paragraphe titre="Principe" ancre="rpcpcp">
+			<texte><reference href="http://www.xmlrpc.com/"><acronyme titre="XML Remote Procedure Calling">XML-RPC</acronyme></reference> est le plus simple des formats d'échange. Le principe de base est le suivant&#160;:</texte>
+			<liste>
+				<item><texte>sur le poste client, une bibliothèque encode les paramètres de la requête en <code type="langage">XML</code>&#160;;</texte></item>
+				<item><texte>sur le poste serveur, une (autre) bibliothèque les décode et les transmet à l'application.</texte></item>
+			</liste>
+			<texte>La procédure inverse a lieu lors de l'envoi de la réponse à la requête vers le poste client. En définitive, le programmeur n'a jamais besoin de coder lui-même le format de sortie en <code type="langage">XML</code>, puisque, dans le cadre du langage de programmation qu'il utilise, des fonctions se chargent des opérations à sa place. Il n'en voit que le résultat final.</texte>
+			<texte>Le transfert des données se fait selon le protocole <acronyme titre="Hyper Text Transfer Protocol">HTTP</acronyme>.</texte>
+			<texte>Il existe des bibliothèques en Perl, C, Python, Java, VB/.Net, PHP...</texte>
+		</paragraphe>
+		<paragraphe titre="Exemple et limitations" ancre="rpcexemple">
+			<texte>Par exemple, <reference href="http://www.adamsnames.tc/api/xmlrpc.html">Adam's Names</reference>, qui est une sorte de "WhoIs" pour les sites hébergés dans plusieurs îles du Pacifique, utilise ce protocole.</texte>
+			<texte>Le système a malheureusement des limites. En théorie, par exemple, les seuls transferts autorisés se font sous le format ASCII, même si des extensions -non officielles- autorisent les transferts en Unicode. De plus, ce format n'est pas normalisé par un organisme indépendant et neutre (comme le <reference href="http://www.w3.org/Consortium/Points/">W3C</reference>).</texte>
+		</paragraphe>
+	</section>
+	<section titre="Simple Object Access Protocol - SOAP" ancre="soap">
+		<paragraphe titre="Principe" ancre="soappcp">
+			<texte>Il s'agit du protocole actuellement le plus en vogue -il est promu par le W3C lui-même et Microsoft, et la première <reference href="http://www.w3.org/TR/soap">recommandation</reference> date de juin 2003.</texte>
+			<texte>Le principe est le même&#160;: le programmeur ne voit jamais le fichier <code type="typefichier">XML</code> que son poste émet ou reçoit, car tout est géré par une bibliothèque de fonctions et procédures dont il ne perçoit que le résultat final, avec le format habituel de son langage de programmation favori.</texte>
+			<texte>Des bibliothèques <code type="langage">SOAP</code> existent pour Perl, C, C#, Python, Java, VB/.Net, PHP, même Ada...</texte>
+			<texte><code type="langage">SOAP</code> permet d'utiliser le même typage de données que <reference href="schema.html#types">celui des schémas XML</reference>, des tableaux, des structures... bref, il est plus complet (et donc plus complexe...) que <code type="langage">XML-RPC</code>.</texte>
+		</paragraphe>
+		<paragraphe titre="Exemple et limitations" ancre="soapexemple">
+			<texte>L'exemple suivant illustre une requête <code type="langage">SOAP</code> simple, demandant à un serveur si un code postal est valable dans le Royaume Uni&#160;:</texte>
+			<exemple type="XML">
+				<element nom="env.Envelope" indent="oui">
+					<attribut nom="xmlns:env">http://www.w3.org/2001/06/soap-envelope</attribut>
+					<element nom="env.Body" niveau="1" indent="oui">
+						<element nom="m:ValidatePostcodeResponse " indent="oui" niveau="2">
+							<attribut nom="m:env:encodingStyle">http://www.w3.org/2001/06/soap-encoding</attribut>
+							<attribut nom="xmlns:m">http://www.lesiteduserviceweb.com/Postcode</attribut>
+							<element nom="PostCode" niveau="3">WC1A8GH</element>
+							<element nom="Country">UK</element>
+						</element>
+					</element>
+				</element>
+			</exemple>
+			<texte>En réponse, le serveur enverra le même type d'"enveloppe"&#160;; mais le corps du message (<code><![CDATA[<env:Body>]]></code>) se limitera à l'élément <code><![CDATA[<Valid>Yes</Valid>]]></code>.</texte>
+			<texte>Une des limitations principales de ce format est, par sa nature <code type="langage">XML</code>, son côté "usine à gaz".</texte>
+		</paragraphe>
+	</section>
+</partie>
+
+<partie titre="Utiliser un service Web: récapitulation et inconvénients" ancre="utiliser">
+	<section titre="Comment choisir un service Web" ancre="choisir">
+		<paragraphe>
+			<texte>Reprenons notre exemple de recherche de code postal, et plaçons-nous dans la peau du développeur d'une application, qui doit entre autres (mais ce n'est pas là sa fonction première) vérifier la validité de codes postaux pour une trentaine de pays.</texte>
+			<texte>Les données ne sont peut-être pas gratuites&#160;; développer un tel module dans l'application peut de surcroît prendre un temps non négligeable. La solution peut être un service Web.</texte>
+			<texte>Il suffit alors de regarder un annuaire -UDDI- pour constater si un tel service Web existe. Si oui, on vérifie (grâce au fichier <code type="typefichier">WSDL</code>) que le service fait bien ce qu'on désire qu'il fasse, puis on peut prendre contact avec la compagnie qui le propose, vérifier sa solvabilité, la fiabilité de sa connexion réseau, enfin acheter éventuellement le service si cela s'avère plus rentable.</texte>
+		</paragraphe>
+		<paragraphe>
+			<texte>Une fois que l'on a décidé d'avoir recours à un service Web, l'essentiel est fait. Il suffit alors de lire la spécification précise du service (une étape qui peut être automatisée si le service est décrit avec <code type="langage">WSDL</code>), et d'écrire le client en faisant appel aux fonctions et bibliothèques disponibles pour son langage de programmation favori (par exemple, VB.Net).</texte>
+			<texte>Du côté du développeur d'un service Web, une profonde réflexion doit avoir lieu en préalable à toute mise à disposition du service au public, notamment sur une définition rigoureuse et stable de l'interface (il serait malvenu de demander à tous les clients de mettre à jour leurs programmes, sous le simple prétexte qu'une balise a légèrement changé de nom...), mais aussi sur les inévitables questions de sécurité et de confidentialité des échanges.</texte>
+		</paragraphe>
+	</section>
+	<section titre="Les inconvénients" ancre="inconvenients">
+		<paragraphe>
+			<texte>A la date d'écriture de ce cours (mai 2004), quatre freins bloquent encore le développement de ces outils.</texte>
+			<liste type="ordonnee">
+				<item><texte>les transferts se font en <code type="langage">XML</code>. Or un tel fichier est assez gros (par rapport, par exemple, à un fichier binaire), et pour peu que le service soit un tant soit peut complexe, les échanges peuvent être lents&#160;;</texte></item>
+				<item><texte>la lenteur de ces échanges vient de l'utilisation du réseau. Cela signifie que si une partie importante du code d'une application dépend d'une requête à un service Web, et que le réseau, pour une raison quelconque, est paralysé, l'application sera dans l'incapacité de fonctionner correctement. Il y a donc une très forte dépendance de contraintes extérieures pas forcément contrôlables&#160;;</texte></item>
+				<item><texte>les services Web ne sont pas encore très répandus&#160;; il est donc encore peu probable de trouver l'objet de sa recherche&#160;;</texte></item>
+				<item><texte>enfin, et cela est lié à la remarque précédente, ce qui est rare est cher... même si certains services Web sont gratuits.</texte></item>
+			</liste>
+		</paragraphe>
+		<paragraphe>
+			<texte>Certains services Web sont néanmoins d'ores et déjà accessibles&#160;:</texte>
+				<liste>
+					<item><texte><reference href="http://www.google.com/apis/">Google</reference> propose des services de recherche</texte></item>
+					<item><texte>Amazon offre gratuitement l'accès à son <reference href="http://www.amazon.com/gp/browse.html/103-5715902-3907065?node=3435361">service Web</reference>...</texte></item>
+				</liste>
+		</paragraphe>
+	</section>
+</partie>
+
+</corpus>
+
+</chapitre>

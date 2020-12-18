@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+
+<cours nomfichier="recapxsl">Cours d'initiation à XML</cours>
+
+<entete>
+	<titre>Mise en forme à l'aide de feuilles de style XSL : instructions XSLT</titre>
+	<auteur email="Gilles.Chagnon@upmc.fr">G. Chagnon</auteur>
+	<resume>XSLT est un langage de transformation complexe, doté de nombreuses capacités que ce chapitre récapitule.</resume>
+	<motsclefs>XSL, XSLT, base, concept, introduction, expression de sélection</motsclefs>
+</entete>
+
+<corpus>
+
+<partie titre="Les expressions de sélection" ancre="p1">
+
+<section titre="Introduction" ancre="p1s1">
+
+<paragraphe>
+	<texte>Connues en anglais sous le nom de <autrelangue type="en">XSL patterns</autrelangue>, les expressions de sélection sont des chaînes de caractères qui permettent de sélectionner des nœuds dans un document source. Il est également possible d'utiliser une syntaxe spéciale, appelée <reference href="fonctionsxpath.html"><code type='langage'>XPath</code></reference>, qui permet, en se fondant sur la structure arborescente du document <code type='typefichier'>XML</code> (le <autrelangue type="en">Document Object Model</autrelangue> -<acronyme titre="Document Object Model">DOM</acronyme>), de faire référence à des éléments et/ou des attributs.</texte>
+</paragraphe>
+
+</section>
+
+<section titre="Sélection d'éléments et d'attributs" ancre="p1s2">
+
+<paragraphe titre="Sélection d'élément, syntaxe de base" ancre="p1s2p1">
+	<texte>L'exemple le plus simple d'expression de sélection est le <valeur>nom</valeur> d'un type d'élément. Cette expression sélectionne tous les éléments du type précisé descendant ou ancêtre d'un nœud donné. Exemple&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:value-of" vide="oui">
+			<attribut nom="select">nom_element</attribut>
+		</element>
+	</exemple>
+	<texte>L'opérateur <code>/</code> permet de définir le chemin d'accès aux éléments à sélectionner, et donc leur parenté. Par exemple, <code>section/paragraphe</code> sélectionne les éléments <code>section</code> du nœud courant et pour chaque élément <code>section</code>, sélectionne les éléments <code>paragraphe</code> qu'il contient. En d'autres termes, cette expression sélectionne les petits-fils <code>paragraphe</code> du nœud courant qui ont pour père un nœud <code>section</code>.</texte>
+	<texte>Un nom d'élément peut être remplacé par <code>*</code> dans une expression. Par exemple, <code>*/paragraphe</code> sélectionne tous les petits-fils <code>paragraphe</code> quel que soit leur père.</texte>
+	<texte>L'utilisation de <code>//</code> permet d'appliquer la recherche aux descendants et non pas seulement aux fils directs. Par exemple, <code>section//paragraphe</code> sélectionne tous les éléments <code>paragraphe</code> descendant d'un élément <code>section</code> fils direct du nœud courant.</texte>
+	<texte>Le caractère <code>.</code> sélectionne le nœud courant. Par exemple, <code>.//paragraphe</code> sélectionne tous les descendants <code>paragraphe</code> du nœud courant.</texte>
+	<texte>La chaîne <code>..</code> sélectionne le père du nœud courant. Par exemple, <code>../paragraphe</code> sélectionne tous les nœuds <code>paragraphe</code> frères du nœud courant.</texte>
+</paragraphe>
+
+<paragraphe titre="Sélection d'élément, appel de fonctions" ancre="p1s2p2">
+	<liste>
+		<item><texte>L'expression <code>comment()</code> sélectionne tous les nœuds commentaires fils du nœud courant.</texte></item>
+		<item><texte>L'expression <code>text()</code> sélectionne tous les nœuds fils du nœud courant, ne contenant que du texte.</texte></item>
+		<item><texte>L'expression <code>node()</code> sélectionne tous les nœuds fils du nœud courant.</texte></item>
+		<item><texte>L'expression <code>id("UnIdentifiant")</code> sélectionne l'élément, normalement unique, qui a un attribut <code>attr</code> de type ID (<autrelangue type="latin">cf.</autrelangue> le paragraphe <reference href="dtd.html#p3s3">"Déclaration d'attribut de type ID"</reference>) valant <code>"UnIdentifiant"</code>.</texte></item>
+	</liste>
+</paragraphe>
+
+<paragraphe titre="Sélection d'élément et DOM" ancre="p1s2p3">
+	<texte>Il est également possible de «&#160;naviguer&#160;» dans les branches de l'arborescence du document <code type='typefichier'>XML</code>, en utilisant les ressources du DOM. Différents types de syntaxes sont possibles, fondées sur une expression de la forme <code>Element[Expression]</code>. Par exemple&#160;:</texte>
+	<liste>
+		<item><texte><code>elt[i]</code> où <code>i</code> est un nombre entier désigne le <code>i</code>-ème descendant direct d'un même parent ayant le nom indiqué. Par exemple, <code>paragraphe[3]</code> désigne le <valeur>3</valeur>ème enfant de l'élément courant, portant le nom <code>paragraphe</code>. <valeur>Attention</valeur>, la numérotation commence à 1 et non à 0.</texte></item>
+		<item><texte><code>elt[position()>i]</code> où <code>i</code> est un nombre entier sélectionne tous les éléments précédés d'au moins <code>i</code> éléments de même nom comme descendants du même parent. Par exemple, <code>paragraphe[position()>5]</code> sélectionne tous les éléments <code>paragraphe</code> dont le numéro d'ordre est strictement supérieur à 5.</texte></item>
+		<item><texte><code>elt[position() mod 2=1]</code> sélectionne tout élément qui est un descendant impair.</texte></item>
+		<item><texte><code>elt[souselt]</code> sélectionne tout élément <code>elt</code> qui a au moins un descendant <code>souselt</code> (à ne pas confondre avec <code>elt/souselt</code>, qui sélectionne tout élément <code>souselt</code> ayant pour parent <code>elt</code>...).</texte></item>
+		<item><texte><code>elt[first-of-any()]</code> sélectionne le premier élément <code>elt</code> fils de l'élément courant.</texte></item>
+		<item><texte><code>elt[last-of-any()]</code> sélectionne le dernier élément <code>elt</code> fils de l'élément courant.</texte></item>
+		<item><texte><code>elt[first-of-type()]</code> sélectionne l'élément <code>elt</code> fils de l'élément courant, s'il est premier de son type. Considérons l'exemple suivant. L'élément <code>elt</code> peut contenir des nœuds de type texte <code>elt1</code> et <code>elt2</code> dans n'importe quel ordre. On cherche à évaluer l'expression <code>elt2[first-of-type()]</code>. Deux cas se présentent&#160;: soit <code>elt</code> commence par au moins un élément <code>elt1</code>, avec <valeur>éventuellement</valeur> un élément <code>elt2</code> ensuite, soit il commence par un élément <code>elt2</code>. L'expression ne sélectionne le premier élément <code>elt2</code> que dans le second cas, où il n'est précédé par aucun élément de même type.</texte></item>
+		<item><texte><code>elt[last-of-type()]</code> sélectionne de même l'élément <code>elt</code> fils de l'élément courant, s'il est le dernier de son type.</texte></item>
+	</liste>
+	<texte>Par exemple, l'expression <code>section/paragraphe[last-of-type() and first-of-type()]</code> sélectionne les éléments <code>paragraphe</code> fils uniques dont le père est un élément <code>section</code>&#160;; l'expression <code>section/paragraphe[last-of-any() and first-of-any()]</code> sélectionne les éléments <code>paragraphe</code> dont le père est un élément <code>section</code> qui ne contient qu'un seul élément <code>paragraphe</code>.</texte>
+	<texte>La fonction <code>ancestor()</code> permet la sélection d'un ancêtre du nœud courant. Elle reçoit en argument une expression de sélection et recherche le premier ancêtre du nom correspondant à la sélection. Par exemple, <code>ancestor(chapitre)/titre</code> sélectionne l'élément <code>titre</code> du chapitre contenant l'élément courant.</texte>
+</paragraphe>
+
+<paragraphe titre="Sélection d'attributs" ancre="p1s2p4">
+	<texte>Les attributs d'un élément sont sélectionnés en faisant précéder leur nom par le caractère <code>@</code>. Les règles relatives à la sélection des éléments s'appliquent également aux attributs&#160;:</texte>
+	<liste>
+		<item><texte><code>section[@titre]</code> sélectionne les éléments <code>section</code> qui ont un attribut <code>titre</code>.</texte></item>
+		<item><texte><code>section[@titre="Introduction"]</code> sélectionne les éléments <code>section</code> dont l'attribut <code>titre</code> a pour valeur <code>Introduction</code>.</texte></item>
+	</liste>
+	<texte>Si l'on veut <valeur>afficher</valeur> le contenu de l'attribut, on le fait précéder du caractère <code>/</code>. Par exemple, <code><![CDATA[<xsl:value-of select="paragraphe/@titre" />]]></code> permet l'affichage du titre de l'élément paragraphe fils de l'élément courant (si rien n'est précisé, par défaut il s'agit du premier élément paragraphe fils).</texte>
+</paragraphe>
+
+<paragraphe titre="Opérateurs logiques" ancre="p1s2p5">
+	<texte>Les opérateurs logiques <code>not()</code>, <code>and</code> et <code>or</code> peuvent être utilisés, comme par exemple <code>section[not(@titre)]</code>, qui sélectionne les éléments <code>section</code> qui n'ont pas d'attribut <code>titre</code>. Attention&#160;: lorsque, dans la <code type='typefichier'>DTD</code> par exemple, l'attribut est défini comme ayant une <reference href="dtd.html#p3s1">valeur par défaut</reference>, même s'il n'est pas explicité dans le document <code type='typefichier'>XML</code>, il est considéré comme existant.</texte>
+</paragraphe>
+
+</section>
+	
+</partie>
+
+<partie titre="XPath" ancre="p2">
+
+<section titre="Introduction" ancre="p2s1">
+<paragraphe>
+	<texte>Comme son nom l'indique, <code type='langage'>XPath</code> est une spécification fondée sur l'utilisation de chemin d'accès permettant de se déplacer au sein du document <code type='typefichier'>XML</code>. Dans ce but, un certain nombre de fonctions ont été définies. Elles permettent de traiter les chaînes de caractères, les booléens et les nombres.</texte>
+	<texte>Le <code type='langage'>XPath</code> établit un arbre de nœuds correspondant au document <code type='typefichier'>XML</code>. Les types de nœuds peuvent être différents&#160;: n&#339;ud d'élément, n&#339;ud d'attribut et n&#339;ud de texte. En vue d'une utilisation plus aisée, le <code type='langage'>XPath</code> comprend un mécanisme qui associe à tous ces types une chaîne de caractères.</texte>
+	<texte>La syntaxe de base du <code type='langage'>XPath</code> est fondée sur l'utilisation d'expressions. Une expression peut s'appliquer à quatre types d'objets&#160;:</texte>
+	<liste>
+		<item><texte>un ensemble non ordonné de nœuds&#160;;</texte></item>
+		<item><texte>une valeur booléenne (vrai ou faux)&#160;;</texte></item>
+		<item><texte>un nombre en virgule flottante&#160;;</texte></item>
+		<item><texte>une chaîne de caractères.</texte></item>
+	</liste>
+	<texte>Chaque évaluation d'expression dépend du contexte courant. Une des expressions les plus importantes dans le standard <code type='langage'>XPath</code> est le <valeur>chemin de localisation</valeur>. Cette expression sélectionne un ensemble de n&#339;uds à partir d'un n&#339;ud contextuel.</texte>
+</paragraphe>
+</section>
+<section titre="Chemin de localisation" ancre="p2s2">
+<paragraphe titre="Introduction" ancre="p2s2p1">
+	<texte>Un chemin de localisation peut être de type absolu ou relatif.</texte>
+	<liste>
+		<item><texte>Dans le cas où il est de type absolu, il commence toujours par le signe <code>/</code> indiquant la racine du document <code type='typefichier'>XML</code>&#160;;</texte></item>
+		<item><texte>Dans le cas où il est de type relatif, le n&#339;ud de départ est le n&#339;ud contextuel courant.</texte></item>
+	</liste>
+	<texte>La syntaxe de composition d'un chemin de localisation peut être de type abrégé ou non abrégé. Toute syntaxe non abrégée ne trouve pas forcément d'équivalenct en syntaxe abrégée.</texte>
+	<texte>Un chemin de localisation est composé de trois parties&#160;:</texte>
+	<liste>
+		<item><texte>un <valeur>axe</valeur>, définissant le sens de la relation entre le n&#339;ud courant et le jeu de n&#339;uds à localiser;</texte></item>
+		<item><texte>un n&#339;ud spécifiant le type de n&#339;ud à localiser;</texte></item>
+		<item><texte>0 à n <valeur>prédicats</valeur> permettant d'affiner la recherche sur le jeu de n&#339;uds à récupérer.</texte></item>
+	</liste>
+	<texte>Par exemple, dans le chemin <code>child::section[position()=1]</code>, <code>child</code> est le nom de l'axe, <code>section</code> le type de n&#339;ud à localiser (élément ou attribut) et <code>[position()=1]</code> est un prédicat. Les doubles <code>::</code> sont obligatoires.</texte>
+	<texte>La syntaxe d'une localisation s'analyse de gauche à droite. Dans notre cas, on cherche dans le n&#339;ud courant, un n&#339;ud section qui est le premier n&#339;ud de son type.</texte>
+</paragraphe>
+<paragraphe titre="Axes" ancre="p2s2p2">
+	<texte><code>child</code>&#160;: contient les enfants directs du n&#339;ud contextuel.</texte>
+	<texte><code>descendant</code>&#160;: contient les descendants du n&#339;ud contextuel. Un descendant peut être un enfant, un petit-enfant...</texte>
+	<texte><code>parent</code>&#160;: contient le parent du n&#339;ud contextuel, s'il y en a un.</texte>
+	<texte><code>ancestor</code>&#160;: contient les ancêtres du n&#339;ud contextuel. Cela comprend son père, le père de son père... Cet axe contient toujours le n&#339;ud racine, excepté dans le cas où le n&#339;ud contextuel serait lui-même le n&#339;ud racine.</texte>
+	<texte><code>following-sibling</code>&#160;: contient tous les n&#339;uds cibles du n&#339;ud contextuel. Dans le cas où ce n&#339;ud est un attribut ou un espace de noms, la cible suivante est vide.</texte>
+	<texte><code>preceding-sibling</code>&#160;: contient tous les prédécesseurs du n&#339;ud contextuel&#160;; si le n&#339;ud contextuel est un attribut ou un espace de noms, la cible précédente est vide.</texte>
+	<texte><code>following</code>&#160;: contient tous les n&#339;uds du même nom que le n&#339;ud contextuel situés après le n&#339;ud contextuel dans l'ordre du document, à l'exclusion de tout descendant, des attributs et des espaces de noms.</texte>
+	<texte><code>preceding</code>&#160;: contient tous les n&#339;uds du même nom que le n&#339;ud contextuel situés avant lui dans l'ordre du document, à l'exclusion de tout descendant, des attributs et des espaces de noms.</texte>
+	<texte><code>attribute</code>&#160;: contient les attributs du n&#339;ud contextuel&#160;; l'axe est vide quand le n&#339;ud n'est pas un élément.</texte>
+	<texte><code>namespace</code>&#160;: contient tous les n&#339;uds des espaces de noms du n&#339;ud contextuel&#160;; l'axe est vide quand le n&#339;ud contextuel n'est pas un élément.</texte>
+	<texte><code>self</code>&#160;: contient seulement le n&#339;ud contextuel.</texte>
+	<texte><code>descendant-or-self</code>&#160;: contient le n&#339;ud contextuel et ses descendants.</texte>
+	<texte><code>ancestor-or-self</code>&#160;: contient le n&#339;ud contextuel et ses ancêtres. Cet axe contiendra toujours le n&#339;ud racine.</texte>
+</paragraphe>
+
+<paragraphe titre="Prédicats" ancre="p2s2p3">
+	<texte>Le contenu d'un prédicat est une prédiction. Chaque expression est évaluée et le résultat est un booléen.</texte>
+	<texte>Par exemple, <code>section[3]</code> est équivalent à <code>section[position()=3]</code>.</texte>
+	<texte>Ces deux expressions sont équivalentes&#160;: chacune d'entre elles produit un booléen. Dans le premier cas, il n'y a pas de test, on sélectionne simplement le troisième élément, l'expression est obligatoirement vraie. Dans le second cas, un test est effectué par rapport à la position de l'élément <code>section</code>&#160;; lorsque la position sera égale à 3, l'expression sera vraie.</texte>
+</paragraphe>
+
+<paragraphe titre="Syntaxe non abrégée" ancre="p2s2p4">
+	<texte>Cette syntaxe va être présentée par plusieurs exemples... Les parties qui dépendent du fichier <code type='typefichier'>XML</code> analysé sont écrites <code option="yes">de cette manière</code>.</texte>
+	<texte><code>child::</code><code option="yes">para</code>&#160;: sélectionne l'élément <code option="yes">para</code> enfant du n&#339;ud contextuel.</texte>
+	<texte><code>child::*</code>&#160;: sélectionne tous les éléments enfants du n&#339;ud contextuel.</texte>
+	<texte><code>child::text()</code>&#160;: sélectionne tous les n&#339;uds de type texte du n&#339;ud contextuel.</texte>
+	<texte><code>child::node()</code>&#160;: sélectionne tous les enfants du n&#339;ud contextuel, quel que soit leur type.</texte>
+	<texte><code>attribute::</code><code option="yes">name</code>&#160;: sélectionne tous les attributs <code option="yes">name</code> du n&#339;ud contextuel.</texte>
+	<texte><code>attribute::</code><code option="yes">*</code>&#160;: sélectionne tous les attributs du n&#339;ud contextuel.</texte>
+	<texte><code>descendant::</code><code option="yes">para</code>&#160;: sélectionne tous les descendants <code option="yes">para</code> du n&#339;ud contextuel.</texte>
+	<texte><code>ancestor::</code><code option="yes">div</code>&#160;: sélectionne tous les ancêtres <code option="yes">div</code> du n&#339;ud contextuel.</texte>
+	<texte><code>ancestor-or-self::</code><code option="yes">div</code>&#160;: sélectionne tous les ancêtres <code option="yes">div</code> du n&#339;ud contextuel et le n&#339;ud contextuel lui-même si c'est un <code option="yes">div</code>.</texte>
+	<texte><code>descendant-or-self::</code><code option="yes">para</code>&#160;: sélectionne tous les descendants <code option="yes">para</code> du n&#339;ud contextuel et le n&#339;ud contextuel lui-même si c'est un <code option="yes">para</code>.</texte>
+	<texte><code>self::</code><code option="yes">para</code>&#160;: sélectionne le n&#339;ud contextuel si c'est un élément <code option="yes">para</code>, et rien dans le cas contraire.</texte>
+	<texte><code>child::</code><code option="yes">chapitre</code><code>/descendant::</code><code option="yes">para</code>&#160;: sélectionne les descendants <code option="yes">para</code> de l'élément <code option="yes">chapitre</code> enfant du n&#339;ud contextuel.</texte>
+	<texte><code>child::*/child::</code><code option="yes">para</code>&#160;: sélectionne tous les petits-enfants <code option="yes">para</code> du n&#339;ud contextuel.</texte>
+	<texte><code>/child::</code>&#160;: sélectionne l'élément racine du document.</texte>
+	<texte><code>/descendant::</code><code option="yes">para</code>&#160;: sélectionne tous les éléments <code option="yes">para</code> descendants du document contenant le n&#339;ud contextuel.</texte>
+	<texte><code>/descendant::</code><code option="yes">olist</code><code>/child::</code><code option="yes">item</code>&#160;: sélectionne tous les éléments <code option="yes">item</code> qui ont un parent <code option="yes">olist</code> et qui sont dans le même document que le n&#339;ud contextuel.</texte>
+	<texte><code>child::</code><code option="yes">para</code><code>[position()=1]</code>&#160;: sélectionne le premier enfant <code option="yes">para</code> du n&#339;ud contextuel.</texte>
+	<texte><code>child::</code><code option="yes">para</code><code>[position()=last()]</code>&#160;: sélectionne le dernier enfant <code option="yes">para</code> du n&#339;ud contextuel.</texte>
+	<texte><code>child::</code><code option="yes">para</code><code>[position()=last()-1]</code>&#160;: sélectionne l'avant-dernier enfant <code option="yes">para</code> du n&#339;ud contextuel.</texte>
+	<texte><code>child::</code><code option="yes">para</code><code>[position()1]</code>&#160;: sélectionne tous les enfants <code option="yes">para</code> du n&#339;ud contextuel autres que le premier.</texte>
+	<texte><code>following-sibling::</code><code option="yes">para</code><code>[position()=1]</code>&#160;: sélectionne  le prochain <code option="yes">para</code> frère du n&#339;ud contextuel.</texte>
+	<texte>On pourrait continuer encore longtemps cette liste d'exemples. Cette syntaxe non-abrégée permet beaucoup de raffinement. <code>child::*[self::</code><code option="yes">chapitre</code><code> or self::</code><code option="yes">sstitre</code><code>][position()=last()]</code> permet ainsi de sélectionner le dernier enfant <code option="yes">chapitre</code> ou <code option="yes">sstitre</code> du n&#339;ud contextuel.</texte>
+</paragraphe>
+<paragraphe titre="Syntaxe abrégée" ancre="p2s2p5">
+	<texte>Cette syntaxe recoupe en fait la «&#160;syntaxe de base&#160;» vue <reference href="#p1s2p1">plus haut</reference>. Elle permet d'obtenir des expressions du type <code>para[@type="avertissement"][5]</code>, qui sélectionne le cinquième enfant de l'élément <code>para</code>, parmi ceux qui ont un attribut <code>type</code> ayant la valeur <code>avertissement</code>.</texte>
+</paragraphe>
+
+</section>
+
+<section titre="Fonctions de base" ancre="p2s3">
+<paragraphe titre="Généralités" ancre="p2s3p1">
+	<texte>De nombreuses fonctions peuvent être utilisées. Ces fonctions concernent quatre catégories d'objets&#160;: n&#339;uds, chaînes de caractères, booléens, nombres. Chaque fonction peut avoir zéro ou plusieurs arguments. Dans les descriptions suivantes, lorsqu'un élément est suivi du caractère <code>?</code>, cela signifie qu'il est optionnel. Cette liste est loin d'être exhaustive. Le chapitre suivant présente les <reference href="fonctionsxpath.html">fonctions XPath</reference> de manière plus complète.</texte>
+</paragraphe>
+<paragraphe titre="Manipulation de n&#339;uds" ancre="p2s3p2">
+	<liste>
+		<item>
+			<texte><valeur>Fonctions retournant un nombre&#160;:</valeur></texte>
+			<liste>
+				<item><texte><code>last()</code>&#160;: retourne un nombre égal à l'index du dernier n&#339;ud dans le contexte courant.</texte></item>
+				<item><texte><code>position()</code>&#160;: retourne un nombre égal à la position du n&#339;ud dans le contexte courant.</texte></item>
+			</liste>
+		</item>
+		<item><texte><valeur>Fonction retournant un jeu de n&#339;uds</valeur>&#160;: <code>id(objet)</code>, permet de sélectionner les éléments par leur identifiant.</texte></item>
+	</liste>
+</paragraphe>
+<paragraphe titre="Manipulation de chaînes de caractères" ancre="p2s3p3">
+	<texte>Beaucoup de fonctions existent. Citons pour mémoire notamment&#160;:</texte>
+	<liste>
+		<item>
+			<texte><code>string(nœud?)</code>&#160;: cette fonction convertit un objet en chaîne de caractères selon les règles suivantes&#160;:</texte>
+			<liste>
+				<item><texte>un ensemble de n&#339;uds est converti en chaîne de caractères en retournant la valeur textuelle du premier n&#339;ud de l'ensemble dans l'ordre du document. Si l'ensemble des n&#339;uds est vide, une chaîne vide est retournée.</texte></item>
+				<item><texte>un nombre est converti en chaîne suivant des règles dépendant de sa nature (<code>NaN</code>, nombre entier, non-entier, zéro...).</texte></item>
+				<item><texte>la valeur booléenne <code>false</code> est convertie en chaîne de caractères <code>"false"</code>, de même pour la valeur booléenne <code>true</code>.</texte></item>
+			</liste>
+			<texte>Cette fonction n'a pas pour objet de convertir des nombres en chaînes de caractères pour les présenter aux utilisateurs&#160;; il existe des fonctions de transformations <code type="langage">XSLT</code> pour ce faire (<code>format-number</code> et <code>xsl:number</code>)</texte>
+		</item>
+		<item><texte><code>concat(chaine1, chaine2, chaine*)</code>&#160;: retourne une chaîne résultant de la compilation des arguments</texte></item>
+		<item><texte><code>string-length(chaine?)</code>&#160;: cette fonction retourne le nombre de caractères de la chaîne. Dans le cas où l'argument est omis, la valeur retournée est égale à la longueur de la valeur textuelle du n&#339;ud courant</texte></item>
+	</liste>
+</paragraphe>
+<paragraphe titre="Manipulation de booléens" ancre="p2s3p4">
+	<texte>Outre la fonction logique <code>not()</code>, ainsi que les fonctions <code>true()</code> et <code>false()</code>, une fonction utile est <code>lang(chaine)</code>. Elle teste l'argument <code>chaine</code> par rapport à l'attribut <code>xml:lang</code> du n&#339;ud contextuel ou de son plus proche ancêtre dans le cas où le n&#339;ud contextuel ne contient pas d'attribut de ce type. La fonction retourne <code>true</code> si l'argument est bien la langue utilisée ou si la langue utilisée est un sous-langage de l'argument (par exemple, <code>en//us</code>). Sinon elle retourne <code>false</code>.</texte>
+</paragraphe>
+<paragraphe titre="Manipulation de nombres" ancre="p2s3p5">
+	<texte>Voici quelques fonctions de manipulations de nombres&#160;:</texte>
+	<liste>
+		<item><texte><code>floor(nombre)</code>&#160;: retourne le plus grand entier inférieur à l'argument passé à la fonction.</texte></item>
+		<item><texte><code>ceiling(nombre)</code>&#160;: retourne le plus petit entier supérieur à l'argument passé à la fonction.</texte></item>
+		<item><texte><code>round(nombre)</code>&#160;: retourne l'entier le plus proche de l'argument passé à la fonction.</texte></item>
+	</liste>
+</paragraphe>
+
+</section>
+
+</partie>
+
+<partie titre="Éléments XSLT" ancre="p3">
+
+<section titre="Généralités" ancre="p3s1">
+<paragraphe titre="Introduction" ancre="p3s1p1">
+	<texte>Dans cette partie, nous allons détailler quelques éléments <code type="langage">XSLT</code> et présenter des exemples d'utilisation. Ne sera introduite ici qu'environ la moitié des éléments de formatage <code type="langage">XSLT</code>&#160;; libre à vous de vous renseigner sur les éléments manquants.</texte>
+	<texte>Le nom de domaine utilisé pour les exemples est celui de la spécification 1.0&#160;: <reference href="http://www.w3.org/TR/xslt">http://www.w3.org/TR/xslt</reference>. La spécification <reference href="http://www.w3.org/TR/xslt20/" lang="en"><code type="langage">XSLT 2.0</code></reference> a été publiée en janvier 2007, mais les modifications qu'elle introduit sortent du cadre restreint d ce cours.</texte>
+</paragraphe>
+<paragraphe titre="Rappel : prologue d'un document XSL" ancre="p3s1p2">
+	<texte>Un fichier <code type='typefichier'>XSL</code> doit commencer par les lignes indiquant le numéro de version <code type="langage">XML</code> et l'encodage de caractères utilisé&#160;:</texte>
+	<exemple type="XML">
+		<prologue/>
+	</exemple>
+</paragraphe>
+</section>
+
+<section titre="Les fondamentaux" ancre="p3s2">
+<paragraphe titre="Généralités" ancre="p3s2p1">
+	<texte>Sont présentés ici les éléments de base du document <code type='typefichier'>XSL</code>, ceux que l'on retrouve dans l'immense majorité des cas, voire la totalité pour certains.</texte>
+</paragraphe>
+<paragraphe titre="&lt;xsl:stylesheet&gt;" ancre="stylesheet">
+	<texte>Cet élément <valeur>doit</valeur> être l'élément racine du document <code type='typefichier'>XSL</code>, et en tant que tel doit figurer juste après le prologue (et les commentaires éventuels qui suivraient celui-ci). Il contient tous les autres éléments de mise en forme. Dans le cas général, l'utilisation de cet élément est de la forme&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:stylesheet">
+			<attribut nom="id">id</attribut>
+			<attribut nom="version">nombre</attribut>
+			<attribut nom="xmlns:pre">URI</attribut>
+			(...)
+		</element>
+	</exemple>
+	<texte><code>id</code> est l'identifiant unique de la feuille de style. <code>version</code> est le numéro de version de la feuille de style <code type="typefichier">XSLT</code>. À l'heure actuelle, la version peut être <code>1.0</code> ou <code>1.1</code>. <code>xmlns:pre</code> correspond à la définition de l'espace de noms. <code>pre</code> indique le préfixe qui sera utilisé dans la feuille de style pour faire référence à l'URI de l'espace nominal. Exemples&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:stylesheet">
+			<attribut nom="version">1.0</attribut>
+			<attribut nom="xmlns:xsl">uri:xsl</attribut>
+			(...)
+		</element>
+	</exemple>
+	<texte>... permet d'avoir accès uniquement à des fonctions de base.</texte>
+	<exemple type="XML">
+		<element nom="xsl:stylesheet">
+			<attribut nom="version">1.0</attribut>
+			<attribut nom="xmlns:xsl">http://www.w3.org/1999/XSL/Transform</attribut>
+			(...)
+		</element>
+	</exemple>
+	<texte>... permet d'avoir accès à des fonctions évoluées d'<code type="langage">XSLT</code>. C'est cette déclaration que nous allons utiliser dans la suite.</texte>
+</paragraphe>
+<paragraphe titre="&lt;xsl:output&gt;" ancre="output">
+	<texte>Cet élément vide, à placer comme premier enfant de <code>&lt;xsl:stylesheet&gt;</code>, permet de spécifier des options concernant l'arbre de sortie. L'utilisation de cet élément est de la forme&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:output" vide="oui">
+			<attribut nom="method">xml | html | text</attribut>
+			<attribut nom="version">nmtoken</attribut>
+			<attribut nom="encoding">chaine</attribut>
+			<attribut nom="omit-xml-declaration">yes | no</attribut>
+			<attribut nom="standalone">yes | no</attribut>
+			<attribut nom="doctype-public">chaine</attribut>
+			<attribut nom="doctype-system">chaine</attribut>
+			<attribut nom="cdata-section-elements">elt</attribut>
+			<attribut nom="indent">yes | no</attribut>
+			<attribut nom="media-type">chaine</attribut>
+		</element>
+	</exemple>
+	<liste>
+		<item><texte><code>method</code> identifie la méthode de transformation. Dans le cas où elle est égale à <code>text</code>, aucune mise en forme n'est effectuée.</texte></item>
+		<item><texte><code>version</code> identifie la version de la méthode de sortie (xml1.0, html4.01...).</texte></item>
+		<item><texte><code>encoding</code> indique la version du jeu de caractères à utiliser pour la sortie.</texte></item>
+		<item><texte><code>omit-xml-declaration</code> indique au processeur XSLT s'il doit ajouter ou non une déclaration XML.</texte></item>
+		<item><texte><code>standalone</code> indique au processeur XSLT s'il doit créer un arbre de sortie avec ou sans déclaration de type de document.</texte></item>
+		<item><texte><code>doctype-public</code> indique l'identifiant public utilisé par la <code type='typefichier'>DTD</code> associée à la transformation.</texte></item>
+		<item><texte><code>doctype-system</code> indique l'identifiant system utilisé par la <code type='typefichier'>DTD</code> associée à la transformation.</texte></item>
+		<item><texte><code>cdata-section-elements</code> indique les éléments dont le contenu doit être traité lors de la transformation <autrelangue type="latin">via</autrelangue> une section <code>CDATA</code>.</texte></item>
+		<item><texte><code>indent</code> présente la transformation sous forme d'arbre dans le cas où la valeur de cet attribut est égale à <code>yes</code>.</texte></item>
+		<item><texte><code>media-type</code> indique le type MIME des données résultantes de la transformation.</texte></item>
+	</liste>
+	<texte>Par exemple&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:output" vide="oui">
+			<attribut nom="method">html</attribut>
+			<attribut nom="version">html4.01</attribut>
+			<attribut nom="encoding">ISO-8859-1</attribut>
+			<attribut nom="doctype-public">-//W3C//DTD HTML 4.01//EN</attribut>
+			<attribut nom="doctype-system">http://www.w3.org/TR/html4/strict.dtd</attribut>
+		</element>
+	</exemple>
+	<texte>... permet d'indiquer que le fichier de sortie sera au format HTML&#160;4.01, conforme à la <code type='typefichier'>DTD</code> publique de l'<code type="langage">HTML</code> du W3C, et que le jeu de caractères utilisé est l'ISO-8859-1. Le résultat en sortie est un fichier <code type="typefichier">HTML</code> commençant par</texte>
+	<exemple type="XML">
+		<typedocument nomracine="html" type="PUBLIC" identifiant="-//W3C//DTD HTML 4.01//EN" href="http://www.w3.org/TR/html4/strict.dtd"/>
+	</exemple>
+	<texte>... et possédant dans son <code>&lt;head&gt;</code></texte>
+	<exemple type="XML">
+		<element nom="meta" vide="oui">
+			<attribut nom="http-equiv">Content-Type</attribut>
+			<attribut nom="content">text/html; charset=ISO-8859-1</attribut>
+		</element>
+	</exemple>
+	<texte>L'utlisation d'un tel élément permet donc de se dispenser de la spécification explicite du codage de caractères via un élément <code>&lt;meta&gt;</code> lors de l'écriture de la feuille de style <code type="typefichier">XSL</code>.</texte>
+</paragraphe>
+<paragraphe titre="&lt;xsl:template&gt;" ancre="template">
+	<texte>Cet élément définit un modèle à appliquer à un n&#339;ud et à un contexte spécifiques. L'utilisation de cet élément est de la forme&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:template">
+			<attribut nom="name">nommodele</attribut>
+			<attribut nom="match">expression</attribut>
+			<attribut nom="mode">modemodele</attribut>
+		</element>
+	</exemple>
+	<liste>
+		<item><texte><code>name</code> correspond au nom associé au modèle.</texte></item>
+		<item><texte><code>match</code> indique quel jeu de n&#339;uds sera affecté par le modèle. Cette expression peut comprendre un test d'existence d'attribut, le caractère <code>|</code> indiquant que le modèle s'applique à un élément ou à un autre, ainsi que tout élément permettant de définir un jeu d'attributs.</texte></item>
+		<item><texte><code>mode</code> permet à un élément d'avoir plusieurs modèles, chacun générant une sortie différente.</texte></item>
+	</liste>
+	<texte>Nous reviendrons plus loin sur les possibilités qu'offre cet élément pour une <reference href="#module">conception modulaire de la feuille de style</reference>.</texte>
+</paragraphe>
+<paragraphe titre="&lt;xsl:value-of&gt;" ancre="value">
+	<texte>Cet élément permet d'insérer la valeur d'un n&#339;ud dans la transformation. Ce n&#339;ud est évalué en fonction d'une expression. Cette expression peut correspondre à un élément, à un attribut ou à tout autre n&#339;ud contenant une valeur. L'utilisation de cet élément est de la forme&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:value-of" vide="oui">
+			<attribut nom="select">expression</attribut>
+			<attribut nom="disable-output-escaping">yes | no</attribut>
+		</element>
+	</exemple>
+	<liste>
+		<item><texte>La valeur de <code>select</code> est évaluée et c'est cette évaluation qui sera insérée dans la transformation.</texte></item>
+		<item><texte><code>disable-output-escaping</code> agit sur la transformation des caractères. Dans le cas où sa valeur est <code>yes</code>, la chaîne <code><![CDATA[&lt;]]></code> est insérée dans la transformation en tant que signe <code>&lt;</code>, ce qui peut entraîner des erreurs. Dans le cas contraire, la chaîne <code><![CDATA[&lt;]]></code> est insérée telle quelle dans la transformation.</texte></item>
+	</liste>
+</paragraphe>
+</section>
+
+<section titre="Ajout d'éléments et d'attributs" ancre="p3s3">
+<paragraphe titre="&lt;xsl:element&gt;" ancre="element">
+	<texte>Cet élément insère un nouvel élément dans la transformation. Le nom de l'élément est donné par l'attribut <code>name</code>. L'utilisation de cet élément est de la forme&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:element">
+			<attribut nom="name">nomelement</attribut>
+			<attribut nom="use-attribute-sets">jeuattr</attribut>
+		</element>
+	</exemple>
+	<texte><code>name</code> correspond au nom de l'élément à créer. <code>use-attribute-sets</code> correspond au jeu d'attributs à associer à l'élément créé. Par exemple&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:element"><attribut nom="name">p</attribut><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">texte</attribut></element></element>
+	</exemple>
+	<texte>... permet de créer dans le fichier <code type='typefichier'>HTML</code> un élément de paragraphe renfermant le contenu de l'élément <code>texte</code> du document <code type='typefichier'>XML</code>.</texte>
+</paragraphe>
+<paragraphe titre="&lt;xsl:attribute&gt;" ancre="attribute">
+	<texte>Cet élément définit un attribut et l'ajoute à l'élément résultat de la transformation. L'utilisation de cet élément est de la forme&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:attribute"><attribut nom="name">nom</attribut>valeur</element>
+	</exemple>
+	<texte><code>name</code> correspond au nom de l'attribut à ajouter dans le contexte courant. <code>valeur</code> correspond à la valeur à lui donner. Par exemple&#160;:</texte>
+	<exemple type="XML">
+		<element nom="image"><element nom="xsl:attribute" enligne="oui"><attribut nom="name">src</attribut>test.gif</element></element>
+	</exemple>
+	<texte>... permet d'ajouter à l'élément <code>image</code> l'attribut <code>src</code> et de lui affecter la valeur <code>test.gif</code>, ce qui a pour effet de produire en sortie l'élément suivant&#160;:</texte>
+	<exemple type="XML">
+		<element nom="image"><attribut nom="src">test.gif</attribut></element>
+	</exemple>
+	<texte>On aurait pu, de manière tout à fait équivalente, écrire</texte>
+	<exemple type="XML">
+		<element nom="xsl:element"><attribut nom="name">image</attribut><element nom="xsl:attribute" enligne="oui"><attribut nom="name">src</attribut>test.gif</element></element>
+	</exemple>
+	<texte>... ce qui a pour effet de produire en sortie</texte>
+	<exemple type="XML">
+		<element nom="image"><attribut nom="src">test.gif</attribut></element>
+	</exemple>
+</paragraphe>
+<paragraphe titre="Syntaxe courte" ancre="accolades">
+	<texte>Il est possible de créer des éléments de manière plus compacte, à l'aide d'une syntaxe particulière. Supposons par exemple que nous ayons dans un fichier <code type="typefichier">XML</code> l'élément <code><![CDATA[<image source="test.gif" texte_alternatif="Image de test"/>]]></code>, et que nous souhaitions obtenir dans le fichier de sortie l'élément <code><![CDATA[<img src="test.gif" alt="Image de test"/>]]></code>. Il existe deux manières&#160;:</texte>
+	<liste type="ordonnee">
+		<item>
+			<texte>La syntaxe longue, avec...</texte>
+			<exemple type="XML">
+				<element nom="xsl:element"><attribut nom="name">img</attribut><element nom="xsl:attribute" enligne="oui"><attribut nom="name">src</attribut><element nom="xsl:value-of" vide="oui" enligne="oui"><attribut nom="select">@source</attribut></element></element><element nom="xsl:attribute" enligne="oui"><attribut nom="name">alt</attribut><element nom="xsl:value-of" vide="oui" enligne="oui"><attribut nom="select">@texte_alternatif</attribut></element></element></element>
+			</exemple>
+		</item>
+		<item>
+			<texte>La syntaxe courte, utilisant des accolades...</texte>
+			<exemple type="XML">
+				<element nom="img" vide="oui"><attribut nom="src">{@source}</attribut><attribut nom="alt">{@texte_alternatif}</attribut></element>
+			</exemple>
+		</item>
+	</liste>
+	<texte>La seconde syntaxe est plus compacte&#160;; mais elle présente deux inconvénients&#160;:</texte>
+	<liste type="ordonnee">
+		<item><texte>Dès lors que des expressions XPath sont un peu longues, cette syntaxe complique la relecture de la feuille de style&#160;;</texte></item>
+		<item><texte>Une feuille <code type="typefichier">XSL</code> est avant tout un fichier <code type="typefichier">XML</code>. En tant que tel, on peut souhaiter sa transformation ou son traitement automatisé. La syntaxe longue s'y prête plus facilement.</texte></item>
+	</liste>
+</paragraphe>
+</section>
+
+<section titre="Gestion des boucles" ancre="p3s4">
+<paragraphe titre="&lt;xsl:for-each&gt;" ancre="for-each" >
+	<texte>Cet <reference href="stylexsl.html#p2s3">élément de bouclage</reference>, que l'on a déjà rencontré, crée une boucle dans laquelle sont appliquées des transformations. Son utilisation est de la forme&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:for-each"><attribut nom="select">jeunœud</attribut></element>
+	</exemple>
+	<texte><code>select</code> correspond au jeu de n&#339;uds devant être parcouru par la boucle. Exemple d'utilisation&#160;:</texte>
+	<exemple type="XML">
+		<element nom="ul" indent="oui">
+			<element nom="xsl:for-each" niveau="1" indent="oui">
+				<attribut nom="select">item</attribut>
+				<element nom="li" niveau="2"><element nom="xsl:value-of" vide="oui" enligne="oui"><attribut nom="select">.</attribut></element></element>
+			</element>
+		</element>
+	</exemple>
+</paragraphe>
+<paragraphe titre="&lt;xsl:sort&gt;" ancre="sort" >
+	<texte>Cet élément permet d'effectuer un tri sur un jeu de n&#339;uds. Il doit être placé soit dans un élément <code><![CDATA[<xsl:for-each>]]></code> soit dans un élément <code><![CDATA[<xsl:apply-templates>]]></code>. C'est un élément vide qui peut être appelé plusieurs fois pour effectuer un tri multicritères. Chaque appel à cet élément provoque un tri sur un champ spécifique, dans un ordre prédéfini. L'utilisation de cet élément est de la forme&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:sort" vide="oui">
+			<attribut nom="select">nœud</attribut>
+			<attribut nom="data-type">text | number | elt</attribut>
+			<attribut nom="order">ascending | descending</attribut>
+			<attribut nom="lang">nmtoken</attribut>
+			<attribut nom="case-order">upper-first | lower-first</attribut>
+		</element>
+	</exemple>
+	<liste>
+		<item><texte><code>select</code> permet de spécifier un n&#339;ud comme clé de tri.</texte></item>
+		<item><texte><code>data-type</code> correspond au type des données à trier. Dans le cas où le type est <code>number</code>, les données sont converties puis triés.</texte></item>
+		<item><texte><code>order</code> correspond à l'ordre de tri. Cet attribut vaut <code>ascending</code> ou <code>descending</code>.</texte></item>
+		<item><texte><code>lang</code> spécifie quel jeu de caractères utiliser pour le tri&#160;; par défaut, il est déterminé en fonction des paramètres système.</texte></item>
+		<item><texte><code>case-order</code> indique si le tri a lieu sur les majuscules ou minuscules en premier, selon qu'il prend la valeur <code>upper-first</code> ou <code>lower-first</code>.</texte></item>
+	</liste>
+	<texte>Par exemple&#160;:</texte>
+	<exemple type="XML">
+		<element nom="ul" indent="oui">
+			<element nom="xsl:for-each" indent="oui" niveau="1">
+				<attribut nom="select">livre</attribut>
+				<element nom="xsl:sort" vide="oui" niveau="2">
+					<attribut nom="select">auteur</attribut>
+					<attribut nom="order">descending</attribut>
+				</element>
+				<element nom="li" niveau="2"><element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">auteur</attribut></element></element><element nom="br" enligne="oui" vide="oui"></element><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">titre</attribut></element></element>
+			</element>
+		</element>
+	</exemple>
+	<texte>Dans cet exemple, la liste des livres est classée dans l'ordre alphabétique décroissant des noms d'auteur.</texte>
+</paragraphe>
+<paragraphe titre="&lt;xsl:number&gt;" ancre="number" >
+	<texte>Cet élément permet d"insérer un nombre formaté pouvant servir de compteur. L'utilisation de cet élément est de la forme&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:number" vide="oui">
+			<attribut nom="level">single | multiple | any</attribut>
+			<attribut nom="count">nœud</attribut>
+			<attribut nom="from">nœud</attribut>
+			<attribut nom="value">expression</attribut>
+			<attribut nom="format">chaine</attribut>
+			<attribut nom="lang">nmtoken</attribut>
+			<attribut nom="grouping-separator">car</attribut>
+			<attribut nom="grouping-size">nombre</attribut>
+		</element>
+	</exemple>
+	<liste>
+		<item><texte><code>level</code> indique quels niveaux doivent être sélectionnés pour le comptage&#160;: <code>single</code> permet de ne compter que la position du nœud par rapport à ses frères&#160;; <code>multiple</code> permet de compter la position du nœud par rapport à ses ancêtres (par exemple de la forme 1.3.4)&#160;; enfin <code>any</code> renvoie la position du nœud par rapport à l'ensemble des nœuds de même nom dans tout le document.</texte></item>
+		<item><texte><code>count</code> indique quels n&#339;uds doivent être comptés dans les niveaux sélectionnés&#160;; dans le cas où cet attribut n'est pas défini, les n&#339;uds comptés sont ceux ayant le même type que celui du n&#339;ud courant.</texte></item>
+		<item><texte><code>from</code> identifie le n&#339;ud à partir duquel le comptage commence.</texte></item>
+		<item><texte><code>value</code> indique l'expression correspondant à la valeur du compteur&#160;; si cet attribut n'est pas défini, le nombre inséré correspond à la position du n&#339;ud (<code>position()</code>).</texte></item>
+		<item><texte><code>format</code> spécifie le format de l'affichage du nombre&#160;; cela peut être un chiffre, un caractère (a-z, A-Z) et comprendre un caractère de séparation tel que le point (<code>.</code>), le trait d'union (<code>-</code>) ou autre. Les formats possibles sont "1", "01", "a", "A", "i", "I".</texte></item>
+		<item><texte><code>lang</code> spécifie le jeu de caractères à utiliser&#160;; par défaut, il est déterminé en fonction des paramètres du système.</texte></item>
+		<item><texte><code>grouping-separator</code> identifie le caractère permettant de définir la séparation entre les centaines et les milliers.</texte></item>
+		<item><texte><code>grouping-size</code> spécifie le nombre de caractères formant un groupe de chiffres dans un nombre long&#160;; le plus souvent la valeur de cet attribut est 3. Ce dernier attribut fonctionne avec...</texte></item>
+		<item><texte>...<code>grouping-separator</code>&#160;; si l'un des deux manque, ils sont ignorés.</texte></item>
+	</liste>
+	<texte>Exemple d'utilisation&#160;:</texte>
+	<exemple type="XML">
+		<element nom="ul" indent="oui">
+			<element nom="xsl:for-each" indent="oui">
+				<attribut nom="select">livre</attribut>
+				<element nom="xsl:sort" niveau="1" vide="oui">
+					<attribut nom="select">auteur</attribut>
+				</element>
+				<element nom="xsl:number" niveau="1" vide="oui">
+					<attribut nom="level">any</attribut>
+					<attribut nom="from">/</attribut>
+					<attribut nom="format">1.</attribut>
+				</element>
+				<element nom="li" niveau="1"><element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">auteur</attribut></element></element><element nom="br" enligne="oui" vide="oui"></element><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">titre</attribut></element></element>
+			</element>
+		</element>
+	</exemple>
+</paragraphe>
+</section>
+
+<section titre="Conditions de test" ancre="p3s5" >
+<paragraphe titre="&lt;xsl:if&gt;" ancre="if" >
+	<texte>Cet élément permet la fragmentation du modèle dans certaines conditions. Il est possible de tester la présence d'un attribut, d'un élément, de savoir si un élément est bien le fils d'un autre, de tester les valeurs des éléments et attributs. L'utilisation de cet élément est de la forme&#160;:</texte>
+	<exemple type="XML">
+		<element nom="xsl:if"><attribut nom="test">condition</attribut>action</element>
+	</exemple>
+	<texte><code>test</code> prend la valeur <code>1</code> ou <code>0</code> suivant le résultat de la condition (vrai ou faux). <code>action</code> correspond à l'action devant être effectuée (texte à afficher, second test, gestion de chaîne...). Exemple d'utilisation:</texte>
+	<exemple type="XML">
+		<element nom="xsl:if" indent="oui"><attribut nom="test">livre</attribut>
+			<element nom="ul" indent="oui" niveau="1">
+				<element nom="xsl:for-each" indent="oui" niveau="2">
+					<attribut nom="select">livre</attribut>
+					<element nom="li" indent="oui" niveau="3">
+						<element nom="b" niveau="4"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">auteur</attribut></element><element nom="br" enligne="oui" vide="oui"></element></element>
+						<element nom="xsl:value-of" niveau="4" vide="oui" enligne="oui"><attribut nom="select">titre</attribut></element>.<element nom="xsl:if" enligne="non"><attribut nom="test">@langue='français'</attribut>Ce livre est en français.</element>
+					</element>
+				</element>
+			</element>
+		</element>
+	</exemple>
+	<texte>Dans le code précédent, si l'attribut <code>langue</code> de l'élément <code>livre</code> vaut <code>français</code>, le processeur ajoutera au fichier de sortie la phrase "Ce livre est en français". Il ne se passe rien si ce n'est pas le cas.</texte>
+</paragraphe>
+<paragraphe titre="&lt;xsl:choose&gt;" ancre="choose" >
+	<texte>Cet élément permet de définir une liste de choix et d'affecter à chaque choix une transformation différente. Chaque choix est défini par un élément <code><![CDATA[<xsl:when>]]></code> et un traitement par défaut peut être spécifié grâce à l'élément <code><![CDATA[<xsl:otherwise>]]></code>. Exemple d'utilisation&#160;:</texte>
+	<exemple type="XML">
+		<element nom="ul" indent="oui">
+			<element nom="xsl:for-each" indent="oui" niveau="1">
+				<attribut nom="select">livre</attribut>
+				<element nom="li" niveau="2" indent="oui">
+					<element nom="b" niveau="3"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">auteur</attribut></element><element nom="br" enligne="oui" vide="oui"></element></element>
+					<element nom="xsl:value-of" niveau="3" vide="oui"><attribut nom="select">titre</attribut>.</element>
+					<element nom="xsl:choose" niveau="3" indent="oui">
+						<element nom="xsl:when" niveau="4"><attribut nom="test">@langue='francais'</attribut>Ce livre est en français.</element>
+						<element nom="xsl:when" niveau="4"><attribut nom="test">@langue='anglais'</attribut>Ce livre est en anglais.</element>
+						<element nom="xsl:otherwise" niveau="4">Ce livre est dans une langue non répertoriée.</element>
+					</element>
+				</element>
+			</element>
+		</element>
+	</exemple>
+</paragraphe>
+</section>
+
+<section titre="Variables et paramètres" ancre="varparam">
+	<paragraphe titre="Introduction" ancre="varparamintro">
+		<texte>Il est possible en <code type="langage">XSLT</code> de définir des variables et des paramètres permettant de faire des calculs. Il est nécessaire pour cela de faire appel à deux éléments XSL&#160;: <code><![CDATA[xsl:variable]]></code> et <code><![CDATA[xsl:param]]></code>.</texte>
+	</paragraphe>
+	<paragraphe titre="Élément &lt;xsl:variable&gt;" ancre="xslvariable">
+		<texte>L'élément <code><![CDATA[<xsl:variable>]]></code> sert à créer les variables dans XSLT. Il possède les attributs suivants&#160;:</texte>
+		<liste>
+			<item><texte><code>name</code>&#160;: cet attribut est obligatoire. Il spécifie le... nom de la variable.</texte></item>
+			<item><texte><code>select</code>&#160;: expression <code type='langage'>XPath</code> qui spécifie la valeur de la variable.</texte></item>
+		</liste>
+		<texte>Par exemple&#160;:</texte>
+		<exemple type="XML">
+			<element nom="xsl:variable" vide="oui">
+				<attribut nom="name">nombre_livres</attribut>
+				<attribut nom="select">255</attribut>
+			</element>
+			<element nom="xsl:variable" vide="oui">
+				<attribut nom="name">auteur</attribut>
+				<attribut nom="select">'Victor Hugo'</attribut>
+			</element>
+			<element nom="xsl:variable" vide="oui">
+				<attribut nom="name">nombre_pages</attribut>
+				<attribut nom="select">livre/tome/@page</attribut>
+			</element>
+		</exemple>
+		<texte>On notera la présence des guillemets imbriqués quand il s'agit d'affecter une chaîne de caractères à une variable.</texte>
+		<texte>La portée d'une variable est limitée aux éléments-frères et à leurs descendants. Par conséquent, si une variable est déclarée dans une boucle <code>xsl:for-each</code> ou un élément  <code>xsl:choose</code> ou <code>xsl:if</code>, on ne peut s'en servir en-dehors de cet élément.</texte>
+		<texte>Une variable est appelée en étant précédée du caractère <code>$</code>&#160;: <code>&lt;xsl:value-of select="$nombre_pages" /&gt;</code>.</texte>
+		<texte>On peut utiliser une variable pour éviter la frappe répétitive d'une chaîne de caractères, et/ou faciliter la mise à jour de la feuille de style.</texte>
+	</paragraphe>
+	<paragraphe titre="L'élément &lt;xsl:call-template&gt;" ancre="calltemplate">
+		<texte>L'élément <code><![CDATA[<xsl:template>]]></code> peut être appelé indépendamment d'une sélection d'un n&#339;ud. Pour cela, il faut renseigner l'attribut <code>name</code>, et l'appeler à l'aide de l'élément <code><![CDATA[<xsl:call-template>]]></code>. Par exemple</texte>
+		<exemple type="XML">
+			<element nom="xsl:template" indent="oui">
+				<attribut nom="name">separateur</attribut>
+				<element nom="hr" niveau="1" vide="oui"></element>
+				<element nom="img" niveau="1" vide="oui"><attribut nom="src">ligne.gif</attribut><attribut nom="alt">séparation</attribut><attribut nom="width">150</attribut><attribut nom="height">2</attribut></element>
+				<element nom="hr" niveau="1" vide="oui"></element>
+			</element>
+		</exemple>
+		<texte>Il suffit alors de l'appeler avec <code><![CDATA[<xsl:call-template name="separateur"/>]]></code>.</texte>
+	</paragraphe>
+	<paragraphe titre="Les éléments &lt;xsl:param&gt; et &lt;xsl:with-param&gt;" ancre="param">
+		<texte>Les paramètres créés avec ces deux éléments sont habituellement utilisés dans les modèles nommés, que nous venons de voir. Ils permettent de passer des valeurs aux modèles. Un paramètre est créé avec l'élément <code><![CDATA[<xsl:param>]]></code>, et passé à un modèle avec l'élément <code><![CDATA[<xsl:with-param>]]></code>. Les deux ont deux attributs&#160;:</texte>
+		<liste>
+			<item><texte><code>name</code>, obligatoire, qui donne un nom au paramètre&#160;;</texte></item>
+			<item><texte><code>select</code>, une expression <code type='langage'>XPath</code> facultative permettant de donner une valeur par défaut au paramètre.</texte></item>
+		</liste>
+		<texte>Par exemple, on peut imaginer un <code>template</code> permettant d'évaluer le résultat d'une expression polynômiale&#160;:</texte>
+		<exemple type="XML">
+			<element nom="xsl:template" indent="oui">
+				<attribut nom="name">polynome</attribut>
+				<element nom="xsl:param" niveau="1" vide="oui"><attribut nom="name">variable_x</attribut></element>
+				<element nom="xsl:value-of" vide="oui" niveau="1"><attribut nom="select">2*$variable_x*$variable_x+(-5)*$variable_x+2</attribut></element>
+			</element>
+		</exemple>
+		<texte>Il suffit alors de l'appeler en lui passant diverses valeurs pour le paramètre <code>variable_x</code> pour qu'il évalue cette expression. Ce comportement se rapproche de celui d'une fonction dans un langage de programmation. Par exemple...</texte>
+		<exemple type="XML">
+			<element nom="xsl:call-template" indent="oui">
+				<attribut nom="name">polynome</attribut>
+				<element nom="xsl:with-param" niveau="1" vide="oui"><attribut nom="name">variable_x</attribut><attribut nom="select">3.4</attribut></element>
+			</element>
+		</exemple>
+		<texte>... permet d'afficher le résultat de 2*3.4^2-5*3.4+2. On remarquera que&#160;:</texte>
+		<liste type="ordonnee">
+			<item><texte>la soustraction d'un nombre se fait par addition du nombre (négatif) opposé&#160;;</texte></item>
+			<item><texte>la division se fait non par le caractère <code>/</code>, mais par l'opérateur <code>div</code>.</texte></item>
+		</liste>
+	</paragraphe>
+	<exercice titre="Utilisation d'éléments XSL" ancre="exoxsl">
+		<enonce href="exercices/exo9.html"/>
+		<correction href="exercices/exo9cor.html"/>
+	</exercice>
+</section>
+</partie>
+	
+<partie titre="Conception modulaire des feuilles de style" ancre="module">
+	<section titre="Introduction" ancre="moduleIntro">
+		<paragraphe>
+			<texte>Les feuilles de style que nous avons écrites jusqu'à présent conviennent à de petits projets. Cependant, lorsqu'un développement doit être réalisé à plusieurs, ou lorsqu'il devient nécessaire de revenir après quelque temps sur du code déjà écrit, la possibilité de mettre au point des feuilles de style modulaires prend toute sa valeur. Deux étages successifs le permettent&#160;:</texte>
+			<liste type="ordonnee">
+				<item><texte>Au sein d'une même feuille de style, la séparation du traitement de chaque nœud peut se faire en généralisant l'emploi des <autrelangue type="en">templates</autrelangue>&#160;;</texte></item>
+				<item><texte>Il est possible de scinder une feuille de styles en plusieurs fichiers, inclus les uns dans les autres.</texte></item>
+			</liste>
+		</paragraphe>
+	</section>
+	<section titre="Utilisation des templates" ancre="templates">
+		<paragraphe titre="Introduction" ancre="templateIntro">
+			<texte>Les feuilles de style que nous avons écrites jusqu'à présent utilisaient l'élément <code>xsl:for-each</code> pour «&#160;inspecter&#160;» successivement tous les éléments renvoyés par une expression XPath. Lorsque le document <code type="typefichier">XML</code> initial ou le document de sortie deviennent un peu complexes, cette méthode aboutit à l'écriture d'une feuille de style consistant en de multiples boucles imbriquées. Une solution commode est alors de séparer les traitements pour chaque nœud du document initial grâce aux éléments <code>xsl:template</code>.</texte>
+		</paragraphe>
+		<paragraphe titre="Exemple" ancre="templateExemple">
+			<texte>Revenons à la deuxième feuille de style que nous avions écrite pour présenter la liste des bouteilles&#160;:</texte>
+			<exemple type="XML"><prologue/>
+				<element nom="xsl:stylesheet" indent="oui">
+					<attribut nom="version">1.0</attribut>
+					<attribut nom="xmlns:xsl">http://www.w3.org/1999/XSL/Transform</attribut>
+					<element nom="xsl:template" enligne="non" indent="oui">
+						<attribut nom="match">/</attribut>
+						<element nom="html" niveau="1" indent="oui">
+							<element nom="head" indent="oui" niveau="2">
+								<element nom="title" niveau="3">Exemple de sortie HTML</element>
+								<element nom="meta" niveau="3" vide="oui">
+									<attribut nom="http-equiv">Content-Type</attribut>
+									<attribut nom="content">text/html; charset=ISO-8859-1</attribut>
+								</element>
+							</element>
+							<element nom="body" indent="oui" niveau="2">
+								<element nom="h1" niveau="3">Bouteille de marque <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/marque</attribut></element></element>
+								<element nom="h2" niveau="3">Composition:</element>
+								<element nom="h3" niveau="3">Ions positifs</element>
+								<element nom="ul" indent="oui" niveau="3">
+									<element nom="xsl:for-each" indent="oui" niveau="4">
+										<attribut nom="select">bouteille/composition/ion_positif</attribut>
+										<element nom="li" niveau="5"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element>
+									</element>
+								</element>
+								<element nom="h3" niveau="3">Ions négatifs</element>
+								<element nom="ul" indent="oui" niveau="3">
+									<element nom="xsl:for-each" indent="oui" niveau="4">
+										<attribut nom="select">bouteille/composition/ion_negatif</attribut>
+										<element nom="li" niveau="5"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element>
+									</element>
+								</element>
+								<element nom="h3" niveau="3">Autres matériaux</element>
+								<element nom="ul" niveau="3" indent="oui">
+									<element nom="xsl:for-each" niveau="4" indent="oui"><attribut nom="select">//autres_materiaux</attribut>
+										<element nom="li" niveau="5"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element>
+									</element>
+								</element>
+								<element nom="h2">Lieu d'origine</element>
+								<element nom="p" niveau="3">Ville de <element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/source/ville</attribut></element></element>, dans le département <element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/source/departement</attribut></element></element></element>
+								<element nom="h2" niveau="3">Autres informations</element>
+								<element nom="ul" niveau="3" indent="oui">
+									<element nom="li" niveau="4">Contenance: <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/contenance</attribut></element></element>
+									<element nom="li" niveau="4">pH: <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/ph</attribut></element></element>
+								</element>
+							</element>
+						</element>
+					</element>
+				</element>	
+			</exemple>
+			<texte>Modifions-la dans un premier temps afin qu'elle puisse s'adapter à un document <code type="typefichier">XML</code> listant plusieurs bouteilles&#160;:</texte>
+			<exemple type="XML"><prologue/>
+				<element nom="xsl:stylesheet" indent="oui">
+					<attribut nom="version">1.0</attribut>
+					<attribut nom="xmlns:xsl">http://www.w3.org/1999/XSL/Transform</attribut>
+					<element nom="xsl:template" enligne="non" indent="oui">
+						<attribut nom="match">/</attribut>
+						<element nom="html" niveau="1" indent="oui">
+							<element nom="head" indent="oui" niveau="2">
+								<element nom="title" niveau="3">Exemple de sortie HTML</element>
+								<element nom="meta" niveau="3" vide="oui">
+									<attribut nom="http-equiv">Content-Type</attribut>
+									<attribut nom="content">text/html; charset=ISO-8859-1</attribut>
+								</element>
+							</element>
+							<element nom="body" indent="oui" niveau="2">
+								<element nom="xsl:for-each" indent="oui"><attribut nom="select">//bouteille</attribut>
+								<element nom="h1" niveau="3">Bouteille de marque <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/marque</attribut></element></element>
+								<element nom="h2" niveau="3">Composition:</element>
+								<element nom="h3" niveau="3">Ions positifs</element>
+								<element nom="ul" indent="oui" niveau="3">
+									<element nom="xsl:for-each" indent="oui" niveau="4">
+										<attribut nom="select">bouteille/composition/ion_positif</attribut>
+										<element nom="li" niveau="5"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element>
+									</element>
+								</element>
+								<element nom="h3" niveau="3">Ions négatifs</element>
+								<element nom="ul" indent="oui" niveau="3">
+									<element nom="xsl:for-each" indent="oui" niveau="4">
+										<attribut nom="select">bouteille/composition/ion_negatif</attribut>
+										<element nom="li" niveau="5"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element>
+									</element>
+								</element>
+								<element nom="h3" niveau="3">Autres matériaux</element>
+								<element nom="ul" niveau="3" indent="oui">
+									<element nom="xsl:for-each" niveau="4" indent="oui"><attribut nom="select">//autres_materiaux</attribut>
+										<element nom="li" niveau="5"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element>
+									</element>
+								</element>
+								<element nom="h2" niveau="3">Lieu d'origine</element>
+								<element nom="p" niveau="3">Ville de <element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/source/ville</attribut></element></element>, dans le département <element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/source/departement</attribut></element></element></element>
+								<element nom="h2" niveau="3">Autres informations</element>
+								<element nom="ul" niveau="3" indent="oui">
+									<element nom="li" niveau="4">Contenance: <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/contenance</attribut></element></element>
+									<element nom="li" niveau="4">pH: <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">bouteille/ph</attribut></element></element>
+								</element>
+							</element>
+							</element></element>
+					</element>
+				</element>	
+			</exemple>
+			<texte>Les imbrications de boucles <code>xsl:for-each</code> peuvent devenir lourdes à gérer. Il est plus facile de maintenir la structure suivante&#160;:</texte>
+			<exemple type="XML"><prologue/>
+				<element nom="xsl:stylesheet" indent="oui">
+					<attribut nom="version">1.0</attribut>
+					<attribut nom="xmlns:xsl">http://www.w3.org/1999/XSL/Transform</attribut>
+					<element nom="xsl:output" vide="oui">
+						<attribut nom="method">html</attribut>
+						<attribut nom="version">html4.01</attribut>
+						<attribut nom="encoding">ISO-8859-1</attribut>
+						<attribut nom="doctype-public">-//W3C//DTD HTML 4.01//EN</attribut>
+						<attribut nom="doctype-system">http://www.w3.org/TR/html4/strict.dtd</attribut>
+					</element>
+					<contenu></contenu>
+					<element nom="xsl:template" enligne="non" indent="oui">
+						<attribut nom="match">/</attribut>
+						<element nom="html" niveau="1" indent="oui">
+							<element nom="head" indent="oui" niveau="2">
+								<element nom="title" niveau="3">Exemple de sortie HTML</element>
+							</element>
+							<element nom="body" indent="oui" niveau="2">
+								<element nom="xsl:apply-templates" niveau="3" vide="oui"></element>
+							</element>
+						</element>
+					</element>
+					<contenu></contenu>
+					<element nom="xsl:template" indent="oui"><attribut nom="match">bouteille</attribut>
+						<element nom="h1" niveau="1">Bouteille de marque <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">marque</attribut></element></element>
+						<element nom="h2" niveau="1">Composition:</element>
+						<element nom="h3" niveau="1">Ions positifs</element>
+						<element nom="ul" indent="oui" niveau="1">
+							<element nom="xsl:for-each" indent="oui" niveau="2">
+								<attribut nom="select">composition/ion_positif</attribut>
+								<element nom="xsl:apply-templates" vide="oui" niveau="3"><attribut nom="select">.</attribut></element>
+							</element>
+						</element>
+						<element nom="h3" niveau="1">Ions négatifs</element>
+						<element nom="ul" indent="oui" niveau="1">
+							<element nom="xsl:for-each" indent="oui" niveau="2">
+								<attribut nom="select">composition/ion_negatif</attribut>
+								<element nom="xsl:apply-templates" vide="oui" niveau="3"><attribut nom="select">.</attribut></element>
+							</element>
+						</element>
+						<element nom="h3" niveau="1">Autres matériaux</element>
+						<element nom="ul" niveau="1" indent="oui">
+							<element nom="xsl:for-each" niveau="2" indent="oui"><attribut nom="select">autres_materiaux</attribut>
+								<element nom="xsl:apply-templates" vide="oui" niveau="3"><attribut nom="select">.</attribut></element>
+							</element>
+						</element>
+						<element nom="h2" niveau="1">Lieu d'origine</element>
+						<element nom="p" niveau="1">Ville de <element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">source/ville</attribut></element></element>, dans le département <element nom="b" enligne="oui"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">source/departement</attribut></element></element></element>
+						<element nom="h2" niveau="1">Autres informations</element>
+						<element nom="ul" niveau="1" indent="oui">
+							<element nom="li" niveau="2">Contenance: <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">contenance</attribut></element></element>
+							<element nom="li" niveau="2">pH: <element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">ph</attribut></element></element>
+						</element>
+					</element>
+					<contenu></contenu>
+					<element nom="xsl:template" indent="oui"><attribut nom="match">ion_positif</attribut>
+						<element nom="li" niveau="1"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element></element>
+					<contenu></contenu>
+					<element nom="xsl:template" indent="oui"><attribut nom="match">ion_negatif</attribut>
+						<element nom="li" niveau="1"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element></element>
+					<contenu></contenu>
+					<element nom="xsl:template" indent="oui"><attribut nom="match">autres_materiaux</attribut>
+						<element nom="li" niveau="1"><element nom="xsl:value-of" enligne="oui" vide="oui"><attribut nom="select">.</attribut></element></element></element>
+					<contenu></contenu>
+				</element>
+			</exemple>
+			<texte>Le gain n'est pas très appréciable ici, mais si vous jetez un œil à la feuille de style qui figure en lien en bas de cette page, vous verrez un exemple d'utilisation plus complexe... et plus utile.</texte>
+		</paragraphe>
+	</section>
+	<section titre="Inclusions de feuilles de style" ancre="inclusions">
+		<paragraphe>
+			<texte>Il est parfois nécessaire de scinder une feuille de style en plusieurs fichiers différents&#160;:</texte>
+			<liste>
+				<item><texte>Cela permet d'en faciliter la maintenance, en rendant possible un travail collectif&#160;;</texte></item>
+				<item><texte>Cela permet aussi de créer des bibliothèques de modèles pouvant être réutilisés d'un projet à un autre</texte></item>
+			</liste>
+			<texte>Pour cela, il suffit de spécifier dans la feuille de style «&#160;maîtresse&#160;» un appel à une feuille de style autre, soit par l'élément <code>xsl:include</code> soit par l'élément <code>xsl:import</code>. Par exemple...</texte>
+			<exemple type="XML">
+				<element nom="xsl:stylesheet" indent="oui">
+					<attribut nom="version">1.0</attribut>
+					<attribut nom="xmlns:xsl">http://www.w3.org/1999/XSL/Transform</attribut>
+					<element nom="xsl:include" niveau="1" vide="oui"><attribut nom="href">feuille_incluse.xsl</attribut></element>
+				</element>
+			</exemple>
+			<texte>Les modèles et variables définis dans la feuille de style ainsi incluse sont directement incorporés à la feuille de style appelante. Quand on utilise <code>xsl:import</code>, s'il y a conflit entre une déclaration de <autrelangue>template</autrelangue> dans la feuille appelante et la feuille appelée, c'est la première qui est prioritaire. La syntaxe est la même&#160;:</texte>
+			<exemple type="XML">
+				<element nom="xsl:stylesheet" indent="oui">
+					<attribut nom="version">1.0</attribut>
+					<attribut nom="xmlns:xsl">http://www.w3.org/1999/XSL/Transform</attribut>
+					<element nom="xsl:import" niveau="1" vide="oui"><attribut nom="href">feuille_incluse.xsl</attribut></element>
+				</element>
+			</exemple>
+		</paragraphe>
+	</section>
+</partie>
+
+</corpus>
+
+</chapitre>

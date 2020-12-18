@@ -1,0 +1,544 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Déclarations de Type de Document</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="xml, base, concept, introduction">
+      <meta name="description" content="Une DTD permet de décrire les éléments et leurs attributs autorisés dans un document XML.">
+      <link rel="next" href="schema.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Déclarations de Type de Document</h1>
+         <p><span class="version">version 2.21</span>, dernière mise à jour le 12 janvier 2010.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#p0" title="Introduction">Introduction</a></li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#p1" title="Types de DTD">Types de DTD</a><ol>
+                     <li><a href="#p1s0" title="Introduction">Introduction</a></li>
+                     <li><a href="#p1s1" title="Syntaxe">Syntaxe</a></li>
+                     <li><a href="#p1s2" title="DTD externe">DTD externe</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#p2" title="Déclarations d'éléments">Déclarations d'éléments</a><ol>
+                     <li><a href="#p2s0" title="Généralités">Généralités</a></li>
+                     <li><a href="#p2s1" title="Élément texte">Élément texte</a></li>
+                     <li><a href="#p2s4" title="Élément vide">Élément vide</a></li>
+                     <li><a href="#p2s2" title="Séquence d'éléments">Séquence d'éléments</a></li>
+                     <li><a href="#p2s3" title="Choix d'éléments">Choix d'éléments</a></li>
+                     <li><a href="#indicoccur" title="Indicateurs d'occurence">Indicateurs d'occurence</a><ol>
+                           <li><a href="#occsyntaxe" title="Syntaxe">Syntaxe</a></li>
+                           <li><a href="#occexemples" title="Exemples">Exemples</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#p2s5" title="Élément quelconque">Élément quelconque</a></li>
+                     <li><a href="#p2s6" title="Élément à contenu mixte">Élément à contenu mixte</a></li>
+                     <li>Exercice&nbsp;: <a href="#ex1">Écriture d'une DTD avec éléments</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>IV. <a href="#p3" title="Déclarations d'attributs">Déclarations d'attributs</a><ol>
+                     <li><a href="#p3s0" title="Introduction">Introduction</a></li>
+                     <li><a href="#p3s2" title="Type chaîne de caractères">Type chaîne de caractères</a></li>
+                     <li><a href="#p3s1" title="Valeurs par défaut">Valeurs par défaut</a></li>
+                     <li><a href="#p3s3" title="Type ID">Type ID</a></li>
+                     <li><a href="#p3s4" title="Type énuméré">Type énuméré</a></li>
+                     <li><a href="#decllisteattr" title="Utilisation de liste pour les attributs">Utilisation de liste pour les attributs</a></li>
+                     <li>Exercice&nbsp;: <a href="#ex2">Écriture d'une DTD avec attributs</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>V. <a href="#p4" title="Déclarations d'entités">Déclarations d'entités</a><ol>
+                     <li><a href="#p4s0" title="Introduction">Introduction</a></li>
+                     <li><a href="#p4s1" title="Les entités paramétriques">Les entités paramétriques</a></li>
+                     <li><a href="#p4s2" title="Les entités de caractères">Les entités de caractères</a></li>
+                     <li><a href="#p4s3" title="Les entités internes">Les entités internes</a></li>
+                     <li><a href="#p4s4" title="Les entités externes">Les entités externes</a></li>
+                     <li>Exercice&nbsp;: <a href="#p4exo1">Déclarations d'entités</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="p0" href="#p0" id="p0"></a>I. Introduction
+         </h3>
+         <p>Il peut être parfois nécessaire de préciser les balises et attributs auxquels on a droit lors de la rédaction d'un document
+            <code class="typefichier">XML</code>, par exemple si l'on veut pouvoir partager le même type de document avec une communauté d'autres rédacteurs. Deux solutions
+            sont possibles&nbsp;: les «&nbsp;<a href="schema.html">Schémas XML</a>&nbsp;» et les «&nbsp;<span lang="en" class="autrelangue">Document Type Definition</span>&nbsp;». Ces dernières sont les plus simples à manipuler et sont apparues en premier, alors que les Schémas n'étaient pas encore
+            définis. Ce sont les raisons pour lesquelles nous allons nous limiter à elles pour le moment. Il faut néanmoins garder à l'esprit
+            qu'il existe une autre solution, plus complexe certes, mais aussi plus puissante. Elle permet notamment d'informer plus efficacement
+            l'utilisateur sur les balises auxquelles il a droit, ou bien de spécifier de manière plus détaillée le format autorisé pour
+            le contenu de l'élément ou de l'attribut.
+         </p>
+         <h3><a name="p1" href="#p1" id="p1"></a>II. Types de DTD
+         </h3>
+         <h4><a name="p1s0" id="p1s0" href="#p1s0"></a>1. Introduction
+         </h4>
+         <p>Une <code class="typefichier">DTD</code> peut être stockée dans deux endroits différents. Elle peut être incorporée au document <code class="typefichier">XML</code> (elle est alors dite <em>interne</em>), ou bien être un fichier à part (on parle alors de <code class="typefichier">DTD</code> <em>externe</em>). Cette dernière possibilité permet de la partager entre plusieurs documents <code class="typefichier">XML</code>. Il est possible de mêler <code class="typefichier">DTD</code> interne et externe.
+         </p>
+         <p>ll existe de surcroît deux types de <code class="typefichier">DTD</code> externes&nbsp;: privé ou public. Les <code class="typefichier">DTD</code> privées sont accessibles uniquement en local (sur la machine de développement), tandis que les publiques sont disponibles
+            pour tout le monde, étant accessibles grâce à un <acronym title="Uniform Resource Identifier">URI</acronym> (<span lang="en" class="autrelangue">Uniform Resource Identifier</span>).
+         </p>
+         <p>Une déclaration de type de document est de la forme&nbsp;:</p>
+         <p class="xml"><span class="exempledtdexterne">&lt;!DOCTYPE elt.racine ...<span class="valeurattribut"> "..."</span><span class="valeurattribut"> "..."</span>&gt;<br></span></p>
+         <p>Nous verrons progressivement par quoi remplacer les points de suspension. Cette déclaration se place juste après le prologue
+            du document. L'élément
+            racine du document <code class="typefichier">XML</code> rattaché à cette <code class="typefichier">DTD</code> est alors obligatoirement <code class="code">elt.racine</code>. Par exemple...
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="exempledtdexterne">&lt;!DOCTYPE commande ...<span class="valeurattribut"> "..."</span><span class="valeurattribut"> "boncommande.dtd"</span>&gt;<br></span><span class="tag">&lt;commande&gt;</span><br>
+            					<span class="tag">&lt;item&gt;</span>(...)<span class="tag">&lt;/item&gt;</span><br>
+            					<span class="tag">&lt;item&gt;</span>(...)<span class="tag">&lt;/item&gt;</span><br>
+            					<span class="tag">&lt;item&gt;</span>(...)<span class="tag">&lt;/item&gt;</span><br>
+            				<span class="tag">&lt;/commande&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p1s0" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p1s1" id="p1s1" href="#p1s1"></a>2. Syntaxe
+         </h4>
+         <p>Le contenu ne change pas suivant le type de <code class="typefichier">DTD</code>, mais les déclarations d'une <code class="typefichier">DTD</code> interne sont écrites à l'intérieur du prologue du document <code class="typefichier">XML</code> alors que celles d'une <code class="typefichier">DTD</code> externe sont stockées dans un fichier... externe.  
+         </p>
+         <p>Exemple de déclarations pour une <code class="typefichier">DTD</code> interne&nbsp;:  
+         </p>
+         <p class="xml"><span class="exempledtdinterne">&lt;!DOCTYPE biblio[</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">biblio</span>&nbsp;<span class="valeurattribut">(livre)*</span><span class="dtdelement">&gt;</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">livre</span>&nbsp;<span class="valeurattribut">(titre, auteur, nb_pages)</span><span class="dtdelement">&gt;</span><br><span class="exempledtdattribut">&nbsp;&nbsp;&lt;!ATTLIST</span>&nbsp;<span class="tag">livre</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nomattribut">type</span>&nbsp;<span class="valeurattribut">(roman | nouvelles | poemes | théâtre)</span>&nbsp;<span class="typeattribut">#IMPLIED</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nomattribut">lang</span>&nbsp;<span class="valeurattribut">CDATA</span>&nbsp;<span class="valeurattribut">"fr"</span><br><span class="exempledtdattribut">&nbsp;&nbsp;&gt;</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">titre</span>&nbsp;<span class="valeurattribut">(#PCDATA)</span><span class="dtdelement">&gt;</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">auteur</span>&nbsp;<span class="valeurattribut">(#PCDATA)</span><span class="dtdelement">&gt;</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">nb_pages</span>&nbsp;<span class="valeurattribut">(#PCDATA)</span><span class="dtdelement">&gt;</span><br><span class="exempledtdinterne">]&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p1s1" title="Retour à la TdM (Syntaxe)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p1s2" id="p1s2" href="#p1s2"></a>3. DTD externe
+         </h4>
+         <p>Les deux types de <code class="typefichier">DTD</code> externes sont les <code class="typefichier">DTD</code> de type <span lang="en" class="autrelangue">public</span> et les <code class="typefichier">DTD</code> de type <span lang="en" class="autrelangue">system</span>. Le mot-clef <code class="code">SYSTEM</code> indique que le fichier spécifié se trouve sur l'ordinateur local et qu'il est disponible uniquement à titre privé. Le mot-clé
+            <code class="code">PUBLIC</code> indique une ressource disponible pour tous sur un serveur distant.
+         </p>
+         <p>Exemple de déclaration de <code class="typefichier">DTD</code> externe de type <code class="code">SYSTEM</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="exempledtdexterne">&lt;!DOCTYPE biblio SYSTEM<span class="valeurattribut"> "bibliographie.dtd"</span>&gt;<br></span></p>
+         <p>Le fichier associé est le suivant&nbsp;:  </p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">biblio</span>&nbsp;<span class="valeurattribut">(livre*)</span><span class="dtdelement">&gt;</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">livre</span>&nbsp;<span class="valeurattribut">(titre, auteur, nb_pages)</span><span class="dtdelement">&gt;</span><br><span class="exempledtdattribut">&nbsp;&nbsp;&lt;!ATTLIST</span>&nbsp;<span class="tag">livre</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nomattribut">type</span>&nbsp;<span class="valeurattribut">(roman | nouvelles | poemes | théâtre)</span>&nbsp;<span class="typeattribut">#IMPLIED</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nomattribut">lang</span>&nbsp;<span class="valeurattribut">CDATA</span>&nbsp;<span class="valeurattribut">"fr"</span><br><span class="exempledtdattribut">&nbsp;&nbsp;&gt;</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">titre</span>&nbsp;<span class="valeurattribut">(#PCDATA)</span><span class="dtdelement">&gt;</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">auteur</span>&nbsp;<span class="valeurattribut">(#PCDATA)</span><span class="dtdelement">&gt;</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">nb_pages</span>&nbsp;<span class="valeurattribut">(#PCDATA)</span><span class="dtdelement">&gt;</span><br></p>
+         <p>Exemple de déclaration de <code class="typefichier">DTD</code> externe de type <code class="code">PUBLIC</code> &nbsp;:  
+         </p>
+         <p class="xml"><span class="exempledtdexterne">&lt;!DOCTYPE html PUBLIC<span class="valeurattribut"> "-//W3C//DTD XHTML 1.0 Strict//EN"</span><span class="valeurattribut"> "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"</span>&gt;<br></span></p>
+         <p>Dans l'exemple précédent, la chaîne de caractères après le mot PUBLIC fait référence tout d'abord à l'identifiant de la DTD
+            (ici <code class="code">-</code>, qui signifie que la DTD n'a pas de numéro d'enregistrement officiel), au propriétaire de la DTD (ici le W3C), puis son nom,
+            enfin sa langue.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s2" title="Retour à la TdM (DTD externe)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="p2" href="#p2" id="p2"></a>III. Déclarations d'éléments
+         </h3>
+         <h4><a name="p2s0" id="p2s0" href="#p2s0"></a>1. Généralités
+         </h4>
+         <p>Une déclaration d'élément est de la forme&nbsp;:</p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">nom</span>&nbsp;<span class="valeurattribut">type_element</span><span class="dtdelement">&gt;</span><br></p>
+         <p><code class="code">nom</code> est le nom de l'élément et <code class="code">type_element</code> est le type auquel il est associé. Un élément peut être de type texte, vide, séquence ou choix d'élément. Dans ces deux derniers
+            cas, on indique la liste des éléments-enfants. Passons ces types en revue.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p2s0" title="Retour à la TdM (Généralités)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s1" id="p2s1" href="#p2s1"></a>2. Élément texte
+         </h4>
+         <p>Cet élément est le plus répandu, puisque c'est celui qui contient... du texte. Il se déclare ainsi&nbsp;:</p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="valeurattribut">(#PCDATA)</span><span class="dtdelement">&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p2s1" title="Retour à la TdM (Élément texte)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s4" id="p2s4" href="#p2s4"></a>3. Élément vide
+         </h4>
+         <p>Un élément vide est, comme son nom l'indique, un élément qui n'a aucun contenu -que ce soit de type texte, ou bien un autre
+            élément. Le mot-clef utilisé pour la déclaration de ce type d'élément est <code class="code">EMPTY</code>&nbsp;:
+         </p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="valeurattribut">EMPTY</span><span class="dtdelement">&gt;</span><br></p>
+         <p>Exemple d'utilisation&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;elt&nbsp;/&gt;</span><br></p>
+         <p>Un élément vide peut cependant fort bien posséder un ou plusieurs attributs. Par exemple</p>
+         <p class="xml"><span class="tag">&lt;img<span class="nomattribut"> width</span>="<span class="valeurattribut">100</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">30</span>"<span class="nomattribut"> src</span>="<span class="valeurattribut">paysage.jpg</span>"<span class="nomattribut"> alt</span>="<span class="valeurattribut">Paysage de neige</span>"&nbsp;/&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p2s4" title="Retour à la TdM (Élément vide)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s2" id="p2s2" href="#p2s2"></a>4. Séquence d'éléments
+         </h4>
+         <p>Une séquence d'éléments est une liste ordonnée des éléments qui doivent apparaître en tant qu'éléments-enfants de l'élément
+            que l'on est en train de définir. Ce dernier ne pourra contenir <em>aucun</em> autre élément que ceux figurant dans la séquence. Cette liste est composée d'éléments séparés par des virgules et est placée
+            entre parenthèses.
+         </p>
+         <p>Chaque élément-enfant doit de plus être déclaré par ailleurs dans la <code class="typefichier">DTD</code> (avant ou après la définition de la liste, peu importe). Dans le fichier <code class="typefichier">XML</code>, ils doivent apparaître <em>dans l'ordre</em> de la séquence.
+         </p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt0</span>&nbsp;<span class="valeurattribut">(elt1, elt2, elt3)</span><span class="dtdelement">&gt;</span><br></p>
+         <p>Exemple d'utilisation valide&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;elt0&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt1&gt;</span>(...)<span class="tag">&lt;/elt1&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt2&gt;</span>(...)<span class="tag">&lt;/elt2&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt3&gt;</span>(...)<span class="tag">&lt;/elt3&gt;</span><br>
+            				<span class="tag">&lt;/elt0&gt;</span><br></p>
+         <p>Exemples d'utilisations non valides&nbsp;:</p>
+         <ul>
+            <li>
+               <p class="xml"><span class="tag">&lt;elt0&gt;</span><br>
+                  							&nbsp;&nbsp;<span class="tag">&lt;elt1&gt;</span>(...)<span class="tag">&lt;/elt1&gt;</span><br>
+                  							&nbsp;&nbsp;<span class="tag">&lt;elt3&gt;</span>(...)<span class="tag">&lt;/elt3&gt;</span><br>
+                  						<span class="tag">&lt;/elt0&gt;</span><br></p>
+               <p>... car l'élément <code class="code">elt2</code> est manquant.
+               </p>
+            </li>
+            <li>
+               <p class="xml"><span class="tag">&lt;elt0&gt;</span><br>
+                  							&nbsp;&nbsp;<span class="tag">&lt;elt1&gt;</span>(...)<span class="tag">&lt;/elt1&gt;</span><br>
+                  							&nbsp;&nbsp;<span class="tag">&lt;elt3&gt;</span>(...)<span class="tag">&lt;/elt3&gt;</span><br>
+                  							&nbsp;&nbsp;<span class="tag">&lt;elt2&gt;</span>(...)<span class="tag">&lt;/elt2&gt;</span><br>
+                  						<span class="tag">&lt;/elt0&gt;</span><br></p>
+               <p>... car l'ordre des éléments n'est pas respecté.</p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p2s2" title="Retour à la TdM (Séquence d'éléments)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s3" id="p2s3" href="#p2s3"></a>5. Choix d'éléments
+         </h4>
+         <p>Un choix d'élément donne... le choix dans une liste de plusieurs éléments possibles. L'utilisation précise dépend des indicateurs
+            d'occurence. De même que pour la séquence, les éléments-enfants doivent être déclarés dans la <code class="typefichier">DTD</code>. Cette liste est composée d'éléments séparés par le caractère <code class="code">|</code> (combinaison de touches <code class="code">AltGr+6</code> sur un clavier AZERTY).
+         </p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt0</span>&nbsp;<span class="valeurattribut">(elt1 | elt2 | elt3)</span><span class="dtdelement">&gt;</span><br></p>
+         <p>Exemple d'utilisation valide&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;elt0&gt;</span><span class="tag">&lt;elt2&gt;</span>(...)<span class="tag">&lt;/elt2&gt;</span><span class="tag">&lt;/elt0&gt;</span><br></p>
+         <p>Exemple d'utilisation non valide&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;elt0&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt2&gt;</span>(...)<span class="tag">&lt;/elt2&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt3&gt;</span>(...)<span class="tag">&lt;/elt3&gt;</span><br>
+            				<span class="tag">&lt;/elt0&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p2s3" title="Retour à la TdM (Choix d'éléments)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="indicoccur" id="indicoccur" href="#indicoccur"></a>6. Indicateurs d'occurence
+         </h4>
+         <h5><a href="#occsyntaxe" name="occsyntaxe" id="occsyntaxe"></a>a. Syntaxe
+         </h5>
+         <p>Lors de la déclaration de séquence ou de choix d'éléments, à chaque élément enfant peut être attribuée une indication d'occurence
+            (<code class="code">?</code>, <code class="code">+</code> ou <code class="code">*</code>).
+         </p>
+         <p>Exemples d'indicateur d'occurences&nbsp;:</p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt0</span>&nbsp;<span class="valeurattribut">(elt1, elt2?, elt3+, elt*)</span><span class="dtdelement">&gt;</span><br></p>
+         <ul>
+            <li>
+               <p><code class="code">elt1</code> ne comprend aucune indication d'occurence. Il doit donc apparaître une <em>seule et unique fois</em> dans l'élément <code class="code">elt0</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">elt2</code> a pour indication d'occurence <code class="code">?</code>. Cela signifie que l'élément doit apparaître <em>au maximum</em> une fois (il peut ne pas apparaître du tout)&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">elt3</code> a pour indication d'occurence <code class="code">+</code>. Cela signifie que l'élément doit apparaître <em>au moins</em> une fois&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">elt4</code> a pour indication d'occurence <code class="code">*</code>. Cela signifie que l'élément peut apparaître autant de fois que l'auteur le désire, voire pas du tout.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_occsyntaxe" title="Retour à la TdM (Syntaxe)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#occexemples" name="occexemples" id="occexemples"></a>b. Exemples
+         </h5>
+         <p>Les indicateurs d'occurence peuvent être utilisés en conjonction avec les séquences ou les choix d'éléments. Ainsi...</p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt0</span>&nbsp;<span class="valeurattribut">(elt1+, elt2*, elt3?)</span><span class="dtdelement">&gt;</span><br></p>
+         <p>... permet d'indiquer une séquence composée d'au moins un élément <code class="code">elt1</code>, puis d'un nombre indéterminé d'éléments <code class="code">elt2</code> (éventuellement nul), enfin au plus un élément <code class="code">elt3</code>.
+         </p>
+         <p>Exemple d'utilisation d'un choix d'éléments avec indicateurs d'occurence par élément&nbsp;:  </p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">choix.elt</span>&nbsp;<span class="valeurattribut">(elt1* | elt2* | elt3*)</span><span class="dtdelement">&gt;</span><br></p>
+         <p>Exemple d'utilisation valide&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;elt0&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt2&gt;</span>(...)<span class="tag">&lt;/elt2&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt2&gt;</span>(...)<span class="tag">&lt;/elt2&gt;</span><br>
+            				<span class="tag">&lt;/elt0&gt;</span><br></p>
+         <p>Exemples d'utilisation non valide&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;elt0&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt3&gt;</span>(...)<span class="tag">&lt;/elt3&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt2&gt;</span>(...)<span class="tag">&lt;/elt2&gt;</span><br>
+            				<span class="tag">&lt;/elt0&gt;</span><br></p>
+         <p class="xml"><span class="tag">&lt;elt0&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt2&gt;</span>(...)<span class="tag">&lt;/elt2&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt3&gt;</span>(...)<span class="tag">&lt;/elt3&gt;</span><br>
+            				<span class="tag">&lt;/elt0&gt;</span><br></p>
+         <p>Exemple d'utilisation d'un choix d'éléments avec indicateur d'occurence global&nbsp;:</p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt0</span>&nbsp;<span class="valeurattribut">(elt1 | elt2 | elt3)*</span><span class="dtdelement">&gt;</span><br></p>
+         <p>Exemple d'utilisation valide&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;elt0&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt2&gt;</span>(...)<span class="tag">&lt;/elt2&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt3&gt;</span>(...)<span class="tag">&lt;/elt3&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;elt1&gt;</span>(...)<span class="tag">&lt;/elt1&gt;</span><br>
+            				<span class="tag">&lt;/elt0&gt;</span><br></p>
+         <p>Dans ce dernier cas, il n'y a pas de contrainte visible sur l'ordre d'apparition des éléments. C'est la déclaration la plus
+            souple possible.
+         </p>
+         <p class="retourtdm"><a href="#tdm_indicoccur" title="Retour à la TdM (Indicateurs d'occurence)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s5" id="p2s5" href="#p2s5"></a>7. Élément quelconque
+         </h4>
+         <p>L'élément quelconque est l'élément-«&nbsp;fourre-tout&nbsp;» dans une <code class="typefichier">DTD</code>. Il peut contenir tout autre élément défini dans la <code class="typefichier">DTD</code>, aussi bien qu'être vide ou contenir du texte. Les éléments-enfants éventuels peuvent apparaître dans n'importe quel ordre,
+            et en quantité non définie. Il est préférable de ne pas utiliser trop souvent ce type de déclaration, car on perd les avantages
+            qu'offre la rédaction d'une <code class="typefichier">DTD</code>, qui sont de fixer des contraintes précises sur la structure du document <code class="typefichier">XML</code> qui lui est lié. Le mot-clef utilisé pour la déclaration de ce type d'élément est <code class="code">ANY</code>.
+         </p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="valeurattribut">ANY</span><span class="dtdelement">&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p2s5" title="Retour à la TdM (Élément quelconque)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s6" id="p2s6" href="#p2s6"></a>8. Élément à contenu mixte
+         </h4>
+         <p>Un élément à contenu mixte peut contenir aussi bien du texte que des éléments-enfants. Il se présente comme une liste de choix,
+            avec des indicateurs d'occurence bien choisis. Le texte contenu peut se trouver à n'importe quel endroit dans l'élément, et
+            peut être une <a href="base.html#p3s4p6">section <code class="code">CDATA</code></a>.
+         </p>
+         <p>Exemple de déclaration&nbsp;:</p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">citation</span>&nbsp;<span class="valeurattribut">(#PCDATA | auteur)*</span><span class="dtdelement">&gt;</span><br></p>
+         <p>Exemple d'utilisation&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;citation&gt;</span><br>
+            					&nbsp;&nbsp;<span class="tag">&lt;auteur&gt;</span>Shakespeare<span class="tag">&lt;/auteur&gt;</span>Être ou ne pas être<br>
+            				<span class="tag">&lt;/citation&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p2s6" title="Retour à la TdM (Élément à contenu mixte)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4>Exercice&nbsp;<a name="ex1" href="#ex1" id="ex1"></a>1. Écriture d'une DTD avec éléments
+         </h4>
+         <h5><a href="exercices/exo4.html" title="Énoncé de l'exercice 'Écriture d'une DTD avec éléments'">Énoncé</a></h5>
+         <h5><a href="exercices/exo4_cor.dtd" title="Correction 'Écriture d'une DTD avec éléments'">
+               				Correction</a></h5>
+         <h3><a name="p3" href="#p3" id="p3"></a>IV. Déclarations d'attributs
+         </h3>
+         <h4><a name="p3s0" id="p3s0" href="#p3s0"></a>1. Introduction
+         </h4>
+         <p>Comme on peut trouver dans un document <code class="typefichier">XML</code> des éléments possédant des attributs, il est normal que la <code class="typefichier">DTD</code> permette de définir des contraintes sur ces derniers. On peut déclarer et attacher à un élément donné chaque attribut séparément,
+            mais il est souvent préférable, afin d'améliorer la lisibilité du code, de les réunir sous la forme d'une liste. Chaque attribut
+            défini dans la liste possède un nom et un type. On peut lui donner une valeur par défaut, ou bien le spécifier obligatoire.
+            Le mot-clef de cette déclaration est <code class="code">ATTLIST</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s0" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s2" id="p3s2" href="#p3s2"></a>2. Type chaîne de caractères
+         </h4>
+         <p>Il s'agit là du type d'attribut le plus courant. Une chaîne de caractères peut être composée de caractères ainsi que d'<a href="#p4">entités analysables</a>. Le mot-clef utilisé pour la déclaration de chaîne de caractère est <code class="code">CDATA</code>.
+         </p>
+         <p>Exemple de déclaration de <code class="code">CDATA</code> (nous reviendrons dans un instant sur la signification du mot-clef <code class="code">#IMPLIED</code>)&nbsp;:
+         </p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="valeurattribut">(...)</span><span class="dtdelement">&gt;</span><br>&nbsp;&nbsp;<span class="exempledtdattribut">&lt;!ATTLIST</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="nomattribut">attr</span>&nbsp;<span class="valeurattribut">CDATA</span>&nbsp;<span class="typeattribut">#IMPLIED</span><span class="exempledtdattribut">&gt;</span><br></p>
+         <p>Exemples d'utilisations&nbsp;:</p>
+         <ul>
+            <li>
+               <p class="xml"><span class="tag">&lt;elt<span class="nomattribut"> attr</span>="<span class="valeurattribut">Chaîne de caractères</span>"&gt;</span>(...)<span class="tag">&lt;/elt&gt;</span><br></p>
+            </li>
+            <li>
+               <p class="xml"><span class="exempledtdelement">&lt;!ENTITY</span>&nbsp;<span class="tag">car</span>&nbsp;<span class="valeurattribut">"caractères"</span><span class="dtdelement">&gt;</span><br><span class="tag">&lt;elt<span class="nomattribut"> attr</span>="<span class="valeurattribut">Chaîne de &amp;car;</span>"&gt;</span>(...)<span class="tag">&lt;/elt&gt;</span><br></p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p3s2" title="Retour à la TdM (Type chaîne de caractères)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s1" id="p3s1" href="#p3s1"></a>3. Valeurs par défaut
+         </h4>
+         <p>Chaque attribut peut être requis, optionnel ou fixe et avoir une valeur par défaut. Les exemples suivants montrent la déclaration
+            d'un attribut appelé <code class="code">attr</code> attaché à un élément nommé <code class="code">elt</code>.
+         </p>
+         <ol>
+            <li>
+               <p>Déclaration d'un attribut avec une valeur par défaut&nbsp;:</p>
+               <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="valeurattribut">(...)</span><span class="dtdelement">&gt;</span><br>&nbsp;&nbsp;<span class="exempledtdattribut">&lt;!ATTLIST</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="nomattribut">attr</span>&nbsp;<span class="valeurattribut">CDATA</span>&nbsp;<span class="valeurattribut">"valeur"</span><span class="exempledtdattribut">&gt;</span><br></p>
+               <p>Un tel attribut n'est pas obligatoire. S'il est omis dans le fichier <code class="typefichier">XML</code> lors de l'utilisation de l'élément <code class="code">elt</code>, il est considéré comme valant <code class="code">valeur</code>. Dans cet exemple, si on écrit <code class="code">&lt;elt&gt;(...)&lt;/elt&gt;</code>, cela est équivalent à écrire <code class="code">&lt;elt attr="valeur"&gt;(...)&gt;/elt&gt;</code>.
+               </p>
+            </li>
+            <li>
+               <p>Déclaration d'un attribut requis&nbsp;:</p>
+               <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="valeurattribut">(...)</span><span class="dtdelement">&gt;</span><br>&nbsp;&nbsp;<span class="exempledtdattribut">&lt;!ATTLIST</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="nomattribut">attr</span>&nbsp;<span class="valeurattribut">CDATA</span>&nbsp;<span class="typeattribut">#REQUIRED</span><span class="exempledtdattribut">&gt;</span><br></p>
+               <p>Un tel attribut est obligatoire. Son absence déclenche une erreur du vérificateur syntaxique sur le fichier <code class="typefichier">XML</code>.
+               </p>
+            </li>
+            <li>
+               <p>Déclaration d'un attribut optionnel&nbsp;:</p>
+               <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="valeurattribut">(...)</span><span class="dtdelement">&gt;</span><br>&nbsp;&nbsp;<span class="exempledtdattribut">&lt;!ATTLIST</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="nomattribut">attr</span>&nbsp;<span class="valeurattribut">CDATA</span>&nbsp;<span class="typeattribut">#IMPLIED</span><span class="exempledtdattribut">&gt;</span><br></p>
+            </li>
+            <li>
+               <p>Déclaration d'un attribut avec une valeur fixe&nbsp;:</p>
+               <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="valeurattribut">(...)</span><span class="dtdelement">&gt;</span><br>&nbsp;&nbsp;<span class="exempledtdattribut">&lt;!ATTLIST</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="nomattribut">attr</span>&nbsp;<span class="valeurattribut">CDATA</span>&nbsp;<span class="typeattribut">#FIXED</span>&nbsp;<span class="valeurattribut">"valeur"</span><span class="exempledtdattribut">&gt;</span><br></p>
+               <p>L'utilité d'un tel attribut peut sembler bizarre à première vue, puisqu'il ne peut prendre qu'une seule valeur. Cette fonctionnalité
+                  est cependant utile lors d'une mise à jour d'une <code class="typefichier">DTD</code>, pour anticiper la compatibilité avec des versions ultérieures.
+               </p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_p3s1" title="Retour à la TdM (Valeurs par défaut)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s3" id="p3s3" href="#p3s3"></a>4. Type ID
+         </h4>
+         <p>Ce type sert à indiquer que l'attribut en question peut servir d'<em>identifiant</em> dans le fichier <code class="typefichier">XML</code>. Deux éléments ne pourront pas posséder le même atribut possédant la même valeur.
+         </p>
+         <p>Exemple de déclaration de type <code class="code">ID</code> optionnel&nbsp;:
+         </p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="valeurattribut">(...)</span><span class="dtdelement">&gt;</span><br>&nbsp;&nbsp;<span class="exempledtdattribut">&lt;!ATTLIST</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="nomattribut">attr</span>&nbsp;<span class="valeurattribut">ID</span>&nbsp;<span class="typeattribut">#IMPLIED</span><span class="exempledtdattribut">&gt;</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt1</span>&nbsp;<span class="valeurattribut">(...)</span><span class="dtdelement">&gt;</span><br>&nbsp;&nbsp;<span class="exempledtdattribut">&lt;!ATTLIST</span>&nbsp;<span class="tag">elt1</span>&nbsp;<span class="nomattribut">attr</span>&nbsp;<span class="valeurattribut">ID</span>&nbsp;<span class="typeattribut">#IMPLIED</span><span class="exempledtdattribut">&gt;</span><br><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt2</span>&nbsp;<span class="valeurattribut">(...)</span><span class="dtdelement">&gt;</span><br>&nbsp;&nbsp;<span class="exempledtdattribut">&lt;!ATTLIST</span>&nbsp;<span class="tag">elt2</span>&nbsp;<span class="nomattribut">attr</span>&nbsp;<span class="valeurattribut">ID</span>&nbsp;<span class="typeattribut">#IMPLIED</span><span class="exempledtdattribut">&gt;</span><br></p>
+         <p>La déclaration précédente interdit par exemple...</p>
+         <p class="xml"><span class="tag">&lt;elt1<span class="nomattribut"> attr</span>="<span class="valeurattribut">machin</span>"&gt;</span><span class="tag">&lt;/elt1&gt;</span><br><span class="tag">&lt;elt2<span class="nomattribut"> attr</span>="<span class="valeurattribut">truc</span>"&gt;</span><span class="tag">&lt;/elt2&gt;</span><br><span class="tag">&lt;elt1<span class="nomattribut"> attr</span>="<span class="valeurattribut">machin</span>"&gt;</span><span class="tag">&lt;/elt1&gt;</span><br></p>
+         <p>... ainsi que</p>
+         <p class="xml"><span class="tag">&lt;elt1<span class="nomattribut"> attr</span>="<span class="valeurattribut">machin</span>"&gt;</span><span class="tag">&lt;/elt1&gt;</span><br><span class="tag">&lt;elt2<span class="nomattribut"> attr</span>="<span class="valeurattribut">machin</span>"&gt;</span><span class="tag">&lt;/elt2&gt;</span><br><span class="tag">&lt;elt1<span class="nomattribut"> attr</span>="<span class="valeurattribut">truc</span>"&gt;</span><span class="tag">&lt;/elt1&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_p3s3" title="Retour à la TdM (Type ID)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p3s4" id="p3s4" href="#p3s4"></a>5. Type énuméré
+         </h4>
+         <p>On peut parfois désirer limiter la liste de valeurs possibles pour un attribut. On le définit alors comme étant de type énuméré.
+            Donner une autre valeur dans le fichier <code class="typefichier">XML</code> provoque une erreur.
+         </p>
+         <p>Exemple de déclaration d'une liste de choix d'attributs&nbsp;:</p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">img</span>&nbsp;<span class="valeurattribut">EMPTY</span><span class="dtdelement">&gt;</span><br>&nbsp;&nbsp;<span class="exempledtdattribut">&lt;!ATTLIST</span>&nbsp;<span class="tag">img</span>&nbsp;<span class="nomattribut">format</span>&nbsp;<span class="valeurattribut">(GIF | JPEG | PNG)</span>&nbsp;<span class="valeurattribut">"PNG"</span><span class="exempledtdattribut">&gt;</span><br></p>
+         <p>Cet exemple déclare un attribut <code class="code">format</code> d'un élément <code class="code">img</code>. La valeur de cet attribut peut être <code class="code">PNG</code>, <code class="code">GIF</code> ou <code class="code">JPEG</code>. Si aucune valeur n'est affectée à cet attribut, c'est la valeur par défaut qui le sera, ici <code class="code">PNG</code>. On notera l'absence de guillemets dans la liste des valeurs possibles. En ajouter est une erreur courante dans la rédaction
+            d'une <code class="typefichier">DTD</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p3s4" title="Retour à la TdM (Type énuméré)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="decllisteattr" id="decllisteattr" href="#decllisteattr"></a>6. Utilisation de liste pour les attributs
+         </h4>
+         <p>On utilise le fait qu'il est possible de «&nbsp;factoriser&nbsp;» le nom de l'élément. Par exemple...</p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ELEMENT</span>&nbsp;<span class="tag">elt</span>&nbsp;<span class="valeurattribut">(...)</span><span class="dtdelement">&gt;</span><br><span class="exempledtdattribut">&nbsp;&nbsp;&lt;!ATTLIST</span>&nbsp;<span class="tag">elt</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nomattribut">attr1</span>&nbsp;<span class="valeurattribut">CDATA</span>&nbsp;<span class="typeattribut">#IMPLIED</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nomattribut">attr2</span>&nbsp;<span class="valeurattribut">CDATA</span>&nbsp;<span class="typeattribut">#REQUIRED</span><br><span class="exempledtdattribut">&nbsp;&nbsp;&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_decllisteattr" title="Retour à la TdM (Utilisation de liste pour les attributs)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4>Exercice&nbsp;<a name="ex2" href="#ex2" id="ex2"></a>1. Écriture d'une DTD avec attributs
+         </h4>
+         <h5><a href="exercices/exo5.html" title="Énoncé de l'exercice 'Écriture d'une DTD avec attributs'">Énoncé</a></h5>
+         <h5><a href="exercices/exo5_cor.dtd" title="Correction 'Écriture d'une DTD avec attributs'">
+               				Correction</a></h5>
+         <h3><a name="p4" href="#p4" id="p4"></a>V. Déclarations d'entités
+         </h3>
+         <h4><a name="p4s0" id="p4s0" href="#p4s0"></a>1. Introduction
+         </h4>
+         <p>Les déclarations d'entités permettent de disposer de l'équivalent de raccourcis clavier et de caractères <span lang="latin" class="autrelangue">a priori</span> non accessibles dans le jeu de caractères sélectionné.  
+         </p>
+         <p class="retourtdm"><a href="#tdm_p4s0" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p4s1" id="p4s1" href="#p4s1"></a>2. Les entités paramétriques
+         </h4>
+         <p>Elles servent à définir des symboles qui seront utilisés ailleurs dans la <code class="typefichier">DTD</code>. Ce sont en quelque sorte des raccourcis d'écriture&nbsp;: partout où une entité est mentionnée, elle peut être remplacée par
+            la chaîne de caractères qui lui est associée. Ce mécanisme s'apparente à un mécanisme de «&nbsp;macro&nbsp;».
+         </p>
+         <p>Les entités paramétriques ne peuvent pas être utilisées en-dehors d'une <code class="typefichier">DTD</code>.
+         </p>
+         <p>Exemple tiré de la <a href="http://www.w3.org/TR/html401/sgml/dtd.html">spécification du langage <code class="langage">HTML</code></a>&nbsp;:
+         </p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ENTITY</span>&nbsp;%&nbsp;<span class="tag">heading</span>&nbsp;<span class="valeurattribut">"H1|H2|H3|H4|H5|H6"</span><span class="dtdelement">&gt;</span><br></p>
+         <p>L'exemple précédent a pour effet d'indiquer au système que toute occurence de <code class="code">%heading;</code> doit être remplacée par <code class="code">H1|H2|H3|H4|H5|H6</code> dans la <code class="typefichier">DTD</code>.
+         </p>
+         <p>Ce mécanisme peut également servir à utiliser un nom relativement compréhensible à la place d'une séquence de caractères peu
+            évocatrice. La définition d'une entité peut également faire référence à d'autres entités&nbsp;; la substitution est alors effectuée
+            de proche en proche.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p4s1" title="Retour à la TdM (Les entités paramétriques)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p4s2" id="p4s2" href="#p4s2"></a>3. Les entités de caractères
+         </h4>
+         <p>Elle servent à donner un nom facilement lisible à des caractères qui ne sont pas représentables dans l'alphabet utilisé, ou
+            qui ne sont pas disponibles au clavier.
+         </p>
+         <p>Exemples tirés de la <code class="typefichier">DTD</code> du langage <code class="langage">HTML&nbsp;4.01</code>&nbsp;:  
+         </p>
+         <p class="xml"><span class="exempledtdelement">&lt;!ENTITY</span>&nbsp;<span class="tag">nbsp</span>&nbsp;<span class="valeurattribut">"&amp;#160;"</span><span class="dtdelement">&gt;</span><br><span class="exempledtdelement">&lt;!ENTITY</span>&nbsp;<span class="tag">eacute</span>&nbsp;<span class="valeurattribut">"&amp;#233;"</span><span class="dtdelement">&gt;</span><br></p>
+         <p>Les entités de caractères définies dans une <code class="typefichier">DTD</code> peuvent être utilisées dans un document <code class="typefichier">XML</code> référençant cette <code class="typefichier">DTD</code> à l'aide de la notation <code class="code">&amp;NomEntité;</code> (par exemple <code class="code">&amp;ecaute;</code> pour reprendre une des entités précédentes).
+         </p>
+         <p class="retourtdm"><a href="#tdm_p4s2" title="Retour à la TdM (Les entités de caractères)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p4s3" id="p4s3" href="#p4s3"></a>4. Les entités internes
+         </h4>
+         <p>Ce sont des symboles pouvant être définis dans une <code class="typefichier">DTD</code> et utilisés dans un document <code class="typefichier">XML</code> comme raccourcis d'écriture. La définition complète du symbole est entièrement incluse dans la <code class="typefichier">DTD</code>, mais cela n'est possible que pour les <code class="typefichier">DTD</code> <em>internes</em>. Exemple&nbsp;:  
+         </p>
+         <p class="xml"><span class="exempledtdinterne">&lt;!DOCTYPE eltRacine[</span><br><span class="exempledtdelement">&lt;!ENTITY</span>&nbsp;<span class="tag">ADN</span>&nbsp;<span class="valeurattribut">"Acide désoxyribonucléique"</span><span class="dtdelement">&gt;</span><br><span class="exempledtdinterne">]&gt;</span><br><span class="tag">&lt;eltRacine&gt;</span>L'&amp;ADN; est une molécule complexe.<br><span class="tag">&lt;/eltRacine&gt;</span><br></p>
+         <p>Dans le fichier <code class="typefichier">XML</code>, l'appel à <code class="code">&amp;ADN;</code> sera aumatiquement remplacé, lors de l'affichage ou du traitement, par la chaîne de caractères "Acide désoxyribonucléique".
+         </p>
+         <p class="retourtdm"><a href="#tdm_p4s3" title="Retour à la TdM (Les entités internes)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p4s4" id="p4s4" href="#p4s4"></a>5. Les entités externes
+         </h4>
+         <p>Il s'agit...</p>
+         <ul>
+            <li>
+               <p>... soit de symboles pouvant être définis dans un autre fichier, mais pouvant être utilisés dans un document <code class="typefichier">XML</code> ou la <code class="typefichier">DTD</code> elle-même. Par exemple&nbsp;:
+               </p>
+               <p class="xml"><span class="exempledtdelement">&lt;!ENTITY</span>&nbsp;<span class="tag">Inclusion</span>&nbsp;SYSTEM&nbsp;<span class="valeurattribut">"toto.xml"</span><span class="dtdelement">&gt;</span><br><span class="exempledtdelement">&lt;!ENTITY</span>&nbsp;%&nbsp;<span class="tag">Inclusion</span>&nbsp;SYSTEM&nbsp;<span class="valeurattribut">"toto.inc"</span><span class="dtdelement">&gt;</span><br></p>
+               <p>Dans le fichier <code class="typefichier">XML</code>, le contenu du fichier <code class="typefichier">toto.xml</code> sera inséré à l'appel de l'entité <code class="code">&amp;Inclusion;</code>, et dans la <code class="typefichier">DTD</code>, le contenu du fichier <code class="typefichier">toto.inc</code> sera inséré à l'appel de l'entité <code class="code">&amp;Inclusion;</code></p>
+            </li>
+            <li>
+               <p>... soit de symboles pouvant être définis dans une autre <code class="typefichier">DTD</code> et utilisés dans la <code class="typefichier">DTD</code> courante&nbsp;:
+               </p>
+               <p class="xml"><span class="exempledtdelement">&lt;!ENTITY</span>&nbsp;%&nbsp;<span class="tag">HTMLSpecial</span>&nbsp;PUBLIC&nbsp;<span class="valeurattribut">"-//W3C//ENTITIES Special for XHTML//EN"</span>&nbsp;"http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent"<span class="dtdelement">&gt;</span><br></p>
+               <p>Le contenu de cette <code class="typefichier">DTD</code> (qui peut être de type <code class="code">SPECIAL</code> ou <code class="code">PUBLIC</code>) est importé dans la <code class="typefichier">DTD</code> courante par l'appel de <code class="code">%HTMLSpecial;</code>.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p4s4" title="Retour à la TdM (Les entités externes)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4>Exercice&nbsp;<a name="p4exo1" href="#p4exo1" id="p4exo1"></a>1. Déclarations d'entités
+         </h4>
+         <h5><a href="exercices/exo6.html" title="Énoncé de l'exercice 'Déclarations d'entités'">Énoncé</a></h5>
+         <h5><a href="exercices/exo6.xml" title="Correction 'Déclarations d'entités' (Fichier XML)">
+               				Correction (Fichier XML)</a></h5>
+         <h5><a href="exercices/exo6.dtd" title="Correction 'Déclarations d'entités' (DTD)">
+               				Correction (DTD)</a></h5>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours suivant&nbsp;: <a href="schema.html">Initiation aux Schema XML</a></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="dtd.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 12 janvier 2010, version 2.21. Correction d'une erreur pour les entités internes.</li>
+            <li>Le 20 janvier 2009, version 2.20. Syntaxe. Refonte légère du plan.</li>
+            <li>Le 16 janvier 2008, version 2.14. Syntaxe.</li>
+            <li>Le 9 janvier 2006, version 2.13. Correction d'une faute de frappe.</li>
+            <li>Le 22 novembre 2005, version 2.12. Corrections typographiques.</li>
+            <li>Le 28 septembre 2005, version 2.11. Correction d'une erreur dans la déclaration d'un élément à contenu mixte.</li>
+            <li>Le 14 juillet 2005, version 2.10. Réécriture des exemples.</li>
+            <li>Le 18 avril 2005, version 2.02. Corrections typographiques.</li>
+            <li>Le 4 février 2005, version 2.01. Corrections typographiques.</li>
+            <li>Le 7 décembre 2004, version 2.00. Réécriture.</li>
+            <li>Le 19 mai 2004, version 1.30. Corrections dans les déclarations d'entités et corrections typographiques.</li>
+            <li>Le 4 mars 2004, version 1.24. Corrections typographiques.</li>
+            <li>Le 2 février 2004, version 1.23. Corrections typographiques.</li>
+            <li>Le 6 novembre 2003, version 1.22. Correction d'une erreur.</li>
+            <li>Le 31 octobre 2003, version 1.21. Correction typographique.</li>
+            <li>Le 30 juillet 2003, version 1.20. Corrections typographiques et quelques mises à jour sur le fond.</li>
+            <li>Le 28 octobre 2002, version 1.12. Suppression des _ dans les attributs.</li>
+            <li>Le 31 mai 2002, version 1.11. Corrections typographiques.</li>
+            <li>Le 21 mai 2002, version 1.10. Déclarations d'attributs et d'entités</li>
+            <li>Le 16 mai 2002, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

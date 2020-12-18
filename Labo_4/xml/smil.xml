@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+
+<cours nomfichier="smil">Cours d'initiation à XML</cours>
+
+<entete>
+	<titre>Synchroniser des contenus multimédia avec SMIL</titre>
+	<auteur email="Gilles.Chagnon@upmc.fr">G. Chagnon</auteur>
+	<resume>SMIL est un format permettant la synchronisation de données multimédia.</resume>
+	<motsclefs>smil, concept, introduction</motsclefs>
+</entete>
+
+<corpus>
+
+<partie titre="Généralités" ancre="p1">
+
+<section titre="Introduction" ancre="p1s1">
+<paragraphe>
+	<texte>Il existe divers moyens d'apporter du contenu dynamique, alliant son, texte et animations sur un site web, <logiciel>Flash</logiciel> par exemple. De son côté, dans le cadre d'études sur la généralisation du format <code type="langage">XML</code>, le <reference href="http://www.w3.org/AudioVideo">W3C</reference> a mis sur pied des groupes de travail chargés de définir un format de données, fondé sur <code type="langage">XML</code>, permettant de créer des animations multimédia sur Internet. Ces groupes de travail ont donc défini <code type="langage">SMIL</code> (<autrelangue type="en">Synchronized Multimedia Integration Language</autrelangue>). Ce langage permet de synchroniser divers éléments multimédia, tels que de la vidéo, du son et du texte. Ceci permet de créer des présentations multimédia interactives très complexes.</texte>
+	<texte>Le <code type="langage">SMIL</code> est une application <code type="langage">XML</code> et se sert donc de tout ce qu'offre ce dernier. Dans cette application, le <code type="langage">XML</code> indique le comportement dans le temps des divers objets multimédia, et leur interactivité <autrelangue type="latin">via</autrelangue> des liens hypertextes ou autres.</texte>
+</paragraphe>
+</section>
+
+<section titre="Moyens logiciels" ancre="p1s2">
+	<paragraphe>
+		<texte>Il est probable que vous ayiez déjà utilisé ce format de données sans le savoir&#160;; en effet, il commence à se répandre. Il existe des applets <code type="langage">Java</code> permettant de visualiser une présentation dans un navigateur, telles que le Soja Player de HELIO et HPAS (<autrelangue type="en">Hypermedia Presentation and Authoring System</autrelangue>) chez Digital.</texte>
+		<texte>On retrouve de même la possibilité de lire ces nouveaux standards à l'aide du <logiciel>Windows Media Player</logiciel> à partir de la version 7.0, <logiciel>Apple Quick Time</logiciel> à partir de la version 5.0 ou encore <logiciel>Real Player</logiciel> à partir de la version 8.0.</texte>
+		<texte>La société Oratrix propose une famille de produits multimédia (dont le nom est GriNS Authoring Software) permettant de créer des présentations multimédia en flux tendu pouvant être lues grâce au <logiciel>Real Player G2</logiciel>. Cette famille de logiciels permet de la même manière de créer des présentations en format <code type="langage">SMIL</code> "pur" contenant aussi bien du <code type="langage">HTML</code> interactif que des animations très complexes.</texte>
+	</paragraphe>
+</section>
+
+<section titre="Structure d'un document SMIL" ancre="p1s3" >
+<paragraphe>
+	<texte>Un document <code type='langage'>SMIL</code> est structuré en trois parties&#160;:</texte>
+	<liste>
+		<item><texte>définition des régions qui recevront les différents objets multimédias (position, style)&#160;;</texte></item>
+		<item><texte>définition de l'ordre et de l'échelle temporelle à appliquer aux objets. Cette étape permet en plus de définir les mouvements, les transitions, <autrelangue type="latin">etc.</autrelangue>&#160;;</texte></item>
+		<item><texte>définition du débit en fonction du type de connexion.</texte></item>
+	</liste>
+</paragraphe>
+</section>
+
+</partie>
+
+<partie titre="Construction progressive d'un fichier SMIL" ancre="p2">
+
+<section titre="Structure" ancre="p2s1">
+<paragraphe>
+	<texte>La structure d'un document <code type='langage'>SMIL</code> ressemble beaucoup à celle d'un document <code type='typefichier'>HTML</code>. L'élément racine est <code><![CDATA[<smil>]]></code>, et il comporte un élément <code><![CDATA[<head>]]></code> et un élément <code><![CDATA[<body>]]></code>&#160;:</texte>
+	<exemple type="XML">
+		<element nom="smil" indent="oui">
+			<element nom="head" niveau="1">(...)</element>
+			<element nom="body" niveau="1">(...)</element>
+		</element>
+	</exemple>
+	<texte>On peut ajouter dans l'élément <code><![CDATA[<head>]]></code> des balises <code><![CDATA[<meta>]]></code>, comme par exemple <code><![CDATA[<meta name="copyright" content="(...)" />]]></code>.</texte>
+	<texte>Il est également possible d'incorporer dans le prologue du fichier, avant l'élément racine, la déclaration de version XML, ainsi qu'une déclaration de dépendance envers la <code type='typefichier'>DTD</code> du W3C&#160;:</texte>
+	<exemple type="XML">
+		<typedocument nomracine="smil" type="PUBLIC" href="http://www.w3.org/TR/REC-smil/SMIL10.dtd" identifiant="-//W3C//DTD SMIL 1.0//EN"/>
+	</exemple>
+	<texte>La dernière version de la spécification du W3C est la <reference href="http://www.w3.org/TR/2005/REC-SMIL2-20051213/">2.1</reference>. Par rapport à la 2.0,qui n'apportait que de petites modifications sur certains éléments, elle ajoute le concept de modularité et l'ajout de nouvelles fonctionnalités plus particulièrement destinées aux mobiles.</texte>
+	<texte>Ce cours d'initiation se limite à la version&#160;1.0.</texte>
+</paragraphe>
+</section>
+
+<section titre="Positionnement" ancre="p2s2" >
+<paragraphe titre="Introduction" ancre="p2s2p1">
+	<texte>Dans le <autrelangue type="en">header</autrelangue>, doit également être défini l'élément <code><![CDATA[<layout>]]></code>, dont la fonction est de spécifier la zone dans laquelle les animations doivent être affichées, ainsi que les diverses régions où elles doivent prendre place.</texte>
+</paragraphe>
+<paragraphe titre="Élément de base" ancre="p2s2p2">
+	<texte>La fenêtre destinée à accueillir l'ensemble des animations est définie par l'élément vide <code><![CDATA[<root-layout/>]]></code>&#160;:</texte>
+	<exemple type="XML">
+		<element nom="root-layout" vide="oui">
+			<attribut nom="width">300</attribut>
+			<attribut nom="height">200</attribut>
+			<attribut nom="background-color">blue</attribut>
+			<attribut nom="title">Animations</attribut>
+		</element>
+	</exemple>
+	<texte>Cet élément permet de définir par ses attributs <code>width</code> et <code>height</code> la taille de la fenêtre de base, mais également sa couleur de fond, son titre, <autrelangue type="latin">etc</autrelangue>. A l'intérieur de cette fenêtre, tout comme à l'intérieur d'une fenêtre de navigateur, le positionnement d'un objet se fait par rapport au coin supérieur gauche.</texte>
+</paragraphe>
+<paragraphe titre="Définition des régions" ancre="p2s2p3" >
+	<texte>Chaque objet multimédia devra être associé, dans ce cadre général, à uné région qu'il faut donc définir. Cela se fait par l'intermédiaire de l'élément vide <code><![CDATA[<region/>]]></code>&#160;:</texte>
+	<exemple type="XML">
+		<element nom="region" vide="oui">
+			<attribut nom="id">region1</attribut>
+			<attribut nom="left">75</attribut>
+			<attribut nom="top">50</attribut>
+			<attribut nom="width">32</attribut>
+			<attribut nom="height">32</attribut>
+		</element>
+	</exemple>
+	<texte>Pour placer ensuite l'image "test.gif", de taille 32x32, dans cette région, il suffit alors de l'insérer dans le <code>body</code>, en spécifiant son affectation à la région. Cela donne au final&#160;:</texte>
+	<exemple type="XML">
+		<prologue/>
+		<typedocument nomracine="smil" type="PUBLIC" href="http://www.w3.org/TR/REC-smil/SMIL10.dtd" identifiant="-//W3C//DTD SMIL 1.0//EN"/>
+		<element nom="smil" indent="oui">
+			<element nom="head" niveau="1" indent="oui">
+				<element nom="meta" niveau="2" vide="oui"><attribut nom="name">copyright</attribut><attribut nom="content">Jean Dupont</attribut></element>
+				<element nom="root-layout" vide="oui" niveau="2">
+					<attribut nom="width">300</attribut>
+					<attribut nom="height">200</attribut>
+					<attribut nom="background-color">blue</attribut>
+					<attribut nom="title">Animations</attribut>
+				</element>
+				<element nom="region" vide="oui" niveau="2">
+					<attribut nom="id">region1</attribut>
+					<attribut nom="left">75</attribut>
+					<attribut nom="top">50</attribut>
+					<attribut nom="width">32</attribut>
+					<attribut nom="height">32</attribut>
+				</element>
+			</element>
+			<element nom="body" niveau="1" indent="oui">
+				<element nom="img" niveau="2" vide="oui"><attribut nom="src">test.gif</attribut><attribut nom="alt">image de test</attribut><attribut nom="region">region1</attribut></element>
+			</element>
+		</element>
+	</exemple>
+	<texte>Il est possible également de définir le positionnement de la région, non en absolu par rapport à la fenêtre principale comme dans l'exemple précédent, mais en relatif, en utilisant les attributs <code>left="40%"</code> et <code>height="30%"</code>, par exemple, qui positionnent le coin supérieur gauche de la région à 40% de la taille totale de la fenêtre principale par rapport à son bord gauche, et à 30% par rapport à son bord supérieur. </texte>
+</paragraphe>
+<paragraphe titre="z-index" ancre="p2s2p4">
+	<texte>De même qu'en <code type="langage">DHTML</code>, il est possible de positionner une région en avant- ou arrière-plan d'une autre, <autrelangue type="latin">via</autrelangue> l'attribut <code>z-index</code>. Plus la valeur de cet attribut est élevée, plus la région est à l'avant-plan. Par exemple</texte>
+	<exemple type="XML">
+		<element nom="region" vide="oui">
+			<attribut nom="id">region1</attribut>
+			<attribut nom="left">75</attribut>
+			<attribut nom="top">50</attribut>
+			<attribut nom="width">32</attribut>
+			<attribut nom="height">32</attribut>
+			<attribut nom="z-index">1</attribut>
+		</element>
+		<element nom="region" vide="oui">
+			<attribut nom="id">region2</attribut>
+			<attribut nom="left">100</attribut>
+			<attribut nom="top">175</attribut>
+			<attribut nom="width">80</attribut>
+			<attribut nom="height">80</attribut>
+			<attribut nom="z-index">2</attribut>
+		</element>
+	</exemple>
+	<texte>Ces deux régions se superposent, mais la région <code>region2</code> est à l'avant-plan&#160;: un objet placé dans cette région apparaîtra <valeur>devant</valeur> tout objet de la première.</texte>
+</paragraphe>
+<paragraphe titre="Ajustement de la taille de l'objet" ancre="fit" >
+	<texte>L'attribut <code>fit</code> de l'élément <code>region</code> permet de définir la manière dont un objet doit la remplir&#160;:</texte>
+	<liste>
+		<item><texte><code>fit="fill"</code> demande à l'objet de remplir toute la fenêtre&#160;; cela peut entraîner des déformations d'une image, par exemple&#160;;</texte></item>
+		<item><texte><code>fit="meet"</code> demande à l'objet de s'agrandir éventuellement jusqu'à ce que sa plus grande dimension entre en contact avec les bords de la région&#160;;</texte></item>
+		<item><texte><code>fit="slice"</code> est le complémentaire de la valeur précédente, puisque cette fois-ci c'est sa plus petite dimension qui est étirée pour entrer en contact avec les bors de la région&#160;;</texte></item>
+		<item><texte><code>fit="scroll"</code> permet à un objet plus grand que la fenêtre d'y être affiché avec des barres de défilement.</texte></item>
+	</liste>
+</paragraphe>
+<paragraphe titre="Types d'objets multimédia" ancre="p2s2p5" >
+	<texte>On a vu un exemple d'utilisation d'une image avec l'élément <code>img</code>. Il est également possible d'utiliser d'autres types d'objets multimédia&#160;:</texte>
+	<liste>
+		<item><texte>les formats d'images acceptés sont <code type="typefichier">gif</code> et <code type="typefichier">jpeg</code>&#160;;</texte></item>
+		<item><texte>des fichiers audio&#160;: <code type="typefichier">wav</code>, <code type="typefichier">MP3</code>, mais aussi des formats plus particuliers comme le format de données audio de Sun. C'est la balise <code>audio</code>&#160;;</texte></item>
+		<item><texte>des fichiers de texte&#160;: texte brut avec la balise <code>text</code>, ou bien texte en <autrelangue type="en">streaming</autrelangue> avec la balise <code>textstream</code> pour les lecteurs Real&#160;;</texte></item>
+		<item><texte>des fichiers vidéo (<code type="typefichier">Real movie</code>, <code type="typefichier">avi</code>, <code type="typefichier">mpeg</code>, <code type="typefichier">mov</code>) avec la balise <code>video</code>.</texte></item>
+	</liste>
+</paragraphe>
+</section>
+<section titre="Synchronisation" ancre="synchro">
+<paragraphe titre="Gestion des paramètres temporels d'affichage" ancre="syp1">
+	<texte>On utilise pour cela les attributs <code>begin</code> et <code>dur</code> (pour <autrelangue type="en">duration</autrelangue>)&#160;:</texte>
+	<exemple type="XML">
+		<element nom="img" vide="oui"><attribut nom="src">test.gif</attribut><attribut nom="alt">image de test</attribut><attribut nom="region">region1</attribut><attribut nom="begin">1s</attribut><attribut nom="dur">3s</attribut></element>
+	</exemple>
+	<texte>Dans cet exemple, l'affichage de l'image débute une seconde après la définition de la région <code>region1</code>, puis l'image disparaît après trois secondes.</texte>
+</paragraphe>
+<paragraphe titre="Séquence" ancre="syp2">
+	<texte>Il est possible de créer une séquence d'événements, en se servant de la balise <code>seq</code> et des attributs <code>begin</code> et <code>dur</code>. Ainsi...</texte>
+	<exemple type="XML">
+		<element nom="seq" indent="oui">
+			<element nom="img" niveau="1" vide="oui"><attribut nom="src">test.gif</attribut><attribut nom="alt">image de test</attribut><attribut nom="region">region1</attribut><attribut nom="dur">3s</attribut></element>
+			<element nom="img" niveau="1" vide="oui"><attribut nom="src">test2.gif</attribut><attribut nom="alt">image de test</attribut><attribut nom="region">region1</attribut><attribut nom="dur">3s</attribut><attribut nom="begin">1s</attribut><attribut nom="dur">7s</attribut></element>
+		</element>
+	</exemple>
+	<texte>... va afficher dans la région1 tout d'abord test.gif pendant trois secondes, puis la faire disparaître. Une seconde plus tard, <code>test2.gif</code> est affichée, et ce pendant sept secondes. Les séquences vidéo et audio ont un "<autrelangue type="en">timer</autrelangue>" interne&#160;; la gestion de leur affichage se fait grâce à d'autres attributs (<code>clip-begin</code>, <code>clip-end</code>...), qui permettent de positionner la lecture en différents endroits de la piste. En l'absence de ces attributs, les films et extraits musicaux sont joués dans leur intégralité.</texte>
+</paragraphe>
+<paragraphe titre="Affichage en parallèle" ancre="syp3">
+	<texte>Il est également possible de faire jouer des objets en parallèle, avec l'élément <code>par</code>.</texte>
+</paragraphe>
+</section>
+<exercice titre="Un premier fichier SMIL" ancre="exosmil">
+	<remarque>Télécharger la correction et l'ouvrir localement, avec tous les fichiers multimédias donnés dans l'énoncé.</remarque>
+	<enonce href="exercices/exo14.html"/>
+	<correction href="exercices/exo14.smil"/>
+</exercice>
+</partie>
+
+<partie titre="Conclusion" ancre="cl">
+	<section titre="D'autres effets possibles..." ancre="cls1">
+		<paragraphe>
+			<texte>La spécification 2.0 du W3C a ajouté également d'autres fonctionnalités, comme des effets de transition&#160;; mais dès le début, <code type="langage">SMIL</code> a permis de mettre en place l'affichage de liens http, de l'interactivité <autrelangue type="latin">via</autrelangue> des réactions à la souris... Bref, il est possible de mettre sur pied des présentations multimédia interactives, avec l'avantage que le fichier source est un simple fichier ASCII. Bien sûr, des <reference href="http://www.w3.org/AudioVideo/#Authoring">environnements intégrés de développement</reference> existent également, pour les réfractaires au <code>Bloc Notes</code>...</texte>
+		</paragraphe>
+	</section>
+	<section titre="Pour en savoir plus..." ancre="cls2">
+		<paragraphe>
+			<texte>De nombreux didacticiels existent sur Internet. Je vous recommande, si ce format vous intéresse, d'y passer quelque temps. Des exemples y sont donnés.</texte>
+			<liste>
+				<item><texte>Le site du <reference href="http://www.w3.org/AudioVideo">W3C</reference>, bien entendu...</texte></item>
+				<item><texte>Real Networks offre bien sûr un très bon site de présentation générale&#160;:<reference href="http://service.real.com/help/library/guides/production/htmfiles/smil.htm">http://service.real.com/help/library/guides/production/htmfiles/smil.htm</reference>. D'autres ressources figurent également sur ce site</texte></item>
+				<item><texte>L'Université de Boston présente un très bon tutoriel à <reference href="http://www.bu.edu/webcentral/learning/smil1/">http://www.bu.edu/webcentral/learning/smil1/</reference>.</texte></item>
+				<item><texte>Des didacticiels réalisés en <code type="langage">SMIL</code> et faisant appel à l'applet SOJA sont disponibles sur <reference href="http://www.empirenet.com/~joseram/">http://www.empirenet.com/~joseram/</reference></texte></item>
+				<item><texte>Un autre bon didacticiel a été réalisé par la société HELIO à <reference href="http://www.helio.org/products/smil/tutorial/">http://www.helio.org/products/smil/tutorial/</reference></texte></item>
+				<item><texte>Just Smil est une mine de renseignements sur <reference href="http://smw.internet.com/smil/smilhome.html">http://smw.internet.com/smil/smilhome.html</reference></texte></item>
+			</liste>
+		</paragraphe>
+	</section>
+</partie>
+
+</corpus>
+
+</chapitre>

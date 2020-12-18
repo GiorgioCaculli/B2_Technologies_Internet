@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE elt.racine SYSTEM "exo6.dtd"[
+<!ENTITY entite2 "<elt.enfant>sgrogneugneu</elt.enfant>">
+<!ENTITY entite3 "&#201;">
+]>
+
+<elt.racine>
+À l'intérieur d'un élément enfant: &entite2;
+Avec une entité de caractère: &entite3;
+</elt.racine>

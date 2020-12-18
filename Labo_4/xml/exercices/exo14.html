@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Exercice 14: Initiation à SMIL</title>    
+</head>
+<body>
+      
+<h1>Exercice&nbsp;14&nbsp;: Initiation à SMIL</h1>
+
+<p>Le but de cet exercice est de rapidement mettre sur pied sur une modeste animation avec <code>SMIL</code>.</p>
+
+<p>Pour commencer, télécharger le fichier contenant les <a href="mm.zip">fichiers multimédia</a> que nous allons mettre en scène.</p>
+
+<ol>
+	<li>Créer un fichier <code>SMIL</code>, faisant appel à la DTD de la version&nbsp;1.0 sur le site du W3C. Il comportera uniquement un entête et un corps de document.</li>
+	<li>Dans l'entête&nbsp;:
+		<ol>
+			<li>déclarer une zone d'affichage totale de 288 pixels de large, sur 384 de haut, et une couleur de fond bleue.</li>
+			<li>déclarer une région d'identifiant <code>reg1</code>, à 10 pixels du haut de la fenêtre et 20 pixels de son bord gauche, une largeur de 200 et une hauteur de 111&nbsp;pixels&nbsp;;</li>
+			<li>déclarer une région d'identifiant <code>reg2</code>, à 150 pixels du haut de la fenêtre et 130 pixels de son bord gauche, une largeur de 170 et une hauteur de 20&nbsp;pixels&nbsp;;</li>
+			<li>déclarer une région d'identifiant <code>reg3</code>, dans le coin supérieur gauche de la fenêtre, une largeur de 384 et une hauteur de 288&nbsp;pixels&nbsp;;</li>
+			<li>déclarer une région d'identifiant <code>reg4</code>, à 250 pixels du haut de la fenêtre et 50% de son bord gauche, une largeur de 70 et une hauteur de 20&nbsp;pixels.</li>
+		</ol>
+	</li>
+	<li>Dans le corps&nbsp;:
+		<ol>
+			<li>L'ensemble des objets cherchés est inclus dans une séquence&nbsp;;</li>
+			<li>Cette séquence commence par une image et un texte affichés en parallèle pendant trois secondes&nbsp;:
+				<ul>
+					<li>L'image est <code>dauphin1.jpg</code>, et doit être affichée dans la région <code>reg1</code>&nbsp;;</li>
+					<li>Le texte est celui du fichier <code>essai.txt</code>, de type plain text, et est affiché dans la région <code>reg2</code>.</li>
+				</ul>
+			</li>
+			<li>Elle continue par l'affichage en parallèle d'une séquence video et d'un texte&nbsp;:
+				<ul>
+					<li>la séquence vidéo du fichier <code>dolphin.avi</code>, pendant une durée de 16 secondes (durée totale de la séquence), et affichée dans la région <code>reg3</code>&nbsp;;</li>
+					<li>Le texte est celui di fichier dauphin.txt, de type plain text, et affiché dans la région <code>reg4</code>, commençant après une attente de 10 secondes, et pendant 6 secondes.</li>
+				</ul>
+			</li>
+			<li>La séquence se termine par l'affichage du texte du fichier <code>fin.txt</code>, de type plain text, dans la région <code>reg3</code>, pendant 10 secondes.</li>
+		</ol>
+	</li>
+</ol>
+
+    <p><a href="../smil.html#exosmil">Retour au cours</a></p>      
+</body>
+</html>

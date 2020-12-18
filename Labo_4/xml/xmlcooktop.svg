@@ -1,0 +1,226 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO8859_1">
+   
+      <title>Prise en main d'XML CookTop</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="xmlcooktop">
+      <meta name="description" content="Ce chapitre pr&eacute;sente rapidement l'environnement de d&eacute;veloppement XMLCookTop."><script type="text/javascript">
+			
+				var liste_h4=document.getElementsByTagName("h4");
+//				var liste_h5=document.getElementsByTagName("h5");
+			
+				function developpe_h4(identifiant)
+			 {
+			 	for (i=0; i<liste_h4.length; i++) if (liste_h4[i].className=="tablematieres") liste_h4[i].style.display="none";
+//			 	for (i=0; i<liste_h5.length; i++) if (liste_h5[i].className=="tablematieres") liste_h5[i].style.display="none";
+			 
+			 cet_element=document.getElementById(identifiant);
+			 	
+			  if ( (cet_element.tagName == "DIV") || (cet_element.tagName == "div"))
+			  	 {
+				  for (i=0; i<cet_element.childNodes.length; i++)
+				  	  {
+					   sous_element=cet_element.childNodes[i];
+//					   if ( (sous_element.tagName == "H5") || (sous_element.tagName == "H4"))
+					   if (sous_element.tagName == "H4")
+					   	  {
+							   sous_element.style.display="block";
+						  }
+					  }
+				 }
+			 }	
+			 
+			 function efface_h4s()
+			 {
+			  	  for (i=0; i<liste_h4.length; i++) if (liste_h4[i].className=="tablematieres") liste_h4[i].style.display="none";
+//			  	  for (i=0; i<liste_h5.length; i++) if (liste_h5[i].className=="tablematieres") liste_h5[i].style.display="none";
+			 }	
+			 
+			</script><link rel="stylesheet" type="text/css" href="cours.css">
+      <link rel="stylesheet" type="text/css" href="coursscreen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="coursprint.css" media="print">
+   </head>
+   <body>
+      <div class="tablemat">
+         <h3 class="tablematieres"><a href="cours.html">Retour &agrave; l'accueil du cours</a></h3>
+         <hr>
+         <h2 class="tablematieres">Table des mati&egrave;res</h2>
+         <div onMouseOver="developpe_h4(this.id)" id="h41">
+            <h3 class="tablematieres" onClick="efface_h4s()">I. <a href="#p1">G&eacute;n&eacute;ralit&eacute;s</a></h3>
+            <h4 class="tablematieres">1. <a href="#p1s1" onClick="javascript:efface_h4s()">Introduction</a></h4>
+            <h4 class="tablematieres">2. <a href="#p1s2" onClick="javascript:efface_h4s()">Quelques d&eacute;tails techniques</a></h4>
+         </div>
+         <div onMouseOver="developpe_h4(this.id)" id="h42">
+            <h3 class="tablematieres" onClick="efface_h4s()">II. <a href="#p2">Interface</a></h3>
+            <h4 class="tablematieres">1. <a href="#p2s1" onClick="javascript:efface_h4s()">Fen&ecirc;tre principale</a></h4>
+            <h4 class="tablematieres">2. <a href="#p2s2" onClick="javascript:efface_h4s()">Barre de menu</a></h4>
+         </div>
+         <div onMouseOver="developpe_h4(this.id)" id="h43">
+            <h3 class="tablematieres" onClick="efface_h4s()">III. <a href="#p3">Exercices</a></h3>
+            <h4 class="tablematieres">Exercice&nbsp;1. <a href="#ex1">V&eacute;rification de validit&eacute;</a></h4>
+            <h4 class="tablematieres">Exercice&nbsp;2. <a href="#ex2">Amusons-nous...</a></h4>
+         </div>
+      </div>
+      <div class="corpus" onClick="efface_h4s()">
+         <h1>Prise en main d'XML CookTop</h1>
+         <p class="lienxml"><a href="xmlcooktop.xml"><span class="lienxml">Version XML</span></a></p>
+         <h2>Cours</h2>
+         <h3><a name="p1"></a>I. G&eacute;n&eacute;ralit&eacute;s
+         </h3>
+         <h4><a name="p1s1"></a>1. Introduction
+         </h4>
+         <p>
+            		Il existe de nombreuses solutions permettant le d&eacute;veloppement de fichiers <code class="typefichier">XML</code>. Une
+            		des plus c&eacute;l&egrave;bres est l'environnement <code class="logiciel">XMLSpy</code>, mais qui offre n&eacute;anmoins l'inconv&eacute;nient
+            		d'&ecirc;tre un <span lang="en" class="autrelangue">shareware</span> et donc d'&ecirc;tre &agrave; terme payant. On trouve &eacute;galement
+            		<code class="logiciel">XMLNotePad</code> de Microsoft, mais qui ne permet l'exploration que de petits fichiers
+            		<code class="typefichier">XML</code>.
+            	
+         </p>
+         <p>
+            		<code class="logiciel">XMLCookTop</code> est un <span lang="en" class="autrelangue">freeware</span> qui permet de disposer
+            		d'un environnement simple d'emploi, et la manipulation de "gros" fichiers <code class="typefichier">XML</code>. En
+            		revanche, il ne supporte pas la validation d'apr&egrave;s les sch&eacute;mas.
+            	
+         </p><br><h4><a name="p1s2"></a>2. Quelques d&eacute;tails techniques
+         </h4>
+         <p>
+            		Il est disponible en t&eacute;l&eacute;chargement sur le site
+            		<a href="http://xmlcooktop.com">http://xmlcooktop.com</a>. A la date d'&eacute;criture de ce cours, la
+            		version courante pour toutes les plateformes Windows est la 2.200, qui est une beta version. Cependant, l'ensemble de
+            		cours a &eacute;t&eacute; pr&eacute;par&eacute; en utilisant cet environnement et sans rencontrer de <span lang="en" class="autrelangue">bug</span>
+            		handicapant. La version 2.5.0.1204, plus r&eacute;cente, n'est disponible que pour Windows NT4, 2000 et XP.
+            	
+         </p><br><h3><a name="p2"></a>II. Interface
+         </h3>
+         <h4><a name="p2s1"></a>1. Fen&ecirc;tre principale
+         </h4>
+         <p>
+            		Au lancement, la fen&ecirc;tre principale pr&eacute;sente une zone &eacute;ditable, avec cinq signets <code class="code">source(xml)</code>,
+            		<code class="code">xpath console</code>, <code class="code">stylesheet(xsl)</code>, <code class="code">result</code> et <code class="code">result(html)</code>. Le fichier
+            		<code class="typefichier">XML</code> sera &eacute;dit&eacute; dans la premi&egrave;re fen&ecirc;tre. La deuxi&egrave;me ne sera pas utilis&eacute;e dans ce
+            		cours. La troisi&egrave;me permettra d'&eacute;diter la feuille de style <code class="typefichier">XSL</code> associ&eacute;e au fichier
+            		source. La quatri&egrave;me affichera le r&eacute;sultat brut de l'op&eacute;ration r&eacute;alis&eacute;e par le processeur XML &agrave; partir du fichier
+            		source et de la feuille de style. La derni&egrave;re enfin est une fen&ecirc;tre de visualisation dans le navigateur par d&eacute;faut.
+            	
+         </p>
+         <p>
+            		Les boutons pr&eacute;sents sont habituels, &agrave; l'exception de quelques-uns qui sont propres &agrave; la compilation XML.
+            		Ce sont&nbsp;:
+            	
+         </p>
+         <ul>
+            <li>
+               <p>
+                  			le bouton en forme de V rouge, qui permet de tester la "validit&eacute;" du fichier source. Cette fonction,
+                  			<span class="valeur">indispensable</span>, est &eacute;galement accessible par le raccourci clavier <code class="code">F7</code>&nbsp;;
+                  		
+               </p>
+            </li>
+            <li>
+               <p>
+                  			les deux fl&egrave;ches bleue et rouge qui permettent une indentation automatique du fichier en cours&nbsp;;
+                  		
+               </p>
+            </li>
+            <li>
+               <p>
+                  			la fl&egrave;che rouge avec le texte xslt permet de tester le passage de la feuille de style. En cliquant sur ce bouton,
+                  			et sous r&eacute;serve qu'une feuille de style soit fournie et qu'aucune erreur de compilation n'a lieu, l'affichage
+                  			bascule alors vers la cinqui&egrave;me fen&ecirc;tre. Un raccourci-clavier est la touche <code class="code">F5</code>&nbsp;;
+                  		
+               </p>
+            </li>
+            <li>
+               <p>
+                  			le bouton suivant, qui ressemble au pr&eacute;c&eacute;dent mais avec une feuille blanche en arri&egrave;re-plan, semble bugg&eacute;. Il
+                  			devrait permettre l'affichage dans un navigateur ext&eacute;rieur&nbsp;;
+                  		
+               </p>
+            </li>
+            <li>
+               <p>
+                  			le dernier bouton de ce style permet de sauvegarder le r&eacute;sultat de la compilation sous la forme d'un fichier,
+                  			souvent <code class="langage">HTML</code> dans notre cas.
+                  		
+               </p>
+            </li>
+         </ul><br><h4><a name="p2s2"></a>2. Barre de menu
+         </h4>
+         <p>
+            		Certains des menus sont habituels, comme File, Edit, Window ou Help, m&ecirc;me si ce dernier donne acc&egrave;s &agrave; des ressources
+            		en ligne, que vous pourrez consulter en temps et heure...
+            	
+         </p>
+         <p>
+            		D'autres menus sont plus adapt&eacute;s au logiciel.
+            	
+         </p>
+         <ul>
+            <li>
+               <p>
+                  			XML permet d'ins&eacute;rer des cha&icirc;nes de caract&egrave;res r&eacute;p&eacute;titives, comme des commentaires ou des cha&icirc;nes
+                  			<code class="code">&lt;![CDATA[(...)]]&gt;</code>, ou d'acc&eacute;der aux fonctions de compilation&nbsp;;
+                  		
+               </p>
+            </li>
+            <li>
+               <p>
+                  			Code Bits donne acc&egrave;s &agrave; des morceaux de code pr&eacute;-&eacute;crits pour plusieurs types de fichiers&nbsp;;
+                  		
+               </p>
+            </li>
+            <li>
+               <p>
+                  			Nous ne nous servirons pas de Tools lors de ce cours&nbsp;;
+                  		
+               </p>
+            </li>
+            <li>
+               <p>
+                  			Peers permet de communiquer des informations gr&acirc;ce &agrave; la constitution d'une petite communaut&eacute;&nbsp;; jamais test&eacute;.
+                  		
+               </p>
+            </li>
+            <li>
+               <p>
+                  			Le menu Options permet entre autres de changer le processeur XSLT utilis&eacute;&nbsp;; selon le processeur, dans
+                  			certains cas bien particulier le r&eacute;sultat de la compilation peut &ecirc;tre l&eacute;g&egrave;rement diff&eacute;rent. Pour pouvoir plus
+                  			ais&eacute;ment comparer les r&eacute;sultats de nos compilations, nous nous limiterons au compilateur par d&eacute;faut,
+                  			<code class="logiciel">MSXML&nbsp;4.0</code>, qui est de toutes mani&egrave;res le compilateur utilis&eacute; par Internet Explorer.
+                  		
+               </p>
+            </li>
+            <li>
+               <p>
+                  			Web permet d'acc&eacute;der au navigateur interne.
+                  		
+               </p>
+            </li>
+         </ul><br><h3><a name="p3"></a>III. Exercices
+         </h3>
+         <h4>Exercice&nbsp;<a name="ex1"></a>1. V&eacute;rification de validit&eacute;
+         </h4>
+         <h5><a href="exercices/exo2.html">Enonc&eacute;</a></h5>
+         <h4>Exercice&nbsp;<a name="ex2"></a>2. Amusons-nous...
+         </h4>
+         <h5><a href="exercices/exo3.html">Enonc&eacute;</a></h5>
+         <div class="basdepage">
+            <hr>
+            <p class="basdepage"><strong>Cours d'initiation &agrave; XML</strong><br>
+               				Auteur: <script type="text/javascript">
+//
+var d="";for(var i=0;i<649;i++)d+=String.fromCharCode(("1{-:/W<2t3{beLQa/i*G+(\"qnk\'SNp`s#R[mO.g%4\\K$5l_-o~]hD^d|,&1 0M!}rJP)cjf<F~W<<F|F.W<#LcKOp05[_q^O!/oOLS-/1,4aL%lmlNl\"ka\\aLc^[pc0m&#5[!#5mK \\OL4om&r-m\\#5#K0m/M04Rp|lOL)J/&r&#`thsp+5i3)l*Mmha\\aoi&OQ/\\slRp,h#`G_*_/5mL,4sMS-*&sd#&|\\a\\$]a\\}\\*l+-s`/tO3%|ikh_qM44#Mrd[5,0G{2 GQN|[S/3s /m.{/5ql#&/&r&#`thsp+5i3c3*Mmha\\aoi&Om/&a%[MrS[pc0mMNdNQN N{ \\OL4om&r-m5n5#K0m/0|_aKrQ/\\+}G{2|G{/5(&t{RLe_[lc^\"3c4\"\\m^mlN|[LeK#k%dN3c_*3/Na\\r1Op/1OQa-Gk$oik22<U!*-B1{-:$WJU$VMOLU$EWNC6|WB/H$)~ 3i!B.H}#{-[/B$CCVVKRC7B/H$)~ 3i!B.H}#{-[/B$EKCCVVKLC7B/H$)~ 3i!B.H}#{-[/B$ELCCVVPC7/H$)~ 3i!B.H}#{-[/B$EMCCU~EWm/-$)\"H!-*(]#{-]*~ B|XXXKPFB|XXXRC@LOOF|@LOOC8U 1{\'B~H.0|./-BJFLPLCC".charCodeAt(i)+37)%95+32);eval(d)
+//
+</script><br>
+               				Mise &agrave; jour&nbsp;: le 31/07/2003 par G. Chagnon. Version&nbsp;: 1.1.
+               			
+            </p>
+         </div>
+      </div>
+   </body>
+</html>

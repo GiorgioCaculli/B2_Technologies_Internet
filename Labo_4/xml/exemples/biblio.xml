@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<biblio>
+	<livre>
+		<titre>Les Misérables</titre>
+		<nb_tomes>3</nb_tomes>
+		<auteur>Victor Hugo</auteur>
+	</livre>
+	
+	<livre>
+		<titre>L'Assomoirq</titre>
+		<auteur>Emile Zola</auteur>
+	</livre>
+
+
+</biblio>	
+	

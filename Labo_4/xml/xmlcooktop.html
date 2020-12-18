@@ -1,0 +1,204 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Prise en main d'XML CookTop</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="xmlcooktop">
+      <meta name="description" content="XMLCookTop est un environnement de développement simple d'emploi, limité à des fonctionalités de base, fonctionnant sous Windows.">
+      <link rel="next" href="oxygenxml.html">
+      <link rel="prev" href="base.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Prise en main d'XML CookTop</h1>
+         <p><span class="version">version 1.11</span>, dernière mise à jour le 13 février 2006.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#p1" title="Généralités">Généralités</a><ol>
+                     <li><a href="#p1s1" title="Introduction">Introduction</a></li>
+                     <li><a href="#p1s2" title="Quelques détails techniques">Quelques détails techniques</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#p2" title="Interface">Interface</a><ol>
+                     <li><a href="#p2s1" title="Fenêtre principale">Fenêtre principale</a></li>
+                     <li><a href="#p2s2" title="Barre de menu">Barre de menu</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#p3" title="Exercices">Exercices</a><ol>
+                     <li>Exercice&nbsp;: <a href="#ex1">Vérification de validité</a></li>
+                     <li>Exercice&nbsp;: <a href="#ex2">Amusons-nous...</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="p1" href="#p1" id="p1"></a>I. Généralités
+         </h3>
+         <h4><a name="p1s1" id="p1s1" href="#p1s1"></a>1. Introduction
+         </h4>
+         <p>Il existe de nombreuses solutions permettant le développement de fichiers <code class="typefichier">XML</code>. Une des plus célèbres est l'environnement <code class="logiciel">XMLSpy</code>, mais qui offre néanmoins l'inconvénient d'être un <span lang="en" class="autrelangue">shareware</span> et donc d'être à terme payant. On trouve également <code class="logiciel">XMLNotePad</code> de Microsoft, mais qui ne permet l'exploration que de petits fichiers <code class="typefichier">XML</code>.
+         </p>
+         <p><code class="logiciel">XMLCookTop</code> est un <span lang="en" class="autrelangue">freeware</span> qui permet de disposer d'un environnement simple d'emploi, et la manipulation de "gros" fichiers <code class="typefichier">XML</code>. En revanche, il ne supporte pas la validation d'après les schémas.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s1" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p1s2" id="p1s2" href="#p1s2"></a>2. Quelques détails techniques
+         </h4>
+         <p>Il est disponible en téléchargement sur le site <a href="http://xmlcooktop.com">http://xmlcooktop.com</a>. À la date d'écriture de ce cours, la
+            version courante pour toutes les plateformes Windows est la 2.200, qui est une beta version. Cependant, les premières versions
+            de ce cours ont été préparées en utilisant cet environnement et sans rencontrer de <span lang="en" class="autrelangue">bug</span> handicapant. La version 2.5.0.1204, plus récente, n'est disponible que pour Windows NT4, 2000 et XP.
+         </p>
+         <p class="retourtdm"><a href="#tdm_p1s2" title="Retour à la TdM (Quelques détails techniques)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="p2" href="#p2" id="p2"></a>II. Interface
+         </h3>
+         <h4><a name="p2s1" id="p2s1" href="#p2s1"></a>1. Fenêtre principale
+         </h4>
+         <p>Au lancement, la fenêtre principale présente une zone éditable, avec cinq signets <code class="code">source(xml)</code>, <code class="code">xpath console</code>, <code class="code">stylesheet(xsl)</code>, <code class="code">result</code> et <code class="code">result(html)</code>. Le fichier <code class="typefichier">XML</code> sera édité dans la première fenêtre. La deuxième ne sera pas utilisée dans ce cours. La troisième permettra d'éditer la feuille
+            de style <code class="typefichier">XSL</code> associée au fichier source. La quatrième affichera le résultat brut de l'opération réalisée par le processeur XML à partir
+            du fichier source et de la feuille de style. La dernière enfin est une fenêtre de visualisation dans le navigateur par défaut.
+         </p>
+         <p>Les boutons présents sont habituels, à l'exception de quelques-uns qui sont propres à la compilation XML. Ce sont&nbsp;:</p>
+         <ul>
+            <li>
+               <p>le bouton en forme de V rouge, qui permet de tester la "validité" du fichier source. Cette fonction, <em>indispensable</em>, est également accessible par le raccourci clavier <code class="code">F7</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>les deux flèches bleue et rouge qui permettent une indentation automatique du fichier en cours&nbsp;;</p>
+            </li>
+            <li>
+               <p>la flèche rouge avec le texte xslt permet de tester le passage de la feuille de style. En cliquant sur ce bouton, et sous
+                  réserve qu'une feuille de style soit fournie et qu'aucune erreur de compilation n'a lieu, l'affichage bascule alors vers la
+                  cinquième fenêtre. Un raccourci-clavier est la touche <code class="code">F5</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>le bouton suivant, qui ressemble au précédent mais avec une feuille blanche en arrière-plan, semble buggé. Il devrait permettre
+                  l'affichage dans un navigateur extérieur&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>le dernier bouton de ce style permet de sauvegarder le résultat de la compilation sous la forme d'un fichier, souvent <code class="langage">HTML</code> dans notre cas.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p2s1" title="Retour à la TdM (Fenêtre principale)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="p2s2" id="p2s2" href="#p2s2"></a>2. Barre de menu
+         </h4>
+         <p>Certains des menus sont habituels, comme File, Edit, Window ou Help, même si ce dernier donne accès à des ressources en ligne,
+            que vous pourrez consulter en temps et heure...
+         </p>
+         <p>D'autres menus sont plus adaptés au logiciel.</p>
+         <ul>
+            <li>
+               <p>XML permet d'insérer des chaînes de caractères répétitives, comme des commentaires ou des chaînes <code class="code">&lt;![CDATA[(...)]]&gt;</code>, ou d'accéder aux fonctions de compilation&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Code Bits donne accès à des morceaux de code pré-écrits pour plusieurs types de fichiers&nbsp;;</p>
+            </li>
+            <li>
+               <p>Nous ne nous servirons pas de Tools lors de ce cours&nbsp;;</p>
+            </li>
+            <li>
+               <p>Peers permet de communiquer des informations grâce à la constitution d'une petite communauté&nbsp;; jamais testé.</p>
+            </li>
+            <li>
+               <p>Le menu Options permet entre autres de changer le processeur XSLT utilisé&nbsp;; selon le processeur, dans certains cas bien particulier
+                  le résultat de la compilation peut être légèrement différent. Pour pouvoir plus aisément comparer les résultats de nos compilations,
+                  nous nous limiterons au compilateur par défaut, <code class="logiciel">MSXML&nbsp;4.0</code>, qui est le compilateur utilisé par Internet Explorer.
+               </p>
+            </li>
+            <li>
+               <p>Web permet d'accéder au navigateur interne.</p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_p2s2" title="Retour à la TdM (Barre de menu)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="p3" href="#p3" id="p3"></a>III. Exercices
+         </h3>
+         <h4>Exercice&nbsp;<a name="ex1" href="#ex1" id="ex1"></a>1. Vérification de validité
+         </h4>
+         <h5><a href="exercices/exo2.html" title="Énoncé de l'exercice 'Vérification de validité'">Énoncé</a></h5>
+         <h5><a href="exercices/exo1_cor.xml" title="Correction 'Vérification de validité'">
+               				Correction</a></h5>
+         <h4>Exercice&nbsp;<a name="ex2" href="#ex2" id="ex2"></a>2. Amusons-nous...
+         </h4>
+         <h5><a href="exercices/exo3.html" title="Énoncé de l'exercice 'Amusons-nous...'">Énoncé</a></h5>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours précédent&nbsp;: <a href="base.html">Concepts de base</a><br>Cours suivant&nbsp;: <a href="oxygenxml.html">Prise en main d'oXygen XML Editor</a></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="xmlcooktop.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 13 février 2006, version 1.11. Ajout de la correction d'un exercice.</li>
+            <li>Le 31 juillet 2003, version 1.10. Corrections typographiques. Quelques mises à jour sur le fond.</li>
+            <li>Le 16 mai 2002, version 1.00. Création du cours.</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

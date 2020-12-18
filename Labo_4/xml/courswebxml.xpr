@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <meta>
+        <filters directoryPatterns="" filePatterns=""
+            positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="courswebxml.xpr">
+        <folder name="DTDs">
+            <file name="../ressources/chapitre22.dtd"/>
+            <file name="../ressources/cours30.dtd"/>
+            <file name="../ressources/historiqueChapitre.dtd.txt"/>
+        </folder>
+        <folder name="Feuilles de style XSL">
+            <file name="../ressources/accueilcours20.xsl"/>
+            <file name="../ressources/chapitreweb20.xsl"/>
+            <file name="../ressources/exercices10.xsl"/>
+            <file name="../ressources/general11.xsl"/>
+            <file name="../ressources/historique20.xsl"/>
+            <file name="../ressources/toc10.xsl"/>
+        </folder>
+        <folder name="Fichiers XML">
+            <file name="base.xml"/>
+            <file name="cours.xml"/>
+            <file name="domxslt.xml"/>
+            <file name="dtd.xml"/>
+            <file name="fonctionsxpath.xml"/>
+            <file name="historique.xml"/>
+            <file name="oxygenxml.xml"/>
+            <file name="recapxsl.xml"/>
+            <file name="schema.xml"/>
+            <file name="servicesweb.xml"/>
+            <file name="smil.xml"/>
+            <file name="stylexsl.xml"/>
+            <file name="svg.xml"/>
+            <file name="svgdynamique.xml"/>
+            <file name="weborama.xml"/>
+            <file name="xforms.xml"/>
+            <file name="xmlcooktop.xml"/>
+        </folder>
+        <folder name="Schémas">
+            <file name="historique10.xsd"/>
+        </folder>
+        <file name="afaire.txt"/>
+    </projectTree>
+</project>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd">
+
+<svg width="400" height="300"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<defs>
+		<rect id="carrerouge" fill="red" width="40" height="40"/>
+		<rect id="carrejaune" fill="yellow" width="40" height="40"/>
+	</defs>
+
+	<use x="80" y="0" xlink:href="#carrejaune" />
+	<use x="120" y="0" xlink:href="#carrerouge" />
+	<use x="160" y="0" xlink:href="#carrejaune" />
+	<use x="80" y="40" xlink:href="#carrerouge" />
+	<use x="120" y="40" xlink:href="#carrejaune" />
+	<use x="160" y="40" xlink:href="#carrerouge" />
+	<use x="80" y="80" xlink:href="#carrejaune" />
+	<use x="120" y="80" xlink:href="#carrerouge" />
+	<use x="160" y="80" xlink:href="#carrejaune" />
+	
+</svg>

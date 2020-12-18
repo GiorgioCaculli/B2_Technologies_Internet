@@ -1,0 +1,33 @@
+Abonne
+{
+    display: block;
+    margin-bottom: 20px;
+}
+
+Nom, Prenom
+{
+    display: inline-block;
+    font-size: 16pt;
+    font-family: arial;
+    font-weight: bold;
+    background-color: khaki;
+}
+
+Prefixe, Tel
+{
+    display: inline-block;
+    color: red;
+}
+
+Adresse
+{
+    display: block;
+    background-color: teal;
+    color: white;
+}
+
+CodePostal
+{
+    display: block;
+    
+}

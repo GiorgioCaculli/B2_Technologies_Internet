@@ -1,0 +1,368 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Fonctions XPath</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="XPath, fonction">
+      <meta name="description" content="XPath est un langage de requête permettant à une feuille XSL d'inspecter un document XML.">
+      <link rel="next" href="domxslt.html">
+      <link rel="prev" href="recapxsl.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Fonctions XPath</h1>
+         <p><span class="version">version 1.31</span>, dernière mise à jour le 22 janvier 2008.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#xpathintro" title="Introduction">Introduction</a></li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#n%C5%93uds" title="Fonctions XPath applicables aux n&#339;uds">Fonctions XPath applicables aux n&#339;uds</a><ol>
+                     <li><a href="#count" title="Fonction de comptage : la fonction count()">Fonction de comptage : la fonction count()</a></li>
+                     <li><a href="#positionlast" title="Obtenir la position d'un n&#339;ud&nbsp;: les fonctions position() et last()">Obtenir la position d'un n&#339;ud&nbsp;: les fonctions position() et last()</a><ol>
+                           <li><a href="#positionintro" title="Introduction">Introduction</a></li>
+                           <li><a href="#position" title="La fonction position()">La fonction position()</a></li>
+                           <li><a href="#last" title="La fonction last()">La fonction last()</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#caracteres" title="Fonctions XPath applicables aux chaînes de caractères">Fonctions XPath applicables aux chaînes de caractères</a><ol>
+                     <li><a href="#concat" title="Concaténation de chaînes avec la fonction concat()">Concaténation de chaînes avec la fonction concat()</a></li>
+                     <li><a href="#containsstarts" title="Test de présence d'une sous-chaîne&nbsp;: les fonctions contains() et starts-with()">Test de présence d'une sous-chaîne&nbsp;: les fonctions contains() et starts-with()</a></li>
+                     <li><a href="#extractstring" title="Extraction de sous-chaîne">Extraction de sous-chaîne</a></li>
+                     <li><a href="#translate" title="Transformation des caractères d'une chaîne&nbsp;: la fonction translate()">Transformation des caractères d'une chaîne&nbsp;: la fonction translate()</a></li>
+                     <li><a href="#normalizespace" title="Suppression des espaces en surnombre&nbsp;: la fonction normalize-space()">Suppression des espaces en surnombre&nbsp;: la fonction normalize-space()</a></li>
+                     <li><a href="#stringlength" title="Longueur d'une chaîne: la fonction string-length()">Longueur d'une chaîne: la fonction string-length()</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>IV. <a href="#xpathnombres" title="Fonctions XPath applicables aux nombres">Fonctions XPath applicables aux nombres</a><ol>
+                     <li><a href="#operateurs" title="Rappel&nbsp;: opérateurs disponibles">Rappel&nbsp;: opérateurs disponibles</a></li>
+                     <li><a href="#nombresfonctions" title="Fonctions de manipulation">Fonctions de manipulation</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>V. <a href="#booleens" title="Fonctions booléennes">Fonctions booléennes</a><ol>
+                     <li><a href="#truefalse" title="Fonctions booléennes constantes&nbsp;: true() et false()">Fonctions booléennes constantes&nbsp;: true() et false()</a></li>
+                     <li><a href="#not" title="La fonction not()">La fonction not()</a></li>
+                     <li><a href="#lang" title="Test de la langue&nbsp;: la fonction lang()">Test de la langue&nbsp;: la fonction lang()</a></li>
+                     <li><a href="#boolean" title="Conversion à un booléen&nbsp;: la fonction boolean()">Conversion à un booléen&nbsp;: la fonction boolean()</a></li>
+                     <li>Exercice&nbsp;: <a href="#exoxpath">Utilisation des fonctions XPath</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>VI. <a href="#xpathautres" title="Autres fonctions">Autres fonctions</a><ol>
+                     <li><a href="#document" title="Accéder à un autre document avec document()">Accéder à un autre document avec document()</a><ol>
+                           <li><a href="#documentintro" title="Introduction">Introduction</a></li>
+                           <li><a href="#exemplexpath" title="Exemple">Exemple</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="xpathintro" href="#xpathintro" id="xpathintro"></a>I. Introduction
+         </h3>
+         <p>Nous avons vu dans un chapitre précédent que les <a href="recapxsl.html">transformations XSLT</a> font appel à une syntaxe particulière, nommée XPath, pour identifier les n&#339;uds que l'on souhaite manipuler. Ce chapitre va
+            donner quelques fonctions utiles.
+         </p>
+         <h3><a name="n%C5%93uds" href="#n%C5%93uds" id="n&#339;uds"></a>II. Fonctions XPath applicables aux n&#339;uds
+         </h3>
+         <h4><a name="count" id="count" href="#count"></a>1. Fonction de comptage : la fonction count()
+         </h4>
+         <p>La fonction <code class="code">count(ensemble_de_n&#339;uds)</code> permet de compter le nombre de n&#339;uds référencés. Par exemple, si dans un fichier <code class="typefichier">XML</code> on déclare la liste des 8 planètes du système solaire sous la forme de balises <code class="code">planete</code>, l'instruction <code class="code">count(//planete)</code> renverra la valeur 8.
+         </p>
+         <p class="retourtdm"><a href="#tdm_count" title="Retour à la TdM (Fonction de comptage : la fonction count())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="positionlast" id="positionlast" href="#positionlast"></a>2. Obtenir la position d'un n&#339;ud&nbsp;: les fonctions position() et last()
+         </h4>
+         <h5><a href="#positionintro" name="positionintro" id="positionintro"></a>a. Introduction
+         </h5>
+         <p>Ces fonctions permettent de connaître la position d'un n&#339;ud par rapport à ses frères.</p>
+         <p class="retourtdm"><a href="#tdm_positionintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#position" name="position" id="position"></a>b. La fonction position()
+         </h5>
+         <p>La fonction <code class="code">position()</code> retourne la position du n&#339;ud contextuel. Sur l'exemple de système solaire, si on a classé les planètes par ordre de distance
+            croissante au Soleil dans le fichier <code class="typefichier">XML</code>, le code <code class="code">&lt;xsl:value-of select="planete[position()=3]/nom"/&gt;</code> renvoie la valeur "Terre" (la troisième planète à partir du Soleil).
+         </p>
+         <p class="retourtdm"><a href="#tdm_position" title="Retour à la TdM (La fonction position())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#last" name="last" id="last"></a>c. La fonction last()
+         </h5>
+         <p>La fonction <code class="code">last()</code> permet de retourner le dernier n&#339;ud d'un ensemble de n&#339;uds, c'est-à-dire la position du dernier n&#339;ud. Ainsi, le code <code class="code">&lt;xsl:value-of select="planete[position()=last()]/nom"/&gt;</code> retourne la valeur "Neptune" (planète la plus éloignée du Soleil).
+         </p>
+         <p class="retourtdm"><a href="#tdm_positionlast" title="Retour à la TdM (Obtenir la position d'un n&#339;ud&nbsp;: les fonctions position() et last())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="caracteres" href="#caracteres" id="caracteres"></a>III. Fonctions XPath applicables aux chaînes de caractères
+         </h3>
+         <h4><a name="concat" id="concat" href="#concat"></a>1. Concaténation de chaînes avec la fonction concat()
+         </h4>
+         <p>La fonction <code class="code">concat()</code> concatène toutes les chaînes qui lui sont passées en arguments et retourne la chaîne résultant de cette concaténation. Sa
+            syntaxe est <code class="code">concat(chaine1, chaine2, ...)</code>. Par exemple, <code class="code">&lt;xsl:value-of select concat('Le livre dont le titre est', livre/titre, ' a été écrit par ', livre/auteur)/&gt;</code> permet ainsi d'afficher la chaîne "Le livre dont le titre est Les Misérables a été écrit par Victor Hugo".
+         </p>
+         <p class="retourtdm"><a href="#tdm_concat" title="Retour à la TdM (Concaténation de chaînes avec la fonction concat())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="containsstarts" id="containsstarts" href="#containsstarts"></a>2. Test de présence d'une sous-chaîne&nbsp;: les fonctions contains() et starts-with()
+         </h4>
+         <p>Ces fonctions permettent de déterminer si une chaîne de caractères est incluse dans une autre, et renvoient un booléen. La
+            fonction <code class="code">starts-with(chaine1, chaine2)</code> renvoie la valeur <code class="code">true</code> si <code class="code">chaine1</code> commence par la <code class="code">chaine2</code>, <code class="code">false</code> sinon. La fonction <code class="code">contains(chaine1, chaine2)</code> renvoie <code class="code">true</code> si <code class="code">chaine1</code> contient <code class="code">chaine2</code>, <code class="code">false</code> sinon.
+         </p>
+         <p class="retourtdm"><a href="#tdm_containsstarts" title="Retour à la TdM (Test de présence d'une sous-chaîne&nbsp;: les fonctions contains() et starts-with())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="extractstring" id="extractstring" href="#extractstring"></a>3. Extraction de sous-chaîne
+         </h4>
+         <p>Il existe trois fonctions permettant d'extraire une sous-chaîne d'une chaîne donnée&nbsp;: <code class="code">substring()</code>, <code class="code">substring-after()</code> et <code class="code">substring-before</code>.
+         </p>
+         <ol>
+            <li>
+               <p>La fonction <code class="code">substring(chaine1, decalage, longueur)</code> retourne une sous-chaîne de <code class="code">chaine1</code> contenant <code class="code">longueur</code> caractères et commençant à <code class="code">decalage</code>. Par exemple, <code class="code">substring("012345", 2, 3)</code> renvoie la chaîne "123"&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>La fonction <code class="code">substring-after(chaine1, chaine2)</code> retourne la sous-chaîne de <code class="code">chaine1</code> qui suit la première occurence de <code class="code">chaine2</code>. Par exemple, <code class="code">substring-after("012345", "2")</code> renvoie la chaîne "345"&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>La fonction <code class="code">substring-before(chaine1, chaine2)</code> retourne la sous-chaîne de <code class="code">chaine1</code> qui précède la première occurence de <code class="code">chaine2</code>. Par exemple, <code class="code">substring-before("012345", "2")</code> renvoie la chaîne "01".
+               </p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_extractstring" title="Retour à la TdM (Extraction de sous-chaîne)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="translate" id="translate" href="#translate"></a>4. Transformation des caractères d'une chaîne&nbsp;: la fonction translate()
+         </h4>
+         <p>La fonction <code class="code">translate(chaine1, chaine2, chaine3)</code> retourne <code class="code">chaine1</code> après y avoir remplacé chaque occurence des caractères de <code class="code">chaine2</code> par le caractère correspondant (c'est-à-dire occupant la même position) de <code class="code">chaine3</code>. Par exemple, pour transformer une lettre quelconque et la mettre en majuscule, on utilise l'appel suivant de la fonction&nbsp;:
+            <code class="code">translate(chaine, "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ")</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_translate" title="Retour à la TdM (Transformation des caractères d'une chaîne&nbsp;: la fonction translate())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="normalizespace" id="normalizespace" href="#normalizespace"></a>5. Suppression des espaces en surnombre&nbsp;: la fonction normalize-space()
+         </h4>
+         <p>Il est parfois nécessaire de supprimer des espaces en surnombre dans une chaîne. La fonction <code class="code">normalize-space(chaine)</code> retourne la chaîne de caractères qu'elle reçoit en argument après en avoir supprimé les espaces situés au début et à la fin,
+            et y avoir remplacé chaque séquence d'espaces consécutifs par un espace unique.
+         </p>
+         <p class="retourtdm"><a href="#tdm_normalizespace" title="Retour à la TdM (Suppression des espaces en surnombre&nbsp;: la fonction normalize-space())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="stringlength" id="stringlength" href="#stringlength"></a>6. Longueur d'une chaîne: la fonction string-length()
+         </h4>
+         <p>Cette fonction retourne "classiquement" la longueur de la chaîne qu'elle reçoit en argument.</p>
+         <p class="retourtdm"><a href="#tdm_stringlength" title="Retour à la TdM (Longueur d'une chaîne: la fonction string-length())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="xpathnombres" href="#xpathnombres" id="xpathnombres"></a>IV. Fonctions XPath applicables aux nombres
+         </h3>
+         <h4><a name="operateurs" id="operateurs" href="#operateurs"></a>1. Rappel&nbsp;: opérateurs disponibles
+         </h4>
+         <p>Les opérateurs suivants sont disponibles en XSLT&nbsp;:</p>
+         <ul>
+            <li>
+               <p><code class="code">+</code> pour l'addition&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">-</code> pour la soustraction&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">*</code> pour la multiplication&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">div</code> pour la division&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">nombre1 mod nombre2</code> retourne le reste de la division euclidienne du premier nombre par le second.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_operateurs" title="Retour à la TdM (Rappel&nbsp;: opérateurs disponibles)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="nombresfonctions" id="nombresfonctions" href="#nombresfonctions"></a>2. Fonctions de manipulation
+         </h4>
+         <p>Ces fonctions sont peu nombreuses, et nous les avons déjà rencontrées dans le <a href="recapxsl.html">chapitre sur XSLT</a>&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>La fonction <code class="code">ceiling(nombre)</code> retourne le plus petit entier égal ou supérieur au nombre qu'elle reçoit en argument&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>La fonction <code class="code">floor(nombre)</code> retourne le plus grand entier égal ou inférieur au nombre qu'elle reçoit en argument&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>La fonction <code class="code">round(nombre)</code> arrondit le nombre qu'elle reçoit à l'entier le plus proche.
+               </p>
+            </li>
+            <li>
+               <p>La fonction <code class="code">sum(nombre1, nombre2, ...)</code> retourne la somme des nombres reçus en argument. Cette fonction sert aussi à calculer la somme des éléments spécifiés par
+                  une expression <code class="langage">XPAth</code>&nbsp;: par exemple, <code class="code">sum(//prix)</code> calcule la somme des contenus de tous les éléments <code class="code">prix</code> du document <code class="typefichier">XML</code>.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_nombresfonctions" title="Retour à la TdM (Fonctions de manipulation)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="booleens" href="#booleens" id="booleens"></a>V. Fonctions booléennes
+         </h3>
+         <h4><a name="truefalse" id="truefalse" href="#truefalse"></a>1. Fonctions booléennes constantes&nbsp;: true() et false()
+         </h4>
+         <p>Il est parfois nécessaire de créer une constante booléenne initialisée à une valeur <code class="code">true</code> ou <code class="code">false</code>. Cette opération est réalisable par un appel respectivement aux fonctions <code class="code">true()</code> et <code class="code">false()</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_truefalse" title="Retour à la TdM (Fonctions booléennes constantes&nbsp;: true() et false())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="not" id="not" href="#not"></a>2. La fonction not()
+         </h4>
+         <p>La fonction <code class="code">not(variable)</code> retourne l'inverse de la valeur logique de son argument.
+         </p>
+         <p class="retourtdm"><a href="#tdm_not" title="Retour à la TdM (La fonction not())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="lang" id="lang" href="#lang"></a>3. Test de la langue&nbsp;: la fonction lang()
+         </h4>
+         <p>La fonction <code class="code">lang(chaine)</code> vérifie que la langue dans laquelle est écrit le n&#339;ud courant (telle qu'elle est définie par l'attribut <code class="code">xml:lang</code>) est la même que le langage qu'elle reçoit en argument. Cette fonction reçoit une chaîne correspondant à l'un des codes de
+            langage définis dans la spécification XML&nbsp;: <code class="code">en</code> pour l'anglais, <code class="code">jp</code> pour le japonais, <code class="code">fr</code> pour le français, <span lang="en" class="autrelangue">etc</span>. Cela permet, avec une même feuille de style, de gérer des fichiers <code class="typefichier">XML</code> écrits dans des langues différentes.
+         </p>
+         <p class="retourtdm"><a href="#tdm_lang" title="Retour à la TdM (Test de la langue&nbsp;: la fonction lang())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="boolean" id="boolean" href="#boolean"></a>4. Conversion à un booléen&nbsp;: la fonction boolean()
+         </h4>
+         <p>La fonction <code class="code">boolean(objet)</code> convertit son argument en valeur booléenne. Le comportement de cette fonction dépend du type XPath de son argument&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>Si l'argument est un nombre non nul et différent de <code class="code">NaN</code>, la fonction retourne <code class="code">true</code>&nbsp;; si l'argument est égal à zéro ou <code class="code">NaN</code>, la fonction retourne <code class="code">false</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Si l'argument est une chaîne non vide, le résultat est <code class="code">true</code>&nbsp;; sinon, le résultat est <code class="code">false</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Si l'argument est de type booléen, sa valeur reste identique&nbsp;;</p>
+            </li>
+            <li>
+               <p>Si l'argument est un ensemble de n&#339;uds, le résultat est <code class="code">true</code> sauf si l'ensemble de n&#339;uds est vide (dans ce cas, la valeur est <code class="code">false)</code>&nbsp;
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_boolean" title="Retour à la TdM (Conversion à un booléen&nbsp;: la fonction boolean())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4>Exercice&nbsp;<a name="exoxpath" href="#exoxpath" id="exoxpath"></a>1. Utilisation des fonctions XPath
+         </h4>
+         <h5><a href="exercices/exo10.html" title="Énoncé de l'exercice 'Utilisation des fonctions XPath'">Énoncé</a></h5>
+         <h5><a href="exercices/exo10cor.html" title="Correction 'Utilisation des fonctions XPath'">
+               				Correction</a></h5>
+         <h3><a name="xpathautres" href="#xpathautres" id="xpathautres"></a>VI. Autres fonctions
+         </h3>
+         <h4><a name="document" id="document" href="#document"></a>1. Accéder à un autre document avec document()
+         </h4>
+         <h5><a href="#documentintro" name="documentintro" id="documentintro"></a>a. Introduction
+         </h5>
+         <p>Il est parfois nécessaire d'accéder à un document extérieur au fichier <code class="typefichier">XML</code> en cours de transformation, pour y récupérer une information particulière. XPath le permet grâce à la fonction <code class="code">document(chaine)</code>. Cette fonction prend comme argument une chaîne de caractères donnant le chemin vers le fichier à ouvrir. Il faut ensuite
+            spécifier le chemin vers l'élément cherché, à partir de la racine.
+         </p>
+         <p class="retourtdm"><a href="#tdm_documentintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#exemplexpath" name="exemplexpath" id="exemplexpath"></a>b. Exemple
+         </h5>
+         <p>Supposons que nous soyons en train de transformer un fichier <code class="typefichier">biblio.xml</code>, contenant une liste de livres, pour lesquels on donne un auteur&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;biblio&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;livre&gt;</span>(...)<span class="tag">&lt;/livre&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;livre&gt;</span>(...)<span class="tag">&lt;/livre&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;livre&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;titre&gt;</span>Les Misérables<span class="tag">&lt;/titre&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;auteur<span class="nomattribut"> prénom</span>="<span class="valeurattribut">Victor</span>"<span class="nomattribut"> nom</span>="<span class="valeurattribut">Hugo</span>"&nbsp;/&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;/livre&gt;</span><br>
+            						<span class="tag">&lt;/biblio&gt;</span><br></p>
+         <p>En parallèle, on dispose d'un fichier <code class="typefichier">auteurs.xml</code> possédant des références biographiques sur des auteurs, dont Victor Hugo&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;biographies&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;auteur&gt;</span>(...)<span class="tag">&lt;/auteur&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;auteur&gt;</span>(...)<span class="tag">&lt;/auteur&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;auteur<span class="nomattribut"> prénom</span>="<span class="valeurattribut">Victor</span>"<span class="nomattribut"> nomFamille</span>="<span class="valeurattribut">Hugo</span>"&gt;</span><br>
+            								
+            								
+            								&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;naissance&gt;</span><span class="tag">&lt;date&gt;</span>1802<span class="tag">&lt;/date&gt;</span>(...)<span class="tag">&lt;/naissance&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;décès&gt;</span><span class="tag">&lt;date&gt;</span>1885<span class="tag">&lt;/date&gt;</span>(...)<span class="tag">&lt;/décès&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;biographie&gt;</span>(...)<span class="tag">&lt;/biographie&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;/auteur&gt;</span><br>
+            						<span class="tag">&lt;/biographies&gt;</span><br></p>
+         <p>Lors de la transformation du fichier <code class="code">biblio.xml</code>, on peut accéder à ces informations avec la commande suivante&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;xsl:variable<span class="nomattribut"> name</span>="<span class="valeurattribut">nomAuteur</span>"<span class="nomattribut"> select</span>="<span class="valeurattribut">@nom</span>"&nbsp;/&gt;</span><br><span class="tag">&lt;xsl:variable<span class="nomattribut"> name</span>="<span class="valeurattribut">prénomAuteur</span>"<span class="nomattribut"> select</span>="<span class="valeurattribut">@prénom</span>"&nbsp;/&gt;</span><br><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">document('auteurs.xml')//auteur[@prénom=$prénomAuteur and @nomFamille=$nomAuteur]/naissance/date</span>"&nbsp;/&gt;</span><br><span class="tag">&lt;xsl:value-of<span class="nomattribut"> select</span>="<span class="valeurattribut">document('auteurs.xml')//auteur[@prénom=$prénomAuteur and @nomFamille=$nomAuteur]/décès/date</span>"&nbsp;/&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_document" title="Retour à la TdM (Accéder à un autre document avec document())">&gt;Retour à la <abbr>TdM</abbr></a></p>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours précédent&nbsp;: <a href="recapxsl.html">Mise en forme à l'aide de feuilles de style XSL : instructions XSLT</a><br>Cours suivant&nbsp;: <a href="domxslt.html">Utilisation du DOM et XSLT dynamique</a></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="fonctionsxpath.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 22 janvier 2008, version 1.31. Corrections de fautes de frappe et de syntaxe.</li>
+            <li>Le 1er décembre 2005, version 1.30. Ajout d'une introduction, d'une section sur la fonction document(), corrections typographiques et syntaxiques.</li>
+            <li>Le 13 juillet 2005, version 1.20. Réécriture des exemples.</li>
+            <li>Le 16 juin 2004, version 1.11. Ajout des corrections des exercices.</li>
+            <li>Le 9 février 2004, version 1.10. Corrections typographiques, complément d'explication sur la fonction sum() et ajout d'un exercice.</li>
+            <li>Le 28 novembre 2003, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

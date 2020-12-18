@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" height="500">
+	<defs>
+		<rect width="100" height="50" id="rectangle"/>
+	</defs>
+	<use xlink:href="#rectangle" x="50" y="20" fill-opacity="1" fill="navy"/>
+	<use xlink:href="#rectangle" x="50" y="20" fill-opacity="0.7" fill="blue" transform="translate(-20,30)"/>
+	<use xlink:href="#rectangle" x="50" y="20" fill-opacity="0.7" fill="aqua" transform="scale(0.5,2)"/>
+	<use xlink:href="#rectangle" x="150" y="100" fill-opacity="1" fill="purple"/>
+	<use xlink:href="#rectangle" x="150" y="100" fill-opacity="0.7" fill="red" transform="rotate(30)"/>
+	<use xlink:href="#rectangle" x="150" y="100" fill-opacity="0.7" fill="fuchsia" transform="rotate(30,150,100)"/>
+	<use xlink:href="#rectangle" x="250" y="200" fill-opacity="1" fill="olive"/>
+	<use xlink:href="#rectangle" x="250" y="200" fill-opacity="0.9" fill="green" transform="translate(50,0) rotate(45)"/>
+	<use xlink:href="#rectangle" x="250" y="200" fill-opacity="0.9" fill="lime" transform="rotate(45) translate(50,0)"/>
+</svg>

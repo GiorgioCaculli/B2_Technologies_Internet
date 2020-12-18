@@ -1,0 +1,956 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Un format de dessin vectoriel en XML: SVG</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="SVG, Scalable, Vector, Graphics, XML">
+      <meta name="description" content="Le SVG est un format graphique vectoriel permettant la production de figures et de diagrammes.">
+      <link rel="next" href="svgdynamique.html">
+      <link rel="prev" href="smil.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Un format de dessin vectoriel en XML: SVG</h1>
+         <p><span class="version">version 1.43</span>, dernière mise à jour le 12 janvier 2010.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#intro" title="Introduction">Introduction</a><ol>
+                     <li><a href="#origine" title="Origine et but">Origine et but</a><ol>
+                           <li><a href="#histosvg" title="Histoire">Histoire</a></li>
+                           <li><a href="#niche" title="«&nbsp;Niche&nbsp;» de SVG">«&nbsp;Niche&nbsp;» de SVG</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#pourquoi" title="Pourquoi SVG&nbsp;?">Pourquoi SVG&nbsp;?</a></li>
+                     <li><a href="#outils" title="Outils">Outils</a><ol>
+                           <li><a href="#outilsintro" title="Introduction">Introduction</a></li>
+                           <li><a href="#outilsedition" title="Édition">Édition</a></li>
+                           <li><a href="#outilsvisual" title="Visualisation">Visualisation</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#svgbase" title="SVG de base">SVG de base</a><ol>
+                     <li><a href="#structure" title="Structure d'une simple page SVG">Structure d'une simple page SVG</a><ol>
+                           <li><a href="#prologue" title="Prologue">Prologue</a></li>
+                           <li><a href="#racine" title="Élément racine">Élément racine</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#imbrication" title="Imbrication d'un fichier SVG dans HTML">Imbrication d'un fichier SVG dans HTML</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#graphiquebase" title="Éléments graphiques de base">Éléments graphiques de base</a><ol>
+                     <li><a href="#grfintro" title="Introduction">Introduction</a></li>
+                     <li><a href="#principaux" title="Mécanismes principaux">Mécanismes principaux</a><ol>
+                           <li><a href="#attributs" title="Attributs">Attributs</a></li>
+                           <li><a href="#positionnement" title="Positionnement et unités">Positionnement et unités</a></li>
+                           <li><a href="#ptransformations" title="Transformations">Transformations</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#fillstroke" title="Le rendu">Le rendu</a><ol>
+                           <li><a href="#fillstrokeintro" title="Introduction">Introduction</a></li>
+                           <li><a href="#fill" title="Propriétés fill">Propriétés fill</a></li>
+                           <li><a href="#stroke" title="Propriétés de stroke">Propriétés de stroke</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#figgeom" title="Figures géométriques">Figures géométriques</a><ol>
+                           <li><a href="#rectangles" title="Rectangles">Rectangles</a></li>
+                           <li><a href="#cercles" title="Cercles et ellipses">Cercles et ellipses</a></li>
+                           <li><a href="#lignes" title="Lignes et polylignes">Lignes et polylignes</a></li>
+                           <li><a href="#polygones" title="Polygones">Polygones</a></li>
+                           <li>Exercice&nbsp;: <a href="#exobase" title="Éléments géométriques de base">Éléments géométriques de base</a></li>
+                           <li>Exercice&nbsp;: <a href="#exorendu" title="Rendu visuel">Rendu visuel</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#path" title="Formes arbitraires avec path">Formes arbitraires avec path</a><ol>
+                           <li><a href="#pathintro" title="Introduction">Introduction</a></li>
+                           <li><a href="#pathattr" title="Attributs de base">Attributs de base</a></li>
+                           <li><a href="#pathdata" title="Path data">Path data</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#texte" title="Texte">Texte</a><ol>
+                           <li><a href="#text" title="La balise text">La balise text</a></li>
+                           <li><a href="#tspan" title="Éléments d'ajustement">Éléments d'ajustement</a></li>
+                           <li><a href="#textetchemin" title="Lien avec les chemins">Lien avec les chemins</a></li>
+                           <li>Exercice&nbsp;: <a href="#exochemin" title="Écriture de texte le long d'un chemin">Écriture de texte le long d'un chemin</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>IV. <a href="#structuration" title="Structuration: éléments de groupage et références">Structuration: éléments de groupage et références</a><ol>
+                     <li><a href="#grouoageintro" title="Introduction">Introduction</a></li>
+                     <li><a href="#svg" title="Le fragment d'un document SVG&nbsp;: svg">Le fragment d'un document SVG&nbsp;: svg</a></li>
+                     <li><a href="#g" title="Groupage d'éléments avec g">Groupage d'éléments avec g</a></li>
+                     <li><a href="#symboluse" title="Objets abstraits avec symbol, defs et use">Objets abstraits avec symbol, defs et use</a><ol>
+                           <li><a href="#symbol" title="Symboles (élément symbol)">Symboles (élément symbol)</a></li>
+                           <li><a href="#defs" title="Définitions (élément defs)">Définitions (élément defs)</a></li>
+                           <li><a href="#use" title="Utilisation d'objets: l'élément use">Utilisation d'objets: l'élément use</a></li>
+                           <li>Exercice&nbsp;: <a href="#exogroupe" title="Groupage d'éléments">Groupage d'éléments</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#titledesc" title="Titre title et descriptions desc">Titre title et descriptions desc</a></li>
+                     <li><a href="#images" title="Insertion d'images: l'élément image">Insertion d'images: l'élément image</a><ol>
+                           <li><a href="#image" title="Élément image">Élément image</a></li>
+                           <li><a href="#preserveaspectratio" title="L'attribut preserveAspectRatio">L'attribut preserveAspectRatio</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>V. <a href="#transformations" title="Transformations">Transformations</a><ol>
+                     <li><a href="#transformintro" title="Introduction">Introduction</a></li>
+                     <li><a href="#transform" title="Transformations avec l'attribut transform">Transformations avec l'attribut transform</a><ol>
+                           <li><a href="#transformintroduction" title="Introduction">Introduction</a></li>
+                           <li><a href="#translate" title="Translations avec le paramètre translate">Translations avec le paramètre translate</a></li>
+                           <li><a href="#scaling" title="Redimensionnement avec scaling">Redimensionnement avec scaling</a></li>
+                           <li><a href="#rotate" title="Rotation avec le paramètre rotate">Rotation avec le paramètre rotate</a></li>
+                           <li><a href="#ordretransform" title="Ordre des opérations">Ordre des opérations</a></li>
+                           <li>Exercice&nbsp;: <a href="#exotransform" title="Transformations">Transformations</a></li>
+                        </ol>
+                     </li>
+                     <li>Exercice&nbsp;: <a href="#exorecap">Récapitulation</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>VI. <a href="#autres" title="Autres fonctionnalités">Autres fonctionnalités</a><ol>
+                     <li><a href="#masque" title="Masquage, filtrage">Masquage, filtrage</a></li>
+                     <li><a href="#animations" title="Animations">Animations</a></li>
+                     <li><a href="#polices" title="Définition de polices">Définition de polices</a></li>
+                     <li><a href="#interaction" title="Interactivité">Interactivité</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>VII. <a href="#conclusion" title="Conclusion">Conclusion</a></li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="intro" href="#intro" id="intro"></a>I. Introduction
+         </h3>
+         <h4><a name="origine" id="origine" href="#origine"></a>1. Origine et but
+         </h4>
+         <h5><a href="#histosvg" name="histosvg" id="histosvg"></a>a. Histoire
+         </h5>
+         <p><acronym title="Scalable Vector Graphics">SVG</acronym> signifie <span lang="en" class="autrelangue">Scalable Vector Graphics</span>. Ce langage permet d'écrire des graphiques vectoriels 2D en <code class="langage">XML</code>. Il a été inventé en 1998 par un groupe de travail (comprenant Microsoft, Autodesk, Adobe, IBM, Sun, Netscape, Xerox, Apple,
+            Corel, HP, ILOG...) pour répondre à un besoin de graphiques légers, dynamiques et interactifs.
+         </p>
+         <p>Une première ébauche du langage est sortie en octobre 1998 et en juin 2000 apparaît la première version du <code class="logiciel">Viewer Adobe</code> (<span lang="en" class="autrelangue">plugin</span> permettant de visualiser le <code class="langage">SVG</code>). Le <code class="langage">SVG</code> s'est très vite placé comme un concurrent de <code class="logiciel">Flash</code> et à ce titre, Adobe a intégré ce langage dans la plupart de ses éditeurs (dont les principaux sont <code class="logiciel">Illustrator</code> et <code class="logiciel">Golive</code>).
+         </p>
+         <p class="retourtdm"><a href="#tdm_histosvg" title="Retour à la TdM (Histoire)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#niche" name="niche" id="niche"></a>b. «&nbsp;Niche&nbsp;» de SVG
+         </h5>
+         <p>Cependant, comme Flash est désormais un produit bien installé, notamment en publicité et sur les sites «&nbsp;branchés&nbsp;», <code class="langage">SVG</code> semble plus adapté aux contextes suivants&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>visualisation de contenus (économiques, processus, cartes, etc.) au format <code class="langage">XML</code>, associée à JavaScript+DOM, ou bien à des transformations <code class="langage">XSLT</code>...&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>interface utilisateur pour certains types d'applications Internet (comme par exemple <code class="logiciel">Firefox</code>)&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>interfaces pour des outils de consultation particuliers (par exemple avec une faible bande passante)</p>
+            </li>
+            <li>
+               <p>dessins statiques, animés ou même interactifs dans le monde de l'éducation.</p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_origine" title="Retour à la TdM (Origine et but)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="pourquoi" id="pourquoi" href="#pourquoi"></a>2. Pourquoi SVG&nbsp;?
+         </h4>
+         <p>Les raisons pouvant pousser à l'adoption d'un format comme <code class="langage">SVG</code> sont nombreuses&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>Liées aux avantages du graphisme vectoriel&nbsp;:</p>
+               <ul>
+                  <li>
+                     <p>Adaptation de l'affichage à des media variés et à des tailles différentes&nbsp;;</p>
+                  </li>
+                  <li>
+                     <p>Possibilité d'appliquer des styles&nbsp;;</p>
+                  </li>
+                  <li>
+                     <p>Possibilité d'indexer le texte qui fait partie du graphisme&nbsp;;</p>
+                  </li>
+                  <li>
+                     <p>Taille de l'image après compression&nbsp;;</p>
+                  </li>
+                  <li>
+                     <p>Facilités d'édition&nbsp;: les éléments sont des objets, des hiérarchies, etc.</p>
+                  </li>
+               </ul>
+            </li>
+            <li>
+               <p>Liées aux avantages particuliers du format <code class="langage">SVG</code>&nbsp;:
+               </p>
+               <ul>
+                  <li>
+                     <p>Insertion dans le monde XML/XHTML&nbsp;:</p>
+                     <ul>
+                        <li>
+                           <p>Génération de <code class="typefichier">SVG</code> avec <code class="langage">XSLT</code> à partir de données <code class="typefichier">XML</code>&nbsp;;
+                           </p>
+                        </li>
+                        <li>
+                           <p>Intégration totale dans <code class="langage">XHTML</code>, viewers <code class="langage">SMIL</code>, etc.
+                           </p>
+                        </li>
+                        <li>
+                           <p>Utilisation de <code class="langage">CSS</code>&nbsp;;
+                           </p>
+                        </li>
+                        <li>
+                           <p>Scriptable avec <code class="langage">JavaScript</code> <span lang="en" class="autrelangue">via</span> le <acronym title="Document Object Model">DOM</acronym>.
+                           </p>
+                        </li>
+                        <li>
+                           <p>Possibilité de mélanger des grammaires <code class="langage">XML</code> entre elles&nbsp;: un document <code class="typefichier">HTML</code> peut contenir des gaphiques <code class="langage">SVG</code>, des expressions mathématiques en <code class="langage">MathML</code>, des présentations en <code class="langage">SMIL</code>...
+                           </p>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <p>Modèle de couleurs sophistiqué, filtres graphiques (comme dans <code class="logiciel">PhotoShop</code>)&nbsp;;
+                     </p>
+                  </li>
+                  <li>
+                     <p>Possibilité d'indexage par les moteurs de recherche (c'est un fichier texte&nbsp;!)&nbsp;;</p>
+                  </li>
+                  <li>
+                     <p>Possibilité de partager du code (format texte non propriétaire)&nbsp;;</p>
+                  </li>
+               </ul>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_pourquoi" title="Retour à la TdM (Pourquoi SVG&nbsp;?)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="outils" id="outils" href="#outils"></a>3. Outils
+         </h4>
+         <h5><a href="#outilsintro" name="outilsintro" id="outilsintro"></a>a. Introduction
+         </h5>
+         <p>Une <a href="http://www.svgi.org/">liste complète des implémentations de <code class="langage">SVG</code></a> est disponible sur le site du W3C.
+         </p>
+         <p class="retourtdm"><a href="#tdm_outilsintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#outilsedition" name="outilsedition" id="outilsedition"></a>b. Édition
+         </h5>
+         <p>Comme <code class="langage">SVG</code> est un format <code class="langage">XML</code>, n'importe quel éditeur de texte fait en théorie l'affaire. Il est néanmoins recommandé d'utiliser de préférence un éditeur
+            dédié à XML si l'on choisit cette option, comme <a href="http://www.jasc.com/products/webdraw/"><code class="logiciel">WebDraw</code></a> de Jasc, ou <a href="http://www.inkscape.org/">InkScape</a>. <code class="logiciel">Adobe Illustrator</code>, <code class="logiciel">Corel Draw</code> permettent aussi d'exporter au format <code class="langage">SVG</code> -et cela pour ne parler que des logiciels les plus connus. Google a lancé en 2010 un <a href="http://code.google.com/p/svg-edit/">éditeur SVG en ligne</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_outilsedition" title="Retour à la TdM (Édition)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#outilsvisual" name="outilsvisual" id="outilsvisual"></a>c. Visualisation
+         </h5>
+         <p><code class="langage">SVG</code> n'est actuellement pas supporté en natif par tous les navigateurs. On distingue plusieurs degrés d'avancement&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="logiciel">Internet Explorer</code> ne le supporte pas en natif. Il est donc nécessaire d'installer soi-même un <span lang="en" class="autrelangue">plugin</span>. Le plus répandu d'entre eux est, à la date de révision de ce cours (mars 2008), le <span lang="en" class="autrelangue">plugin</span>&nbsp;<code class="logiciel">SVG&nbsp;Viewer&nbsp;3.03</code>, téléchargeable gratuitement sur le site d'Adobe&nbsp;: <a href="http://www.adobe.com/svg/">http://www.adobe.com/svg/</a></p>
+            </li>
+            <li>
+               <p><code class="logiciel">FireFox</code>, <a href="http://developer.mozilla.org/en/docs/SVG_in_Firefox_1.5">à partir de sa version 1.5</a>, a entrepris de supporter en natif le format <code class="langage">SVG</code>, mais son <a href="http://developer.mozilla.org/en/docs/SVG_in_Firefox_1.5">support</a> reste partiel. Le <a href="http://www.croczilla.com/svg/samples/">panorama du support SVG de FireFox</a> donne néanmoins un aperçu des fonctionnalités de ce format.
+               </p>
+            </li>
+            <li>
+               <p><code class="logiciel">Opera</code> a commencé à prendre en charge le SVG dans sa version 8.0. Le <a href="http://www.opera.com/features/svg/index.dml">support SVG d'<code class="logiciel">Opera</code></a> inclut maintenant des animations.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_outils" title="Retour à la TdM (Outils)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="svgbase" href="#svgbase" id="svgbase"></a>II. SVG de base
+         </h3>
+         <h4><a name="structure" id="structure" href="#structure"></a>1. Structure d'une simple page SVG
+         </h4>
+         <h5><a href="#prologue" name="prologue" id="prologue"></a>a. Prologue
+         </h5>
+         <p>Un fichier <code class="typefichier">SVG</code> commence par une déclaration de version <code class="langage">XML</code> standard, comme par exemple
+         </p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"&nbsp;standalone="no"?&gt;</span><br></p>
+         <p>Il faut alors ajouter le DocType correspondant à la version SVG utilisée&nbsp;:</p>
+         <p class="xml"><span class="exempledtdexterne">&lt;!DOCTYPE svg PUBLIC<span class="valeurattribut"> "-//W3C//DTD SVG 1.0//EN"</span><span class="valeurattribut"> "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"</span>&gt;<br></span></p>
+         <p>Il est cependant préférable, en cours de développement, de copier localement la <a href="svg10.dtd"><code class="typefichier">DTD de SVG</code></a>, et d'y accéder en local&nbsp;:
+         </p>
+         <p class="xml"><span class="exempledtdexterne">&lt;!DOCTYPE svg SYSTEM<span class="valeurattribut"> "svg10.dtd"</span>&gt;<br></span></p>
+         <p>La <a href="http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-flat.dtd">version&nbsp;1.1  de la DTD SVG</a> existe également, mais représente une évolution en terme de modularisation hors de propos ici.
+         </p>
+         <p class="retourtdm"><a href="#tdm_prologue" title="Retour à la TdM (Prologue)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#racine" name="racine" id="racine"></a>b. Élément racine
+         </h5>
+         <p>La racine d'un fichier <code class="typefichier">SVG</code> est un élément... <code class="code">svg</code>. Mais il est nécessaire de définir deux espaces de noms, un par défaut et un second permettant d'avoir accès à d'autres fonctionnalités
+            que nous verrons par la suite, comme suit&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;svg<span class="nomattribut"> xmlns</span>="<span class="valeurattribut">http://www.w3.org/2000/svg</span>"<span class="nomattribut"> xmlns:link</span>="<span class="valeurattribut">http://www.w3.org/1999/xlink</span>"&gt;</span>(..)<br><span class="tag">&lt;/svg&gt;</span><br></p>
+         <p>La taille de la fenêtre <code class="langage">SVG</code> est définie par les attributs <code class="code">width</code> et <code class="code">height</code> de l'élément <code class="code">&lt;svg&gt;</code>&nbsp;: <code class="code">&lt;svg width="400" height="250" xmlns="http://www.w3.org/2000/svg"&gt;</code></p>
+         <p class="retourtdm"><a href="#tdm_structure" title="Retour à la TdM (Structure d'une simple page SVG)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="imbrication" id="imbrication" href="#imbrication"></a>2. Imbrication d'un fichier SVG dans HTML
+         </h4>
+         <p>À moyen terme on devrait pouvoir insérer directement du code <code class="langage">SVG</code> dans du code <code class="langage">XHTML</code>. Certaines <a href="http://www.mozilla.org/projects/svg/">variantes de Mozilla</a> possèdent cette fonctionnalité avec un sous-ensemble de <code class="langage">SVG</code>.
+         </p>
+         <p>La version canonique demande d'utiliser la balise <code class="code">&lt;object&gt;</code>. On peut en consulter un exemple sur le site de l'INSEE avec l'<a href="http://www.insee.fr/fr/indicateur/indic_cons/sip/sip.htm">évolution des prix à la consommation depuis 2000</a>.
+         </p>
+         <p>La solution la plus souple d'emploi reste d'utiliser un environnement <code class="code">&lt;iframe&gt;</code>. Par exemple&nbsp;:
+         </p>
+         <p class="html"><span class="tag">&lt;iframe<span class="nomattribut"> src</span>="<span class="valeurattribut">salut-tout-le-monde.svg</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">540</span>"<span class="nomattribut"> width</span>="<span class="valeurattribut">95%</span>"<span class="nomattribut"> frameborder</span>="<span class="valeurattribut">0</span>"&gt;</span><br>
+            							
+            							
+            							
+            							
+            							&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>(Contenu alternatif: image+texte, texte seulement...)<span class="tag">&lt;/p&gt;</span><br>
+            						<span class="tag">&lt;/iframe&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_imbrication" title="Retour à la TdM (Imbrication d'un fichier SVG dans HTML)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="graphiquebase" href="#graphiquebase" id="graphiquebase"></a>III. Éléments graphiques de base
+         </h3>
+         <h4><a name="grfintro" id="grfintro" href="#grfintro"></a>1. Introduction
+         </h4>
+         <p>SVG définit un certain nombre d'éléments graphiques de base. Voici la liste des éléments les plus importants&nbsp;:</p>
+         <ol>
+            <li>
+               <p>Texte avec <code class="code">text</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Rectangles <code class="code">rect</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Le cercle <code class="code">circle</code> et l'ellipse <code class="code">ellipse</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Lignes <code class="code">line</code> et poly-lignes <code class="code">polyline</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Polygones&nbsp;;</p>
+            </li>
+            <li>
+               <p>Formes arbitraires avec <code class="code">path</code>.
+               </p>
+            </li>
+         </ol>
+         <p>Chaque élément graphique est représenté par un élément <code class="langage">XML</code> qui est paramétrable avec des attributs <code class="langage">XML</code> et hérite d'attributs de ses parents.
+         </p>
+         <p>Comme dans d'autres langages vectoriels (par exemple <code class="langage">VRML</code>), il existe des formes géométriques de base (rectangle, ellipse, cercle, lignes, poly-lignes et polygone). Il existe également
+            une méthode permettant de produire des formes complexes.
+         </p>
+         <p class="retourtdm"><a href="#tdm_grfintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="principaux" id="principaux" href="#principaux"></a>2. Mécanismes principaux
+         </h4>
+         <h5><a href="#attributs" name="attributs" id="attributs"></a>a. Attributs
+         </h5>
+         <p>Il faut se référer à la spécification pour connaître tous les détails. Ici, nous ne montrons en règle générale qu'un petit
+            extrait, car leur nombre est énorme&nbsp;!
+         </p>
+         <p>La plupart des éléments se partagent un nombre commun d'attributs comme par exemple l'attribut <code class="code">id</code> (identificateur) ou encore <code class="code">style</code> (les propriétés de style suivent les règles du <code class="langage">CSS2</code>).
+         </p>
+         <p>La plupart des valeurs d'attributs sont assez intuitives (pour ceux qui connaissent un peu <code class="langage">CSS</code>). En revanche pour certains il existe de véritables sous-grammaires (voir la création de <a href="#path">formes arbitraires</a> avec <code class="code">path</code> par exemple)
+         </p>
+         <p class="retourtdm"><a href="#tdm_attributs" title="Retour à la TdM (Attributs)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#positionnement" name="positionnement" id="positionnement"></a>b. Positionnement et unités
+         </h5>
+         <p>Les objets <code class="typefichier">SVG</code> se positionnent dans un système de coordonnées qui commence en haut et à gauche (pratique standard en graphisme informatique).
+            Il est possible de travailler avec des coordonnées locales.
+         </p>
+         <p>Les unités à utiliser sont les mêmes qu'en <code class="langage">CSS2</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_positionnement" title="Retour à la TdM (Positionnement et unités)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#ptransformations" name="ptransformations" id="ptransformations"></a>c. Transformations
+         </h5>
+         <p>Chaque objet peut être translaté, orienté et changé de taille. Il hérite des transformations de l'objet parent.</p>
+         <p class="retourtdm"><a href="#tdm_principaux" title="Retour à la TdM (Mécanismes principaux)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="fillstroke" id="fillstroke" href="#fillstroke"></a>3. Le rendu
+         </h4>
+         <h5><a href="#fillstrokeintro" name="fillstrokeintro" id="fillstrokeintro"></a>a. Introduction
+         </h5>
+         <p><code class="langage">SVG</code> définit quelques dizaines d'attributs-propriétés applicables à certains éléments. En ce qui concerne les éléments graphiques,
+            voici les deux plus importants&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">stroke</code> définit la forme du bord d'un objet&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">fill</code> définit comment le contenu d'un objet est rempli.
+               </p>
+            </li>
+         </ul>
+         <p><code class="langage">SVG</code> possède deux syntaxes différentes pour définir la mise en forme d'un élément&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>L'attribut <code class="code">style</code> reprend la syntaxe et les styles de <code class="langage">CSS2</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Pour chaque style, il existe aussi un attribut de présentation <code class="langage">SVG</code>. Cela simplifie la génération de contenus <code class="langage">SVG</code> avec <code class="langage">XSLT</code>.
+               </p>
+            </li>
+         </ul>
+         <p>Par exemple&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;rect<span class="nomattribut"> x</span>="<span class="valeurattribut">200</span>"<span class="nomattribut"> y</span>="<span class="valeurattribut">100</span>"<span class="nomattribut"> width</span>="<span class="valeurattribut">60</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">30</span>"<span class="nomattribut"> fill</span>="<span class="valeurattribut">red</span>"<span class="nomattribut"> stroke</span>="<span class="valeurattribut">blue</span>"<span class="nomattribut"> stroke-width</span>="<span class="valeurattribut">3</span>"&nbsp;/&gt;</span><br></p>
+         <p>Le code précédent a le même effet que&nbsp;:</p>
+         <p class="xml"><span class="tag">&lt;rect<span class="nomattribut"> x</span>="<span class="valeurattribut">200</span>"<span class="nomattribut"> y</span>="<span class="valeurattribut">100</span>"<span class="nomattribut"> width</span>="<span class="valeurattribut">60</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">30</span>"<span class="nomattribut"> style</span>="<span class="valeurattribut">fill:red;stroke:blue;stroke-width:3</span>"&nbsp;/&gt;</span><br></p>
+         <p class="retourtdm"><a href="#tdm_fillstrokeintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#fill" name="fill" id="fill"></a>b. Propriétés fill
+         </h5>
+         <p><code class="code">fill</code> permet de gérer le remplissage de l'élément. Ses propriétés sont&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>la couleur, avec les mêmes conventions de représentation qu'en <code class="langage">CSS</code> (exemple précédent&nbsp;: <code class="code">fill="red"</code>).
+               </p>
+            </li>
+            <li>
+               <p>l'URI d'une couleur, d'un gradient de couleur (pour obtenir un effet de dégradé) ou  d'un motif de remplissage.</p>
+            </li>
+            <li>
+               <p>une valeur d'opacité (<code class="code">opacity</code>), comprise entre 0 et 1. Voir l'exemple <a href="exemples/opacite.svg">opacite.svg</a>.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_fill" title="Retour à la TdM (Propriétés fill)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#stroke" name="stroke" id="stroke"></a>c. Propriétés de stroke
+         </h5>
+         <p><code class="code">stroke</code> permet de gérer l'entourage d'un élément de dessin. Ses propriétés sont&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>la couleur, avec les mêmes conventions de représentation qu'en <code class="langage">CSS</code> (exemple précédent&nbsp;: <code class="code">fill="red"</code>).
+               </p>
+            </li>
+            <li>
+               <p>l'uri d'une couleur, d'un gradient de couleur (pour obtenir un effet de dégradé) ou  d'un motif de remplissage.</p>
+            </li>
+            <li>
+               <p>une valeur d'opacité (<code class="code">opacity</code>), comprise entre 0 et 1.
+               </p>
+            </li>
+            <li>
+               <p>l'épaisseur (<code class="code">width</code>) du trait&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>la jonction de ligne (<code class="code">linejoin</code>), qui peut prendre les valeurs <code class="code">miter</code>, <code class="code">round</code> ou <code class="code">bevel</code>. Voir l'exemple <a href="exemples/strokejoin.svg">strokejoin.svg</a>.
+               </p>
+            </li>
+            <li>
+               <p>la forme des angles (<code class="code">linecap</code>) qui peut être <code class="code">butt</code>( les lignes s'arrêtent brutalement à leur fin), <code class="code">round</code> ou <code class="code">square</code> (des carrés sont tracés en bout de chaque ligne). Voir l'exemple <a href="exemples/strokecap.svg">strokecap.svg</a>.
+               </p>
+            </li>
+            <li>
+               <p>des pointillés éventuels avec la propriété <code class="code">dasharray</code>, qui doit prendre comme valeur, si spécifiée, une chaîne de valeurs numériques séparées par des espaces. Voir par exemple
+                  <a href="exemples/strokedash.svg">strokedash.svg</a>. On peut spécifier un décalage de démarrage des pointillés avec la propriété <code class="code">dashoffset</code>.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_fillstroke" title="Retour à la TdM (Le rendu)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="figgeom" id="figgeom" href="#figgeom"></a>4. Figures géométriques
+         </h4>
+         <h5><a href="#rectangles" name="rectangles" id="rectangles"></a>a. Rectangles
+         </h5>
+         <p>L'élément <code class="code">rect</code> permet de définir des rectangles, y compris avec des coins arrondis sans passer par une modification de l'attribut <code class="code">stroke-linejoin</code>. Les attributs de base sont&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">x</code> et <code class="code">y</code>, qui donnent la position du coin supérieur gauche.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">width</code> et <code class="code">height</code>, qui permettent de définir respectivement largeur et hauteur du rectangle.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">rx</code> et <code class="code">ry</code>, qui sont les axes x et y de l'ellipse utilisée pour arrondir&nbsp;; les nombres négatifs sont interdits, et on ne peut dépasser
+                  la moitié de la largeur (longueur) du rectangle.
+               </p>
+            </li>
+         </ul>
+         <p>Voir l'exemple <a href="exemples/rectangle.svg">rectangle.svg</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_rectangles" title="Retour à la TdM (Rectangles)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#cercles" name="cercles" id="cercles"></a>b. Cercles et ellipses
+         </h5>
+         <p>Un cercle est créé par l'élément <code class="code">circle</code> et une ellipse par l'élément... <code class="code">ellipse</code>. Leurs attributs sont&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">cx</code> et <code class="code">cy</code> qui définissent les coordonnées du centre.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">r</code> qui définit le rayon du cercle.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">rx</code> et <code class="code">ry</code> qui définissent les demi-axes x et y de l'ellipse.
+               </p>
+            </li>
+         </ul>
+         <p>Voir l'exemple <a href="exemples/cercleellipse.svg">cercleellipse.svg</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_cercles" title="Retour à la TdM (Cercles et ellipses)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#lignes" name="lignes" id="lignes"></a>c. Lignes et polylignes
+         </h5>
+         <p>Une ligne est définie avec l'élément <code class="code">line</code>, une poly-ligne par l'élément... <code class="code">polyline</code>.
+         </p>
+         <p>Les attributs de <code class="code">line</code> sont&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">x1</code> et <code class="code">y1</code>, qui définissent les coordonnées du point de départ.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">x2</code> et <code class="code">y2</code>, qui définissent les coordonnées du point d'arrivée.
+               </p>
+            </li>
+         </ul>
+         <p>L'attribut de base de <code class="code">polyline</code> est <code class="code">points</code>, qui prend comme valeur une suite de coordonnées. Voir l'exemple <a href="exemples/lignes.svg">lignes.svg</a> pour plus de détails.
+         </p>
+         <p class="retourtdm"><a href="#tdm_lignes" title="Retour à la TdM (Lignes et polylignes)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#polygones" name="polygones" id="polygones"></a>d. Polygones
+         </h5>
+         <p>Un polygone est une courbe fermée, une poly-ligne une courbe ouverte. L'élément permettant de définir un polygone est <code class="code">polygon</code>. L'attribut de base de cet élément est <code class="code">points</code>, qui s'utilise de la même manière qu'avec une polyligne. Voir des exemples dans le fichier <a href="exemples/polygones.svg">polygones.svg</a>.
+         </p>
+         <h4>Exercice&nbsp;<a name="exobase" href="#exobase" id="exobase"></a>1. Éléments géométriques de base
+         </h4>
+         <h5><a href="exercices/exo12.html#base" title="Énoncé de l'exercice 'Éléments géométriques de base'">Énoncé</a></h5>
+         <h4>Exercice&nbsp;<a name="exorendu" href="#exorendu" id="exorendu"></a>2. Rendu visuel
+         </h4>
+         <h5><a href="exercices/exo12.html#rendu" title="Énoncé de l'exercice 'Rendu visuel'">Énoncé</a></h5>
+         <p class="retourtdm"><a href="#tdm_figgeom" title="Retour à la TdM (Figures géométriques)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="path" id="path" href="#path"></a>5. Formes arbitraires avec path
+         </h4>
+         <h5><a href="#pathintro" name="pathintro" id="pathintro"></a>a. Introduction
+         </h5>
+         <p>L'élément <code class="code">path</code> permet de définir des formes arbitraires. Ces formes peuvent avoir un contour et servir de support pour d'autres éléments
+            (voir plus loin un exemple avec <a href="#exochemin">du texte</a>).
+         </p>
+         <p class="retourtdm"><a href="#tdm_pathintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#pathattr" name="pathattr" id="pathattr"></a>b. Attributs de base
+         </h5>
+         <p>Ces attributs sont au nombre de 2&nbsp;:</p>
+         <ul>
+            <li>
+               <p><code class="code">d</code>, au nom peu explicite, sert à définir les <span lang="en" class="autrelangue">path data</span>, autrement dit la liste de commande permettant de tracer le chemin.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">nominalLength</code>, facultatif, permet de définir éventuellement la longueur totale du chemin.
+               </p>
+            </li>
+         </ul>
+         <p class="retourtdm"><a href="#tdm_pathattr" title="Retour à la TdM (Attributs de base)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#pathdata" name="pathdata" id="pathdata"></a>c. Path data
+         </h5>
+         <p>Les <span lang="en" class="autrelangue">path data</span> suivent les règles suivantes&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>Toutes les instructions peuvent être abrégées en un seul caractère</p>
+            </li>
+            <li>
+               <p>Les espaces peuvent être éliminés</p>
+            </li>
+            <li>
+               <p>On peut omettre de répéter une commande</p>
+            </li>
+            <li>
+               <p>Il existe toujours deux versions des commandes&nbsp;:</p>
+               <ul>
+                  <li>
+                     <p>en majuscules&nbsp;: coordonnées absolues</p>
+                  </li>
+                  <li>
+                     <p>en minuscules&nbsp;: coordonnées relatives</p>
+                  </li>
+               </ul>
+            </li>
+         </ul>
+         <p>Ces règles visent à diminuer au maximum la taille requise par la description des chemins. Les commandes sont&nbsp;:</p>
+         <ul>
+            <li>
+               <p><code class="code">M</code> ou <code class="code">m</code> (<span lang="en" class="autrelangue">moveto</span>) x,y démarre un nouveau sous-chemin
+               </p>
+            </li>
+            <li>
+               <p><code class="code">Z</code> ou <code class="code">z</code> (<span lang="en" class="autrelangue">closepath</span>) ferme un sous-chemin en traçant une ligne droite entre le point courant et le dernier <code class="code">moveto</code></p>
+            </li>
+            <li>
+               <p><span lang="en" class="autrelangue">lineto</span></p>
+               <ul>
+                  <li>
+                     <p><code class="code">L</code> ou <code class="code">l</code> (<span lang="en" class="autrelangue">lineto</span>)  x , y trace une ligne droite entre le point courant et le point (x,y).
+                     </p>
+                  </li>
+                  <li>
+                     <p><code class="code">H</code> ou <code class="code">h</code> (<span lang="en" class="autrelangue">horizontal lineto</span>) x trace une ligne horizontale entre le point courant et le point (x,y0).
+                     </p>
+                  </li>
+                  <li>
+                     <p><code class="code">V</code> ou <code class="code">v</code>&nbsp;: (<span lang="en" class="autrelangue">vertical lineto</span>) <code class="code">y</code> trace une ligne verticale entre le point courant et le point ( x0,y ).
+                     </p>
+                  </li>
+               </ul>
+            </li>
+         </ul>
+         <p>Il existe également des commandes permettant de tracer des courbes (courbes de Bézier, arcs...).</p>
+         <p>Un exemple de tracé simple et un autre de tracé de courbes sont visibles dans le fichier <a href="exemples/path.svg">path.svg</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_path" title="Retour à la TdM (Formes arbitraires avec path)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="texte" id="texte" href="#texte"></a>6. Texte
+         </h4>
+         <h5><a href="#text" name="text" id="text"></a>a. La balise text
+         </h5>
+         <p>L'élément balise <code class="code">text</code> est considérée comme un objet graphique, et est donc gérée comme tel. Il possède deux attributs&nbsp;: <code class="code">x</code> et <code class="code">y</code>, qui donnent les coordonnées du point de départ du texte. La mise en forme est réalisée par des propriétés de style CSS.
+         </p>
+         <p class="retourtdm"><a href="#tdm_text" title="Retour à la TdM (La balise text)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#tspan" name="tspan" id="tspan"></a>b. Éléments d'ajustement
+         </h5>
+         <p>À l'intérieur d'un élément <code class="code">text</code>, on peut ajuster la position du texte, sa valeur ou la police grâce à l'élément <code class="code">tspan</code>. Cet élément possède, outre les attributs <code class="code">x</code> et <code class="code">y</code>, des attributs <code class="code">dx</code> et <code class="code">dy</code> permettant de spécifier les <em>décalages</em> à apporter dans l'écriture du texte par rapport à la position par défaut. Voir par exemple le fichier <a href="exemples/texte.svg">texte.svg</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_tspan" title="Retour à la TdM (Éléments d'ajustement)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#textetchemin" name="textetchemin" id="textetchemin"></a>c. Lien avec les chemins
+         </h5>
+         <p>Il est possible d'écrire un texte le long d'un chemin (<span lang="en" class="autrelangue">path</span>) défini par ailleurs, par un élément <code class="code">path</code> en appelant un élément <code class="code">textPath</code>. Voir l'exemple <a href="exemples/textpath.svg">textpath.svg</a>.
+         </p>
+         <h4>Exercice&nbsp;<a name="exochemin" href="#exochemin" id="exochemin"></a>1. Écriture de texte le long d'un chemin
+         </h4>
+         <h5><a href="exercices/exo12.html#path" title="Énoncé de l'exercice 'Écriture de texte le long d'un chemin'">Énoncé</a></h5>
+         <h5><a href="exercices/exo12_3.svg" title="Correction 'Écriture de texte le long d'un chemin'">
+               				Correction</a></h5>
+         <p class="retourtdm"><a href="#tdm_texte" title="Retour à la TdM (Texte)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="structuration" href="#structuration" id="structuration"></a>IV. Structuration: éléments de groupage et références
+         </h3>
+         <h4><a name="grouoageintro" id="grouoageintro" href="#grouoageintro"></a>1. Introduction
+         </h4>
+         <p>Chaque langage informatique de haut niveau doit permettre de regrouper des objets dans des blocs, de les nommer et de les
+            réutiliser. <code class="langage">SVG</code> possède plusieurs constructions intéressantes.
+         </p>
+         <p>Il faut noter également que les objets <code class="langage">SVG</code> (comme les objets <code class="langage">HTML</code>) héritent le style de leurs parents. Autrement dit, les styles «&nbsp;cascadent&nbsp;» le long de l'arborescence. Voici la liste des
+            éléments les plus importants. Notez qu'il faut se référer à la spécification pour connaître tous les attributs de ces éléments.
+            Ici, nous ne montrons qu'un petit extrait.
+         </p>
+         <ol>
+            <li>
+               <p>Le fragment d'un document <code class="typefichier">SVG</code>&nbsp;: <code class="code">svg</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Groupage d'éléments avec <code class="code">g</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Objets abstraits (chablons) <code class="code">symbol</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Section de définition <code class="code">def</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Utilisation d'éléments <code class="code">use</code>&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>Titre <code class="code">title</code> et description <code class="code">desc</code>.
+               </p>
+            </li>
+         </ol>
+         <p class="retourtdm"><a href="#tdm_grouoageintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="svg" id="svg" href="#svg"></a>2. Le fragment d'un document SVG&nbsp;: svg
+         </h4>
+         <p><code class="code">svg</code> est la racine d'un graphisme <code class="typefichier">SVG</code>. Mais on peut aussi imbriquer des éléments <code class="code">svg</code> parmi d'autres et les positionner. Chaque <code class="code">svg</code> crée un nouveau système de coordonnées. Ainsi on peut facilement réutiliser des fragments graphiques sans devoir modifier
+            des coordonnées. Voir l'exemple <a href="exemples/salut2.svg">salut2.svg</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_svg" title="Retour à la TdM (Le fragment d'un document SVG&nbsp;: svg)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="g" id="g" href="#g"></a>3. Groupage d'éléments avec g
+         </h4>
+         <p>Cet élément sert à regrouper les éléments graphiques, ainsi que vous avez pu le constater en regardant le code source des
+            exemples précédents. En voici une autre illustration avec <a href="exemples/g.svg">g.svg</a>. Notez l'héritage des propriétés, mais aussi leur redéfinition locale possible.
+         </p>
+         <p class="retourtdm"><a href="#tdm_g" title="Retour à la TdM (Groupage d'éléments avec g)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="symboluse" id="symboluse" href="#symboluse"></a>4. Objets abstraits avec symbol, defs et use
+         </h4>
+         <h5><a href="#symbol" name="symbol" id="symbol"></a>a. Symboles (élément symbol)
+         </h5>
+         <p>Cet élément permet de définir des objets graphiques réutilisables en plusieurs endroits, avec l'élément <code class="code">use</code>. <code class="code">symbol</code> ressemble à <code class="code">g</code>, sauf que l'objet lui-même n'est pas dessiné. Cet élément possède des attributs supplémentaires, comme <code class="code">viewBox</code> et <code class="code">preserveAspectRatio</code>, dont nous ne parlerons pas.
+         </p>
+         <p class="retourtdm"><a href="#tdm_symbol" title="Retour à la TdM (Symboles (élément symbol))">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#defs" name="defs" id="defs"></a>b. Définitions (élément defs)
+         </h5>
+         <p>Cet élément ressemble un peu à <code class="code">symbol</code>, mais est plus simple. De même, l'objet défini n'est pas dessiné.
+         </p>
+         <p class="retourtdm"><a href="#tdm_defs" title="Retour à la TdM (Définitions (élément defs))">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#use" name="use" id="use"></a>c. Utilisation d'objets: l'élément use
+         </h5>
+         <p><code class="code">use</code> permet de réutiliser les objets suivants&nbsp;: <code class="code">svg</code>, <code class="code">symbol</code>, <code class="code">g</code>, les éléments graphiques et <code class="code">use</code>. Cet élément se comporte légèrement différemment selon le type d'objet défini (voir la <a href="http://www.w3.org/TR/SVG11/">spécification</a>). Il s'agit donc d'un instrument de base pour éviter de répéter du code.
+         </p>
+         <p>Les objets réutilisés doivent avoir un identificateur <code class="langage">XML</code>. Par exemple, <code class="code">&lt;rect id="rectanglerouge" fill="red" width="20" height="10"/&gt;</code>.
+         </p>
+         <p>Les attributs <code class="code">x</code>, <code class="code">y</code>, <code class="code">width</code> et <code class="code">height</code> permettent de redéfinir la taille et la position de l'élément appelé. <code class="code">xlink:href</code> permet de renvoyer à l'élément défini. Voir par exemple les fichiers <a href="exemples/use.svg">use.svg</a>, <a href="exemples/use2.svg">use2.svg</a> et <a href="exemples/use3.svg">use3.svg</a>.
+         </p>
+         <h4>Exercice&nbsp;<a name="exogroupe" href="#exogroupe" id="exogroupe"></a>1. Groupage d'éléments
+         </h4>
+         <h5><a href="exercices/exo12.html#groupement" title="Énoncé de l'exercice 'Groupage d'éléments'">Énoncé</a></h5>
+         <p class="retourtdm"><a href="#tdm_symboluse" title="Retour à la TdM (Objets abstraits avec symbol, defs et use)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="titledesc" id="titledesc" href="#titledesc"></a>5. Titre title et descriptions desc
+         </h4>
+         <p>Ces éléments permettent de documenter le code. Ils ne sont pas affichés tels quels. En revanche, un outil de consultation
+            peut par exemple décider de les afficher comme des infobulles. Ces documentations peuvent être utiles pour principalement
+            deux raisons&nbsp;: éventuellement mieux comprendre le code (même s'il est bien sûr toujours possible de le faire <span lang="en" class="autrelangue">via</span> des commentaires <code class="code">&lt;!-- (...) --!&gt;</code>), mais aussi permettre un meilleur référencement du <code class="typefichier">SVG</code> par un moteur de recherche.
+         </p>
+         <p class="retourtdm"><a href="#tdm_titledesc" title="Retour à la TdM (Titre title et descriptions desc)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="images" id="images" href="#images"></a>6. Insertion d'images: l'élément image
+         </h4>
+         <h5><a href="#image" name="image" id="image"></a>a. Élément image
+         </h5>
+         <p>Les formats supportés sont <code class="langage">jpeg</code> et <code class="langage">png</code>. L'élément <code class="code">image</code> permet également d'insérer un autre fichier <code class="typefichier">SVG</code>. Les attributs sont&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">x</code> et <code class="code">y</code>, qui définissent la position de l'image&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">width</code> et <code class="code">height</code>, qui définissent la taille de l'image&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p><code class="code">xlink:href</code> indique l'URI de l'image (équivalent de l'attribut <code class="code">src</code> de l'élément <code class="code">img</code> en <code class="langage">HTML</code>.
+               </p>
+            </li>
+         </ul>
+         <p>Cet élément possède également un attribut supplémentaire, <code class="code">preserveAspectRatio</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_image" title="Retour à la TdM (Élément image)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#preserveaspectratio" name="preserveaspectratio" id="preserveaspectratio"></a>b. L'attribut preserveAspectRatio
+         </h5>
+         <p>L'attribut supplémentaire <code class="code">preserveAspectRatio</code> permet de définir la manière dont l'affichage de l'image doit s'adapter à son cadre. Il est utilisé également pour nombre
+            d'autres éléments, dont par exemple <code class="code">symbol</code>, ce qui explique que la description suivante se place souvent dans la perspective d'un élément à redimensionner non limité
+            à un unique rectangle. Il peut prendre plusieurs valeurs&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>rien (valeur par défaut)&nbsp;: la mise à l'échelle est telle que les valeurs extrêmes en x et en y touchent les bords du rectangle
+                  de point de vue.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">xMinYmin</code>&nbsp;: mise à l'échelle uniforme. La plus petite largeur de l'image est ajustée à la plus petite largeur du cadre.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">xMidYMin</code>&nbsp; mise à l'échelle uniforme. La valeur moyenne des x de l'élément est ajustée à la valeur moyenne des x du cadre.
+               </p>
+            </li>
+         </ul>
+         <p>Il y a aussi toutes les autres variantes en <code class="code">Min</code>, <code class="code">Max</code> et <code class="code">Mid</code> pour chacune des deux coordonnées.
+         </p>
+         <p>Cet attribut peut également prendre comme valeur un paramètre, <code class="code">meet</code> ou <code class="code">slice</code>, optionnel&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p><code class="code">meet</code> (valeur par défaut) met à l'échelle le graphique de sorte que le rapport d'aspect soit préservé, tous les éléments soient
+                  visibles (pour une image, qu'elle ne soit pas coupée), et que le cadre soit calculé le plus large possible.
+               </p>
+            </li>
+            <li>
+               <p><code class="code">slice</code> met à l'échelle le graphique de telle sorte que le rapport d'aspect soit préservé,  tous l'esapce du cadre soit occupé par
+                  la boîte, et que le cadre soit calculé le plus petit possible.
+               </p>
+            </li>
+         </ul>
+         <p>Une illustration complète est visible avec le fichier <a href="exemples/preserveaspectratio.svg">preserveaspectratio.svg</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_images" title="Retour à la TdM (Insertion d'images: l'élément image)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="transformations" href="#transformations" id="transformations"></a>V. Transformations
+         </h3>
+         <h4><a name="transformintro" id="transformintro" href="#transformintro"></a>1. Introduction
+         </h4>
+         <p>Jusqu'à présent, nous avons vu comment placer des éléments graphiques parfois complexes dans un cadre donné. Afin d'aller
+            plus loin, il serait possible d'explorer dans le détail la manière dont le format <code class="langage">SVG</code> gère les systèmes de coordonnées, et de faire une étude détaillée des transformations et changements de repère d'un point
+            de vue mathématique -le seul à même de produire une démarche rigoureuse de l'ensemble des transformations à appliquer pour
+            obtenir un effet voulu. Nous allons cependant ici nous contenter d'aborder chaque transformation indépendamment, tout en gardant
+            présent à l'esprit que ce système de transformations est extrêmement complexe.
+         </p>
+         <p class="retourtdm"><a href="#tdm_transformintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="transform" id="transform" href="#transform"></a>2. Transformations avec l'attribut transform
+         </h4>
+         <h5><a href="#transformintroduction" name="transformintroduction" id="transformintroduction"></a>a. Introduction
+         </h5>
+         <p>Cet attribut est disponible pour l'ensemble des éléments de groupement (par exemple <code class="code">&lt;g&gt;</code>), aussi bien que pour tous les éléments graphiques (figures géométriques, texte, etc.). Il accepte un certain nombre de paramètres
+            permettant d'opérer translations, rotations, redimensionnement, transformations quelconques avec une matrice, etc.
+         </p>
+         <p class="retourtdm"><a href="#tdm_transformintroduction" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#translate" name="translate" id="translate"></a>b. Translations avec le paramètre translate
+         </h5>
+         <p>La syntaxe est par exemple <code class="code">&lt;g transform="translate(50, 40)"&gt;</code>, permettant d'opérer un déplacement du groupe de 50 pixels vers la droite, et 40 pixels vers le bas. Le code suivant...
+         </p>
+         <p class="xml"><span class="tag">&lt;rect<span class="nomattribut"> width</span>="<span class="valeurattribut">100</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">50</span>"<span class="nomattribut"> x</span>="<span class="valeurattribut">10</span>"<span class="nomattribut"> y</span>="<span class="valeurattribut">50</span>"<span class="nomattribut"> transform</span>="<span class="valeurattribut">translate(10,-20)</span>"&nbsp;/&gt;</span><br></p>
+         <p>... déclare un rectangle placé initialement au point de coordonnées (10,50), mais translaté de 10 pixels vers la droite et
+            20 pixels vers le haut, ce qui le place finalement au point de coordonnées (20,30).
+         </p>
+         <p class="retourtdm"><a href="#tdm_translate" title="Retour à la TdM (Translations avec le paramètre translate)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#scaling" name="scaling" id="scaling"></a>c. Redimensionnement avec scaling
+         </h5>
+         <p>La syntaxe est <code class="code">scale(&lt;sx&gt;[,&lt;sy&gt;])</code>. Lorsque <code class="code">sy</code> n'est pas indiqué, on considère que <code class="code">sy=sx</code>.Attention, le système de coordonnées est modifié. Le code suivant...
+         </p>
+         <p class="xml"><span class="tag">&lt;rect<span class="nomattribut"> width</span>="<span class="valeurattribut">100</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">50</span>"<span class="nomattribut"> x</span>="<span class="valeurattribut">10</span>"<span class="nomattribut"> y</span>="<span class="valeurattribut">50</span>"<span class="nomattribut"> transform</span>="<span class="valeurattribut">scale(2)</span>"&nbsp;/&gt;</span><br></p>
+         <p>... déclare un rectangle de 100 pixels de large et 50 pixels de haut, placé initialement au point de coordonnées (10,50).
+            Une fois mis à l'échelle, ici augmenté d'un facteur 2 dans les deux directions, il devient un rectangle de 200 pixels de large
+            et 100 pixels de haut, placé au point de coordonnées (20,100).
+         </p>
+         <p class="retourtdm"><a href="#tdm_scaling" title="Retour à la TdM (Redimensionnement avec scaling)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#rotate" name="rotate" id="rotate"></a>d. Rotation avec le paramètre rotate
+         </h5>
+         <p>La syntaxe est <code class="code">rotate(&lt;rotate-angle&gt; [&lt;cx&gt;,&lt;cy&gt;])</code>. L'angle de rotation est indiqué en degrés. <code class="code">cx</code> et <code class="code">cy</code> définissent le centre de rotation. <em>Attention</em>&nbsp;! Par défaut, il s'agit de l'origine du système de coordonnées locales, <em>pas</em> du centre de l'objet&nbsp;!
+         </p>
+         <p class="retourtdm"><a href="#tdm_rotate" title="Retour à la TdM (Rotation avec le paramètre rotate)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#ordretransform" name="ordretransform" id="ordretransform"></a>e. Ordre des opérations
+         </h5>
+         <p>L'ordre des opérations est séquentiel. <em>Attention</em>, à chaque transformation on obtient un nouveau système de coordonnées&nbsp;!
+         </p>
+         <h4>Exercice&nbsp;<a name="exotransform" href="#exotransform" id="exotransform"></a>1. Transformations
+         </h4>
+         <h5><a href="exercices/exo17.html" title="Énoncé de l'exercice 'Transformations'">Énoncé</a></h5>
+         <h5><a href="exercices/exo17cor.svg" title="Correction 'Transformations'">
+               				Correction</a></h5>
+         <p class="retourtdm"><a href="#tdm_transform" title="Retour à la TdM (Transformations avec l'attribut transform)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4>Exercice&nbsp;<a name="exorecap" href="#exorecap" id="exorecap"></a>1. Récapitulation
+         </h4>
+         <h5><a href="exercices/exo12.html#generation" title="Énoncé de l'exercice 'Récapitulation'">Énoncé</a></h5>
+         <h5><a href="exercices/exo12_5_1.xsl" title="Correction 'Récapitulation' (Génération SVG)">
+               				Correction (Génération SVG)</a></h5>
+         <h5><a href="exercices/exo12_5_2.xsl" title="Correction 'Récapitulation' (Génération HTML)">
+               				Correction (Génération HTML)</a></h5>
+         <h3><a name="autres" href="#autres" id="autres"></a>VI. Autres fonctionnalités
+         </h3>
+         <h4><a name="masque" id="masque" href="#masque"></a>1. Masquage, filtrage
+         </h4>
+         <p>Il est possible d'appliquer des filtres numériques à un élément graphique, aussi bien que de lui appliquer un masque afin
+            de le modifier&nbsp;: voir par exemple le fichier <a href="exemples/filters01.svg">filters01.svg</a> tiré de la spécification <code class="langage">SVG</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_masque" title="Retour à la TdM (Masquage, filtrage)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="animations" id="animations" href="#animations"></a>2. Animations
+         </h4>
+         <p>On peut évidemment appliquer des effets d'animation sur les éléments graphiques, grâce à un jeu d'éléments et d'attributs
+            développés en collaboration avec l'équipe en charge de l'élaboration de <code class="langage">SMIL</code>. Les graphiques <code class="typefichier">SVG</code> peuvent être animés par les éléments d'animation <code class="langage">SVG</code>, mais aussi directement par l'interface du DOM. Voir par exemple le fichier <a href="exemples/anim01.svg">anim01.svg</a> tiré de la spécification <code class="langage">SVG</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_animations" title="Retour à la TdM (Animations)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="polices" id="polices" href="#polices"></a>3. Définition de polices
+         </h4>
+         <p><code class="langage">SVG</code> permet également de définir de nouvelles polices, qu'il peut importer. Voir par exemple le fichier <a href="exemples/font.svg">font.svg</a> tiré de la spécification <code class="langage">SVG</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_polices" title="Retour à la TdM (Définition de polices)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="interaction" id="interaction" href="#interaction"></a>4. Interactivité
+         </h4>
+         <p>On peut insérer des éléments interactifs par le biais de scripts, ou bien par l'utilisation d'éléments spécifiques.</p>
+         <p class="retourtdm"><a href="#tdm_interaction" title="Retour à la TdM (Interactivité)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="conclusion" href="#conclusion" id="conclusion"></a>VII. Conclusion
+         </h3>
+         <p><code class="langage">SVG</code> est un langage graphique extrêmement riche, dont il est impossible de faire le tour en si peu de temps. Je vous engage -une
+            fois n'est pas coutume- à explorer la <a href="http://www.w3.org/TR/2003/REC-SVG11-20030114/">spécification du W3C</a>, qui fourmille d'exemples particulièrement parlants des possibilités de ce langage.
+         </p>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours précédent&nbsp;: <a href="smil.html">Synchroniser des contenus multimédia avec SMIL</a><br>Cours suivant&nbsp;: <a href="svgdynamique.html">L'animation dans le SVG</a></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="svg.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 12 janvier 2010, version 1.43. Mention de l'éditeur en ligne lancé par Google.</li>
+            <li>Le 11 mars 2008, version 1.42. Corrections de syntaxe et de fautes de frappe.</li>
+            <li>Le 9 septembre 2007, version 1.41. Correction du nom d'un élément.</li>
+            <li>Le 30 janvier 2006, version 1.40. Ajout d'un exercice et d'exemples sur les transformations.</li>
+            <li>Le 13 janvier 2006, version 1.31. Corrections de coquilles et syntaxiques.</li>
+            <li>Le 14 décembre 2005, version 1.30. Corrections typographiques, réécriture de la présentation du support.</li>
+            <li>Le 12 septembre 2005, version 1.21. Corrections typographiques.</li>
+            <li>Le 13 juillet 2005, version 1.20. Réécriture des exemples.</li>
+            <li>Le 16 mars 2005, version 1.14. Remarque sur le support de SVG par Opera.</li>
+            <li>Le 11 mars 2005, version 1.13. Corrections typographiques.</li>
+            <li>Le 16 juin 2004, version 1.12. Ajout des corrections des exercices.</li>
+            <li>Le 6 avril 2004, version 1.11. Ajout du lien vers le plug-in Adobe beta pour Mozilla .</li>
+            <li>Le 29 mars 2004, version 1.10. Corrections typographiques.</li>
+            <li>Le 6 décembre 2003, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

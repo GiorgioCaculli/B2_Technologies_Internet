@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Exercices 13</title>    
+</head>
+<body>
+      
+<h1>Exercice&nbsp;13&nbsp;: Initiation aux Schemas&nbsp;XML</h1>
+
+<h2><a name="exoelt"></a>I.&nbsp;Déclarations d'éléments</h2>
+
+<p>Nous allons reprendre le texte de l'exercice&nbsp;4 sur les DTD, mais cetts fois-ci avec un schéma. On ne déclarera, pour le moment, que des types de chaînes de caractères.</p>
+
+<p>Rédiger un <code class="type_fichier">Schema&nbsp;XML</code> pour une bibliographie. Cette
+bibliographie&nbsp;:</p>
+<ul>
+	<li>contient des livres et des articles&nbsp;;</li>
+	<li>les informations nécessaires pour un livre (élément <code>livre</code>) sont&nbsp;:
+			<ul>
+				<li>son titre général (élément <code>titre</code>)&nbsp;;</li>
+				<li>les noms des auteurs (éléments <code>auteur</code>)&nbsp;;</li>
+				<li>ses tomes (élément <code>tomes</code>) et pour chaque tome (éléments <code>tome</code>), leur nombre de pages (élément <code>pages</code>)&nbsp;;</li>
+				<li>des informations générales sur son édition  (élément <code>infosEdition</code>)comme par exemple le nom de l'éditeur (élément <code>editeur</code>), le lieu d'édition (élément <code>lieuEdition</code>), le lieu d'impression (élément <code>lieuImpression</code>), son numéro ISBN (élément <code>ISBN</code>)&nbsp;;</li>
+			</ul>
+	</li>
+	<li>les informations nécessaires pour un article (élément <code>article</code>) sont&nbsp;:
+		<ul>
+			<li>son titre (élément <code>titre</code>)&nbsp;;</li>
+			<li>les noms des auteurs (éléments <code>auteur</code>)&nbsp;;</li>
+			<li>ses références de publication (élément <code>infosPublication</code>)&nbsp;: nom du journal (élément <code>nomJournal</code>), numéro des pages (élément <code>pages</code>), année de publication (élément <code>anneePublication</code>) et numéro du journal (élément <code>numéroJournal</code>)</li>
+		</ul>
+	</li>
+	<li>on réservera aussi un champ optionnel, pour chaque livre et ahcque article, pour un avis (élément <code>avis</code>) personnel.
+</ul>
+<p>Tester ce <code class="type_fichier">Schema&nbsp;XML</code> avec un fichier <code class="type_fichier">XML</code> que l'on écrira <i>ex-nihilo</i> et validera.
+</p>
+
+    <p><a href="../schema.html#exoelt">Retour au cours</a></p>   
+
+<h2><a name="exoattr"></a>II.&nbsp;Déclarations d'attributs</h2>
+
+<p>Modifier le <code class="type_fichier">Schéma</code> précédent... On ne déclarera, pour le moment, que des types de chaînes de caractères.</p>
+
+<ul>
+	<li>... en ajoutant un attribut optionnel <code>soustitre</code> à l'élément <code>titre</code>&nbsp;;</li>
+	<li>... en faisant de l'élément <code>tome</code> un élément vide et en lui ajoutant un attribut requis <code>nbPages</code> et un attribut optionnel <code>sousTitre</code>&nbsp;;</li>
+	<li>... en faisant de l'élément <code>nomJournal</code> un attribut de l'élément <code>infosPublication</code> et en lui donnant comme valeur par défaut <code>Feuille de Chou</code>&nbsp;;</li>
+	<!--<li>... en faisant de l'élément <code>annee</code> un attribut de type énuméré, prenant comme valeurs possibles 2000, 2001, 2002, "avant_2000" et "inconnue" et proposant comme valeur par défaut <code>inconnue.</li>-->
+</ul>
+
+<p>Utiliser ce <code class="type_fichier">Schéma</code> pour créer un fichier <code class="type_fichier">XML</code> valide.</p>
+
+    <p><a href="../schema.html#exoattr">Retour au cours</a></p>   
+
+<h2><a name="exotypes"></a>III.&nbsp;Déclarations de types</h2>
+
+<p>Nous allons modifier le <code>Schema</code> précédent pour tirer parti des fonctionnalités additionnelles de ce format, relatives ayx types de données.</p>
+
+<h3>III.1&nbsp;Utilisation des types intégrés</h3>
+
+<ol>
+	<li>L'élément <code>pages</code> doit être un entier positif, ainsi que l'élément <code>numéroJournal</code>.</li>
+	<li>L'élément <code>anneePublication</code> doit être déclaré comme... une année.</li>
+</ol>
+
+<h3>III.2&nbsp;Déclarations de types</h3>
+
+<p>Nous allons maintenant définir nos propres types de données, en les dérivant par rapport aux types intégrés.</p>
+
+<ol>
+	<li>Définir un type simple nommé <code>typeISBN</code>, basé sur une <em>restriction</em> du ype <code>xsd:string</code>, se limitant à une chaîne de caractères composée de 10 chiffres. L'utiliser dans la déclaration de l'élément <code>ISBN</code>.</li>
+	<li>En s'inspirant de l'exemple donné en cours du formatage d'une adresse électronique, déclarer un type <code>typePages</code>, basé sur une <em>restriction</em> du type <code>xsd:string</code>, se limitant à un nombre, puis la chaîne de caractères " à ", puis un autre nombre.</li>
+</ol>
+
+<p>On vérifiera le fonctionnement à l'aide d'un fichier XML.</p>
+    <p><a href="../schema.html#exotypes">Retour au cours</a></p>   
+</body>
+</html>

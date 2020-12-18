@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+	<cours nomfichier="svgdynamique">Initiation à XML</cours>
+	<entete>
+		<titre>L'animation dans le SVG</titre>
+		<auteur>G. Chagnon</auteur>
+		<resume>Un fichier au format SVG peut être manipulé et modifié dynamiquement grâce à quelques lignes de JavaScript.</resume>
+		<motsclefs>SVG, Scalable, Vector, Graphics, XML</motsclefs>
+	</entete>
+	<corpus>
+		<partie titre="Introduction" ancre="intro">
+			<paragraphe>
+				<texte>Nous avons vu précédemment ce qu'il était possible de réaliser en <reference href="svg.html">SVG</reference>, uniquement de manière statique. On peut cependant ajouter de l'interactivité à un fichier <code type='typefichier'>SVG</code>, et ce de deux manières&#160;:</texte>
+				<liste>
+					<item><texte>soit en utilisant des éléments et attributs propres  au format <code type="langage">SVG</code> -c'est ce que nous allons voir dans la suite de ce cours&#160;;</texte></item>
+					<item><texte>soit en utilisant JavaScript et/ou EcmaScript, une sorte de JavaScript normalisé, ainsi qu'un usage intensif du <autrelangue type="en">Document Object Model</autrelangue> de la page.</texte></item>
+				</liste>
+				<texte>Les possibilités d'animation d'un fichier <code type='typefichier'>SVG</code> à l'aide d'éléments de la spécification sont une composante de base de cette dernière, et sont inspirées de la syntaxe du <reference href="smil.html">langage SMIL</reference>. Nous allons aborder ces notions de manière progressive, à partir de la réalisation d'un exemple.</texte>
+			</paragraphe>
+		</partie>
+		<partie titre="Animation de base&#160;: l'élément animate" ancre="animate">
+			<section titre="Création du graphique de base" ancre="graphbase">
+				<paragraphe>
+					<texte>Avant d'animer un graphique, encore faut-il l'avoir écrit. Nous allons donc créer un petit cube à l'aide d'une définition.</texte>
+					<exemple type="XML">
+						<prologue/>
+						<typedocument nomracine="svg" type="SYSTEM" href="svg10.dtd"/>
+						<element nom="svg" indent="oui">
+							<attribut nom="width">500</attribut>
+							<attribut nom="height">500</attribut>
+							<attribut nom="xmlns:xlink">http://www.w3.org/1999/xlink</attribut>
+							<attribut nom="xmlns">http://www.w3.org/2000/svg</attribut>
+							<element nom="defs" indent="oui" niveau="1">
+								<element nom="symbol" niveau="2" indent="oui">
+									<attribut nom="id">cube</attribut>
+									<attribut nom="stroke">black</attribut>
+									<attribut nom="stroke-line-join">bevel</attribut>
+									<attribut nom="stroke-width">2</attribut>
+									<element nom="rect" niveau="3" vide="oui">
+										<attribut nom="width">100</attribut>
+										<attribut nom="height">100</attribut>
+										<attribut nom="fill">#ccc</attribut>
+										<attribut nom="x">1</attribut>
+										<attribut nom="y">42</attribut>
+									</element>
+									<element nom="polygon" niveau="3" vide="oui">
+										<attribut nom="points">1,42 42,1 142,1 101,42 1,42</attribut>
+										<attribut nom="stroke-width">2</attribut>
+										<attribut nom="fill">#999</attribut>
+									</element>
+									<element nom="polygon" niveau="3" vide="oui">
+										<attribut nom="points">101,42 142,1 142,101 101,142 101,42</attribut>
+										<attribut nom="fill">#666</attribut>
+									</element>
+								</element>
+							</element>
+							<element nom="use" niveau="1" vide="oui"><attribut nom="xlink:href">#cube</attribut><attribut nom="x">150</attribut><attribut nom="y">150</attribut></element>
+						</element>
+					</exemple>
+					<texte><reference href="exemples/dyna1.svg">Ce fichier</reference> va nous servir de base.</texte>
+				</paragraphe>
+				<exercice titre="Création du graphique de base" ancre="exographiquebase">
+					<enonce href="exercices/exo16.html#debut"/>
+				</exercice>
+			</section>
+			<section titre="Un premier effet" ancre="premiereffet">
+				<paragraphe titre="Modification d'un attribut" ancre="modifattrib">
+					<texte>Nous allons commencer par quelque chose de simple en nous contentant de faire monter et descendre notre joli cube. L'attribut servant à gérer cette position verticale est l'attribut <code>y</code>. Nous allons donc travailler dessus, en l'<valeur>animant</valeur> à l'aide de l'élément... <code>animate</code>. Analysons l'exemple ci-dessous...</texte>
+					<exemple type="XML">
+						<element nom="use" indent="oui"><attribut nom="xlink:href">#cube</attribut><attribut nom="x">150</attribut><attribut nom="y">150</attribut>
+							<element nom="animate" vide="oui" niveau="1"><attribut nom="attributeName">y</attribut><attribut nom="dur">2s</attribut><attribut nom="values">150; 140; 130; 120; 110; 100; 110; 120; 130; 140; 150</attribut></element>
+						</element>
+					</exemple>
+					<texte>Comme nous pouvons le constater sur l'<reference href="exemples/dyna2.svg">exemple</reference>, le cube monte et descend. L'opération se fait en ajoutant un élément-enfant <code>animate</code> à l'élément qu'il faut animer. L'attribut <code>attributeName</code> permet de sélectionner l'attribut sur lequel va porter l'animation. <valeur>N'importe quel</valeur> attribut peut être modifié, à l'exception toutefois de l'attribut <code>transform</code>, dont la syntaxe de modification est légèrement différente.</texte>
+					<texte>Il est possible de faire des boucles (utilisation de l'attribut <code>repeatCount</code>), de commencer ou finir à des instants déterminés (attributs <code>begin</code> ou <code>end</code>), mais aussi de synchroniser différentes animations. Nous verrons cela par la suite.</texte>
+					<texte>Dans ce cas simple, nous avons utilisé l'attribut <code>dur</code>, qui fixe la durée de l'animation. Par défaut, cette dernière commence à la fin du chargement du fichier. Ici, elle dure 2&#160;secondes.</texte>
+					<texte>L'attribut <code>values</code> donne la liste de... valeurs par lesquelles passe l'attribut spécifié par <code>attributeName</code>. Par défaut, un lecteur SVG <valeur>doit</valeur> réaliser une interpolation linéaire entre chacune de ces valeurs, mais il est possible de changer ce comportement par défaut.</texte>
+				</paragraphe>
+				<paragraphe titre="Utilisation de la souris" ancre="souris">
+					<texte>Il est facile d'insérer un comportement lié à la souris. Par exemple, <code>begin="mouseover"</code> déclenche l'animation dès que l'on survole l'élément par la souris. Nous allons plutôt créer un petit bouton, afin de tester ce genre de comportement. Il suffit pour cela de caser dans un coin un rectangle, que l'on identifie par un <code>id="bouton"</code>, par exemple, et d'écrire dans notre élément <code>animate</code> un <code>begin="bouton.click"</code>, pour obtenir l'<reference href="exemples/dyna3.svg">effet voulu</reference>.</texte>
+				</paragraphe>
+			</section>
+			<section titre="Un peu plus de contrôle" ancre="pluscontrole">
+				<paragraphe titre="Attributs from et to" ancre="fromto">
+					<texte>Ces deux attributs permettent de ne pas avoir à spécifier une liste de valeurs, dans le cas (comme dans notre exemple) où celles-ci sont régulièrement réparties. Quand on les spécifie, le lecteur SVG réalise une interpolation linéaire entre ces deux valeurs. On peut par exemple ajouter <code><![CDATA[<animate attributeName="x" dur="3s" from="150" to="100"/>]]></code> à l'animation précédente pour modifier également la <reference href="exemples/dyna4.svg">position horizontale</reference>.</texte>
+				</paragraphe>
+				<paragraphe titre="Figer une animation" ancre="figer">
+					<texte>Dans l'exemple précédent, l'animation, après s'être exécutée, revenait à son état initial. Ce n'est parfois pas l'effet désiré. Pour figer l'animation dans son état final, on utilise l'attribut <code>fill</code>, avec la valeur <code>freeze</code> (geler, en anglais). On obtient ainsi le résultat visible sur l'<reference href="exemples/dyna5.svg">exemple suivant</reference>...</texte>
+				</paragraphe>
+				<paragraphe titre="Répéter une animation" ancre="repeat">
+					<texte>On peut également demander à ce qu'une animation se répète un nombre déterminé de fois, à l'aide de l'attribut <code>repeatCount</code>. Cet attribut peut prendre comme valeur un nombre entier, ou bien <code>indefinite</code>, qui permet de boucler à l'infini. Il permet d'obtenir une <reference href="exemples/dyna6.svg">animation bouclée</reference>.</texte>
+				</paragraphe>
+			</section>
+			<paragraphe>
+				<texte>Un autre exemple, plus fouillé, de ce genre d'animation nous montre cette fois-ci une <reference href="exemples/dyna7.svg">collection de cubes</reference>...</texte>
+			</paragraphe>
+			<exercice titre="Animation de base" ancre="animationbase">
+				<enonce href="exercices/exo16.html#animationbase"/>
+			</exercice>
+		</partie>
+		<partie titre="Des animations plus complexes" ancre="autresanim">
+			<section titre="Changements de couleurs&#160;: l'élément animateColor" ancre="couleur">
+				<paragraphe>
+					<texte>La couleur nécessite un traitement séparé. Il est réalisé à l'aide de l'élément <code>animateColor</code>, mais les attributs de base restent les mêmes. La couleur à modifier doit avoir été fixée lors de l'appel à l'élément, pas lors de la définition (voir le <reference href="exemples/couleur1.svg">premier exemple</reference> pour plus de précisions).</texte>
+					<texte>Il est cette fois-ci nécessaire de spécifier un attribut, <code>attributeType</code>, dont le rôle est d'indiquer si le format de l'attribut est <code>XML</code> ou, comme dans le cas qui nous occupe, <code>CSS</code>. Pour passer d'une couleur de remplissage bleue à une couleur verte en trois secondes, on écrira ainsi</texte>
+					<exemple type="XML">
+						<element nom="animateColor" vide="oui">
+							<attribut nom="attributeName">fill</attribut>
+							<attribut nom="attributeType">CSS</attribut>
+							<attribut nom="values">#ccc; #000</attribut>
+							<attribut nom="dur">3s</attribut>
+						</element>
+					</exemple>
+				</paragraphe>
+				<exercice titre="Changements de couleurs" ancre="changecouleurs">
+					<enonce href="exercices/exo16.html#changementscouleur"/>
+				</exercice>
+			</section>
+			<section titre="Rotations, mises à l'échelle et translations" ancre="transform">
+				<paragraphe>
+					<texte>La syntaxe de l'attribut <code>transform</code> ne se prête pas à l'utilisation de l'élément <code>animate</code>. Il a été nécessaire de développer un autre élément, <code>animateTransform</code>, avec un attribut <code>attributeName</code> prenant la valeur <code>transform</code>. Cet élément utilise un attribut, <code>type</code>, qui lui permet de déterminer de quel type de transformation il va s'agir. Le <reference href="exemples/transform1.svg">code suivant</reference> permet de décaler dans la direction des x et des y positifs l'élément à animer...</texte>
+					<exemple type="XML">
+						<element nom="animateTransform" vide="oui">
+							<attribut nom="attributeName">transform</attribut>
+							<attribut nom="attributeType">XML</attribut>
+							<attribut nom="type">translate</attribut>
+							<attribut nom="from">0,0</attribut>
+							<attribut nom="to">100,100</attribut>
+							<attribut nom="dur">3s</attribut>
+						</element>
+					</exemple>
+					<texte>Pour une rotation, les règles sont les mêmes que lors de l'utilisation de l'attribut <code>transform</code>&#160;: si on ne spécifie qu'un seul nombre, la rotation se fait de l'angle indiqué (en degrés, selon les orientations trigonométriques), par rapport à l'origine des coordonnées. Sinon, on peut également spécifier trois nombres&#160;; le premier est l'angle de rotation, les deux autres donnent les coordonnées du centre de rotation.</texte>
+				</paragraphe>
+				<exercice titre="Transformations" ancre="transformations">
+					<enonce href="exercices/exo16.html#transformations"/>
+				</exercice>
+			</section>
+			<section titre="Superpositions d'effets" ancre="superpos">
+				<paragraphe>
+					<texte>Par défaut, à chaque fois que l'on ajoute une animation, celle-ci écrase celles qui ont été définies avant. Afin d'éviter ce comportement, il faut renseigner l'attribut <code>additive</code> avec la valeur <code>sum</code> (addition).</texte>
+				</paragraphe>
+			</section>
+			<exercice titre="Pour aller plus loin" ancre="plusloin">
+				<enonce href="exercices/exo16.html#plusloin"/>
+				<correction href="exercices/exo16cor.svg"/>
+			</exercice>
+		</partie>
+	</corpus>
+</chapitre>

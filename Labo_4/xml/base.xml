@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+
+<cours nomfichier="base">Cours d'initiation à XML</cours>
+
+<entete>
+	<titre>Concepts de base</titre>
+	<auteur email="Gilles.Chagnon@upmc.fr">G. Chagnon</auteur>
+	<resume>Ce chapitre présente un bref historique et les concepts de base de XML.</resume>
+	<motsclefs>xml, base, concept, introduction</motsclefs>
+</entete>
+
+<corpus>
+
+<partie titre="Historique&#160;: de SGML à XML" ancre="p1">
+<paragraphe>
+	<texte><code type="langage">XML</code> dérive d'un langage développé dans les années 80, le <reference href="#p1s3p1"><code type="langage">SGML</code></reference>. Ce langage était complexe à apprendre et utiliser quotidiennement. Une version allégée, le <reference href="#p1s3p2"><code type="langage">HTML</code></reference> a donc été développée&#160;; mais ce dernier, malgré de nombreuses adaptations, ne pouvait pas être étendu à l'infini, au fur et à mesure de l'augmentation des besoins des développeurs. C'est alors que fut créé le <code type="langage">XML</code>.</texte>
+</paragraphe>
+
+<section titre="SGML et HTML" ancre="p1s3">
+
+<paragraphe titre="Le SGML" ancre="p1s3p1">
+	<texte>Le <code type="langage">SGML</code> (Standard Generalized Markup Language, langage de balisage standard généralisé), premier essai de normalisation concernant les documents électroniques, a été adopté comme standard en 1986.</texte>	
+	<texte>Le <code type="langage">SGML</code> est constitué de plusieurs composants. Ceux-ci changent pour chaque application <code type="langage">SGML</code>&#160;:</texte>
+	<liste>
+		<item><texte><valeur>Définition du type de document</valeur> (<code type="typefichier">DTD</code>)&#160;: ce composant sert à préciser la structure du document&#160;;</texte></item>
+		<item><texte><valeur>Instance du document</valeur>&#160;: il s'agit des données à stocker elle-mêmes, présentées sous une forme structurée selon les éléments <code type="langage">SGML</code> qui ont été définis dans la <code type="typefichier">DTD</code>. Même si une instance de document peut partager une <code type="typefichier">DTD</code> avec d'autres documents, elle ne peut se conformer qu'à une seule <code type="typefichier">DTD</code>&#160;;</texte></item>
+		<item><texte><valeur>Synthèse du document</valeur>&#160;: ce composant sert à préciser les principaux aspects de l'application <code type="langage">SGML</code>. C'est à ce niveau que sont déterminées les options et qu'est précisé le jeu de caractères qui sera utilisé ainsi que les autres fonctions similaires.</texte></item>
+	</liste>
+	<texte>Ce langage servant à préciser la structure d'un document <valeur>quelconque</valeur>, il est compréhensible que sa généralité le rende difficile d'apprentissage, et complexe d'emploi. En particulier, il était inadapté à l'écriture de documents pour Internet. Il a donc été nécessaire d'en dériver le langage <code type="langage">HTML</code>.</texte>
+</paragraphe>
+
+<paragraphe titre="Le HTML" ancre="p1s3p2">
+	<texte>Comme il a été dit précédemment, c'est aujourd'hui le standard du développement web. Il a été étendu par le <code type="langage">XHTML</code>, un langage qui lui est extrêmement similaire, mais permettant la production de documents aux normes <code type="langage">XML</code>.</texte>
+	<texte>Ce langage est facile à apprendre et à utiliser&#160;; il a d'ailleurs donné lieu au développement de nombreux outils de publication sur Internet&#160;:</texte>
+	<liste>
+		<item><texte>logiciels WYSIWYG -"<autrelangue>What You See Is What You Get</autrelangue>"- tels que <reference href="http://net2.com/nvu/"><logiciel>Nvu</logiciel></reference>, <reference href="http://office.microsoft.com/fr-fr/frontpage/FX100743231036.aspx"><logiciel>FrontPage</logiciel></reference> ou <reference href="http://www.adobe.com/fr/products/dreamweaver/"><logiciel>Dreamweaver</logiciel></reference>&#160;;</texte></item>
+		<item><texte>outils de publication de contenu comme <reference href="http://www.spip.net/">SPIP</reference>, <reference href="http://ez.no/ez_publish">eZPublish</reference>, <reference href="http://www.joomla.fr/"><logiciel>Joomla</logiciel></reference>, <reference href="http://phpnuke.org/">PHPNuke</reference>...</texte></item>
+	</liste>
+	<texte>... sans oublier qu'il est possible d'utiliser de simples éditeurs de texte comme <logiciel>(X)Emacs</logiciel> sous Linux ou bien le <logiciel>Bloc-Notes</logiciel> sous Windows.</texte>
+	<texte>Le <code type="langage">HTML</code> étant une application <code type="langage">SGML</code>, il est donc lié lui aussi à une <code type="typefichier">DTD</code>. Il en existe parfois plusieurs par version d'<code type="langage">HTML</code>. Celles de la version 4.01 se trouvent référencées sur le site web du <reference href="http://www.w3.org">W3C</reference>&#160;: <valeur>DTD HTML 4.01 Strict, Transitional, Frameset</valeur>...</texte>
+	<texte>Un inconvénient du <code type="langage">HTML</code> est son champ d'action limité&#160;: il n'est ainsi pas possible de définir <valeur>autre chose</valeur> qu'une page Web, ce qui est compréhensible puisque ce langage a été spécifiquement conçu pour cela.On ne peut par exemple pas ajouter de nouveaux éléments (on pourrait imaginer insérer des équations mathématiques, mais ce n'est pas possible en <code type="langage">HTML</code> stricto sensu).</texte>
+	<texte>Au bout de quelques années, la demande se faisant de plus en plus forte pour la définition d'un nouveau format, et le langage <code type="langage">HTML</code> rencontrant ses limites, le W3C a commencé à organiser des <reference href="http://www.w3.org/XML/#wgs">groupes de travail sur <code type="langage">XML</code></reference>, un autre descendant du <code type="langage">SGML</code>.</texte>
+</paragraphe>
+</section>
+
+<section titre="XML" ancre="p1s4">
+
+<paragraphe>
+	<texte>Le <code type="langage">XML</code> est un dérivé du <code type="langage">SGML</code>. Il tente de se servir des principes de simplicité du <code type="langage">HTML</code> et de la souplesse <code type="langage">SGML</code>.</texte>
+	<texte>Simplification de <code type="langage">SGML</code>, puisqu'il ne reste que 35 pages de spécification contre 155 pages en ce qui concerne le <code type="langage">SGML</code>, le format <code type="langage">XML</code> est rapidement apparu adapté à beaucoup plus d'usages que ses concepteurs le pensaient initialement. Il conserve certains aspects de <code type="langage">SGML</code>.</texte>
+	<texte>Le plus important point commun avec le <code type="langage">SGML</code> est le fait que tout document <code type="typefichier">XML</code> <valeur>peut</valeur> être basé sur une <code type="typefichier">DTD</code> ou un <code type="typefichier">Schéma</code>. Cette association n'est cependant pas obligatoire, et un fichier <code type='typefichier'>XML</code> peut très bien se suffire à lui-même.</texte>
+	<texte>Une autre caractéristique importante est que dans un document <code type="typefichier">XML</code>, la mise en forme des données est totalement séparée des données elles-mêmes. Cela permet de séparer complètement l'information (le contenu) de son apparence (le contenant), et donc de fournir plusieurs types de sortie pour un même fichier de données, en fonction de l'utilisateur ou de l'application demandeuse (autre document <code type="typefichier">XML</code>, tableau, graphique, image, animation multimédia, fichier <code type='typefichier'>HTML</code>, fichier <code type="typefichier">PDF</code>...).</texte>
+	<texte>De plus, la possibilité de créer les éléments que l'on désire permet de rendre le fichier lui-même lisible -et modifiable- par un être humain&#160;: on peut donner aux informations contenues dans un tel fichier les étiquettes que l'on veut, et les ordonner selon son désir.</texte>
+	<texte>Un document <code type="typefichier">XML</code> peut ainsi prévoir plusieurs cibles, comme par exemple l'écran d'un téléphone portable, celui d'un ordinateur de bureau, une base de données, une application logicielle, <autrelangue type="latin">etc</autrelangue>.</texte>
+	<texte>Il est également possible d'effectuer des sélections par tri, des générations automatiques de tables des matières et bien d'autres fonctions encore, grâce au <reference href="stylexsl.html">langage de feuilles de style</reference> <code type="langage">XSLT</code>.</texte>
+</paragraphe>
+</section>
+
+</partie>
+
+<partie titre="Mise en œuvre" ancre="p2">
+<section titre="Procédure" ancre="p2s1">
+<paragraphe>
+	<texte><code type="langage">XML</code> permet de nettement séparer forme et fond. Par exemple, cela signifie que pour produire un document <code type="typefichier">HTML</code> à partir de données en utilisant le format <code type="typefichier">XML</code>, il est nécessaire d'écrire <valeur>au moins</valeur> deux fichiers, le premier contenant les données à mettre en forme, le second les informations nécessaires à cette mise en forme. En pratique, et dans un souci de normalisation et de généralisation, il peut s'avérer nécessaire d'ajouter un troisième fichier à l'ensemble&#160;:</texte>
+	<liste type="ordonnee">
+		<item><texte><valeur>Optionnel</valeur>&#160;: un fichier peut être nécessaire pour définir <autrelangue type="latin">a priori</autrelangue> les balises auxquelles le document <code type="typefichier">XML</code> pourra avoir recours. Ce fichier peut être soit une <autrelangue type="en"><definition clef="DTD">Document Type Definition</definition></autrelangue> soit un Schema (voir plus loin dans le cours)&#160;;</texte></item>
+		<item><texte>Le document contenant les données elles-mêmes, c'est-à-dire le document <code type="typefichier">XML</code> à proprement parler (une instance du document, au sens <code type="langage">SGML</code>)&#160;;</texte></item>
+		<item><texte>Le document contenant les informations de mise en forme, permettant de produire un fichier dans le format de sortie voulu&#160;: une feuille XSLT (<definition clef="XSL">eXtensive Stylesheet Language Transformations</definition>).</texte></item>
+	</liste>
+	<texte>Dans le cas d'un format de sortie <code type="langage">HTML</code>, il peut être également nécessaire d'ajouter une feuille de style <code type="typefichier">CSS</code>.</texte>
+	<texte>En résumé, si l'on veut produire un fichier <code type="typefichier">HTML</code> à partir de données mises sous format <code type="langage">XML</code>, il faut&#160;:</texte>
+	<liste type="ordonnee">
+		<item><texte>Créer éventuellement un fichier définissant les balises utilisables&#160;;</texte></item>
+		<item><texte>Créer le fichier de données <code type="typefichier">XML</code>&#160;;</texte></item>
+		<item><texte>Créer la feuille de style <code type="typefichier">XSL</code> permettant la production du fichier <code type="typefichier">HTML</code>&#160;;</texte></item>
+		<item><texte>Créer éventuellement une feuille de style <code type="typefichier">CSS</code>.</texte></item>
+	</liste>
+	<texte>Nous verrons au long de ce cours successivement les étapes 2, 1 et 3.</texte>
+</paragraphe>
+</section>
+<section titre="Exemple : une bibliographie" ancre="p2s2">
+<paragraphe>
+	<exemple type="XML">
+		<prologue/>
+			<commentaire niveau="0">La ligne ci-dessus est le prologue</commentaire>
+			<commentaire niveau="0">Élément racine</commentaire>
+			<element nom="biblio" indent="oui">
+				<commentaire niveau="1">Premier enfant</commentaire>
+				<element nom="livre" niveau="1" indent="oui">
+					<commentaire niveau="2">Élément enfant titre</commentaire>
+					<element nom="titre" niveau="2">Les Misérables</element>
+					<element nom="auteur" niveau="2">Victor Hugo</element>
+					<element nom="nb_tomes" niveau="2">3</element>
+				</element>
+				<element nom="livre" niveau="1" indent="oui">
+					<element nom="titre" niveau="2">L'Assomoir</element>
+					<element nom="auteur" niveau="2">Émile Zola</element>
+				</element>
+				<element nom="livre" niveau="1" indent="oui">
+					<attribut nom="lang">en</attribut>
+					<element nom="titre" niveau="2">David Copperfield</element>
+					<element nom="auteur" niveau="2">Charles Dickens</element>
+					<element nom="nb_tomes" niveau="2">3</element>
+				</element>
+			</element>
+	</exemple>
+</paragraphe>
+</section>
+<exercice titre="Structuration d'informations 1" ancre="ex1">
+	<enonce href="exercices/exo1.html"/>
+	<correction href="exercices/exo1_cor.xml"/>
+</exercice>
+<exercice titre="Structuration d'informations 2" ancre="exostruct">
+	<enonce href="exercices/exo15.html"/>
+	<correction href="exercices/exo15cor.xml"/>
+</exercice>
+</partie>
+
+<partie titre="Structure d'un document XML" ancre="p3">
+<section titre="Généralités" ancre="p3s1">
+<paragraphe>
+	<texte>Les personnes ayant élaboré <code type="langage">XML</code> avaient en tête la simplicité de déclaration et la validation de la structure. De plus, elles souhaitaient tenir compte des expériences du passé en intégrant la grande souplesse syntaxique du <code type="langage">SGML</code> et la simplicité d'écriture du <code type="langage">HTML</code>.</texte>
+	<texte>Comme cela est illustré par l'<reference href="#p2s2">exemple</reference> précédent, un fichier <code type="typefichier">XML</code> est composé d'un <valeur>prologue</valeur>, d'un <valeur>élément racine</valeur> et d'un <valeur>arbre</valeur>. Cet arbre est constitué d'éléments imbriqués les uns dans les autres (ayant une relation parent-enfant) et d'éléments adjacents.</texte>
+	<liste>
+		<item><texte>Les premières lignes forment le prologue, constitué dans l'exemple précédent de la déclaration <code type="langage">XML</code>, puis éventuellement d'une déclaration de type de document (une <code type="typefichier">DTD</code>)&#160;;</texte></item>
+		<item><texte>L'élément <code type="code">biblio</code> est notre élément racine (en anglais&#160;: <autrelangue type="en">document element</autrelangue>)&#160;; il est constitué de trois éléments <code type="code">livre</code>. Dans chacun d'entre eux nous retrouvons la même composition, c'est-à-dire&#160;: un élément <code type="code">titre</code>, un élement <code type="code">auteur</code> et éventuellement un élément <code type="code">nb_tomes</code>. L'élément <code type="code">livre</code>, de plus, peut avoir un attribut <code type="code">lang</code>&#160;;</texte></item>
+	</liste>
+	<texte>Même s'il est simple de comprendre ce code, on s'aperçoit mieux d'une éventuelle erreur lorsqu'on visualise ce même fichier dans <reference href="#p4">un navigateur</reference>.</texte>
+</paragraphe>
+</section>
+
+<section titre="Le prologue" ancre="p3s2">
+
+<paragraphe titre="Déclaration XML" ancre="p3s2p1">
+	<texte>Cette déclaration fait partie des «&#160;instructions de traitement&#160;». Exemple de déclaration <code type="langage">XML</code>&#160;:</texte>
+	<exemple type="XML">
+		<prologue standalone="yes"/>
+	</exemple>
+	<texte>On distingue trois informations fournies dans cette déclaration&#160;:</texte>
+	<liste type="ordonnee">
+		<item><texte><code type="code">version</code>&#160;: version du <code type="langage">XML</code> utilisée dans le document, 1.0 en ce qui nous concerne (la dernière version du langage, 1.1, date de février 2004 mais ne change rien quant à ses bases)&#160;;</texte></item>
+		<item><texte><code type="code">encoding</code>&#160;: le jeu de codage de caractères utilisé. Le jeu de caractères habituel pour le français est le <valeur>ISO-8859-1</valeur>. Il a tendance à être remplacé par l'ISO-8859-15 en attendant la généralisation de l'Unicode. Par défaut, l'attribut <code type="code">encoding</code> a la valeur <code type="code">UTF-8</code>. Cela permet à l'ordinateur de «&#160;savoir&#160;» quel caractère il doit afficher en réponse aux combinaisons de 1 et de 0 que contient le fichier sur le disque dur&#160;;</texte></item>
+		<item><texte><code type="code">standalone</code>&#160;: dépendance du document par rapport à une <reference href="dtd.html">déclaration de type de document</reference>. Si <code type="code">standalone</code> a la valeur <code type="code">yes</code>, le processeur de l'application n'attend aucune déclaration de type de document extérieure au document. Sinon, le processeur attend une référence de déclaration de type de document. La valeur par défaut est <code>no</code>.</texte></item>
+	</liste>
+	<texte>Cette déclaration est facultative, mais il est préférable de l'utiliser. Dans ce cas les attributs <code>version</code>, <code>encoding</code> et <code>standalone</code> doivent être placés <valeur>dans cet ordre</valeur>. Si elle est utilisée, elle doit être placée en toute <valeur>première ligne</valeur> du document <code type="typefichier">XML</code>. Par exemple, il ne faut placer ni commentaire, ni même une simple ligne vide avant elle.</texte>
+</paragraphe>
+<paragraphe titre="Instructions de traitement" ancre="p3s2p2">
+	<texte>Une instruction de traitement est une instruction interprétée par l'application servant à traiter le document <code type='typefichier'>XML</code>. Elle ne fait pas totalement partie du document. Les instructions de traitement qui servent le plus souvent sont la déclaration <code type="langage">XML</code> ainsi que la déclaration de feuille de style. Exemple d'instruction de traitement&#160;:</texte>
+	<exemple type="XML">
+		<instruction_traitement href="biblio.xsl" nom="xml-stylesheet" type="text/xsl"/>
+	</exemple>
+	<texte>Dans cet exemple, l'application est <logiciel>xml-stylesheet</logiciel>, le processeur de feuille de style du <code type="langage">XML</code>. Deux feuilles de style différentes peuvent être utilisées, les <code type="typefichier">XSL</code> (propres au <code type="langage">XML</code>) ainsi que les <code type="typefichier">CSS</code> (feuilles de style apparues avec le <code type="langage">HTML</code>). L'attribut <code>type</code> indique de quel type de fichier il s'agit (<code>text/css</code> pour les feuilles de style <code type="typefichier">CSS</code>, par exemple) et l'attribut <code>href</code> indique l'URL du fichier. Cette instruction de traitement est notamment utilisée par les navigateurs Internet pour la mise en forme du document.</texte>
+</paragraphe>
+
+<paragraphe titre="Déclaration de type de document (DTD)" ancre="p3s2p3">
+	<texte>Cette déclaration, lorsqu'elle est présente, permet de définir la structure du document. Elle peut être de deux types, externe ou interne. Exemple de déclaration de type de document&#160;:</texte>
+	<exemple type="XML">
+		<typedocument nomracine="biblio" type="SYSTEM" href="biblio.dtd"/>
+	</exemple>
+	<texte>Ce type de déclaration est celui d'une déclaration de type de document externe (voir le <reference href="dtd.html">chapitre sur les DTD</reference>). Elle définit l'ensemble des éléments utilisables dans le document, y compris l'élément-racine (ici <code>biblio</code>) ainsi que l'emplacement où se trouve le fichier <code type="typefichier">biblio.dtd</code> dans lequel se trouve définie la structure du document.</texte>
+	<texte>Bien que facultative, il est souvent très intéressant de posséder une <code type="typefichier">DTD</code>, en particulier externe, simplement pour vérifier la validité du document <code type="typefichier">XML</code>. Il est ainsi recommandé d'en utiliser une dans le cas du développement parallèle de plusieurs fichiers <code type='typefichier'>XML</code> destinés à subir un traitement particulier (développement par plusieurs personnes par exemple).</texte>
+	<texte>L'autre type de document permettant de définir la structure d'un fichier, le <reference href="schema.html">schéma XML</reference>, s'utilise autrement, comme nous le verrons plus tard.</texte>
+</paragraphe>
+</section>
+
+<section titre="Les commentaires" ancre="p3s3">
+<paragraphe>
+	<texte>En <code type="langage">XML</code>, les commentaires se déclarent de la même façon qu'en <code type="langage">HTML</code>, car ils reprennent la syntaxe du <code type="langage">SGML</code>. Ils commencent donc par <code>&lt;!--</code> et se terminent par <code>--&gt;</code>. Ils peuvent être placés à n'importe quel endroit tant qu'ils se trouvent à l'<valeur>extérieur</valeur> d'une autre balise.</texte>
+	<texte>Exemples de commentaires valides&#160;:</texte>
+	<exemple type="XML">
+		<commentaire>ceci est correct</commentaire>
+		<element nom="elt">
+			<commentaire>ceci est correct aussi</commentaire>
+			Un peu de texte
+		</element>
+	</exemple>
+	<texte><valeur>Remarque</valeur>&#160;: En raison de la compatibilité <code type="langage">XML</code>/<code type="langage">SGML</code>, la chaîne de caractères <code>--</code> est interdite dans un commentaire.</texte>
+</paragraphe>
+</section>
+
+<section titre="L'arbre d'éléments" ancre="p3s4">
+<paragraphe titre="Introduction" ancre="p3s4p1">
+	<texte>Un document <code type='typefichier'>XML</code> peut se représenter sous la forme d'une arborescence d'<valeur>éléments</valeur>. Cette arborescence comporte une racine (unique), des branches et des feuilles. Reprenons l'exemple précédent.</texte>
+	<exemple type="XML">
+		<prologue/>
+		<element nom="biblio" indent="oui">
+			<element nom="livre" niveau="1" indent="oui">
+				<commentaire niveau="2">Élément enfant titre</commentaire>
+				<element nom="titre" niveau="2">Les Misérables</element>
+				<element nom="auteur" niveau="2">Victor Hugo</element>
+				<element nom="nb_tomes" niveau="2">3</element>
+			</element>
+			<element nom="livre" niveau="1" indent="oui">
+				<element nom="titre" niveau="2">L'Assommoir</element>
+				<element nom="auteur" niveau="2">Émile Zola</element>
+				<element nom="couverture" niveau="2" vide="oui"><attribut nom="couleur">rouge</attribut></element>
+			</element>
+			<element nom="livre" niveau="1" indent="oui">
+				<attribut nom="lang">en</attribut>
+				<element nom="titre" niveau="2">David Copperfield</element>
+				<element nom="auteur" niveau="2">Charles Dickens</element>
+				<element nom="nb_tomes" niveau="2">3</element>
+			</element>
+		</element>
+	</exemple>
+</paragraphe>
+<paragraphe titre="Élément racine" ancre="p3s4p2">
+	<texte>L'élément-racine (en anglais&#160;: <autrelangue type="en">document element</autrelangue>) est, comme son nom l'indique, la base du document <code type='typefichier'>XML</code>. Il est unique et englobe <valeur>tous</valeur> les autres éléments. Il s'ouvre juste après le prologue, et se ferme à la toute fin du document. Dans l'<reference href="#exemple1">exemple</reference> ci-dessus, l'élément racine est <code>biblio</code>.</texte>
+</paragraphe>
+<paragraphe titre="Les éléments" ancre="p3s4p3">
+	<texte>Les éléments forment la structure même du document&#160;: ce sont les branches et les feuilles de l'arborescence. Ils peuvent contenir du texte, ou bien d'autres éléments, qui sont alors appelés «&#160;éléments enfants&#160;», l'élément contenant étant quant à lui appelé logiquement «&#160;élément parent&#160;».</texte>
+	<texte>Exemple d'élément contenant du texte&#160;:</texte>
+	<exemple type="XML">
+		<element nom="titre">Les Misérables</element>
+	</exemple>
+	<texte>
+		Exemple d'élément contenant d'autres éléments&#160;:
+	</texte>
+	<exemple type="XML">
+		<element nom="livre" indent="oui">
+			<element nom="titre" niveau="1">L'Assommoir</element>
+			<element nom="auteur" niveau="1">Émile Zola</element>
+			<element nom="couverture" niveau="1" vide="oui"><attribut nom="couleur">rouge</attribut></element>
+		</element>
+	</exemple>
+	<texte>D'autres éléments sont vides&#160;: ils ne contiennent pas d'élément-enfant. Exemple d'élément vide&#160;:</texte>
+	<exemple type="XML">
+		<element nom="couverture" niveau="2" vide="oui"><attribut nom="couleur">rouge</attribut></element>
+	</exemple>
+	<texte>Il faut prendre garde à ne pas confondre la <valeur>balise</valeur> <code>&lt;elt&gt;</code> avec l'<valeur>élément</valeur> <code>elt</code>.</texte>
+</paragraphe>
+<paragraphe titre="Les attributs" ancre="p3s4p4">
+	<texte>
+		Tous les éléments peuvent contenir un ou plusieurs attributs. Chaque élément ne peut contenir qu'une fois le même attribut. Un attribut est composé d'un nom et d'une valeur. Il ne peut être présent que dans la balise <valeur>ouvrante</valeur> de l'élément (par exemple, on n'a pas le droit d'écrire <code><![CDATA[</livre lang="en">]]></code>).
+	</texte>
+	<texte>
+		Exemple d'utilisation d'un élément avec attribut&#160;:
+	</texte>
+	<exemple type="XML">
+		<element nom="instrument"><attribut nom="type">vent</attribut>trompette</element>
+	</exemple>
+	<texte>
+		Exemple d'utilisation d'un élément vide avec attributs&#160;:
+	</texte>
+	<exemple type="XML">
+		<element nom="img" vide="oui">
+			<attribut nom="src">ours.png</attribut>
+			<attribut nom="alt">Gros ours</attribut>
+			<attribut nom="width">56</attribut>
+			<attribut nom="height">100</attribut>
+		</element>
+	</exemple>
+</paragraphe>
+<paragraphe titre="Les entités" ancre="p3s4p5">
+	<texte>
+		Il existe des entités définissables et définies. Elles peuvent être analysables ou non, internes ou externes. La déclaration des entités s'effectue au sein de la <code type="typefichier">DTD</code>. Elles peuvent être utilisées aussi bien dans la <code type="typefichier">DTD</code> que dans le document <code type="typefichier">XML</code>. Nous reviendrons plus en détails sur <reference href="dtd.html#p4">les entités</reference> et leur utilisation ultérieurement.
+	</texte>
+	<texte>Certains caractères ayant un sens précis en <code type="langage">XML</code>, il est nécessaire de leur trouver un remplaçant lorsque l'on a besoin de les insérer dans un document. On a recours dans ce cas à des entités prédéfinies. Ces entités sont&#160;:</texte>
+	<tableau>
+		<ligne type="header">
+			<colonne id="carac"><texte>Caractère</texte></colonne>
+			<colonne id="entite"><texte>Entité</texte></colonne>
+		</ligne>
+		<ligne>
+			<colonne headers="carac"><texte><![CDATA[&]]></texte></colonne>
+			<colonne headers="entite"><texte><![CDATA[&amp;]]></texte></colonne>
+		</ligne>
+		<ligne>
+			<colonne headers="carac"><texte><![CDATA[<]]></texte></colonne>
+			<colonne headers="entite"><texte><![CDATA[&lt;]]></texte></colonne>
+		</ligne>
+		<ligne>
+			<colonne headers="carac"><texte><![CDATA[>]]></texte></colonne>
+			<colonne headers="entite"><texte><![CDATA[&gt;]]></texte></colonne>
+		</ligne>
+		<ligne>
+			<colonne headers="carac"><texte><![CDATA["]]></texte></colonne>
+			<colonne headers="entite"><texte><![CDATA[&quot;]]></texte></colonne>
+		</ligne>
+		<ligne>
+			<colonne headers="carac"><texte><![CDATA[']]></texte></colonne>
+			<colonne headers="entite"><texte><![CDATA[&aquot;]]></texte></colonne>
+		</ligne>
+		<legende>Liste des entités prédéfinies</legende>
+	</tableau>
+	<texte>Il n'existe pas d'entité prédéfinie pour les lettres accentuées ou pour les alphabets latins. Il faut utiliser à la place les entités numériques du type <code><![CDATA[&#n;]]></code> (où <code>n</code> est une valeur décimale). La valeur numérique correspond au code ISO 10646&#160;; par exemple le caractère <valeur>é</valeur> est codé par l'entité numérique <code><![CDATA[&#233;]]></code>. Il est néanmoins possible d'importer des entités en provenance d'une autre <code type="typefichier">DTD</code>, par exemple <reference href="http://www.w3.org/TR/REC-html40/HTMLsymbol.ent">celle du <code type="langage">HTML</code></reference>.</texte>
+</paragraphe>
+<paragraphe titre="Les sections CDATA" ancre="p3s4p6">
+	<texte>Une section <code>CDATA</code> est une section pouvant contenir toutes sortes de chaîne de caractères. Une section <code>CDATA</code> permet de définir un bloc de caractères ne devant pas être analysés par le processeur <code type="langage">XML</code>. Cela permet entre autres de garder dans un bloc de texte un exemple de code à afficher tel quel.</texte>
+	<texte>Exemple d'utilisation de <code>CDATA</code>&#160;:</texte>
+	<exemple type="XML">
+		<cdat>Une balise commence par un &lt; et se termine par un &gt;.</cdat>
+	</exemple>
+</paragraphe>
+</section>
+
+<section titre="Règles de composition" ancre="p3s5">
+
+<paragraphe>
+	<texte>Un certain nombre de règles de base doivent être respectées&#160;:</texte>
+	<liste type="ordonnee"> 
+		<item><texte>Un nom d'élément ne peut commencer par un chiffre. Si le nom n'est composé que d'un seul caractère, ce doit être une lettre comprise entre «&#160;a&#160;» et «&#160;z&#160;» pour les minuscules, «&#160;A&#160;» et «&#160;Z&#160;» pour les majuscules. S'il est composé d'au moins deux caractères, le premier peut être «&#160;_&#160;» ou «&#160;:&#160;». Le nom peut ensuite être composé de lettres, chiffres, tirets, tirets bas et deux points. La syntaxe <code type="langage">XML</code> est sensible à la casse (le format distingue majuscules et minuscules).</texte></item>
+		<item><texte>Toutes les balises portant un contenu non vide doivent être fermées. La balise de début, la balise de terminaison et le contenu entre deux sont globalement appelés <valeur>élément</valeur>&#160;;</texte></item>
+		<item><texte>Les balises n'ayant pas de contenu doivent se terminer par /> (voir la balise <code>&lt;img .../&gt;</code> ci-dessus)&#160;;</texte>	</item>
+		<item><texte>Les valeurs d'attributs doivent être <valeur>entre guillemets</valeur>&#160;;</texte></item>
+	</liste>
+	<texte>Un document respectant ces critères est dit <valeur>bien formé</valeur> (<autrelangue type="en">well formed</autrelangue>).</texte>
+	<texte>Il est aussi possible de définir des règles plus strictes indiquant quelles sont les séquences et imbrications de balises ou les attributs autorisés. Cela se fait à l'aide d'une <code type="typefichier">DTD</code> ou d'un <code type="typefichier">Schéma</code>. Il est alors possible d'effectuer une <valeur>validation</valeur> des documents faisant référence à une <code type="typefichier">DTD</code> pour s'assurer qu'ils respectent bien les règles qui y sont mentionnées. Un document bien formé dont la syntaxe est conforme aux règles stipulées dans une <reference href="dtd.html"><code type="typefichier">DTD</code></reference> ou un <reference href="schema.html">Schema XML</reference> est dit <valeur>valide</valeur>. Nous reviendrons sur cette notion ultérieurement. </texte>
+</paragraphe>
+
+</section>
+
+</partie>
+
+<partie titre="Support par les navigateurs" ancre="p4">
+	
+	<!-- Obsolète: <paragraphe><texte>Le W3C tient à jour une page sur le <reference href="http://www.w3schools.com/xml/xml_browsers.asp">support de XML par les navigateurs</reference>.</texte></paragraphe> -->
+
+<section titre="Famille Mozilla et Internet Explorer" ancre="navigmozie">
+	<paragraphe>
+		<texte>Ces navigateurs (à partir de la version 5 pour <logiciel>Internet Explorer</logiciel>) permettent l'affichage des documents <code type='typefichier'>XML</code> sous la forme d'une arborescence dans le cas général&#160;; si une feuille de style est spécifiée, le navigateur l'interprète (à partir de la version 6 pour <logiciel>Internet Explorer</logiciel>).</texte>	
+	</paragraphe>
+</section>
+	
+<section titre="Netscape" ancre="p4s1">
+<paragraphe>
+	<texte>Le tour de la question est vite fait en ce qui concerne les navigateurs de la famille Netscape, puisque seules les versions égales ou supérieures à 6 affichent les fichiers <code type="typefichier">XML</code> à condition toutefois qu'une feuille de style <code type="typefichier">XSL</code> soit déclarée dans le prologue. Néanmoins son implémentation est encore partielle.</texte>
+</paragraphe>
+</section>
+	
+<section titre="Opera" ancre="navigopera">
+	<paragraphe>
+		<texte><logiciel lang="en">Opera</logiciel> supporte <code type="langage">XML</code> depuis la version&#160;8, et le langage <code type="langage">XSL</code> depuis la version&#160;9.</texte>
+	</paragraphe>
+</section>
+
+<section titre="Conclusion" ancre="p4s3">
+<paragraphe>
+	<texte>En définitive, deux solutions se présentent&#160;:</texte>
+	<liste type="ordonnee">
+		<item><texte>Soit on veut visualiser le source <code type="typefichier">XML</code>. Dans ce cas, mieux vaut ne pas fournir de feuille de style dans le prologue et utiliser <logiciel>Internet Explorer</logiciel> ou un navigateur de la famille <logiciel>Mozilla</logiciel>.&#160;;</texte></item>
+		<item><texte>Soit on veut tester la feuille de style. Dans ce cas, on peut ajouter l'appel à la feuille de style dans le fichier <code type="typefichier">XML</code>, et constater le résultat sous n'importe quel navigateur récent.</texte></item>
+	</liste>
+</paragraphe>
+</section>
+</partie>
+
+</corpus>
+
+</chapitre>

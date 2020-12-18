@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Stage>
+  <Etudiant nom="Caculli" prenom="Giorgio" section="Informatique de Gestion" classe="2BIb2">
+    <Entreprise denomination="" adresse="" tel="" object_social="">
+      <Responsable>
+        <Direction nom="" prenom="" tel="" fonction="" />
+        <Stagiaire nom="" prenom="" tel="" fonction="" />
+      </Responsable>
+    </Entreprise>
+    <Direction signe="non" date="">
+      <Remarques>
+      </Remarques>
+    </Direction>
+  </Etudiant>
+</Stage>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chapitre SYSTEM "../ressources/chapitre22.dtd">
+
+<chapitre typecourssiteweb="xml">
+
+<cours nomfichier="oxygenxml">Cours d'initiation à XML</cours>
+
+<entete>
+	<titre>Prise en main d'oXygen XML Editor</titre>
+	<auteur email="Gilles.Chagnon@upmc.fr">G. Chagnon</auteur>
+	<resume>Ce chapitre présente rapidement l'environnement de développement oXygen XML Editor 3.1.</resume>
+	<motsclefs>oxygen xml</motsclefs>
+</entete>
+
+<corpus>
+
+<partie titre="Généralités" ancre="p1">
+
+<section titre="Introduction" ancre="p1s1">
+
+<paragraphe>
+	<texte>Il existe de nombreuses solutions permettant le développement de fichiers <code type="typefichier">XML</code>. Une des plus célèbres est l'environnement <reference href="http://www.altova.com/products/xmlspy/xml_editor.html"><logiciel>XMLSpy</logiciel></reference>, mais elle présente l'inconvénient d'être un <autrelangue type="en">shareware</autrelangue> et donc d'être à terme payant. On trouve également <logiciel>XMLNotePad</logiciel> de Microsoft, mais qui ne permet l'exploration que de petits fichiers <code type="typefichier">XML</code>. Il est possible d'utiliser un logiciel <autrelangue type="en">freeware</autrelangue>, <logiciel>XMLCooktop</logiciel>, qui permet de disposer d'un environnement simple d'emploi, et la manipulation de «&#160;gros&#160;» fichiers <code type="typefichier">XML</code>. En revanche, il ne supporte pas la validation d'après les schémas et offre des fonctionnalités ergonomiques réduites. Bien qu'il soit suffisant pour une utilisation ponctuelle, son développement est arrêté depuis 2003.</texte>
+	<texte>Nous allons dans ce cours utiliser le logiciel <logiciel>&lt;oXygen&gt; XML Editor&#160;3.1</logiciel>. Il s'agit d'un logiciel offrant un certain nombre de fonctionnalités facilitant la saisie de code <code type="langage">XML</code>.</texte>
+</paragraphe>
+</section>
+
+<section titre="Quelques détails techniques" ancre="p1s2">
+<paragraphe>
+	<texte>Une version d'évaluation limitée à 30 jours est disponible en téléchargement sur le site <reference href="http://www.oxygenxml.com">http://www.oxygenxml.com</reference>. Il s'agit d'un programme <code type="langage">Java</code>, qui est par conséquent portable sur n'importe quelle machine pouvant faire tourner une machine Java virtuelle. Il est également disponible sous la forme d'un <autrelangue>plug-in</autrelangue> pour l'environnement de développement <reference href="http://www.eclipse.org/">Eclipse</reference>.</texte>
+</paragraphe>
+</section>
+</partie>
+
+<partie titre="Interface" ancre="p2">
+
+<section titre="Fenêtre principale" ancre="p2s1">
+<paragraphe>
+	<texte>Au lancement, la fenêtre principale se divise en deux&#160;: à gauche, une barre latérale présentant le projet en cours et une exploration du fichier <code type="typefichier">XML</code> en cours d'édition. A droite, et occupant la majeure partie de l'espace disponible, la fenêtre d'édition proprement dite.</texte>
+	<texte>Les boutons présents sont habituels, à l'exception d'un bouton propre à l'édition XML. Ce bouton permet d'«&#160;éditer l'arbre XML&#160;».</texte>
+</paragraphe>
+</section>
+
+<section titre="Barre de menu" ancre="p2s2">
+<paragraphe>
+	<texte>Certains des menus sont habituels, comme Fichier, Édition, Recherche, Options, Fenêtre ou Aide, tandis que d'autres menus sont plus adaptés au logiciel.</texte>
+	<liste>
+		<item><texte><valeur>Éditeur d'Arbre XML</valeur> permet d'éditer un fichier <code type="typefichier">XML</code> directement à partir de son arborescence&#160;;</texte></item>
+		<item><texte><valeur>Modules d'extension</valeur> permet d'appeler un certain nombre de modules supplémentaires&#160;; pour le moment, nous ne nous en servirons pas&#160;;</texte></item>
+		<item><texte>Nous ne nous servirons pas de <valeur>Outils</valeur> lors de ce cours&#160;;</texte></item>
+		<item><texte><valeur>Outils externes</valeur> permet éventuellement d'utiliser des outils en ligne&#160;;</texte></item>
+		<item>
+			<texte>Le menu <valeur>XML</valeur> offre des fonctionnalités propres aux fichiers... <code type='typefichier'>XML</code>. Ce sont&#160;:</texte>
+			<liste>
+				<item><texte>la vérification de la validité du document en cours d'édition&#160;;</texte></item>
+				<item><texte>l'appel et la configuration des fonctions de transformations du document (nous y reviendrons)&#160;;</texte></item>
+				<item><texte>diverses autres fonctions d'édition.</texte></item>
+			</liste>
+		</item>
+	</liste>
+</paragraphe>
+</section>
+</partie>
+
+<partie titre="Fonctionnalités" ancre="fonctionnalites">
+	<paragraphe>
+		<texte>Cet outil est doté d'un certain nombre de fonctionnalités facilitant grandement la production de documents <code type='typefichier'>XML</code> bien formés (et valides).</texte>
+		<liste>
+			<item><texte>une édition possible à partir de l'arborescence&#160;;</texte></item>
+			<item><texte>une insertion des éléments en accord avec la <code type='typefichier'>DTD</code> ou le Schéma en cours&#160;;</texte></item>
+			<item><texte>une indentation automatique&#160;;</texte></item>
+			<item><texte>la possibilité de travailler sur des projets&#160;;</texte></item>
+			<item><texte>des modèles de documents prédéfinis et/ou personnalisables&#160;</texte></item>
+			<item><texte>il y a même un vérificateur orthographique&#160;!</texte></item>
+		</liste>
+	</paragraphe>
+</partie>
+
+<partie titre="Exercices" ancre="p3">
+
+<exercice titre="Vérification de validité" ancre="ex1">
+	<enonce href="exercices/exo2.html"/>
+	<correction href="exercices/exo1_cor.xml"/>
+</exercice>
+
+<exercice titre="Amusons-nous..." ancre="ex2">
+	<enonce href="exercices/exo3.html"/>
+</exercice>
+
+</partie>
+
+</corpus>
+
+</chapitre>

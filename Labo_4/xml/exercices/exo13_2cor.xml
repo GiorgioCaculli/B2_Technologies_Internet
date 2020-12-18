@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<biblio xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="exo13_2cor.xsd">
+ 	<livre>
+ 		<titre sousTitre="gk">gg</titre>
+ 		<tomes>
+ 			<tome nbPages=""/>
+ 		</tomes>
+ 		<infosEdition>
+ 			<editeur></editeur>
+ 			<lieuEdition></lieuEdition>
+ 			<lieuImpression></lieuImpression>
+ 			<ISBN></ISBN>
+ 		</infosEdition>
+ 	</livre>
+ 	
+ 	<article>
+ 		<titre/>
+ 		<auteur></auteur>
+ 		<infosPublication>
+ 			<pages></pages>
+ 			<anneePublication></anneePublication>
+ 			<numéroJournal></numéroJournal>
+ 		</infosPublication>
+ 	</article>
+ 	
+ 	
+</biblio>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="fr">
+<head>
+	<title>Exercice 7</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<h1>Exercice 7</h1>
+
+<p>Créer le fichier <code>XML</code> suivant&nbsp;:</p>
+<pre style="background-color: #FFFF66">
+&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;
+
+&lt;recette&gt;
+
+	&lt;entete&gt;
+		&lt;auteur&gt;Casimir&lt;/auteur&gt;
+		&lt;titre&gt;Recette du Gloubi-Boulga&lt;/titre&gt;
+		&lt;remarque&gt;Pour une personne&lt;/remarque&gt;
+	&lt;/entete>
+	
+	&lt;procedure&gt;
+		Remplir un saladier avec de la confiture de fraises, du chocolat râpé,
+		des bananes écrasées, de la moutarde forte, des saucisses de Toulouse
+		écrasées tièdes mais crues. Mélanger vigoureusement jusqu'à obtenir une
+		bouillie marron-clair. Il est normal qu'il y ait des grumeaux. Les
+		proportions sont environ égales pour tous les ingrédients, mais il est
+		possible de varier selon les goûts de chacun. 	
+	&lt;/procedure&gt;
+	
+&lt;/recette&gt;
+</pre>
+<p>
+Créer une feuille de style <code>XSL</code> permettant à partir de cette fiche
+recette de produire une page <code>HTML</code> qui&nbsp;:</p>
+<ul>
+	<li> a pour titre le contenu de la balise <code>titre</code>&nbsp;;</li>
+	<li> commence par un titre &lt;h1> ayant comme contenu le contenu de l'élément <code>titre</code>&nbsp;;</li>
+	<li> donne ensuite le nom de l'auteur de la recette&nbsp;;</li>
+	<li> affiche ensuite le mot <b>Remarque&nbsp;:</b> puis le contenu de l'élément <code>remarque</code>&nbsp;;</li>
+	<li> affiche <b>Procédure</b> en niveau &lt;h2>&nbsp;;</li>
+	<li> dans un paragraphe, présente la procédure à suivre.</li> 	
+</ul>
+
+<p><a href="../stylexsl.html#exo1_2">Retour au cours</a></p>
+</body>
+</html>

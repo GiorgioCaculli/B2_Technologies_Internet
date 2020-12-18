@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE smil PUBLIC "-//W3C/DTD SMIL 1.0//EN" "http://www.w3.org/TR/REC-smil/SMIL10.dtd">
+
+<smil>
+	<head>
+		<meta name="copyright" content="G. Chagnon"/>
+		<layout>
+			<root-layout width="384" height="288" background-color="blue"/>
+			<region id="reg1" top="10" left="20" background-color="transparent" width="200" height="111"/>
+			<region id="reg2" top="150" left="130" width="170" height="20"/>
+			<region id="reg3" top="0" left="0" width="384" height="288"/>
+			<region id="reg4" top="250" height="20" width="70" left="50%" background-color="transparent"/>
+		</layout>
+	</head>
+	<body>
+		<seq>
+			<par>
+				<img region="reg1" src="dauphin1.jpg" dur="3s" title="une image"/>
+				<text region="reg2" src="essai.txt" type="text/plain" dur="3s"/>
+			</par>
+			<par>
+				<video src="dolphin.avi" region="reg3" title="Vidéo" dur="16s"/>
+				<text region="reg4" src="dauphin.txt" type="text/plain" begin="10s" title="Texte d'accompagnement" dur="6s"/>
+			</par>
+			<text src="fin.txt" type="text/plain" region="reg3" title="Message de fin" dur="10s"/>
+		</seq>
+	</body>
+</smil>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd">
+
+<svg width="400" height="300"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<symbol id="bleublancrouge">
+		<rect x="0" fill="blue" width="40" height="40"/>
+		<rect x="40" fill="white" width="40" height="40"/>
+		<rect x="80" fill="red" width="40" height="40"/>
+		<rect x="0" fill="none" width="120" height="40" stroke="black" stroke-width="2"/>
+	</symbol>
+
+	<use x="60" y="40" xlink:href="#bleublancrouge" opacity="0.3" />	
+	<use x="40" y="20" xlink:href="#bleublancrouge" />
+	
+</svg>

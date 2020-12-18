@@ -1,0 +1,177 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Utilisation du DOM et XSLT dynamique</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="DOM, XSL, XSLT, JavaScript, XML">
+      <meta name="description" content="Ce chapitre présente une initiation aux techniques de script permettant la gestion du Document Object Model via une feuille de style XSL.">
+      <link rel="prev" href="fonctionsxpath.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- Utilisation du DOM et XSLT dynamique</h1>
+         <p><span class="version">version 1.10</span>, dernière mise à jour le 11 juillet 2005.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#javascript" title="Insertion de code JavaScript dans une page">Insertion de code JavaScript dans une page</a><ol>
+                     <li><a href="#jsintro" title="Introduction">Introduction</a></li>
+                     <li><a href="#jsinsertion" title="Insertion de code">Insertion de code</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#dom" title="Utilisation du DOM">Utilisation du DOM</a><ol>
+                     <li><a href="#objets" title="Objets, méthodes et propriétés">Objets, méthodes et propriétés</a><ol>
+                           <li><a href="#accesfichiers" title="Accéder aux fichiers XML et XSL">Accéder aux fichiers XML et XSL</a></li>
+                           <li><a href="#selectelt" title="Sélection des éléments dans un fichier XML">Sélection des éléments dans un fichier XML</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#majaffichage" title="Mise à jour de l'affichage">Mise à jour de l'affichage</a></li>
+                     <li><a href="#exemple" title="Exemple">Exemple</a><ol>
+                           <li>Exercice&nbsp;: <a href="#exomanipxsl" title="Manipulation dynamique de la feuille de style XSL">Manipulation dynamique de la feuille de style XSL</a></li>
+                        </ol>
+                     </li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="javascript" href="#javascript" id="javascript"></a>I. Insertion de code JavaScript dans une page
+         </h3>
+         <h4><a name="jsintro" id="jsintro" href="#jsintro"></a>1. Introduction
+         </h4>
+         <p>XSLT permet de créer, entre autres, des pages <code class="typefichier">HTML</code>. On peut désirer que ces pages puissent être dotées d'un comportement dynamique&nbsp;; cela est réalisable <span lang="en" class="autrelangue">via</span> l'insertion de code JavaScript. Mais un certain nombre de précautions doivent être prises afin d'éviter l'interprétation
+            du code ainsi inséré. Deux approches, à ce niveau, sont possibles. La première consiste à écrire le code JavaScript destiné
+            à la manipulation du code HTML, ainsi que nous l'avons fait en <code class="langage">DHTML</code>. Le côté "dynamique" est donc déporté sur la gestion du document <code class="typefichier">HTML</code> créé. La seconde méthode, que nous allons explorer dans ce cours, consiste à incorporer un code JavaScript permettant de
+            modifier la feuille de style <code class="typefichier">XSL</code> elle-même. Cette méthode, rendue obsolète par les progrès de la standardisation et de l'accès au DOM par les navigateurs,
+            est implémentée <span lang="en" class="autrelangue">via</span> une interface propriétaire sous <code class="logiciel">Internet Explorer&nbsp;6</code>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_jsintro" title="Retour à la TdM (Introduction)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="jsinsertion" id="jsinsertion" href="#jsinsertion"></a>2. Insertion de code
+         </h4>
+         <p>Un code JavaScript, en effet, peut contenir un certain nombre de caractères <code class="code">&lt;</code> ou <code class="code">&gt;</code>, qui risquent d'être interprétés par un <span lang="en" class="autrelangue">parser</span> <code class="langage">XSL</code>. Le code doit donc être inséré dans un élément <code class="langage">XML</code> non interprété. Cela donne ainsi l'exemple suivant&nbsp;:
+         </p>
+         <p class="xml"><span class="tag">&lt;script<span class="nomattribut"> type</span>="<span class="valeurattribut">text/javascript</span>"&gt;</span><span class="exemplecdata">&lt;![CDATA[<span class="valeurattribut">(Emplacement du code)</span>]]&gt;</span><span class="tag">&lt;/script&gt;</span><br></p>
+         <p>Il est alors possible d'écrire le code JavaScript (ou autre...) sans se soucier d'éventuelles incompatibilités de syntaxe.</p>
+         <p class="retourtdm"><a href="#tdm_jsinsertion" title="Retour à la TdM (Insertion de code)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h3><a name="dom" href="#dom" id="dom"></a>II. Utilisation du DOM
+         </h3>
+         <h4><a name="objets" id="objets" href="#objets"></a>1. Objets, méthodes et propriétés
+         </h4>
+         <h5><a href="#accesfichiers" name="accesfichiers" id="accesfichiers"></a>a. Accéder aux fichiers XML et XSL
+         </h5>
+         <p>Avant toute chose, il faut être en mesure de pouvoir <em>lire</em> les fichiers sources <code class="typefichier">XML</code> et <code class="typefichier">XSL</code>. Pour cela, on utilise deux collections, <code class="code">document.XMLDocument</code> et <code class="code">document.XSLDocument</code>&nbsp;:
+         </p>
+         <p class="javascript"><span class="declaration">var</span>&nbsp;<span class="variable">XMLsource</span>&nbsp;=&nbsp;<span class="instruction">new</span>&nbsp;<span class="autres">Object</span>
+            		;<br><span class="declaration">var</span>&nbsp;<span class="variable">XSLsource</span>&nbsp;=&nbsp;<span class="instruction">new</span>&nbsp;<span class="autres">Object</span>
+            		;<br><span class="variable">XMLsource</span> = document.XMLDocument
+            		;<br><span class="variable">XSLsource</span> = document.XSLDocument
+            		;<br></p>
+         <p class="retourtdm"><a href="#tdm_accesfichiers" title="Retour à la TdM (Accéder aux fichiers XML et XSL)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#selectelt" name="selectelt" id="selectelt"></a>b. Sélection des éléments dans un fichier XML
+         </h5>
+         <p>Une fois que le fichier <code class="typefichier">XML</code> est déclaré, il faut pouvoir accéder à ses différents éléments. Cela est réalisé par un appel à la méthode <code class="code">selectNodes()</code>, qui prend comme argument une expression <code class="langage">XPath</code>, appliquée à la collection <code class="code">documentElement</code> de l'objet précédemment défini.
+         </p>
+         <p class="javascript"><span class="variable">XMLsource</span>.documentElement.<span class="fonction">selectNodes</span>(livre/auteur/@nom)
+            		;<br></p>
+         <p>On peut également modifier un élément de la feuille XSL&nbsp;</p>
+         <p class="javascript"><span class="variable">collection_element</span>=<span class="variable">XSLsource</span>.documentElement.<span class="fonction">selectNodes</span>("xsl:for-each[@select='livre']")
+            		;<br><span class="variable">element</span>=<span class="variable">collection_element</span>[0]
+            		;<br><span class="variable">element</span>.<span class="fonction">setAttribute</span>("select",&nbsp;auteur/@nom)
+         </p>
+         <p class="retourtdm"><a href="#tdm_objets" title="Retour à la TdM (Objets, méthodes et propriétés)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="majaffichage" id="majaffichage" href="#majaffichage"></a>2. Mise à jour de l'affichage
+         </h4>
+         <p>Il est nécessaire, pour terminer, de mettre à jour l'afichage avec les modifications désirées. Cela est réalisé en utilisant
+            la propriété <code class="code">innerHTML</code> de l'objet <code class="code">document.body</code>, et lui affectant le résultat de la transformation de l'objet XML par l'objet XSL modifié&nbsp;:
+         </p>
+         <p class="javascript">document.body.innerHTML = <span class="variable">XMLsource</span>.<span class="fonction">transformNode</span>(<span class="variable">XSLsource</span>)
+            		;<br></p>
+         <p class="retourtdm"><a href="#tdm_majaffichage" title="Retour à la TdM (Mise à jour de l'affichage)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="exemple" id="exemple" href="#exemple"></a>3. Exemple
+         </h4>
+         <p>Consulter l'exemple de tri sur la collection de nuages (<a href="exemples/nuages.xml">source</a> et <a href="exemples/exemple1.xsl">feuille de style</a>).
+         </p>
+         <h4>Exercice&nbsp;<a name="exomanipxsl" href="#exomanipxsl" id="exomanipxsl"></a>1. Manipulation dynamique de la feuille de style XSL
+         </h4>
+         <h5><a href="exercices/exo11.html" title="Énoncé de l'exercice 'Manipulation dynamique de la feuille de style XSL'">Énoncé</a></h5>
+         <h5><a href="exercices/exo11_1.xsl" title="Correction 'Manipulation dynamique de la feuille de style XSL' (partie 1)">
+               				Correction (partie 1)</a></h5>
+         <h5><a href="exercices/exo11_2.xsl" title="Correction 'Manipulation dynamique de la feuille de style XSL' (partie 2)">
+               				Correction (partie 2)</a></h5>
+         <p class="retourtdm"><a href="#tdm_exemple" title="Retour à la TdM (Exemple)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours précédent&nbsp;: <a href="fonctionsxpath.html">Fonctions XPath</a><br></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="domxslt.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 11 juillet 2005, version 1.10. Réécriture des exemples.</li>
+            <li>Le 18 avril 2005, version 1.03. Corrections typographiques.</li>
+            <li>Le 16 juin 2004, version 1.02. Ajout des corrections des exercices.</li>
+            <li>Le 3 mars 2004, version 1.01. Corrections typographiques et ajout de la limitation à Internet Explorer.</li>
+            <li>Le 29 novembre 2003, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

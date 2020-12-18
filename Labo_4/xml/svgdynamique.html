@@ -1,0 +1,269 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="fr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>L'animation dans le SVG</title>
+      <meta name="author" content="G. Chagnon">
+      <meta name="keywords" content="SVG, Scalable, Vector, Graphics, XML">
+      <meta name="description" content="Un fichier au format SVG peut être manipulé et modifié dynamiquement grâce à quelques lignes de JavaScript.">
+      <link rel="prev" href="svg.html">
+      <link rel="contents" href="toc.html" type="text/html">
+      <link rel="up" href="index.html" type="text/html">
+      <link rel="first" href="base.html" type="text/html">
+      <link rel="last" href="servicesweb.html" type="text/html">
+      <link rel="stylesheet" type="text/css" href="../ressources/menu.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/tablemat.css">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3screen.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../ressources/forme3print.css" media="print">
+   </head>
+   <body>
+      <ul id="menugeneral">
+         <li><a href="../index.html" accesskey="1" title="Tous les cours du site" tabindex="1">Tous les cours</a></li>
+         <li><a href="#licence" accesskey="8" tabindex="2">Conditions d'utilisation</a></li>
+         <li><a href="../ressources/apropos.html">À propos de ces cours</a></li>
+         <li><a href="mailto:cours@gchagnon.fr?subject=[Cours de XML]" accesskey="7" title="Envoyer un courriel à l'auteur" tabindex="3">Contact</a></li>
+      </ul>
+      <div id="entete">
+         <h1>Cours de XML&nbsp;- L'animation dans le SVG</h1>
+         <p><span class="version">version 1.24</span>, dernière mise à jour le 12 mars 2009.
+         </p>
+         <form action="http://www.google.com/search" id="recherche">
+            <p><label for="formrecherche">Chercher dans le cours&nbsp;:</label>&nbsp;<input name="q" type="text" size="10" accesskey="4" tabindex="4" id="formrecherche"><input type="hidden" name="q" value="site:www.gchagnon.fr/cours/xml/">&nbsp;<input type="image" src="images/recherche3.png" alt="Chercher" value="Chercher"></p>
+         </form>
+      </div>
+      <ul id="menu">
+         <li class="page"><a href="#tablemat" tabindex="6">Table des matières (<abbr title="Table des Matières">TdM</abbr>)</a></li>
+         <li class="page"><a href="#contenu" accesskey="s" tabindex="7">Contenu</a></li>
+         <li class="page"><a href="#historique" title="Historique de ce document" tabindex="8">Historique</a></li>
+         <li class="cours"><a href="exercices.html">Exercices</a></li>
+         <li class="cours"><a href="index.html" tabindex="9">Accueil du cours</a></li>
+      </ul>
+      <div id="tablemat">
+         <h2>Table des matières (<abbr title="Table des Matières">TdM</abbr>)
+         </h2>
+         <div class="impair">
+            <ol>
+               <li>I. <a href="#intro" title="Introduction">Introduction</a></li>
+            </ol>
+         </div>
+         <div class="pair">
+            <ol>
+               <li>II. <a href="#animate" title="Animation de base&nbsp;: l'élément animate">Animation de base&nbsp;: l'élément animate</a><ol>
+                     <li><a href="#graphbase" title="Création du graphique de base">Création du graphique de base</a><ol>
+                           <li>Exercice&nbsp;: <a href="#exographiquebase" title="Création du graphique de base">Création du graphique de base</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#premiereffet" title="Un premier effet">Un premier effet</a><ol>
+                           <li><a href="#modifattrib" title="Modification d'un attribut">Modification d'un attribut</a></li>
+                           <li><a href="#souris" title="Utilisation de la souris">Utilisation de la souris</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#pluscontrole" title="Un peu plus de contrôle">Un peu plus de contrôle</a><ol>
+                           <li><a href="#fromto" title="Attributs from et to">Attributs from et to</a></li>
+                           <li><a href="#figer" title="Figer une animation">Figer une animation</a></li>
+                           <li><a href="#repeat" title="Répéter une animation">Répéter une animation</a></li>
+                        </ol>
+                     </li>
+                     <li>Exercice&nbsp;: <a href="#animationbase">Animation de base</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <div class="impair">
+            <ol>
+               <li>III. <a href="#autresanim" title="Des animations plus complexes">Des animations plus complexes</a><ol>
+                     <li><a href="#couleur" title="Changements de couleurs&nbsp;: l'élément animateColor">Changements de couleurs&nbsp;: l'élément animateColor</a><ol>
+                           <li>Exercice&nbsp;: <a href="#changecouleurs" title="Changements de couleurs">Changements de couleurs</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#transform" title="Rotations, mises à l'échelle et translations">Rotations, mises à l'échelle et translations</a><ol>
+                           <li>Exercice&nbsp;: <a href="#transformations" title="Transformations">Transformations</a></li>
+                        </ol>
+                     </li>
+                     <li><a href="#superpos" title="Superpositions d'effets">Superpositions d'effets</a></li>
+                     <li>Exercice&nbsp;: <a href="#plusloin">Pour aller plus loin</a></li>
+                  </ol>
+               </li>
+            </ol>
+         </div>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+      <div id="contenu">
+         <h2>Contenu du cours</h2>
+         <h3><a name="intro" href="#intro" id="intro"></a>I. Introduction
+         </h3>
+         <p>Nous avons vu précédemment ce qu'il était possible de réaliser en <a href="svg.html">SVG</a>, uniquement de manière statique. On peut cependant ajouter de l'interactivité à un fichier <code class="typefichier">SVG</code>, et ce de deux manières&nbsp;:
+         </p>
+         <ul>
+            <li>
+               <p>soit en utilisant des éléments et attributs propres  au format <code class="langage">SVG</code> -c'est ce que nous allons voir dans la suite de ce cours&nbsp;;
+               </p>
+            </li>
+            <li>
+               <p>soit en utilisant JavaScript et/ou EcmaScript, une sorte de JavaScript normalisé, ainsi qu'un usage intensif du <span lang="en" class="autrelangue">Document Object Model</span> de la page.
+               </p>
+            </li>
+         </ul>
+         <p>Les possibilités d'animation d'un fichier <code class="typefichier">SVG</code> à l'aide d'éléments de la spécification sont une composante de base de cette dernière, et sont inspirées de la syntaxe du
+            <a href="smil.html">langage SMIL</a>. Nous allons aborder ces notions de manière progressive, à partir de la réalisation d'un exemple.
+         </p>
+         <h3><a name="animate" href="#animate" id="animate"></a>II. Animation de base&nbsp;: l'élément animate
+         </h3>
+         <h4><a name="graphbase" id="graphbase" href="#graphbase"></a>1. Création du graphique de base
+         </h4>
+         <p>Avant d'animer un graphique, encore faut-il l'avoir écrit. Nous allons donc créer un petit cube à l'aide d'une définition.</p>
+         <p class="xml"><span class="enteteexemplexml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span><br><span class="exempledtdexterne">&lt;!DOCTYPE svg SYSTEM<span class="valeurattribut"> "svg10.dtd"</span>&gt;<br></span><span class="tag">&lt;svg<span class="nomattribut"> width</span>="<span class="valeurattribut">500</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">500</span>"<span class="nomattribut"> xmlns:xlink</span>="<span class="valeurattribut">http://www.w3.org/1999/xlink</span>"<span class="nomattribut"> xmlns</span>="<span class="valeurattribut">http://www.w3.org/2000/svg</span>"&gt;</span><br>
+            							
+            							
+            							
+            							
+            							&nbsp;&nbsp;<span class="tag">&lt;defs&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;symbol<span class="nomattribut"> id</span>="<span class="valeurattribut">cube</span>"<span class="nomattribut"> stroke</span>="<span class="valeurattribut">black</span>"<span class="nomattribut"> stroke-line-join</span>="<span class="valeurattribut">bevel</span>"<span class="nomattribut"> stroke-width</span>="<span class="valeurattribut">2</span>"&gt;</span><br>
+            									
+            									
+            									
+            									
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;rect<span class="nomattribut"> width</span>="<span class="valeurattribut">100</span>"<span class="nomattribut"> height</span>="<span class="valeurattribut">100</span>"<span class="nomattribut"> fill</span>="<span class="valeurattribut">#ccc</span>"<span class="nomattribut"> x</span>="<span class="valeurattribut">1</span>"<span class="nomattribut"> y</span>="<span class="valeurattribut">42</span>"&nbsp;/&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;polygon<span class="nomattribut"> points</span>="<span class="valeurattribut">1,42 42,1 142,1 101,42 1,42</span>"<span class="nomattribut"> stroke-width</span>="<span class="valeurattribut">2</span>"<span class="nomattribut"> fill</span>="<span class="valeurattribut">#999</span>"&nbsp;/&gt;</span><br>
+            									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;polygon<span class="nomattribut"> points</span>="<span class="valeurattribut">101,42 142,1 142,101 101,142 101,42</span>"<span class="nomattribut"> fill</span>="<span class="valeurattribut">#666</span>"&nbsp;/&gt;</span><br>
+            								&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/symbol&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;/defs&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;use<span class="nomattribut"> xlink:href</span>="<span class="valeurattribut">#cube</span>"<span class="nomattribut"> x</span>="<span class="valeurattribut">150</span>"<span class="nomattribut"> y</span>="<span class="valeurattribut">150</span>"&nbsp;/&gt;</span><br>
+            						<span class="tag">&lt;/svg&gt;</span><br></p>
+         <p><a href="exemples/dyna1.svg">Ce fichier</a> va nous servir de base.
+         </p>
+         <h4>Exercice&nbsp;<a name="exographiquebase" href="#exographiquebase" id="exographiquebase"></a>1. Création du graphique de base
+         </h4>
+         <h5><a href="exercices/exo16.html#debut" title="Énoncé de l'exercice 'Création du graphique de base'">Énoncé</a></h5>
+         <p class="retourtdm"><a href="#tdm_graphbase" title="Retour à la TdM (Création du graphique de base)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="premiereffet" id="premiereffet" href="#premiereffet"></a>2. Un premier effet
+         </h4>
+         <h5><a href="#modifattrib" name="modifattrib" id="modifattrib"></a>a. Modification d'un attribut
+         </h5>
+         <p>Nous allons commencer par quelque chose de simple en nous contentant de faire monter et descendre notre joli cube. L'attribut
+            servant à gérer cette position verticale est l'attribut <code class="code">y</code>. Nous allons donc travailler dessus, en l'<em>animant</em> à l'aide de l'élément... <code class="code">animate</code>. Analysons l'exemple ci-dessous...
+         </p>
+         <p class="xml"><span class="tag">&lt;use<span class="nomattribut"> xlink:href</span>="<span class="valeurattribut">#cube</span>"<span class="nomattribut"> x</span>="<span class="valeurattribut">150</span>"<span class="nomattribut"> y</span>="<span class="valeurattribut">150</span>"&gt;</span><br>
+            							&nbsp;&nbsp;<span class="tag">&lt;animate<span class="nomattribut"> attributeName</span>="<span class="valeurattribut">y</span>"<span class="nomattribut"> dur</span>="<span class="valeurattribut">2s</span>"<span class="nomattribut"> values</span>="<span class="valeurattribut">150; 140; 130; 120; 110; 100; 110; 120; 130; 140; 150</span>"&nbsp;/&gt;</span><br>
+            						<span class="tag">&lt;/use&gt;</span><br></p>
+         <p>Comme nous pouvons le constater sur l'<a href="exemples/dyna2.svg">exemple</a>, le cube monte et descend. L'opération se fait en ajoutant un élément-enfant <code class="code">animate</code> à l'élément qu'il faut animer. L'attribut <code class="code">attributeName</code> permet de sélectionner l'attribut sur lequel va porter l'animation. <em>N'importe quel</em> attribut peut être modifié, à l'exception toutefois de l'attribut <code class="code">transform</code>, dont la syntaxe de modification est légèrement différente.
+         </p>
+         <p>Il est possible de faire des boucles (utilisation de l'attribut <code class="code">repeatCount</code>), de commencer ou finir à des instants déterminés (attributs <code class="code">begin</code> ou <code class="code">end</code>), mais aussi de synchroniser différentes animations. Nous verrons cela par la suite.
+         </p>
+         <p>Dans ce cas simple, nous avons utilisé l'attribut <code class="code">dur</code>, qui fixe la durée de l'animation. Par défaut, cette dernière commence à la fin du chargement du fichier. Ici, elle dure
+            2&nbsp;secondes.
+         </p>
+         <p>L'attribut <code class="code">values</code> donne la liste de... valeurs par lesquelles passe l'attribut spécifié par <code class="code">attributeName</code>. Par défaut, un lecteur SVG <em>doit</em> réaliser une interpolation linéaire entre chacune de ces valeurs, mais il est possible de changer ce comportement par défaut.
+         </p>
+         <p class="retourtdm"><a href="#tdm_modifattrib" title="Retour à la TdM (Modification d'un attribut)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#souris" name="souris" id="souris"></a>b. Utilisation de la souris
+         </h5>
+         <p>Il est facile d'insérer un comportement lié à la souris. Par exemple, <code class="code">begin="mouseover"</code> déclenche l'animation dès que l'on survole l'élément par la souris. Nous allons plutôt créer un petit bouton, afin de tester
+            ce genre de comportement. Il suffit pour cela de caser dans un coin un rectangle, que l'on identifie par un <code class="code">id="bouton"</code>, par exemple, et d'écrire dans notre élément <code class="code">animate</code> un <code class="code">begin="bouton.click"</code>, pour obtenir l'<a href="exemples/dyna3.svg">effet voulu</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_premiereffet" title="Retour à la TdM (Un premier effet)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="pluscontrole" id="pluscontrole" href="#pluscontrole"></a>3. Un peu plus de contrôle
+         </h4>
+         <h5><a href="#fromto" name="fromto" id="fromto"></a>a. Attributs from et to
+         </h5>
+         <p>Ces deux attributs permettent de ne pas avoir à spécifier une liste de valeurs, dans le cas (comme dans notre exemple) où
+            celles-ci sont régulièrement réparties. Quand on les spécifie, le lecteur SVG réalise une interpolation linéaire entre ces
+            deux valeurs. On peut par exemple ajouter <code class="code">&lt;animate attributeName="x" dur="3s" from="150" to="100"/&gt;</code> à l'animation précédente pour modifier également la <a href="exemples/dyna4.svg">position horizontale</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_fromto" title="Retour à la TdM (Attributs from et to)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#figer" name="figer" id="figer"></a>b. Figer une animation
+         </h5>
+         <p>Dans l'exemple précédent, l'animation, après s'être exécutée, revenait à son état initial. Ce n'est parfois pas l'effet désiré.
+            Pour figer l'animation dans son état final, on utilise l'attribut <code class="code">fill</code>, avec la valeur <code class="code">freeze</code> (geler, en anglais). On obtient ainsi le résultat visible sur l'<a href="exemples/dyna5.svg">exemple suivant</a>...
+         </p>
+         <p class="retourtdm"><a href="#tdm_figer" title="Retour à la TdM (Figer une animation)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h5><a href="#repeat" name="repeat" id="repeat"></a>c. Répéter une animation
+         </h5>
+         <p>On peut également demander à ce qu'une animation se répète un nombre déterminé de fois, à l'aide de l'attribut <code class="code">repeatCount</code>. Cet attribut peut prendre comme valeur un nombre entier, ou bien <code class="code">indefinite</code>, qui permet de boucler à l'infini. Il permet d'obtenir une <a href="exemples/dyna6.svg">animation bouclée</a>.
+         </p>
+         <p class="retourtdm"><a href="#tdm_pluscontrole" title="Retour à la TdM (Un peu plus de contrôle)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <p>Un autre exemple, plus fouillé, de ce genre d'animation nous montre cette fois-ci une <a href="exemples/dyna7.svg">collection de cubes</a>...
+         </p>
+         <h4>Exercice&nbsp;<a name="animationbase" href="#animationbase" id="animationbase"></a>1. Animation de base
+         </h4>
+         <h5><a href="exercices/exo16.html#animationbase" title="Énoncé de l'exercice 'Animation de base'">Énoncé</a></h5>
+         <h3><a name="autresanim" href="#autresanim" id="autresanim"></a>III. Des animations plus complexes
+         </h3>
+         <h4><a name="couleur" id="couleur" href="#couleur"></a>1. Changements de couleurs&nbsp;: l'élément animateColor
+         </h4>
+         <p>La couleur nécessite un traitement séparé. Il est réalisé à l'aide de l'élément <code class="code">animateColor</code>, mais les attributs de base restent les mêmes. La couleur à modifier doit avoir été fixée lors de l'appel à l'élément, pas
+            lors de la définition (voir le <a href="exemples/couleur1.svg">premier exemple</a> pour plus de précisions).
+         </p>
+         <p>Il est cette fois-ci nécessaire de spécifier un attribut, <code class="code">attributeType</code>, dont le rôle est d'indiquer si le format de l'attribut est <code class="code">XML</code> ou, comme dans le cas qui nous occupe, <code class="code">CSS</code>. Pour passer d'une couleur de remplissage bleue à une couleur verte en trois secondes, on écrira ainsi
+         </p>
+         <p class="xml"><span class="tag">&lt;animateColor<span class="nomattribut"> attributeName</span>="<span class="valeurattribut">fill</span>"<span class="nomattribut"> attributeType</span>="<span class="valeurattribut">CSS</span>"<span class="nomattribut"> values</span>="<span class="valeurattribut">#ccc; #000</span>"<span class="nomattribut"> dur</span>="<span class="valeurattribut">3s</span>"&nbsp;/&gt;</span><br></p>
+         <h4>Exercice&nbsp;<a name="changecouleurs" href="#changecouleurs" id="changecouleurs"></a>1. Changements de couleurs
+         </h4>
+         <h5><a href="exercices/exo16.html#changementscouleur" title="Énoncé de l'exercice 'Changements de couleurs'">Énoncé</a></h5>
+         <p class="retourtdm"><a href="#tdm_couleur" title="Retour à la TdM (Changements de couleurs&nbsp;: l'élément animateColor)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="transform" id="transform" href="#transform"></a>2. Rotations, mises à l'échelle et translations
+         </h4>
+         <p>La syntaxe de l'attribut <code class="code">transform</code> ne se prête pas à l'utilisation de l'élément <code class="code">animate</code>. Il a été nécessaire de développer un autre élément, <code class="code">animateTransform</code>, avec un attribut <code class="code">attributeName</code> prenant la valeur <code class="code">transform</code>. Cet élément utilise un attribut, <code class="code">type</code>, qui lui permet de déterminer de quel type de transformation il va s'agir. Le <a href="exemples/transform1.svg">code suivant</a> permet de décaler dans la direction des x et des y positifs l'élément à animer...
+         </p>
+         <p class="xml"><span class="tag">&lt;animateTransform<span class="nomattribut"> attributeName</span>="<span class="valeurattribut">transform</span>"<span class="nomattribut"> attributeType</span>="<span class="valeurattribut">XML</span>"<span class="nomattribut"> type</span>="<span class="valeurattribut">translate</span>"<span class="nomattribut"> from</span>="<span class="valeurattribut">0,0</span>"<span class="nomattribut"> to</span>="<span class="valeurattribut">100,100</span>"<span class="nomattribut"> dur</span>="<span class="valeurattribut">3s</span>"&nbsp;/&gt;</span><br></p>
+         <p>Pour une rotation, les règles sont les mêmes que lors de l'utilisation de l'attribut <code class="code">transform</code>&nbsp;: si on ne spécifie qu'un seul nombre, la rotation se fait de l'angle indiqué (en degrés, selon les orientations trigonométriques),
+            par rapport à l'origine des coordonnées. Sinon, on peut également spécifier trois nombres&nbsp;; le premier est l'angle de rotation,
+            les deux autres donnent les coordonnées du centre de rotation.
+         </p>
+         <h4>Exercice&nbsp;<a name="transformations" href="#transformations" id="transformations"></a>1. Transformations
+         </h4>
+         <h5><a href="exercices/exo16.html#transformations" title="Énoncé de l'exercice 'Transformations'">Énoncé</a></h5>
+         <p class="retourtdm"><a href="#tdm_transform" title="Retour à la TdM (Rotations, mises à l'échelle et translations)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4><a name="superpos" id="superpos" href="#superpos"></a>3. Superpositions d'effets
+         </h4>
+         <p>Par défaut, à chaque fois que l'on ajoute une animation, celle-ci écrase celles qui ont été définies avant. Afin d'éviter
+            ce comportement, il faut renseigner l'attribut <code class="code">additive</code> avec la valeur <code class="code">sum</code> (addition).
+         </p>
+         <p class="retourtdm"><a href="#tdm_superpos" title="Retour à la TdM (Superpositions d'effets)">&gt;Retour à la <abbr>TdM</abbr></a></p>
+         <h4>Exercice&nbsp;<a name="plusloin" href="#plusloin" id="plusloin"></a>1. Pour aller plus loin
+         </h4>
+         <h5><a href="exercices/exo16.html#plusloin" title="Énoncé de l'exercice 'Pour aller plus loin'">Énoncé</a></h5>
+         <h5><a href="exercices/exo16cor.svg" title="Correction 'Pour aller plus loin'">
+               				Correction</a></h5>
+      </div>
+      <div id="navigation">
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p>Cours précédent&nbsp;: <a href="svg.html">Un format de dessin vectoriel en XML: SVG</a><br></p>
+         <p>Liste des fichiers associés à ce fichier HTML&nbsp;:</p>
+         <ul>
+            <li><a href="svgdynamique.xml">Fichier XML</a></li>
+            <li><a href="../ressources/chapitre22.dtd">DTD du cours</a></li>
+            <li><a href="../ressources/chapitreweb20.xsl">Feuille de style XSL</a></li>
+         </ul>
+      </div>
+      <div id="historique">
+         <h2>Historique de ce document</h2>
+         <ul>
+            <li>Le 12 mars 2009, version 1.24. Corrections syntaxiques.</li>
+            <li>Le 30 janvier 2006, version 1.23. Corrections de coquilles.</li>
+            <li>Le 13 janvier 2006, version 1.22. Corrections de coquilles et syntaxiques.</li>
+            <li>Le 12 septembre 2005, version 1.21. Corrections typographiques.</li>
+            <li>Le 13 juillet 2005, version 1.20. Réécriture des exemples.</li>
+            <li>Le 3 juin 2005, version 1.10. Ajout des exercices.</li>
+            <li>Le 16 mars 2005, version 1.00. Création du cours</li>
+         </ul>
+      </div>
+      <div id="bibliographie">
+         <h2>Bibliographie</h2>
+         <h3>De l'auteur (G. Chagnon)</h3>
+         <ul>
+            <li><cite>XML</cite>, publié par Pearson Education en septembre 2007.&nbsp;Livre de cours et exercices écrit en collaboration avec Florent Nolot (Université de Reims).&nbsp;<a href="http://www.eyrolles.com/Informatique/Livre/9782744072369/livre-xml.php" title="Consulter la fiche sur Eyrolles: XML, publié par Pearson Education">Consulter la fiche sur Eyrolles</a>.&nbsp;<a href="http://www.amazon.fr/XML-Gilles-Chagnon/dp/2744072362" title="Consulter la fiche sur Amazon: XML, publié par Pearson Education">Consulter la fiche sur Amazon</a>.
+            </li>
+         </ul>
+      </div>
+      <div id="licence">
+         <h2>Conditions d'utilisation et licence</h2>
+         <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br>Cette création est mise à disposition par Gilles Chagnon sous un <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">contrat Creative Commons</a>.
+         </p>
+         <p class="retourhaut"><a href="#menu">Retour au menu</a></p>
+      </div>
+   </body>
+</html>

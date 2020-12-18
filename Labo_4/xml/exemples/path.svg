@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg SYSTEM "../svg10.dtd" >
+
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+
+    <text x="5" y="20" style="font-size:10">SVG Demo: path.</text>
+
+<g stroke-width="4px" stroke="blue">
+	<!-- On pose le crayon (M 50 100), ensuite on tire un trait vers le coin du bas (L 100 150) et vers le coin en haut à droite (150 50), finalement on ferme (z) -->
+	<path d="M 50 50 L 100 150 150 50 z" fill="cyan"/>
+	<!-- Exemple de courbe:
+		On se positionne à 180, 180 (M 180, 180);
+		On dessine une ligne verticale vers y=-75 (v=-75). Cela devient le point de départ pour l'arc.
+		On dessine un arc (a) avec rayon x=75 et y=75 (75,75), sans rotation (0). Le deuxième 0 indique que l'arc se trouve du côté "petit", le troisième 0 indique une direction de dessin négative. Les -75, 75 indiquent l'arrivée de l'arc.
+		On ferme le tout.
+	-->
+	<path d="M 180,180 v-75 a75,75 0 0,0 -75,75 z" fill="yellow"/>
+	<!-- Exemple de courbe similaire:
+		On dessine l'arc dans le même sens (négatif), mais du côté "large" (1) de l'angle implicitement défini au départ.
+	-->
+	<path d="M200, 200, h-50 a50,50 0 1,0 50,-50 z" fill="red"/>
+	
+	<path d="M300,150 L250,120 a100,60 0 1,0 100,-50 z" fill="green"/>
+</g>
+
+
+
+</svg> 

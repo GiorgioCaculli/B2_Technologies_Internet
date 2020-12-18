@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<biblio xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="exo13_1cor.xsd">
+ 
+ 	<livre>
+ 		<titre></titre>
+ 		<tomes>
+ 			<tome>
+ 				<pages></pages>
+ 			</tome>
+ 		</tomes>
+ 		<infosEdition>
+ 			<editeur></editeur>
+ 			<lieuEdition></lieuEdition>
+ 			<lieuImpression></lieuImpression>
+ 			<ISBN></ISBN>
+ 		</infosEdition>
+ 	</livre>
+ 	
+ 	<article>
+ 		<titre></titre>
+ 		<auteur></auteur>
+ 		<infosPublication>
+ 			<nomJournal></nomJournal>
+ 			<pages></pages>
+ 			<anneePublication></anneePublication>
+ 			<numéroJournal></numéroJournal>
+ 		</infosPublication>
+ 		
+ 	</article>
+ 
+</biblio>

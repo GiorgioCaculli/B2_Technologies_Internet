@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<svg width="400px" height="300px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <style type="text/css">
+      <![CDATA[
+        @font-face {
+          font-family: 'Super Sans'; 
+          font-weight: normal;
+          font-style: italic;
+          src: url("exemplefont.svg#Font2") format(svg)
+        }
+      ]]>
+   </style>
+  </defs>
+  <text x="100" y="100"
+           style="font-family: 'Super Sans'; font-weight:normal;
+                  font-style: italic">Texte utilisant la font "Super Sans"</text>
+   <text x="100" y="200" style="font-family: Verdana">Texte normal.</text>
+</svg>
+
