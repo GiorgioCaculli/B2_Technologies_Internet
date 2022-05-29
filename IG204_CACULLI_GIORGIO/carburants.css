@@ -1,0 +1,15 @@
+table
+{
+    table-layout: fixed;
+    width: 100%;
+}
+
+table, th, td
+{
+    border: 1px solid black;
+}
+
+td
+{
+    text-align: center;
+}

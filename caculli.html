@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+    <title>Labo JQuery</title>
+  </head>
+  <body>
+    Caculli Giorgio LA196672<br />
+    Chercher: <input type="text" id="chercher"/><br />
+    Couleur <input type="color" id='couleurChoix'/><br />
+    <form id="couleurForm">
+      <input type="radio" name="couleur" value="ul"/> UE <br />
+      <input type="radio" name="couleur" value="li"/> AA <br />
+    </form>
+    <ul><a href="#" title="Crédits: 4">Programmation linéaire et statistique 3</a>
+      <li>Mathématique</li>
+      <li>Traitement de données</li>
+    </ul>
+    <ul><a href="#" title="Crédits: 5">Communication 3</a>
+      <li>Langues étrangères</li>
+      <li>Rapport et communication en langue française</li>
+      <li>Droit</li>
+    </ul>
+    <ul><a href="#" title="Crédits: 5">Langages de programmation</a>
+      <li>Langage procédural</li>
+    </ul>
+    <ul><a href="#" title="Crédits: 6">Technologies internet</a>
+      <li>Technologies Internet</li>
+      <li>Fichiers et bases de données</li>
+    </ul>
+    <ul><a href="#" title="Crédits: 6">Analyse et developpement 1</a>
+      <li>Programmation orientée objet</li>
+      <li>Analyse et conduite de projet</li>
+    </ul>
+    <ul><a href="#" title="Crédits: 4">Systèmes et réseaux 1</a>
+      <li>Systèmes et réseaux</li>
+    </ul>
+    <ul><a href="#" title="Crédits: 6">Gestion 3</a>
+      <li>Organisation et gestion de l’entreprise</li>
+      <li>Economie générale et/ou appliquée</li>
+    </ul>
+    <ul><a href="#" title="Crédits: 3">Communication 4</a>
+      <li>Langues étrangères</li>
+      <li>Rapport et communication en langue française</li>
+    </ul>
+    <ul><a href="#" title="Crédits: 13">Analyse et développement 2</a>
+      <li>Programmation orientée objet</li>
+      <li>Analyse et conduite de projet</li>
+      <li>Langues étrangères</li>
+      <li>Projet</li>
+    </ul>
+    <ul><a href="#" title="Crédits: 6">Technologies mobiles, internet et bases de données</a>
+      <li>Fichiers et bases de données</li>
+      <li>Technologies Internet</li>
+      <li>Technologies mobiles</li>
+    </ul>
+    <ul><a href="#" title="Crédits: 6">Systèmes et réseaux 2</a>
+      <li>Systèmes et réseaux</li>
+    </ul>
+    <script type='text/javascript'>
+      $(function() {
+          $('li').hover(function() {
+              $(this).animate({
+                  marginLeft: '50'
+              }, 100);
+          });
+          $('li').mouseleave(function() {
+              $(this).animate({
+                  marginLeft: '0'
+              }, 100);
+          });
+      });
+      $('#chercher').on('input', function() {
+          if(!($('#chercher').val() == '')){
+              $('li').css({
+                  'color': '',
+                  'font-size': '',
+                  'font-weight' : ''
+              });
+              $('li:contains("' + $('#chercher').val() + '")').css({
+                  'color': 'Pink',
+                  'font-size': '20px',
+                  'font-weight' : 'bold'
+              });
+          } else
+          {
+              $('li').css({
+                  'color': '',
+                  'font-size': '',
+                  'font-weight': ''
+              });
+          }
+      });
+      $('#couleurChoix').on('change', function() {
+          $($('input[name=couleur]:checked', '#couleurForm').val()).css('background-color', $('#couleurChoix').val());
+      });
+      $('ul a').css({
+          'color': 'black',
+          'text-decoration': 'none'
+      });
+      $('ul a').tooltip();
+    </script>
+  </body>
+</html>
