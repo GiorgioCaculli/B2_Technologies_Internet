@@ -1,0 +1,22 @@
+{"question": [{
+    "id_question": "1",
+    "texte_question": "\u00c0 quoi corr\u00e9spond le panneau <img src=\"Panneaux\/A1b\r\n.gif\"><\/img>",
+    "id_panneau": "2",
+    "texte_reponse_1": "A1b\r\n",
+    "texte_reponse_2": "A1d\r\n",
+    "texte_reponse_3": "A1a\r\n"
+},{
+    "id_question": "2",
+    "texte_question": "\u00c0 quoi corr\u00e9spond le panneau <img src=\"Panneaux\/A1d\r\n.gif\"><\/img>",
+    "id_panneau": "4",
+    "texte_reponse_1": "A3\r\n",
+    "texte_reponse_2": "A1d\r\n",
+    "texte_reponse_3": "A7\r\n"
+},{
+    "id_question": "3",
+    "texte_question": "\u00c0 quoi corr\u00e9spond le panneau <img src=\"Panneaux\/A1a\r\n.gif\"><\/img>",
+    "id_panneau": "1",
+    "texte_reponse_1": "A1d\r\n",
+    "texte_reponse_2": "A1a\r\n",
+    "texte_reponse_3": "A3\r\n"
+}]}

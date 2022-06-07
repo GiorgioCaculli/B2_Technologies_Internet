@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Examen TI Caculli Giorgio</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    label {
+      float: left;
+      width: 100%;
+    }
+
+    form {
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    td {
+      word-wrap: break-word;
+    }
+
+    table, td, th {
+      border: solid black 1px;
+    }
+  </style>
+</head>
+<body>
+<h1>Examen TI Caculli Giorgio</h1>
+<button id="fill_database" onclick="fillDatabase()">Remplir la base de données</button>
+<h2>Ajouter une nouvelle question</h2>
+<form method="GET" action="ajout.php">
+  <label for="panneau">Panneau
+    <select id="panneau" name="panneau">
+    </select>
+  </label>
+  <label for="reponse_1">Réponse 1
+    <select name="reponse_1" id="reponse_1" onchange="hideChoice23($(this).val())" required>
+    </select>
+  </label>
+  <label for="reponse_2">Réponse 2
+    <select name="reponse_2" id="reponse_2" onchange="hideChoice3($(this).val())" required>
+    </select>
+  </label>
+  <label for="reponse_3">Réponse 3
+    <select name="reponse_3" id="reponse_3" required>
+    </select>
+  </label>
+  <input type="submit" value="Ajouter question">
+</form>
+
+<h2>Questions présentes dans la base de données</h2>
+<button id="export_json" onclick="location.href='consultation.php?export_json=1'">Exporter en JSON</button>
+<p id="info"></p>
+
+<script>
+  function hideChoice23(val1) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function ()
+    {
+      var response = xhr.responseText.split('\n');
+      $('#reponse_2').html('');
+      $('#reponse_3').html('');
+      for(var i = 0; i < response.length; i++)
+      {
+        if(response[i] !== val1)
+        {
+          $('#reponse_2').append("<option value='" + response[i] + "'>" + response[i] + "</option>");
+          $('#reponse_3').append("<option value='" + response[i] + "'>" + response[i] + "</option>");
+        }
+      }
+    }
+    xhr.open('GET', 'code.txt', true);
+    xhr.send();
+  }
+  function hideChoice3(val2)
+  {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function ()
+    {
+      var response = xhr.responseText.split('\n');
+      $('#reponse_3').html('');
+      for(var i = 0; i < response.length; i++)
+      {
+        if(response[i] !== val2)
+        {
+          $('#reponse_3').append("<option value='" + response[i] + "'>" + response[i] + "</option>");
+        }
+      }
+    }
+    xhr.open('GET', 'code.txt', true);
+    xhr.send();
+  }
+  function fillDatabase() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function ()
+    {
+      $('#info').html('Base de donnée remplie');
+    }
+    xhr.open('GET', 'ajout.php?fill_panneau=1', true);
+    xhr.send();
+  }
+  $(function (){
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function ()
+    {
+      var response = xhr.responseText.split('\n');
+      for(var i = 0; i < response.length; i++)
+      {
+        $('#panneau').append("<option value='" + response[i] + "'>" + response[i] + "</option>");
+        $('#reponse_1').append("<option value='" + response[i] + "'>" + response[i] + "</option>");
+        $('#reponse_2').append("<option value='" + response[i] + "'>" + response[i] + "</option>");
+        $('#reponse_3').append("<option value='" + response[i] + "'>" + response[i] + "</option>");
+      }
+    }
+    xhr.open('GET', 'code.txt', true);
+    xhr.send();
+    var xhrQuestion = new XMLHttpRequest();
+    xhrQuestion.onload = function ()
+    {
+      var response = xhrQuestion.responseText;
+      $('body').append(response);
+    }
+    xhrQuestion.open('GET', 'consultation.php', true);
+    xhrQuestion.send();
+  });
+</script>
+</body>
+</html>
